@@ -1,0 +1,31 @@
+.text {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 22px;
+  color: #212529;
+  width: 416px;
+  white-space: nowrap; /* не переносить текст на другую строку */
+  overflow: hidden; /* скрываем переполнение контентом */
+  border-right: 3px solid #212529; /* рисуем курсор */
+  animation: cursor 0.75s step-end infinite, printed_text 4s steps(51);
+}
+
+@keyframes cursor {
+  0% {
+    border-color: #212529;
+  }
+
+  50% {
+    border-color: transparent;
+  }
+
+  100% {
+    border-color: #212529;
+  }
+}
+
+@keyframes printed_text {
+  from {
+    width: 0;
+  }
+}

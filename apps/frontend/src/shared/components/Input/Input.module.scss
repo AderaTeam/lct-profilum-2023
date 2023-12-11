@@ -1,0 +1,36 @@
+.input {
+  input {
+    background: #25262b;
+    border-radius: 12px;
+    padding: 18px 12px;
+    color: #c1c2c5;
+    font-size: 16px;
+    font-style: normal;
+    border-color: #2c2e33;
+    font-weight: 500;
+    line-height: 24px;
+    &:focus-within {
+      border-color: #cc5de8;
+    }
+    &::placeholder {
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 24px;
+      color: #5c5f66;
+    }
+    &:disabled {
+      background: #25262b;
+    }
+  }
+}
+
+.custom-input {
+  @extend .input;
+  input {
+    padding: 16px 24px;
+    &:focus-within {
+      border-color: #909296;
+    }
+  }
+}

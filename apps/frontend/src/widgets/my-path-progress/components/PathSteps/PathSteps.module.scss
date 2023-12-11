@@ -1,0 +1,20 @@
+.line {
+  width: 8px;
+  height: 100%;
+}
+
+.test {
+  height: 100%;
+}
+
+.content-title {
+  color: #adb5bd;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 22px;
+}
+
+.content-text {
+  @extend .content-title;
+  color: #2f80ed;
+}

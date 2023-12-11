@@ -1,0 +1,33 @@
+.input {
+  button {
+    border-radius: 16px;
+    border: 2px solid #25262b;
+    padding: 18px 24px;
+    background: transparent;
+    &:focus-within {
+      border-color: #cc5de8;
+    }
+    span {
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 24px;
+      color: #5c5f66;
+    }
+    &:disabled {
+      background: #25262b;
+    }
+    div {
+      color: #5c5f66;
+    }
+  }
+
+  label {
+    margin-bottom: 8px;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
+    color: #5c5f66;
+  }
+}

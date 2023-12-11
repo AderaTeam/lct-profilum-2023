@@ -1,0 +1,13 @@
+.segment {
+  div {
+    &:first-of-type {
+      background: #25262B;
+    }
+    
+  }
+
+  label {
+    border-radius: 14px;
+    background: #373A40;
+  }
+} 

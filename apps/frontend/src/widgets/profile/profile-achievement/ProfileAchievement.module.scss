@@ -1,0 +1,34 @@
+.title {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 28px;
+  color: #212529;
+
+  span {
+    color: #adb5bd;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 28px;
+  }
+}
+
+.name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #212529;
+}
+
+.date {
+  color: #adb5bd;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 22px;
+}
+
+.image {
+  filter: grayscale(1);
+  transition: all 0.3s;
+  &:hover {
+    filter: grayscale(0);
+  }
+}
