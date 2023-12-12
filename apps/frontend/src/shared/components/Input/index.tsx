@@ -11,6 +11,7 @@ interface Props {
   placeholder?: string;
   disabled?: boolean;
   label?: string;
+  onFocus?: React.FocusEventHandler<HTMLInputElement>;
 }
 
 export const Input = ({
@@ -21,6 +22,7 @@ export const Input = ({
   placeholder,
   disabled,
   label,
+  onFocus,
 }: Props) => {
   return (
     <MantineInput.Wrapper
@@ -28,6 +30,7 @@ export const Input = ({
       label={label}
     >
       <MantineInput
+        onFocus={onFocus}
         placeholder={placeholder}
         w={w}
         h={h}

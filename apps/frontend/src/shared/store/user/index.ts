@@ -1,10 +1,10 @@
-import axios from "axios";
-import { makeAutoObservable } from "mobx";
-import { API_URL } from "shared/api";
-import { IUser } from "shared/models/IUser";
-import { AuthResponse } from "shared/models/response/AuthResponse";
-import AuthServices from "shared/services/AuthServices";
-import { data } from "./mockdata";
+import axios from 'axios';
+import { makeAutoObservable } from 'mobx';
+import { API_URL } from 'shared/api';
+import { IUser } from 'shared/models/IUser';
+import { AuthResponse } from 'shared/models/response/AuthResponse';
+import AuthServices from 'shared/services/AuthServices';
+import { data } from './mockdata';
 
 export default class UserStore {
   user = {} as IUser;
@@ -31,8 +31,8 @@ export default class UserStore {
   async login(email: string, password: string, role: string) {
     try {
       const response = await AuthServices.login(email, password, role);
-      localStorage.setItem("token", response.data.accessToken);
-      localStorage.setItem("rtoken", response.data.refreshToken);
+      localStorage.setItem('token', response.data.accessToken);
+      localStorage.setItem('rtoken', response.data.refreshToken);
       this.setAuth(true);
       this.setUser(response.data.user);
     } catch (e: any) {
@@ -45,10 +45,10 @@ export default class UserStore {
       const response = await AuthServices.registration(
         username,
         email,
-        password,
+        password
       );
-      localStorage.setItem("token", response.data.accessToken);
-      localStorage.setItem("rtoken", response.data.refreshToken);
+      localStorage.setItem('token', response.data.accessToken);
+      localStorage.setItem('rtoken', response.data.refreshToken);
       this.setAuth(true);
       this.setUser(response.data.user);
     } catch (e: any) {
@@ -60,8 +60,8 @@ export default class UserStore {
     try {
       const response = await AuthServices.logout();
       console.table(response);
-      localStorage.removeItem("token");
-      localStorage.removeItem("rtoken");
+      localStorage.removeItem('token');
+      localStorage.removeItem('rtoken');
       this.setAuth(false);
       this.setUser({} as IUser);
     } catch (e: any) {
@@ -74,10 +74,10 @@ export default class UserStore {
     try {
       const response = await axios.post<AuthResponse>(
         `${API_URL}/users/refresh`,
-        { refreshToken: `${localStorage.getItem("rtoken")}` },
+        { refreshToken: `${localStorage.getItem('rtoken')}` }
       );
-      localStorage.setItem("token", response.data.accessToken);
-      localStorage.setItem("rtoken", response.data.refreshToken);
+      localStorage.setItem('token', response.data.accessToken);
+      localStorage.setItem('rtoken', response.data.refreshToken);
       this.setAuth(true);
       this.setUser(response.data.user);
     } catch (e: any) {
