@@ -1,16 +1,16 @@
-import { Flex, Loader, Stack } from "@mantine/core";
-import { Card } from "shared/components/Card";
-import { Avatar } from "./components/Avatar";
+import { Flex, Loader, Stack } from '@mantine/core';
+import { Card } from 'shared/components/Card';
+import { Avatar } from './components/Avatar';
 
-import mage from "shared/assets/analyse-mage.png";
-import avatar from "shared/assets/avatar.png";
+import mage from 'shared/assets/mage.png';
+import avatar from 'shared/assets/avatar.png';
 
-import style from "./MageChat.module.scss";
-import { Button } from "shared/components/Button";
-import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
-import { ResultList } from "./components/ResultList";
-import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import style from './MageChat.module.scss';
+import { Button } from 'shared/components/Button';
+import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react';
+import { ResultList } from './components/ResultList';
+import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 export const MageChat = () => {
   const navigate = useNavigate();
@@ -32,7 +32,7 @@ export const MageChat = () => {
   }, [isShow]);
 
   return (
-    <Stack w={"100%"} gap={12}>
+    <Stack w={'100%'} gap={12}>
       <Stack align="flex-end">
         <Card outline radius="24px 2px 24px 24px" w={480} bg="transparent">
           <Stack gap={16}>
@@ -46,7 +46,7 @@ export const MageChat = () => {
       {isShow && (
         <>
           {isLoading ? (
-            <Loader size={"xl"} color="gray" type="dots" />
+            <Loader size={'xl'} color="gray" type="dots" />
           ) : (
             <Stack>
               <Card radius="2px 24px 24px 24px" bg="#F8F9FA">
@@ -55,13 +55,13 @@ export const MageChat = () => {
                     <Avatar name="Профилум" image={mage} />
                     <p className="text black">
                       Вижу... тебя в учебном заведении твоей мечты! А там... что
-                      это? Программирование... Дизайн... IT... Хмммм. <br />{" "}
-                      Точно! Я вижу, тебе суждено стать{" "}
+                      это? Программирование... Дизайн... IT... Хмммм. <br />{' '}
+                      Точно! Я вижу, тебе суждено стать{' '}
                       <span className="text pink">Системным аналитиком!</span>
                     </p>
                   </Stack>
                   <ResultList />
-                  <Flex justify={"space-between"}>
+                  <Flex justify={'space-between'}>
                     <Button onClick={() => navigate(-1)}>
                       <Flex gap={8}>
                         <IconChevronLeft stroke={1.5} color="#ffff" />

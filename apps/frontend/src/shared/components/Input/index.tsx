@@ -1,19 +1,16 @@
-import { Input as MantineInput } from "@mantine/core";
-import style from "./Input.module.scss";
-import { ControllerRenderProps, FieldValues } from "react-hook-form";
-import { IResult } from "shared/models/IResult";
-import { Icon123, IconSearch } from "@tabler/icons-react";
+import { Input as MantineInput } from '@mantine/core';
+import style from './Input.module.scss';
+import { ControllerRenderProps, FieldValues } from 'react-hook-form';
+import { Icon123, IconSearch } from '@tabler/icons-react';
 
 interface Props {
-  field:
-    | ControllerRenderProps<IResult, any>
-    | ControllerRenderProps<FieldValues, any>;
+  field: ControllerRenderProps<FieldValues, any>;
   w?: number;
   size?: string;
   h?: number;
   placeholder?: string;
-  br?: string;
   disabled?: boolean;
+  label?: string;
 }
 
 export const Input = ({
@@ -22,29 +19,23 @@ export const Input = ({
   h,
   size,
   placeholder,
-  br,
   disabled,
+  label,
 }: Props) => {
   return (
-    <MantineInput
-      placeholder={placeholder}
-      rightSection={
-        placeholder && (
-          <IconSearch
-            opacity={0.3}
-            style={{ marginBottom: "4px" }}
-            width={24}
-            height={24}
-          />
-        )
-      }
-      w={w}
-      h={h}
-      disabled={disabled}
-      style={{ borderRadius: br }}
-      size={size}
-      {...field}
-      className={placeholder ? style["custom-input"] : style.input}
-    />
+    <MantineInput.Wrapper
+      className={placeholder ? style['custom-input'] : style.input}
+      label={label}
+    >
+      <MantineInput
+        placeholder={placeholder}
+        w={w}
+        h={h}
+        disabled={disabled}
+        size={size}
+        {...field}
+        className={placeholder ? style['custom-input'] : style.input}
+      />
+    </MantineInput.Wrapper>
   );
 };
