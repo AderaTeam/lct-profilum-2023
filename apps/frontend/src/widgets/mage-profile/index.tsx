@@ -11,7 +11,18 @@ export const MageProfile = () => {
 
   return (
     <Stack align="center" gap={24}>
-      <Image radius={24} src={mageAvatar} w={180} h={180} />
+      <Image
+        decoding="async"
+        loading="lazy"
+        radius={24}
+        src={mageAvatar}
+        w={180}
+        h={180}
+        style={{
+          backgroundSize: 'cover',
+          backgroundImage: `${mageAvatar}`,
+        }}
+      />
       <div style={{ position: 'absolute', right: 40, top: 40 }}>
         <ActionIcon onClick={() => navigate(-1)} outline>
           <IconPlus style={{ rotate: '45deg' }} stroke={1.5} color="#ADB5BD" />

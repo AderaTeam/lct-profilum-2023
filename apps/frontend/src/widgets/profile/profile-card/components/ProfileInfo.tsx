@@ -25,9 +25,9 @@ export const ProfileInfo = (user: IUser) => {
           <p className="text bold">{user.grade}</p>
         </Flex>
       </Stack>
-      {user.path.length ? (
+      {user.paths.length ? (
         <Flex gap={8}>
-          {user.path.map((item) => (
+          {user.paths.map((item) => (
             <Tag key={item.id} variant="outline">
               {item.name}
             </Tag>

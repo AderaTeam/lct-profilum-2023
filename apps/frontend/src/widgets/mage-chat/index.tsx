@@ -10,9 +10,13 @@ import { Button } from 'shared/components/Button';
 import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react';
 import { ResultList } from './components/ResultList';
 import { useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { observer } from 'mobx-react-lite';
+import { Context } from 'main';
 
-export const MageChat = () => {
+export const MageChat = observer(() => {
+  const { UStore } = useContext(Context);
+
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isShow, setIsShow] = useState<boolean>(false);
@@ -30,6 +34,80 @@ export const MageChat = () => {
       }, 3000);
     }
   }, [isShow]);
+
+  useEffect(() => {
+    if (!isLoading) {
+      UStore.setUser({
+        ...UStore.user,
+        analysedPaths: [
+          {
+            id: 0,
+            name: 'Frontend - разработка',
+            steps: [
+              {
+                step: 1,
+                title:
+                  'Посмотрите видео “Что такое клиент-серверное взаимодействие?”',
+                status: 'Завершено',
+                points: 20,
+                tags: ['#КЛИЕНТ-СЕРВЕРНОЕ ВЗАИМОДЕЙСТВИЕ', '#WEB'],
+                content: {
+                  link: '123',
+                  questionsCount: 2,
+                },
+              },
+              {
+                step: 2,
+                title:
+                  'Посмотрите видео “Что такое клиент-серверное взаимодействие?”',
+                status: 'В процессе',
+                points: 20,
+                tags: ['#КЛИЕНТ-СЕРВЕРНОЕ ВЗАИМОДЕЙСТВИЕ', '#WEB'],
+                content: {
+                  link: '123',
+                  questionsCount: 2,
+                },
+              },
+              {
+                step: 3,
+                title: 'test',
+                status: 'Не начато',
+                points: 20,
+                tags: ['#КЛИЕНТ-СЕРВЕРНОЕ ВЗАИМОДЕЙСТВИЕ', '#WEB'],
+                content: {
+                  link: '123',
+                  questionsCount: 2,
+                },
+              },
+              {
+                step: 4,
+                title:
+                  'Посмотрите видео “Что такое клиент-серверное взаимодействие?”',
+                status: 'Не начато',
+                points: 20,
+                tags: ['#КЛИЕНТ-СЕРВЕРНОЕ ВЗАИМОДЕЙСТВИЕ', '#WEB'],
+                content: {
+                  link: '123',
+                  questionsCount: 2,
+                },
+              },
+              {
+                step: 5,
+                title: 'test',
+                status: 'Не начато',
+                points: 20,
+                tags: ['#КЛИЕНТ-СЕРВЕРНОЕ ВЗАИМОДЕЙСТВИЕ', '#WEB'],
+                content: {
+                  link: '123',
+                  questionsCount: 2,
+                },
+              },
+            ],
+          },
+        ],
+      });
+    }
+  }, [isLoading]);
 
   return (
     <Stack w={'100%'} gap={12}>
@@ -83,4 +161,4 @@ export const MageChat = () => {
       )}
     </Stack>
   );
-};
+});

@@ -11,8 +11,9 @@ export const data: IUser = {
   role: '',
   rating: 1,
   points: 20,
-  path: [],
-  // path: [
+  analysedPaths: [],
+  paths: [],
+  // paths: [
   //   {
   //     id: 0,
   //     name: 'Frontend - разработка',

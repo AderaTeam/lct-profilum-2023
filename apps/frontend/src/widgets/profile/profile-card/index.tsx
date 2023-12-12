@@ -12,10 +12,17 @@ import { Context } from 'main';
 import { ProfileInfo } from './components/ProfileInfo';
 import { observer } from 'mobx-react-lite';
 import { ProfileEdit } from './components/ProfileEdit';
+import { FormProvider, useForm } from 'react-hook-form';
 
 export const ProfileCard = observer(() => {
   const { UStore } = useContext(Context);
+  const profileForm = useForm({ mode: 'onSubmit', defaultValues: UStore.user });
   const [isEdit, setIsEdit] = useState(false);
+
+  const onSubmit = profileForm.handleSubmit((formData) => {
+    UStore.setUser(formData);
+    setIsEdit(false);
+  });
 
   return (
     <Card radius={32}>
@@ -37,7 +44,14 @@ export const ProfileCard = observer(() => {
               src={avatar}
             />
             {isEdit ? (
-              <Button onClick={() => setIsEdit(false)}>
+              <Button
+                disabled={
+                  !profileForm.watch('grade') ||
+                  !profileForm.watch('nickname') ||
+                  !profileForm.watch('username')
+                }
+                onClick={onSubmit}
+              >
                 Сохранить изменения
               </Button>
             ) : (
@@ -55,7 +69,13 @@ export const ProfileCard = observer(() => {
               </Flex>
             )}
           </Flex>
-          {isEdit ? <ProfileEdit /> : <ProfileInfo {...UStore.user} />}
+          {isEdit ? (
+            <FormProvider {...profileForm}>
+              <ProfileEdit />{' '}
+            </FormProvider>
+          ) : (
+            <ProfileInfo {...UStore.user} />
+          )}
         </Stack>
       </Card.Section>
     </Card>

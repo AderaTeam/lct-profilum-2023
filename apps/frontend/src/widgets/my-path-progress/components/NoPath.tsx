@@ -29,10 +29,10 @@ export const NoPath = () => {
             тебе нужно сделать
           </p>
         </Stack>
-        <Button outline onClick={() => navigate(MY_SOCIALS_ROUTE)}>
+        <Button onClick={() => navigate(MY_SOCIALS_ROUTE)}>
           <Flex gap={8}>
             Подключить
-            <IconChevronRight stroke={1.5} color="#ADB5BD" />
+            <IconChevronRight stroke={1.5} color="#FFFF" />
           </Flex>
         </Button>
       </Stack>

@@ -9,7 +9,8 @@ export interface IUser {
   rank: string;
   rating: number;
   points: number;
-  path: IPath[];
+  paths: IPath[];
   grade?: string;
   nickname?: string;
+  analysedPaths?: IPath[];
 }
