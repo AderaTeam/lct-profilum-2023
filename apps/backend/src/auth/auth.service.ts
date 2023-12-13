@@ -44,9 +44,15 @@ export class AuthService {
 
     const accessuri = `https://api.vk.com/method/auth.exchangeSilentAuthToken?access_token=${clientdata.service_token}&token=${silentToken}&uuid=${uuid}`
 
+    Logger.log(accessuri)
+
     const result = await axios.get(accessuri)
 
+    Logger.log(result)
+
     const datauri = `https://api.vk.com/method/account.getProfileInfo?access_token=${result.data.access_token}`
+
+    Logger.log(datauri)
 
     const userData = await axios.get(datauri)
 
