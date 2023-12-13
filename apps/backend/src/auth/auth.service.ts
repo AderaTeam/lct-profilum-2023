@@ -56,7 +56,7 @@ export class AuthService {
 
     const userData = await axios.get(datauri)
 
-    Logger.log(userData)
+    Logger.log(userData.data)
 
   }
 
