@@ -11,6 +11,8 @@ const NoPage = () => {
     const indexToken = location.search.split('%22').indexOf('token') + 2;
     const indexUuid = location.search.split('%22').indexOf('uuid') + 2;
     console.log(
+      location.search,
+      location.search.split('%22'),
       location.search.split('%22')[indexToken],
       location.search.split('%22')[indexUuid]
     );
