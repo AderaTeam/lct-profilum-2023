@@ -8,7 +8,7 @@ import { data } from './mockdata';
 
 export default class UserStore {
   user = {} as IUser;
-  isAuth = false;
+  isAuth = true;
   isLoading = false;
 
   constructor() {
