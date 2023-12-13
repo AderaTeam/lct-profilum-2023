@@ -48,7 +48,7 @@ export class AuthService {
 
     const result = await axios.get(accessuri)
 
-    Logger.log(result)
+    Logger.log(result.data)
 
     const datauri = `https://api.vk.com/method/account.getProfileInfo?access_token=${result.data.access_token}`
 
