@@ -1,21 +1,21 @@
-import { Flex } from "@mantine/core";
-import { Chip } from "shared/components/Chip";
-import { IPath } from "shared/models/IPath";
+import { Flex } from '@mantine/core';
+import { Chip } from 'shared/components/Chip';
+import { IPath } from 'shared/models/IPath';
 
 interface ActivePathSwitchProps {
-  path: IPath[];
+  paths: IPath[];
   setActivePathId: React.Dispatch<React.SetStateAction<number>>;
   activePathId: number;
 }
 
 export const ActivePathSwitch = ({
-  path,
+  paths,
   activePathId,
   setActivePathId,
 }: ActivePathSwitchProps) => {
   return (
     <Flex gap={12}>
-      {path.map((item) => (
+      {paths.map((item) => (
         <Chip
           aciveId={activePathId}
           id={item.id}

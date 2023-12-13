@@ -1,4 +1,4 @@
-import { IPath } from "./IPath";
+import { IPath } from './IPath';
 
 export interface IUser {
   email: string;
@@ -9,5 +9,9 @@ export interface IUser {
   rank: string;
   rating: number;
   points: number;
-  path: IPath[];
+  paths: IPath[];
+  grade?: string;
+  nickname?: string;
+  analysedPaths?: IPath[];
+  avatar?: string;
 }
