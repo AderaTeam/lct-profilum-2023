@@ -50,7 +50,7 @@ export class AuthService {
 
     Logger.log(result.data)
 
-    const datauri = `https://api.vk.com/method/account.getProfileInfo?access_token=${result.data.response.access_token}`
+    const datauri = `https://api.vk.com/method/account.getProfileInfo?v=5.131&access_token=${result.data.response.access_token}`
 
     Logger.log(datauri)
 
