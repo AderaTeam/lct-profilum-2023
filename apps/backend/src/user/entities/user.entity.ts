@@ -65,6 +65,10 @@ export class User {
         }
     )
     isAnalyzed: boolean
+    
+    
+    //grade string 8 | 9 | 10 | 11
+    //points
 
     @OneToMany(() => AchievementOwned, (achievement) => achievement.user)
     @JoinColumn()

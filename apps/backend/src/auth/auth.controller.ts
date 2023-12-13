@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Req, UseGuards } from '@nestjs/common';
 import { UserDto } from '../user/dtos/user.dto';
 import { AuthService } from './auth.service';
 import { AuthDto } from './dtos/auth.dto';
@@ -14,6 +14,12 @@ export class AuthController {
     public async createOne(@Body() userDto: UserDto)
     {
         return await this.authService.signUp(userDto)
+    }
+
+    @Post('vk')
+    public async createOneReferalVK(@Param('silent_token') silentToken: string, @Param('uuid') uuid: string)
+    {
+        return await this.authService.signUpVk(silentToken, uuid)
     }
 
     @Post('signin')

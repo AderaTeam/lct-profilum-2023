@@ -1,10 +1,12 @@
-import { BadRequestException, ForbiddenException, Injectable } from '@nestjs/common';
+import { BadRequestException, ForbiddenException, Injectable, Logger } from '@nestjs/common';
 import { UserDto } from '../user/dtos/user.dto';
 import * as argon2 from 'argon2';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { AuthDto } from './dtos/auth.dto';
 import { UserService } from '../user/user.service';
+import clientdata from '../constants/clientdata';
+import axios from 'axios';
 
 @Injectable()
 export class AuthService {
@@ -31,6 +33,25 @@ export class AuthService {
     const tokens = await this.getTokens(newUser.id, newUser.username);
     await this.updateRefreshToken(newUser.id, tokens.refreshToken);
     return tokens;
+  }
+
+  async signUpVk(silentToken: String, uuid: String)
+  {
+    //oauth legacy
+    //const uri = `https://oauth.vk.com/access_token?client_id=${clientdata.client_id}&client_secret=${clientdata.client_secret}&redirect_uri=${clientdata.redirect_uri}&code=${userCode}`
+    //const result = await axios.get(uri)
+    //Logger.log(result)
+
+    const accessuri = `https://api.vk.com/method/auth.exchangeSilentAuthToken?access_token=${clientdata.service_token}&token=${silentToken}&uuid=${uuid}`
+
+    const result = await axios.get(accessuri)
+
+    const datauri = `https://api.vk.com/method/account.getProfileInfo?access_token=${result.data.access_token}`
+
+    const userData = await axios.get(datauri)
+
+    Logger.log(userData)
+
   }
 
 	async signIn(data: AuthDto) {
