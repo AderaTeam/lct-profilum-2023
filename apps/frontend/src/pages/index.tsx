@@ -38,7 +38,7 @@ export const Routing = observer(() => {
     <Flex bg={'gray.0'} className="wrapper" style={{ height: '100vh' }}>
       <Flex>
         {location.pathname !== MAGE_ROUTE && UStore.isAuth && (
-          <div className="wrapper">
+          <div style={{ width: 'fit-content' }} className="wrapper">
             <Navbar />
           </div>
         )}

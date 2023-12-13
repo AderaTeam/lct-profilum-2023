@@ -6,6 +6,8 @@ import { useContext } from 'react';
 import { Context } from 'main';
 import { ProgressCard } from './components/progress-card';
 
+import style from './MainWrapper.module.scss';
+
 type Props = {
   children?: React.ReactNode[];
   CustomTitle?: () => JSX.Element;
@@ -19,10 +21,10 @@ const MainWrapper = observer(
     const { UStore } = useContext(Context);
 
     return (
-      <Stack p={'32px 40px'}>
+      <Stack w={'100%'} p={'32px 40px'}>
         {!fullWidth ? (
           <Flex justify="space-between" gap={24}>
-            <Stack gap={48} w={1019}>
+            <Stack gap={48} className={style.center}>
               {CustomTitle ? (
                 <CustomTitle />
               ) : (
@@ -32,7 +34,7 @@ const MainWrapper = observer(
                 {children?.length ? children[0] : <></>}
               </div>
             </Stack>
-            <Stack w={497}>
+            <Stack className={style.right}>
               <div className="wrapper">
                 {children?.length ? (
                   <Stack gap={16}>

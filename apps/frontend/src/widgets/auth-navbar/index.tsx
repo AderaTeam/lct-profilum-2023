@@ -3,7 +3,7 @@ import style from './AuthNavbar.module.scss';
 
 import logo from 'shared/assets/logo.svg';
 import { Chip } from 'shared/components/Chip';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { AuthForm } from './components/AuthFrom';
 import { Navigate, useLocation } from 'react-router-dom';
@@ -19,6 +19,10 @@ export const AuthNavbar = () => {
     authFrom.reset();
   };
 
+  useEffect(() => {
+    authFrom.reset();
+  }, [location]);
+
   if (location.pathname === REGISTRATION_ROUTE && activeRole === 0) {
     return <Navigate to={LOGIN_ROUTE} replace />;
   }
@@ -27,7 +31,9 @@ export const AuthNavbar = () => {
     <Stack gap={88} className={style.navbar}>
       <Image src={logo} />
       <Stack align="center" gap={40}>
-        <h1 className="h1">Vhod</h1>
+        <h1 className="h1">
+          {location.pathname === LOGIN_ROUTE ? 'Вход' : 'Регистрация'}
+        </h1>
         <Flex gap={8}>
           <Chip
             aciveId={activeRole}

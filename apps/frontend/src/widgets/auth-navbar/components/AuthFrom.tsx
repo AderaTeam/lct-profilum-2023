@@ -1,5 +1,7 @@
 import { Flex, Stack } from '@mantine/core';
 import { IconChevronRight } from '@tabler/icons-react';
+import { Context } from 'main';
+import { useContext } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { NavLink, useLocation } from 'react-router-dom';
 import { Button } from 'shared/components/Button';
@@ -12,8 +14,10 @@ interface AuthFormProps {
 }
 
 export const AuthForm = ({ activeRole }: AuthFormProps) => {
+  const { UStore } = useContext(Context);
   const location = useLocation();
-  const { control, watch, setValue, getValues } = useFormContext();
+  const { control, watch, setValue, getValues, handleSubmit } =
+    useFormContext();
 
   const selectData = [
     { label: '11 класс', value: '11 класс' },
@@ -22,17 +26,52 @@ export const AuthForm = ({ activeRole }: AuthFormProps) => {
     { label: '8 класс', value: '8 класс' },
   ];
 
+  const onSubmit = handleSubmit((formData) => {
+    if (location.pathname === LOGIN_ROUTE) {
+      UStore.setUser({ ...UStore.user, ...formData });
+      UStore.setAuth(true);
+    } else {
+      UStore.setUser({ ...UStore.user, ...formData });
+      UStore.setAuth(true);
+    }
+  });
+
   return (
     <Stack align="center" gap={24}>
       <Stack gap={12}>
         {location.pathname === LOGIN_ROUTE ? (
           <>
+            {activeRole === 0 ? (
+              <Flex
+                p={'16px 24px'}
+                style={{ borderRadius: '12px' }}
+                bg={'#FFF0F7'}
+                gap={16}
+              >
+                <Flex gap={8}>
+                  <p className="text bold">Логин:</p>
+                  <p className="text black">@admin</p>
+                </Flex>
+                <Flex gap={8}>
+                  <p className="text bold">Пароль:</p>
+                  <p className="text black">admin</p>
+                </Flex>
+              </Flex>
+            ) : (
+              <></>
+            )}
             <Controller
-              name="login"
+              name="nickname"
               control={control}
               defaultValue={''}
               render={(field) => (
-                <Input label="Логин" {...field} w={360} h={43} />
+                <Input
+                  label="Логин"
+                  placeholder="@pavel"
+                  {...field}
+                  w={360}
+                  h={43}
+                />
               )}
             />
             <Controller
@@ -40,7 +79,14 @@ export const AuthForm = ({ activeRole }: AuthFormProps) => {
               control={control}
               defaultValue={''}
               render={(field) => (
-                <Input label="Пароль" {...field} w={360} h={43} />
+                <Input
+                  type="password"
+                  label="Пароль"
+                  placeholder="*******"
+                  {...field}
+                  w={360}
+                  h={43}
+                />
               )}
             />
           </>
@@ -51,20 +97,27 @@ export const AuthForm = ({ activeRole }: AuthFormProps) => {
               control={control}
               defaultValue={''}
               render={(field) => (
-                <Input label="Фамилия Имя" {...field} w={360} h={43} />
+                <Input
+                  label="Фамилия Имя"
+                  placeholder="Иванов Иван"
+                  {...field}
+                  w={360}
+                  h={43}
+                />
               )}
             />
             <Controller
-              name="login"
+              name="nickname"
               control={control}
               defaultValue={''}
               render={(field) => (
                 <Input
                   onFocus={
-                    !getValues('login')
-                      ? () => setValue('login', '@')
+                    !getValues('nickname')
+                      ? () => setValue('nickname', '@')
                       : undefined
                   }
+                  placeholder="@krytoiperec"
                   label="Логин"
                   {...field}
                   w={360}
@@ -80,6 +133,7 @@ export const AuthForm = ({ activeRole }: AuthFormProps) => {
                 <Select
                   data={selectData}
                   label="Класс обучения"
+                  placeholder="11 класс"
                   {...field}
                   w={360}
                 />
@@ -90,17 +144,25 @@ export const AuthForm = ({ activeRole }: AuthFormProps) => {
               control={control}
               defaultValue={''}
               render={(field) => (
-                <Input label="Пароль" {...field} w={360} h={43} />
+                <Input
+                  type="password"
+                  label="Пароль"
+                  placeholder="*******"
+                  {...field}
+                  w={360}
+                  h={43}
+                />
               )}
             />
           </>
         )}
       </Stack>
       <Button
+        onClick={onSubmit}
         disabled={
           location.pathname === LOGIN_ROUTE
-            ? !watch('login') || !watch('password')
-            : !watch('login') ||
+            ? !watch('nickname') || !watch('password')
+            : !watch('nickname') ||
               !watch('password') ||
               !watch('username') ||
               !watch('grade')

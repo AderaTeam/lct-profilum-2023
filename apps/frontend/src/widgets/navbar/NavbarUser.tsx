@@ -3,8 +3,6 @@ import { IconChevronRight } from '@tabler/icons-react';
 import { NavLink } from 'react-router-dom';
 import { PROFILE_ROUTE } from 'shared/constants/const';
 
-import avatar from 'shared/assets/avatar.png';
-
 import style from './Navbar.module.scss';
 import { observer } from 'mobx-react-lite';
 import { useContext } from 'react';
@@ -15,7 +13,7 @@ const NavbarUser = observer(() => {
 
   return (
     <Flex gap={12} align={'center'}>
-      <Avatar src={avatar} h={56} w={56} />
+      <Avatar src={UStore.user.avatar} h={56} w={56} />
       <Stack gap={6}>
         <Text className={style['navbar__name']}>{UStore.user.username}</Text>
         <Text className={style['navbar__tag']}>{UStore.user.nickname}</Text>

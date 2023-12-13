@@ -13,4 +13,5 @@ export interface IUser {
   grade?: string;
   nickname?: string;
   analysedPaths?: IPath[];
+  avatar?: string;
 }

@@ -4,7 +4,6 @@ import { IconPencil, IconSettings } from '@tabler/icons-react';
 import { Tag } from 'shared/components/Tag';
 
 import profileBg from 'shared/assets/profile-bg.png';
-import avatar from 'shared/assets/avatar.png';
 
 import style from './ProfileCard.module.scss';
 import { useContext, useState } from 'react';
@@ -41,7 +40,7 @@ export const ProfileCard = observer(() => {
               size={194}
               radius={32}
               mt={-97 - 32}
-              src={avatar}
+              src={UStore.user.avatar}
             />
             {isEdit ? (
               <Button

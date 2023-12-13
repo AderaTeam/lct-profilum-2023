@@ -13,7 +13,7 @@ export const ProfileEdit = () => {
   ];
 
   return (
-    <Flex gap={16}>
+    <Flex wrap={'wrap'} gap={16}>
       <Controller
         name="nickname"
         control={control}

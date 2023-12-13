@@ -3,7 +3,6 @@ import { Card } from 'shared/components/Card';
 import { Avatar } from './components/Avatar';
 
 import mage from 'shared/assets/mage.png';
-import avatar from 'shared/assets/avatar.png';
 
 import style from './MageChat.module.scss';
 import { Button } from 'shared/components/Button';
@@ -114,7 +113,7 @@ export const MageChat = observer(() => {
       <Stack align="flex-end">
         <Card outline radius="24px 2px 24px 24px" w={480} bg="transparent">
           <Stack gap={16}>
-            <Avatar name="Эмили Сторан" image={avatar} />
+            <Avatar name={UStore.user.username} image={UStore.user.avatar!} />
             <p className={style.text}>
               Профилум, помоги! Хочу знать на кого пойти учиться!
             </p>
