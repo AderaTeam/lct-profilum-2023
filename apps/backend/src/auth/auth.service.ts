@@ -42,7 +42,7 @@ export class AuthService {
     //const result = await axios.get(uri)
     //Logger.log(result)
 
-    const accessuri = `https://api.vk.com/method/auth.exchangeSilentAuthToken?access_token=${clientdata.service_token}&token=${silentToken}&uuid=${uuid}`
+    const accessuri = `https://api.vk.com/method/auth.exchangeSilentAuthToken?v=5.131&access_token=${clientdata.service_token}&token=${silentToken}&uuid=${uuid}`
 
     Logger.log(accessuri)
 
