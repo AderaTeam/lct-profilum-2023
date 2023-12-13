@@ -10,6 +10,8 @@ import pt from 'shared/assets/mock/pt.png';
 import { useNavigate } from 'react-router-dom';
 import { MAGE_ROUTE } from 'shared/constants/const';
 import { FormProvider, useForm } from 'react-hook-form';
+import { Card } from 'shared/components/Card';
+import { IconAlertCircleFilled } from '@tabler/icons-react';
 
 interface MySocialsListProps {
   isLoading: boolean;
@@ -103,6 +105,14 @@ export const MySocialsList = ({
         {data.filter((item) => item.status === 'available').length ? (
           <Stack gap={24}>
             <h2 className="h2">Доступные соц.сети для подключения</h2>
+            <Card bg="#E0EEFF" p="24px 32px" radius="12px">
+              <Flex gap={12}>
+                <IconAlertCircleFilled style={{ color: '#2F80ED' }} />
+                <p className="text black">
+                  Подключите все желаемые соц. сети, прежде чем анализировать
+                </p>
+              </Flex>
+            </Card>
             <Stack gap={12}>
               {data
                 .filter((item) => item.status === 'available')
