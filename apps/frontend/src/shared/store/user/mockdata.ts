@@ -1,74 +1,81 @@
-import { IUser } from "shared/models/IUser";
+import { IUser } from 'shared/models/IUser';
+
+import avatar from 'shared/assets/ranks/0.png';
 
 export const data: IUser = {
-  username: "Test User",
+  username: 'Test User',
+  nickname: '@jaadera',
+  grade: '11 класс',
   isAnalyzed: false,
   id: 0,
-  email: "",
-  rank: "Незнайка",
-  role: "",
+  email: '',
+  rank: 'Незнайка',
+  role: '',
   rating: 1,
   points: 20,
-  path: [
+  analysedPaths: [],
+  // paths: [],
+  avatar: avatar,
+  paths: [
     {
       id: 0,
-      name: "Frontend - разработка",
+      name: 'Frontend - разработка',
       steps: [
         {
           step: 1,
           title:
-            "Посмотрите видео “Что такое клиент-серверное взаимодействие?”",
-          status: "Завершено",
+            'Посмотрите видео “Что такое клиент-серверное взаимодействие?”',
+          status: 'Завершено',
           points: 20,
-          tags: ["#КЛИЕНТ-СЕРВЕРНОЕ ВЗАИМОДЕЙСТВИЕ", "#WEB"],
+          tags: ['#КЛИЕНТ-СЕРВЕРНОЕ ВЗАИМОДЕЙСТВИЕ', '#WEB'],
           content: {
-            link: "123",
+            link: '123',
             questionsCount: 2,
           },
         },
         {
           step: 2,
           title:
-            "Посмотрите видео “Что такое клиент-серверное взаимодействие?”",
-          status: "В процессе",
+            'Посмотрите видео “Что такое клиент-серверное взаимодействие?”',
+          status: 'В процессе',
           points: 20,
-          tags: ["#КЛИЕНТ-СЕРВЕРНОЕ ВЗАИМОДЕЙСТВИЕ", "#WEB"],
+          tags: ['#КЛИЕНТ-СЕРВЕРНОЕ ВЗАИМОДЕЙСТВИЕ', '#WEB'],
           content: {
-            link: "123",
+            link: '123',
             questionsCount: 2,
           },
         },
         {
           step: 3,
-          title: "test",
-          status: "Не начато",
+          title: 'test',
+          status: 'Не начато',
           points: 20,
-          tags: ["#КЛИЕНТ-СЕРВЕРНОЕ ВЗАИМОДЕЙСТВИЕ", "#WEB"],
+          tags: ['#КЛИЕНТ-СЕРВЕРНОЕ ВЗАИМОДЕЙСТВИЕ', '#WEB'],
           content: {
-            link: "123",
+            link: '123',
             questionsCount: 2,
           },
         },
         {
           step: 4,
           title:
-            "Посмотрите видео “Что такое клиент-серверное взаимодействие?”",
-          status: "Не начато",
+            'Посмотрите видео “Что такое клиент-серверное взаимодействие?”',
+          status: 'Не начато',
           points: 20,
-          tags: ["#КЛИЕНТ-СЕРВЕРНОЕ ВЗАИМОДЕЙСТВИЕ", "#WEB"],
+          tags: ['#КЛИЕНТ-СЕРВЕРНОЕ ВЗАИМОДЕЙСТВИЕ', '#WEB'],
           content: {
-            link: "123",
+            link: '123',
             questionsCount: 2,
           },
         },
         {
           step: 5,
-          title: "test",
-          status: "Не начато",
+          title: 'test',
+          status: 'Не начато',
           points: 20,
-          tags: ["#КЛИЕНТ-СЕРВЕРНОЕ ВЗАИМОДЕЙСТВИЕ", "#WEB"],
+          tags: ['#КЛИЕНТ-СЕРВЕРНОЕ ВЗАИМОДЕЙСТВИЕ', '#WEB'],
           content: {
-            link: "123",
+            link: '123',
             questionsCount: 2,
           },
         },
@@ -76,39 +83,39 @@ export const data: IUser = {
     },
     {
       id: 1,
-      name: "Программная инженерия",
+      name: 'Программная инженерия',
       steps: [
         {
           step: 1,
-          title: "test",
-          status: "Завершено",
+          title: 'test',
+          status: 'Завершено',
           points: 20,
-          tags: ["#WEB", "#WEB1"],
+          tags: ['#WEB', '#WEB1'],
           content: {
-            link: "123",
+            link: '123',
             questionsCount: 2,
           },
         },
         {
           step: 2,
           title:
-            "Посмотрите видео “Что такое клиент-серверное взаимодействие?”",
-          status: "Завершено",
+            'Посмотрите видео “Что такое клиент-серверное взаимодействие?”',
+          status: 'Завершено',
           points: 20,
-          tags: ["#WEB2", "#WEB"],
+          tags: ['#WEB2', '#WEB'],
           content: {
-            link: "123",
+            link: '123',
             questionsCount: 2,
           },
         },
         {
           step: 3,
-          title: "test",
-          status: "В процессе",
+          title: 'test',
+          status: 'В процессе',
           points: 20,
-          tags: ["#WEB", "#WEB3"],
+          tags: ['#WEB', '#WEB3'],
           content: {
-            link: "123",
+            link: '123',
             questionsCount: 2,
           },
         },

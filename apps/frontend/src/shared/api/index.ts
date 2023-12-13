@@ -1,7 +1,7 @@
-import axios from "axios";
-import { AuthResponse } from "shared/models/response/AuthResponse";
+import axios from 'axios';
+import { AuthResponse } from 'shared/models/response/AuthResponse';
 
-export const API_URL = `http://178.170.192.87:8000`;
+export const API_URL = `https://api.adera-team.ru`;
 
 const $api = axios.create({
   withCredentials: true,
@@ -9,7 +9,7 @@ const $api = axios.create({
 });
 
 $api.interceptors.request.use((config) => {
-  config.headers.Authorization = `Bearer ${localStorage.getItem("token")}`;
+  config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
   return config;
 });
 
@@ -28,17 +28,17 @@ $api.interceptors.response.use(
       try {
         const response = await axios.post<AuthResponse>(
           `${API_URL}/users/refresh`,
-          { refreshToken: `${localStorage.getItem("rtoken")}` },
+          { refreshToken: `${localStorage.getItem('rtoken')}` }
         );
-        localStorage.setItem("token", response.data.accessToken);
-        localStorage.setItem("rtoken", response.data.accessToken);
+        localStorage.setItem('token', response.data.accessToken);
+        localStorage.setItem('rtoken', response.data.accessToken);
         return $api.request(originalRequest);
       } catch (e) {
-        console.log("Пользователь не авторизован", e);
+        console.log('Пользователь не авторизован', e);
       }
       throw error;
     }
-  },
+  }
 );
 
 export default $api;

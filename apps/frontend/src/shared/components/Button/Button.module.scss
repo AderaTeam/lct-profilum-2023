@@ -15,8 +15,10 @@
 
 .button-full-width {
   @extend .button;
-  width: auto;
+  width: 100%;
   span {
+    display: flex;
+    justify-content: center;
     width: 100%;
   }
 }
