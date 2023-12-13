@@ -19,8 +19,6 @@ export class AuthController {
     @Post('vk')
     public async createOneReferalVK(@Query('silent_token') silentToken: string, @Query('uuid') uuid: string)
     {
-        Logger.log(silentToken, ' ', uuid)
-
         return await this.authService.signUpVk(silentToken, uuid)
     }
 
