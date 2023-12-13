@@ -1,12 +1,11 @@
-import { useEffect, useMemo } from 'react';
-import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import $api from 'shared/api';
 import { MY_SOCIALS_ROUTE } from 'shared/constants/const';
 
 const NoPage = () => {
   const navigate = useNavigate();
-
-  let [searchParams, setSearchParams] = useSearchParams();
+  const location = useLocation();
 
   useEffect(() => {
     const indexToken = location.search.split('%22').indexOf('token') + 2;
