@@ -20,8 +20,10 @@
       color: #adb5bd;
     }
     &:disabled {
-      background: #adb5bd;
-      color: white;
+      background: #dee2e6;
+      &::placeholder {
+        color: white;
+      }
     }
   }
   label {

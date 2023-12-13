@@ -6,6 +6,7 @@ import {
   MAGE_ROUTE,
   MY_PATH_ROUTE,
   MY_SOCIALS_ROUTE,
+  NO_PAGE_ROUTE,
   PROFILE_ROUTE,
   REGISTRATION_ROUTE,
   TRAINING_ROUTE,
@@ -28,6 +29,7 @@ const training = lazy(() => import('pages/training'));
 const profile = lazy(() => import('pages/profile'));
 const mySocials = lazy(() => import('pages/my-socials'));
 const mage = lazy(() => import('pages/mage'));
+const noPage = lazy(() => import('pages/no-page'));
 
 export const authRoutes = [
   {
@@ -83,6 +85,13 @@ export const authRoutes = [
     path: MAGE_ROUTE,
     Component: mage,
     title: 'Маг',
+    isAdmin: true,
+    isHide: true,
+  },
+  {
+    path: NO_PAGE_ROUTE,
+    Component: noPage,
+    title: 'Пустая страница',
     isAdmin: true,
     isHide: true,
   },

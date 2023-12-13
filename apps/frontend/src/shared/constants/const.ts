@@ -9,3 +9,4 @@ export const TRAINING_ROUTE = '/training';
 export const PROFILE_ROUTE = '/profile';
 export const MY_SOCIALS_ROUTE = '/my_socials';
 export const MAGE_ROUTE = '/mage';
+export const NO_PAGE_ROUTE = '/no_page';
