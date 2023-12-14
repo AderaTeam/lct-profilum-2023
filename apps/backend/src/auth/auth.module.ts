@@ -17,6 +17,6 @@ import { SocialsService } from '../socials/socials.service';
     SocialsModule
   ],
   controllers: [AuthController],
-  providers: [AuthService, AccessTokenStrategy, RefreshTokenStrategy, SocialsService]
+  providers: [AuthService, AccessTokenStrategy, RefreshTokenStrategy]
 })
 export class AuthModule {}
