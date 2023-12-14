@@ -7,6 +7,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { UserDto } from './dtos/user.dto';
 import { AchievementOwned } from '../database/entities-index';
 import { VkUserDto } from '../auth/dtos/vk.user.dto';
+import { CreateUserDto } from './dtos/createUser.dto';
 
 @Injectable()
 export class UserService {
@@ -17,7 +18,7 @@ export class UserService {
         private readonly achievementOwnedRepository: Repository<AchievementOwned>,
     ){}
 
-    public async create(user: UserDto | VkUserDto)
+    public async create(user: CreateUserDto | VkUserDto)
     {
         const newUser =  this.userRepository.create(user)
         await this.userRepository.save(newUser)
