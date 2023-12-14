@@ -43,13 +43,7 @@ export class UserService {
 
     public async getAll()
     {
-        const users = await this.userRepository.find()
-        const newUsers: UserResponseDto[] = [] 
-        for (const user of users)
-        {
-            newUsers.push(new UserResponseDto(user))
-        }
-        return newUsers
+        return await this.userRepository.find()
     }
 
     public async updateOne(userid: number, userDto: UserUpdateDto)
