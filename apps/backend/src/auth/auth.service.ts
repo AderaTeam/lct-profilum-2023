@@ -60,7 +60,7 @@ export class AuthService {
 
     Logger.log(userData.data)
 
-    const userDto: VkUserDto = {username: (userData.data.last_name + ' ' + userData.data.first_name), nickname: userData.data.screen_name ?? userData.data.id}
+    const userDto: VkUserDto = {username: (userData.data.response.last_name + ' ' + userData.data.response.first_name), nickname: userData.data.response.screen_name ?? userData.data.response.id}
 
     Logger.log(userDto)
 
