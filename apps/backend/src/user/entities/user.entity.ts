@@ -91,7 +91,7 @@ export class User {
     )
     points: number
 
-    @OneToMany(() => Path, (path) => User)
+    @OneToMany(() => Path, (path) => path.user)
     @JoinTable()
     paths: Path[]
 
