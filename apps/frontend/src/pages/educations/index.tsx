@@ -1,9 +1,10 @@
-import MainWrapper from "shared/components/Wrappers/MainWrapper";
+import MainWrapper from 'shared/components/Wrappers/MainWrapper';
+import { EducationsSelectedCard } from 'widgets/educations-selected-card';
 
 const EducationsPage = () => {
   return (
     <MainWrapper>
-      123
+      <EducationsSelectedCard />
       <></>
     </MainWrapper>
   );
