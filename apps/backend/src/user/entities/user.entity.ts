@@ -90,6 +90,15 @@ export class User {
     )
     points: number
 
+    @Column
+    (
+        {
+            nullable: true,
+            default: []
+        }
+    )
+    paths: [number]
+
     @OneToMany(() => AchievementOwned, (achievement) => achievement.user)
     @JoinColumn()
     achievements: AchievementOwned[]
