@@ -1,7 +1,7 @@
 import { Input as MantineInput } from '@mantine/core';
 import style from './Input.module.scss';
 import { ControllerRenderProps, FieldValues } from 'react-hook-form';
-import { Icon123, IconSearch } from '@tabler/icons-react';
+import { IconSearch } from '@tabler/icons-react';
 
 interface Props {
   field: ControllerRenderProps<FieldValues, any>;
@@ -38,6 +38,16 @@ export const Input = ({
         size={size}
         {...field}
         className={style.input}
+        rightSection={
+          placeholder === 'Поиск' && (
+            <IconSearch
+              opacity={0.3}
+              style={{ marginRight: '10px' }}
+              width={24}
+              height={24}
+            />
+          )
+        }
       />
     </MantineInput.Wrapper>
   );
