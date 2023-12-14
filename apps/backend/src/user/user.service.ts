@@ -43,7 +43,7 @@ export class UserService {
 
     public async getOneByNickname(nickname: string)
     {
-        return await this.userRepository.findOne({where:{nickname: nickname}})
+        return await this.userRepository.findOne({where:{nickname: nickname}, relations:{paths: true}})
     }
 
     public async getAll()
