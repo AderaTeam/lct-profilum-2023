@@ -14,7 +14,7 @@ export const SocialCardForm = ({ name }: SocialCardFormProps) => {
   const { control, watch } = useFormContext();
   VKID.Config.set({
     app: 51812541,
-    redirectUrl: `https://profilum.adera-team.ru/${NO_PAGE_ROUTE}`,
+    redirectUrl: `https://profilum.adera-team.ru${NO_PAGE_ROUTE}`,
   });
 
   return (
