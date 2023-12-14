@@ -96,7 +96,6 @@ export class User {
     (
         {
             nullable: false,
-            default: []
         }
     )
     paths: Path[]
