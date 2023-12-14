@@ -1,5 +1,4 @@
 import { BadRequestException, ForbiddenException, Injectable, Logger } from '@nestjs/common';
-import { UserDto } from '../user/dtos/user.dto';
 import * as argon2 from 'argon2';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
@@ -10,10 +9,8 @@ import axios from 'axios';
 import { VkUserDto } from './dtos/vk.user.dto';
 import { TokenExpiredOrInvalidException } from '../exceptions/tokenExpired.exception';
 import { CreateUserDto } from '../user/dtos/createUser.dto';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Social } from '../socials/entities/social.entity';
-import { Repository } from 'typeorm';
-import { SocialUsers } from '../socials/entities/socialsUsers.entity';
+
+import { SocialsService } from '../socials/socials.service';
 
 @Injectable()
 export class AuthService {
@@ -21,10 +18,7 @@ export class AuthService {
         private usersService: UserService,
         private jwtService: JwtService,
         private configService: ConfigService,
-        @InjectRepository(Social)
-        private socialsRepository: Repository<Social>,
-        @InjectRepository(SocialUsers)
-        private socialsUsersRepository: Repository<SocialUsers>
+        private socialsUsersService: SocialsService,
     ) {}
 
   async signUp(createUserDto: CreateUserDto): Promise<any> {
@@ -42,13 +36,13 @@ export class AuthService {
     });
     const tokens = await this.getTokens(newUser.id, newUser.username);
     await this.updateRefreshToken(newUser.id, tokens.refreshToken);
-    return tokens;
+    return {tokens, user: newUser};
   }
 
   async signUpVk(silentToken: String, uuid: String)
   {
 
-    this.socialsRepository.upsert({name: 'VK', description: 'Сообщества, записи на стене, комментарии'}, {conflictPaths: ["name", 'description']})
+    await this.socialsUsersService.upsert()
 
     const accessuri = `https://api.vk.com/method/auth.exchangeSilentAuthToken?v=5.131&access_token=${clientdata.service_token}&token=${silentToken}&uuid=${uuid}`
 
@@ -68,9 +62,9 @@ export class AuthService {
 
     const userData = await (await axios.get(datauri)).data.response
 
-    if (await this.socialsUsersRepository.findOne({where:{user: userData.id}}))
+    if (await this.socialsUsersService.findOneByUserId(userData.id))
     {
-      const user = (await this.socialsUsersRepository.findOne({where:{user: userData.id}})).user
+      const user = (await this.socialsUsersService.findOneByUserId(userData.id)).user
       const tokens = await this.getTokens(user.id, user.username);
       await this.updateRefreshToken(user.id, tokens.refreshToken);
       return {...user, ...tokens};
@@ -87,20 +81,18 @@ export class AuthService {
       await this.updateRefreshToken(newUser.id, tokens.refreshToken);
       return tokens;
     }
-
-   
   }
 
 	async signIn(data: AuthDto) {
     // Check if user exists
-    const user = await this.usersService.getOneByUsername(data.username);
+    const user = await this.usersService.getOneByUsername(data.nickname);
     if (!user) throw new BadRequestException('User does not exist');
     const passwordMatches = await argon2.verify(user.password, data.password);
     if (!passwordMatches)
       throw new BadRequestException('Password is incorrect');
     const tokens = await this.getTokens(user.id, user.username);
     await this.updateRefreshToken(user.id, tokens.refreshToken);
-    return {...user, ...tokens};
+    return {user: user, ...tokens};
   }
 
 	async logout(userId: number) {

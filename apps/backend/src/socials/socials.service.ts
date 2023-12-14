@@ -6,12 +6,15 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UserRolesGuard } from '../user/user.guard';
 import { Roles } from '../decorators/roles.decorator';
+import { SocialUsers } from './entities/socialsUsers.entity';
 
 @Injectable()
 export class SocialsService {
   constructor(
     @InjectRepository(Social)
     private socialsRepository: Repository<Social>,
+    @InjectRepository(SocialUsers)
+    private socialsUsersRepository: Repository<SocialUsers>
   ){}
   @UseGuards(UserRolesGuard)
   @Roles('admin')
@@ -20,8 +23,18 @@ export class SocialsService {
     return await this.socialsRepository.save(social);
   }
 
+  async upsert()
+  {
+    this.socialsRepository.upsert({name: 'VK', description: 'Сообщества, записи на стене, комментарии'}, {conflictPaths: ["name", 'description']})
+  }
+
   async findAll() {
     return await this.socialsRepository.find();
+  }
+
+  async findOneByUserId(id: number)
+  {
+    return await this.socialsUsersRepository.findOne({where:{originaluserid: id}})
   }
 
   async findOne(id: number) {
