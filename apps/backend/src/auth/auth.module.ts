@@ -7,6 +7,7 @@ import { RefreshTokenStrategy } from './strategies/refreshToken.strategy';
 import { UserModule } from '../user/user.module';
 import { ConfigModule } from '@nestjs/config';
 import { SocialsModule } from '../socials/socials.module';
+import { SocialsService } from '../socials/socials.service';
 
 @Module({
   imports: [
@@ -16,6 +17,6 @@ import { SocialsModule } from '../socials/socials.module';
     SocialsModule
   ],
   controllers: [AuthController],
-  providers: [AuthService, AccessTokenStrategy, RefreshTokenStrategy]
+  providers: [AuthService, AccessTokenStrategy, RefreshTokenStrategy, SocialsService]
 })
 export class AuthModule {}
