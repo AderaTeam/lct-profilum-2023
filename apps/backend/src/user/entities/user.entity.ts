@@ -19,6 +19,13 @@ export class User {
             nullable: false,
         }
     )
+    nickname: string
+
+    @Column(
+        {
+            nullable: true,
+        }
+    )
     password: string
 
     @Column(
@@ -66,9 +73,22 @@ export class User {
     )
     isAnalyzed: boolean
     
+    @Column
+    (
+        {
+            nullable: true
+        }
+    )
+    grade: "8" | "9" | "10" | "11" 
     
-    //grade string 8 | 9 | 10 | 11
-    //points
+    @Column
+    (
+        {
+            nullable: true,
+            default: 0
+        }
+    )
+    points: number
 
     @OneToMany(() => AchievementOwned, (achievement) => achievement.user)
     @JoinColumn()

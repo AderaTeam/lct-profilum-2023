@@ -7,6 +7,9 @@ import { AuthDto } from './dtos/auth.dto';
 import { UserService } from '../user/user.service';
 import clientdata from '../constants/clientdata';
 import axios from 'axios';
+import { VkUserDto } from './dtos/vk.user.dto';
+import { TokenExpiredOrInvalidException } from '../exceptions/tokenExpired.exception';
+import { CreateUserDto } from '../user/dtos/createUser.dto';
 
 @Injectable()
 export class AuthService {
@@ -16,7 +19,7 @@ export class AuthService {
         private configService: ConfigService,
     ) {}
 
-  async signUp(createUserDto: UserDto): Promise<any> {
+  async signUp(createUserDto: CreateUserDto): Promise<any> {
     const userExists = await this.usersService.getOneByUsername(
       createUserDto.username,
     );
@@ -24,7 +27,6 @@ export class AuthService {
       throw new BadRequestException('User already exists');
     }
 
-    // Hash password
     const hash = await this.hashData(createUserDto.password);
     const newUser = await this.usersService.create({
       ...createUserDto,
@@ -37,10 +39,6 @@ export class AuthService {
 
   async signUpVk(silentToken: String, uuid: String)
   {
-    //oauth legacy
-    //const uri = `https://oauth.vk.com/access_token?client_id=${clientdata.client_id}&client_secret=${clientdata.client_secret}&redirect_uri=${clientdata.redirect_uri}&code=${userCode}`
-    //const result = await axios.get(uri)
-    //Logger.log(result)
 
     const accessuri = `https://api.vk.com/method/auth.exchangeSilentAuthToken?v=5.131&access_token=${clientdata.service_token}&token=${silentToken}&uuid=${uuid}`
 
@@ -48,6 +46,10 @@ export class AuthService {
 
     const result = await axios.get(accessuri)
 
+    if (result.status == 104)
+    {
+      throw new TokenExpiredOrInvalidException()
+    }
     Logger.log(result.data)
 
     const datauri = `https://api.vk.com/method/account.getProfileInfo?v=5.131&access_token=${result.data.response.access_token}`
@@ -58,6 +60,9 @@ export class AuthService {
 
     Logger.log(userData.data)
 
+    const userDto: VkUserDto = {username: userData.data.last_name + ' ' + userData.data.first_name, nickname: userData.data.screen_name}
+
+    return await this.usersService.create(userDto)
   }
 
 	async signIn(data: AuthDto) {

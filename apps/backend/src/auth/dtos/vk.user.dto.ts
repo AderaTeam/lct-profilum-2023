@@ -1,8 +1,8 @@
-export class UserDto
+export class VkUserDto
 {
-    id?: number
     username: string
-    password: string
+    nickname: string
+    
     role?: string
     type?: string
 }
