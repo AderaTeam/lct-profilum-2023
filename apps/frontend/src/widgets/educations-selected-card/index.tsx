@@ -4,7 +4,6 @@ import { EducationsCard } from './components/EducationsCard';
 
 import img1 from 'shared/assets/university/1.png';
 import img2 from 'shared/assets/university/2.png';
-import img3 from 'shared/assets/university/3.png';
 
 const CardsList = (dataLen: number) => {
   const cards = [];
