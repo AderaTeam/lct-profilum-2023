@@ -95,7 +95,6 @@ export class User {
     @Column
     (
         {
-            array: true,
             nullable: false,
             default: []
         }
