@@ -9,5 +9,6 @@ import { SocialUsers } from './entities/socialsUsers.entity';
   imports:[TypeOrmModule.forFeature([Social, SocialUsers])],
   controllers: [SocialsController],
   providers: [SocialsService],
+  exports: [SocialsService]
 })
 export class SocialsModule {}
