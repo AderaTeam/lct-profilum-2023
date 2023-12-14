@@ -93,11 +93,11 @@ export class User {
     @Column
     (
         {
-            nullable: true,
+            nullable: false,
             default: []
         }
     )
-    paths: number[]
+    paths: number
 
     @OneToMany(() => AchievementOwned, (achievement) => achievement.user)
     @JoinColumn()
