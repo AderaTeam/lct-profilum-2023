@@ -1,4 +1,4 @@
-import { BadRequestException, Inject, Injectable, UnauthorizedException } from '@nestjs/common';
+import { BadRequestException, Inject, Injectable, Logger, UnauthorizedException } from '@nestjs/common';
 import { User } from './entities/user.entity';
 import { Repository } from 'typeorm';
 import { UserResponseDto } from './dtos/userResponse.dto';
@@ -20,6 +20,7 @@ export class UserService {
 
     public async create(user: CreateUserDto | VkUserDto)
     {
+        Logger.log(user)
         const newUser =  this.userRepository.create(user)
         await this.userRepository.save(newUser)
         return newUser
