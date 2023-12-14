@@ -41,6 +41,11 @@ export class UserService {
         return await this.userRepository.findOne({where:{username: username}})
     }
 
+    public async getOneByNickname(nickname: string)
+    {
+        return await this.userRepository.findOne({where:{nickname: nickname}})
+    }
+
     public async getAll()
     {
         return await this.userRepository.find()
