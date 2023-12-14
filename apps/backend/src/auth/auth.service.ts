@@ -46,7 +46,7 @@ export class AuthService {
 
     const result = await axios.get(accessuri)
 
-    if (result.status == 104)
+    if (result.data.error)
     {
       throw new TokenExpiredOrInvalidException()
     }
