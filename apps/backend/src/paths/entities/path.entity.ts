@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn, ManyToOne } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn, ManyToOne, JoinTable } from "typeorm"
 import { User } from "../../database/entities-index"
 
 @Entity()
@@ -8,6 +8,6 @@ export class Path {
     id: number
 
     @ManyToOne(() => User)
-    @JoinColumn()
+    @JoinTable()
     user: User
 }

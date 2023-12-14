@@ -25,7 +25,7 @@ export class SocialsService {
 
   async upsert()
   {
-    this.socialsRepository.upsert({name: 'VK', description: 'Сообщества, записи на стене, комментарии'}, {conflictPaths: ["name", 'description']})
+    this.socialsRepository.upsert({name: 'VK', description: 'Сообщества, записи на стене, комментарии'}, {conflictPaths: ["name"]})
   }
 
   async findAll() {
