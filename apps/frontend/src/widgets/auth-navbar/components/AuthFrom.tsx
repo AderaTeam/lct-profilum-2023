@@ -31,14 +31,15 @@ export const AuthForm = ({ activeRole }: AuthFormProps) => {
       UStore.login(
         formData.nickname,
         formData.password,
-        activeRole === 1 ? 'admin' : 'user'
+        activeRole === 0 ? 'admin' : 'user'
       );
     } else {
       UStore.registration(
         formData.username,
         formData.nickname,
         formData.password,
-        formData.grade
+        formData.grade,
+        activeRole === 0 ? 'admin' : 'user'
       );
     }
   });

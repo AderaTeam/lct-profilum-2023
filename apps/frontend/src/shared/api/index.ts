@@ -27,9 +27,15 @@ $api.interceptors.response.use(
       originalRequest._isRetry = true;
       try {
         const response = await axios.get<AuthResponse>(
-          `${API_URL}/auth/refresh`
+          `${API_URL}/auth/refresh`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('rtoken')}`,
+            },
+          }
         );
         localStorage.setItem('token', response.data.accessToken);
+        localStorage.setItem('rtoken', response.data.refreshToken);
         return $api.request(originalRequest);
       } catch (e) {
         console.log('Пользователь не авторизован', e);

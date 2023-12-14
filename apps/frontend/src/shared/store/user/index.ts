@@ -8,12 +8,11 @@ import { data } from './mockdata';
 
 export default class UserStore {
   user = {} as IUser;
-  isAuth = true;
+  isAuth = false;
   isLoading = false;
 
   constructor() {
     makeAutoObservable(this);
-    this.user = data;
   }
 
   setAuth(bool: boolean) {
@@ -32,6 +31,7 @@ export default class UserStore {
     try {
       const response = await AuthServices.login(nickname, password, role);
       localStorage.setItem('token', response.data.accessToken);
+      localStorage.setItem('rtoken', response.data.refreshToken);
       this.setAuth(true);
       this.setUser(response.data.user);
     } catch (e: any) {
@@ -43,16 +43,19 @@ export default class UserStore {
     username: string,
     nickname: string,
     password: string,
-    grade: string
+    grade: string,
+    role: string
   ) {
     try {
       const response = await AuthServices.registration(
         username,
         nickname,
         password,
-        grade
+        grade,
+        role
       );
       localStorage.setItem('token', response.data.accessToken);
+      localStorage.setItem('rtoken', response.data.refreshToken);
       this.setAuth(true);
       this.setUser(response.data.user);
     } catch (e: any) {
@@ -63,6 +66,7 @@ export default class UserStore {
   async logout() {
     try {
       localStorage.removeItem('token');
+      localStorage.removeItem('rtoken');
       this.setAuth(false);
       this.setUser({} as IUser);
     } catch (e: any) {
@@ -73,8 +77,16 @@ export default class UserStore {
   async checkAuth() {
     this.setLoading(true);
     try {
-      const response = await axios.get<AuthResponse>(`${API_URL}/auth/refresh`);
+      const response = await axios.get<AuthResponse>(
+        `${API_URL}/auth/refresh`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('rtoken')}`,
+          },
+        }
+      );
       localStorage.setItem('token', response.data.accessToken);
+      localStorage.setItem('rtoken', response.data.refreshToken);
       this.setAuth(true);
       this.setUser(response.data.user);
     } catch (e: any) {

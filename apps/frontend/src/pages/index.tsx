@@ -1,8 +1,14 @@
 import { Flex, Stack } from '@mantine/core';
 import { Context } from 'main';
 import { observer } from 'mobx-react-lite';
-import { useContext } from 'react';
-import { Route, Routes, useLocation, Navigate } from 'react-router-dom';
+import { useContext, useEffect } from 'react';
+import {
+  Route,
+  Routes,
+  useLocation,
+  Navigate,
+  useNavigate,
+} from 'react-router-dom';
 import {
   HOME_ROUTE,
   LOGIN_ROUTE,
@@ -14,6 +20,7 @@ import Navbar from 'widgets/navbar';
 
 export const Routing = observer(() => {
   const location = useLocation();
+  const navigate = useNavigate();
   const { UStore } = useContext(Context);
 
   if (location.pathname === HOME_ROUTE) {
@@ -27,13 +34,6 @@ export const Routing = observer(() => {
     return <Navigate to={MY_PATH_ROUTE} />;
   }
 
-  if (
-    !UStore.isAuth &&
-    !publicRoutes.find((item) => item.path === location.pathname)
-  ) {
-    return <Navigate to={LOGIN_ROUTE} />;
-  }
-
   return (
     <Flex bg={'gray.0'} className="wrapper" style={{ height: '100vh' }}>
       <Flex>
@@ -44,10 +44,19 @@ export const Routing = observer(() => {
         )}
         <Stack w={'100%'} align="center">
           <Routes>
-            {UStore.isAuth &&
-              authRoutes.map(({ path, Component }) => (
-                <Route key={path} path={path} element={<Component />} />
-              ))}
+            {UStore.isAuth && UStore.user.role === 'user'
+              ? authRoutes
+                  .filter((item) => !item.isAdmin)
+                  .map(({ path, Component }) => (
+                    <Route key={path} path={path} element={<Component />} />
+                  ))
+              : UStore.isAuth &&
+                UStore.user.role === 'admin' &&
+                authRoutes
+                  .filter((item) => item.isAdmin)
+                  .map(({ path, Component }) => (
+                    <Route key={path} path={path} element={<Component />} />
+                  ))}
             {!UStore.isAuth &&
               publicRoutes.map(({ path, Component }) => (
                 <Route key={path} path={path} element={<Component />} />

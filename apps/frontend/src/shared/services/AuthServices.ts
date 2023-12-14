@@ -19,13 +19,15 @@ export default class AuthServices {
     username: string,
     nickname: string,
     password: string,
-    grade: string
+    grade: string,
+    role: string
   ): Promise<AxiosResponse<AuthResponse>> {
     return $api.post<AuthResponse>('/auth', {
       username,
       nickname,
       password,
       grade,
+      role,
     });
   }
 }
