@@ -12,7 +12,7 @@ export class AchievementOwned {
     @JoinColumn()
     achievement: Achievement
 
-    @ManyToOne(() => User, (user) => user.achievements, {})
+    @OneToOne(() => User, (user) => user.achievements, {})
     @JoinColumn()
     user: User
 

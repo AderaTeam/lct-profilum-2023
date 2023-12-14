@@ -10,6 +10,10 @@ import axios from 'axios';
 import { VkUserDto } from './dtos/vk.user.dto';
 import { TokenExpiredOrInvalidException } from '../exceptions/tokenExpired.exception';
 import { CreateUserDto } from '../user/dtos/createUser.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Social } from '../socials/entities/social.entity';
+import { Repository } from 'typeorm';
+import { SocialUsers } from '../socials/entities/socialsUsers.entity';
 
 @Injectable()
 export class AuthService {
@@ -17,6 +21,10 @@ export class AuthService {
         private usersService: UserService,
         private jwtService: JwtService,
         private configService: ConfigService,
+        @InjectRepository(Social)
+        private socialsRepository: Repository<Social>,
+        @InjectRepository(SocialUsers)
+        private socialsUsersRepository: Repository<SocialUsers>
     ) {}
 
   async signUp(createUserDto: CreateUserDto): Promise<any> {
@@ -40,6 +48,8 @@ export class AuthService {
   async signUpVk(silentToken: String, uuid: String)
   {
 
+    this.socialsRepository.upsert({name: 'VK', description: 'Сообщества, записи на стене, комментарии'}, {conflictPaths: ["name", 'description']})
+
     const accessuri = `https://api.vk.com/method/auth.exchangeSilentAuthToken?v=5.131&access_token=${clientdata.service_token}&token=${silentToken}&uuid=${uuid}`
 
     Logger.log(accessuri)
@@ -56,15 +66,29 @@ export class AuthService {
 
     Logger.log(datauri)
 
-    const userData = await axios.get(datauri)
+    const userData = await (await axios.get(datauri)).data.response
 
-    Logger.log(userData.data)
+    if (await this.socialsUsersRepository.findOne({where:{user: userData.id}}))
+    {
+      const user = (await this.socialsUsersRepository.findOne({where:{user: userData.id}})).user
+      const tokens = await this.getTokens(user.id, user.username);
+      await this.updateRefreshToken(user.id, tokens.refreshToken);
+      return {...user, ...tokens};
+    }
+    else
+    {
+      const userDto: VkUserDto = {username: (userData.last_name + ' ' + userData.first_name), nickname: userData.screen_name ?? userData.id}
 
-    const userDto: VkUserDto = {username: (userData.data.response.last_name + ' ' + userData.data.response.first_name), nickname: userData.data.response.screen_name ?? userData.data.response.id}
+      Logger.log(userDto)
+  
+      const newUser = await this.usersService.create(userDto)
 
-    Logger.log(userDto)
+      const tokens = await this.getTokens(newUser.id, newUser.username);
+      await this.updateRefreshToken(newUser.id, tokens.refreshToken);
+      return tokens;
+    }
 
-    return await this.usersService.create(userDto)
+   
   }
 
 	async signIn(data: AuthDto) {
