@@ -3,6 +3,7 @@ import { UserDto } from '../user/dtos/user.dto';
 import { AuthService } from './auth.service';
 import { AuthDto } from './dtos/auth.dto';
 import { RefreshTokenGuard } from './refreshToken.guard';
+import { CreateUserDto } from '../user/dtos/createUser.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -11,7 +12,7 @@ export class AuthController {
     ){}
     
     @Post()
-    public async createOne(@Body() userDto: UserDto)
+    public async createOne(@Body() userDto: CreateUserDto)
     {
         return await this.authService.signUp(userDto)
     }
