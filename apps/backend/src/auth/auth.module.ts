@@ -6,12 +6,14 @@ import { AccessTokenStrategy } from './strategies/accessToken.strategy';
 import { RefreshTokenStrategy } from './strategies/refreshToken.strategy';
 import { UserModule } from '../user/user.module';
 import { ConfigModule } from '@nestjs/config';
+import { SocialsModule } from '../socials/socials.module';
 
 @Module({
   imports: [
     JwtModule.register({}),
     ConfigModule.forRoot(),
-    UserModule
+    UserModule,
+    SocialsModule
   ],
   controllers: [AuthController],
   providers: [AuthService, AccessTokenStrategy, RefreshTokenStrategy]
