@@ -62,6 +62,8 @@ export class AuthService {
 
     const userDto: VkUserDto = {username: (userData.data.last_name + ' ' + userData.data.first_name), nickname: userData.data.screen_name ?? userData.data.id}
 
+    Logger.log(userDto)
+
     return await this.usersService.create(userDto)
   }
 
