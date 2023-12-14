@@ -28,11 +28,18 @@ export const AuthForm = ({ activeRole }: AuthFormProps) => {
 
   const onSubmit = handleSubmit((formData) => {
     if (location.pathname === LOGIN_ROUTE) {
-      UStore.setUser({ ...UStore.user, ...formData });
-      UStore.setAuth(true);
+      UStore.login(
+        formData.nickname,
+        formData.password,
+        activeRole === 1 ? 'admin' : 'user'
+      );
     } else {
-      UStore.setUser({ ...UStore.user, ...formData });
-      UStore.setAuth(true);
+      UStore.registration(
+        formData.username,
+        formData.nickname,
+        formData.password,
+        formData.grade
+      );
     }
   });
 

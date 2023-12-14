@@ -28,11 +28,10 @@ export default class UserStore {
     this.isLoading = bool;
   }
 
-  async login(email: string, password: string, role: string) {
+  async login(nickname: string, password: string, role: string) {
     try {
-      const response = await AuthServices.login(email, password, role);
+      const response = await AuthServices.login(nickname, password, role);
       localStorage.setItem('token', response.data.accessToken);
-      localStorage.setItem('rtoken', response.data.refreshToken);
       this.setAuth(true);
       this.setUser(response.data.user);
     } catch (e: any) {
@@ -40,15 +39,20 @@ export default class UserStore {
     }
   }
 
-  async registration(username: string, email: string, password: string) {
+  async registration(
+    username: string,
+    nickname: string,
+    password: string,
+    grade: string
+  ) {
     try {
       const response = await AuthServices.registration(
         username,
-        email,
-        password
+        nickname,
+        password,
+        grade
       );
       localStorage.setItem('token', response.data.accessToken);
-      localStorage.setItem('rtoken', response.data.refreshToken);
       this.setAuth(true);
       this.setUser(response.data.user);
     } catch (e: any) {
@@ -58,10 +62,7 @@ export default class UserStore {
 
   async logout() {
     try {
-      const response = await AuthServices.logout();
-      console.table(response);
       localStorage.removeItem('token');
-      localStorage.removeItem('rtoken');
       this.setAuth(false);
       this.setUser({} as IUser);
     } catch (e: any) {
@@ -72,12 +73,8 @@ export default class UserStore {
   async checkAuth() {
     this.setLoading(true);
     try {
-      const response = await axios.post<AuthResponse>(
-        `${API_URL}/users/refresh`,
-        { refreshToken: `${localStorage.getItem('rtoken')}` }
-      );
+      const response = await axios.get<AuthResponse>(`${API_URL}/auth/refresh`);
       localStorage.setItem('token', response.data.accessToken);
-      localStorage.setItem('rtoken', response.data.refreshToken);
       this.setAuth(true);
       this.setUser(response.data.user);
     } catch (e: any) {

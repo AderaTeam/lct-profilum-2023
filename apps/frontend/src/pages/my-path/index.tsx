@@ -4,6 +4,7 @@ import { observer } from 'mobx-react-lite';
 import { useContext } from 'react';
 import MainWrapper from 'shared/components/Wrappers/MainWrapper';
 import { EducationsSelectedCard } from 'widgets/educations-selected-card';
+import { MyPathAnalysedPath } from 'widgets/my-path-analysed-path';
 import { MyPathProgress } from 'widgets/my-path-progress';
 
 const MyPathPage = observer(() => {
@@ -12,8 +13,12 @@ const MyPathPage = observer(() => {
   return (
     <MainWrapper>
       <Stack gap={48}>
-        {UStore.user.paths ? <EducationsSelectedCard /> : <></>}
-        <MyPathProgress />
+        {UStore.user.paths?.length ? <EducationsSelectedCard /> : <></>}
+        {!UStore.user.paths?.length && UStore.user?.analysedPaths?.length ? (
+          <MyPathAnalysedPath />
+        ) : (
+          <MyPathProgress />
+        )}
       </Stack>
       <></>
     </MainWrapper>

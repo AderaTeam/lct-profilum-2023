@@ -1,31 +1,31 @@
-import { AxiosResponse } from "axios";
-import $api from "shared/api";
-import { AuthResponse } from "../models/response/AuthResponse";
+import { AxiosResponse } from 'axios';
+import $api from 'shared/api';
+import { AuthResponse } from '../models/response/AuthResponse';
 
 export default class AuthServices {
   static async login(
-    email: string,
+    nickname: string,
     password: string,
-    role: string,
+    role: string
   ): Promise<AxiosResponse<AuthResponse>> {
-    return $api.post<AuthResponse>("/users/login", { email, password, role });
+    return $api.post<AuthResponse>('/auth/signin', {
+      nickname,
+      password,
+      role,
+    });
   }
 
   static async registration(
     username: string,
-    email: string,
+    nickname: string,
     password: string,
+    grade: string
   ): Promise<AxiosResponse<AuthResponse>> {
-    return $api.post<AuthResponse>("/users/register", {
+    return $api.post<AuthResponse>('/auth', {
       username,
-      email,
+      nickname,
       password,
-    });
-  }
-
-  static async logout(): Promise<void> {
-    return $api.post("/users/logout", {
-      refreshToken: `${localStorage.getItem("rtoken")}`,
+      grade,
     });
   }
 }

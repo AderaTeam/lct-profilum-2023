@@ -8,9 +8,13 @@ import { IconPlus } from '@tabler/icons-react';
 
 interface UniversityCardProps {
   university: IUniversity;
+  handleSelectUnivercity: Function;
 }
 
-export const UniversityCard = ({ university }: UniversityCardProps) => {
+export const UniversityCard = ({
+  university,
+  handleSelectUnivercity,
+}: UniversityCardProps) => {
   return (
     <Flex gap={0}>
       <Image w={220} radius={'24px 0 0 24px'} src={university.image} />
@@ -32,7 +36,7 @@ export const UniversityCard = ({ university }: UniversityCardProps) => {
               />
             ))}
           </Flex>
-          <Button outline>
+          <Button onClick={() => handleSelectUnivercity(university)} outline>
             <Flex gap={8}>
               Добавить в мой ТОП-3 <IconPlus stroke={1.5} color="#ADB5BD" />
             </Flex>

@@ -20,12 +20,12 @@ export const Routing = observer(() => {
     return <Navigate to={MY_PATH_ROUTE} />;
   }
 
-  // if (
-  //   UStore.isAuth &&
-  //   !authRoutes.find((item) => item.path === location.pathname)
-  // ) {
-  //   return <Navigate to={MY_PATH_ROUTE} />;
-  // }
+  if (
+    UStore.isAuth &&
+    !authRoutes.find((item) => item.path.includes(location.pathname))
+  ) {
+    return <Navigate to={MY_PATH_ROUTE} />;
+  }
 
   if (
     !UStore.isAuth &&
