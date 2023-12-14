@@ -23,7 +23,7 @@ const Navbar = () => {
       <div className={style['navbar__user']}>
         <NavbarUser />
       </div>
-      <NavbarLinksGroup />
+      <NavbarLinksGroup role={UStore.user.role} />
       <div className={style['navbar__footer']}>
         <div
           onClick={() => {

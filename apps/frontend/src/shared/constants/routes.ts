@@ -7,13 +7,18 @@ import {
   MY_PATH_ROUTE,
   MY_SOCIALS_ROUTE,
   NO_PAGE_ROUTE,
+  PATH_DB_ROUTE,
   PROFILE_ROUTE,
+  PROF_DB_ROUTE,
   REGISTRATION_ROUTE,
+  STAT_ROUTE,
   TRAINING_ROUTE,
 } from 'shared/constants/const';
 import { lazy } from 'react';
 import {
+  IconChartHistogram,
   IconChessRook,
+  IconFileDescription,
   IconMessageChatbot,
   IconMessages,
   IconRoute,
@@ -94,6 +99,27 @@ export const authRoutes = [
     title: 'Пустая страница',
     isAdmin: false,
     isHide: true,
+  },
+  {
+    path: STAT_ROUTE,
+    Component: mySocials,
+    title: 'Статистика',
+    isAdmin: true,
+    icon: IconChartHistogram,
+  },
+  {
+    path: PROF_DB_ROUTE,
+    Component: mage,
+    title: 'База профессий',
+    isAdmin: true,
+    icon: IconFileDescription,
+  },
+  {
+    path: PATH_DB_ROUTE,
+    Component: noPage,
+    title: 'База путей',
+    isAdmin: true,
+    icon: IconRoute,
   },
 ];
 

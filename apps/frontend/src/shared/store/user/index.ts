@@ -4,7 +4,6 @@ import { API_URL } from 'shared/api';
 import { IUser } from 'shared/models/IUser';
 import { AuthResponse } from 'shared/models/response/AuthResponse';
 import AuthServices from 'shared/services/AuthServices';
-import { data } from './mockdata';
 
 export default class UserStore {
   user = {} as IUser;
