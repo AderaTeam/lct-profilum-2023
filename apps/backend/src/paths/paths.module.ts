@@ -7,9 +7,13 @@ import { OwnedPath } from './entities/ownedPath.entity';
 import { PathStep } from './entities/pathStep.entity';
 import { PathStepContent } from './entities/pathStepContent.entity';
 import { PathStepTag } from './entities/pathTag.entity';
+import { UserModule } from '../user/user.module';
 
 @Module({
-  imports:[TypeOrmModule.forFeature([Path, OwnedPath, PathStep, PathStepContent, PathStepTag])],
+  imports:[
+    TypeOrmModule.forFeature([Path, OwnedPath, PathStep, PathStepContent, PathStepTag]),
+    UserModule
+  ],
   controllers: [PathsController],
   providers: [PathsService],
 })
