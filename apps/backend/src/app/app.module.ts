@@ -5,6 +5,7 @@ import ormconfig from '../ormconfig';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from '../auth/auth.module';
 import { AchievementModule } from '../achievement/achievement.module';
+import { PathsModule } from '../paths/paths.module';
 
 
 @Module({
@@ -13,6 +14,7 @@ import { AchievementModule } from '../achievement/achievement.module';
     UserModule,
     AuthModule,
     AchievementModule,
+    PathsModule,
     TypeOrmModule.forRoot(ormconfig as TypeOrmModuleOptions),
   ],
   controllers: [],
