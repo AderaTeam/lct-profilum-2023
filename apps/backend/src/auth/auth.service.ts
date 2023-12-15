@@ -60,19 +60,19 @@ export class AuthService {
 
     const userData = await (await axios.get(datauri)).data.response
 
-    Logger.log(await this.socialsService.findOneByUserId("VK",userData.id))
+    Logger.log(await this.socialsService.findOneByUserId("VK",userData.user_id))
 
-    if (await this.socialsService.findOneByUserId("VK",userData.id))
+    if (await this.socialsService.findOneByUserId("VK",userData.user_id))
     {
 
-      const user = (await this.socialsService.findOneByUserId("VK",userData.id)).user
+      const user = (await this.socialsService.findOneByUserId("VK",userData.user_id)).user
       const tokens = await this.getTokens(user.id, user.username);
       await this.updateRefreshToken(user.id, tokens.refreshToken);
       return {...user, ...tokens};
     }
     else
     {
-      const userDto: VkUserDto = {username: (userData.last_name + ' ' + userData.first_name), nickname: userData.screen_name ?? userData.id}
+      const userDto: VkUserDto = {username: (userData.last_name + ' ' + userData.first_name), nickname: userData.screen_name ?? userData.user_id}
 
       Logger.log(userDto)
   
@@ -80,7 +80,7 @@ export class AuthService {
       //await this.socialsUsersService.
       const tokens = await this.getTokens(newUser.id, newUser.username);
       await this.updateRefreshToken(newUser.id, tokens.refreshToken);
-      this.socialsService.addUsersSocial(newUser.id, "VK", userData.id)
+      this.socialsService.addUsersSocial(newUser.id, "VK", userData.user_id)
       return {...newUser, ...tokens};
     }
   }
