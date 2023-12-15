@@ -48,7 +48,7 @@ export class UserService {
 
     public async getAll()
     {
-        return await this.userRepository.find()
+        return await this.userRepository.find({relations: {socials: true}})
     }
 
     public async updateOne(userid: number, userDto: UserUpdateDto)

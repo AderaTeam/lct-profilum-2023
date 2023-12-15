@@ -2,6 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column, OneToMany, JoinColumn, JoinTabl
 import { AchievementOwned } from "../../achievement/entities/achievementOwned.entity"
 import { Path } from "../../paths/entities/path.entity"
 import { OwnedPath } from "../../paths/entities/ownedPath.entity"
+import { SocialUsers } from "../../socials/entities/socialsUsers.entity"
 
 @Entity()
 export class User {
@@ -101,6 +102,10 @@ export class User {
     avataruri: string
 
     //IMAGES FOR USERS
+
+    @OneToMany(() => SocialUsers, (social) => social.user)
+    @JoinTable()
+    socials: SocialUsers[]
 
     @OneToMany(() => OwnedPath, (path) => path.user)
     @JoinTable()

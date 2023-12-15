@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { SocialUsers } from "./socialsUsers.entity";
 
 @Entity()
 export class Social {
@@ -18,4 +19,8 @@ export class Social {
         }
     )
     description: string
+
+    @OneToMany(() => SocialUsers, (socialUsers) => socialUsers.social)
+    @JoinColumn()
+    social: SocialUsers
 }

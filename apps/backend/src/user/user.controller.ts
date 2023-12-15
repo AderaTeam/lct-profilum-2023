@@ -26,7 +26,7 @@ export class UserController
     @Get(':userid')
     public async getOneById(@Param('userid') userid: number)
     {
-        return await this.userService.getOneById(userid)
+        return await this.userService.getOneByNickname((await this.userService.getOneById(userid)).nickname)
     }
 
     @UseGuards(AccessTokenGuard)
