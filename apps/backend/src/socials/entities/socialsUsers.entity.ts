@@ -23,6 +23,4 @@ export class SocialUsers {
     @ManyToOne(() => Social, {cascade: true})
     @JoinColumn()
     social: Social
-
-
 }
