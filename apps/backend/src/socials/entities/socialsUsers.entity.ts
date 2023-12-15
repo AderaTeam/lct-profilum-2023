@@ -13,7 +13,7 @@ export class SocialUsers {
             nullable: false
         }
     )
-    originaluserid: number
+    originaluserid: string
 
     @OneToOne(() => User)
     @JoinColumn()

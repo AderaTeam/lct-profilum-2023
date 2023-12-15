@@ -7,10 +7,12 @@ import { Repository } from 'typeorm';
 import { UserRolesGuard } from '../user/user.guard';
 import { Roles } from '../decorators/roles.decorator';
 import { SocialUsers } from './entities/socialsUsers.entity';
+import { UserService } from '../user/user.service';
 
 @Injectable()
 export class SocialsService {
   constructor(
+    private userService: UserService,
     @InjectRepository(Social)
     private socialsRepository: Repository<Social>,
     @InjectRepository(SocialUsers)
@@ -39,18 +41,18 @@ export class SocialsService {
     return await this.socialsRepository.find();
   }
 
-  async findOneByUserId(id: number, socialname: string)
+  async findOneByUserId(socialname: string, originalid: string)
   {
-    return await this.socialsUsersRepository.findOne({where:{originaluserid: id, social: await this.socialsRepository.findOneBy({name: socialname})}})
+    return await this.socialsUsersRepository.findOneBy({originaluserid: originalid, social: await this.socialsRepository.findOneBy({name: socialname})})
   }
 
   async findOne(id: number) {
     return await this.socialsRepository.findOneBy({id: id});
   }
 
-  async addUsersSocial(userid: number, socialname: string)
+  async addUsersSocial(userid: number, socialname: string, originalid: string)
   {
-    return await this.socialsUsersRepository.create({originaluserid: userid, social: await this.socialsRepository.findOneBy({name: socialname})})
+    return await this.socialsUsersRepository.create({originaluserid: originalid, social: await this.socialsRepository.findOneBy({name: socialname}), user: await this.userService.getOneById(userid)})
   }
 
   @UseGuards(UserRolesGuard)
