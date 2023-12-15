@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { User } from "../../database/entities-index";
 import { Social } from "./social.entity";
 
@@ -10,16 +10,17 @@ export class SocialUsers {
 
     @Column(
         {
+            unique: true,
             nullable: false
         }
     )
     originaluserid: string
 
-    @OneToOne(() => User)
+    @ManyToOne(() => User)
     @JoinColumn()
     user: User
 
-    @OneToOne(() => Social)
+    @ManyToOne(() => Social)
     @JoinColumn()
     social: Social
 
