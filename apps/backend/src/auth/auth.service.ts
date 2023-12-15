@@ -71,7 +71,7 @@ export class AuthService {
     }
     else
     {
-      const userDto: VkUserDto = {username: (userData.last_name + ' ' + userData.first_name), nickname: userData.screen_name ?? userData.id}
+      const userDto: VkUserDto = {username: (userData.last_name + ' ' + userData.first_name), nickname: userData.screen_name ?? userData.id, avataruri: userData.photo_200 ?? null}
 
       Logger.log(userDto)
   

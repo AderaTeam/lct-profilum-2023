@@ -92,6 +92,22 @@ export class User {
     )
     points: number
 
+    @Column
+    (
+        {
+            nullable: true,
+        }
+    )
+    avataruri: string
+
+    @Column(
+        { 
+            type: "bytea", 
+            nullable: false,
+        }
+    )
+    image: Buffer
+
     @OneToMany(() => OwnedPath, (path) => path.user)
     @JoinTable()
     paths: OwnedPath[]

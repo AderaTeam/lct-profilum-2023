@@ -4,4 +4,5 @@ export class VkUserDto
     nickname: string
     role?: string
     type?: string
+    avataruri?: string
 }
