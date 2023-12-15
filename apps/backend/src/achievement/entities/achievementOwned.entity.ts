@@ -8,11 +8,11 @@ export class AchievementOwned {
     @PrimaryGeneratedColumn()
     id: number
 
-    @OneToOne(() => Achievement, {})
+    @ManyToOne(() => Achievement, {cascade: true})
     @JoinColumn()
     achievement: Achievement
 
-    @OneToOne(() => User, (user) => user.achievements, {})
+    @ManyToOne(() => User, (user) => user.achievements, {cascade: true})
     @JoinColumn()
     user: User
 

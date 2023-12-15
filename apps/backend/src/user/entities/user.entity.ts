@@ -35,7 +35,7 @@ export class User {
             nullable: true,
         }
     )
-    role: string
+    role: "admin" | "user"
 
     @Column(
         {

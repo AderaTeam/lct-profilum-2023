@@ -3,7 +3,7 @@ export class UserUpdateDto
     email?: string
     username?: string
     password?: string
-    role?: string
+    role?: "admin" | "user"
     type?: string
     isPlan?: boolean
     refreshToken?: string

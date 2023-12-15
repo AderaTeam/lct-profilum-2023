@@ -67,7 +67,7 @@ export class AuthService {
       Logger.log(JSON.stringify((await this.socialsService.findOneByUserId("VK",userData.id))))
       const tokens = await this.getTokens(user.id, user.username);
       await this.updateRefreshToken(user.id, tokens.refreshToken);
-      return {user: await this.usersService.getOneByNickname(user.nickname), ...tokens};
+      return {user: await this.usersService.getOneByNickname(user.nickname), ...tokens, firsttime: false};
     }
     else
     {
@@ -81,7 +81,7 @@ export class AuthService {
       await this.updateRefreshToken(newUser.id, tokens.refreshToken);
       Logger.log(userData)
       await this.socialsService.addUsersSocial(newUser.id, "VK", userData.id)
-      return {user: await this.usersService.getOneByNickname(newUser.nickname), ...tokens};
+      return {user: await this.usersService.getOneByNickname(newUser.nickname), ...tokens, firsttime: true};
     }
   }
 
