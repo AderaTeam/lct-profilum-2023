@@ -30,5 +30,5 @@ export class PathStepContent {
 
     @OneToOne(() => PathStep,  {cascade: true})
     @JoinColumn()
-    user: PathStep
+    step: PathStep
 }

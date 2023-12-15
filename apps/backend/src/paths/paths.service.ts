@@ -44,7 +44,7 @@ export class PathsService {
       if(!(await this.pathStepContentRepository.findOneBy(step.content)))
       {
         const newContent = this.pathStepContentRepository.create(step.content)
-        content = this.pathStepContentRepository.save(newContent)
+        content = await this.pathStepContentRepository.save(newContent)
       }
       else
       {
