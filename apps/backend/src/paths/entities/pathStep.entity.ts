@@ -38,7 +38,7 @@ export class PathStep {
     @JoinTable()
     content: PathStepContent   
 
-    @ManyToOne(() => Path, (path) => path.pathSteps)
+    @ManyToOne(() => Path, (path) => path.pathSteps,  {cascade: true})
     @JoinTable()
     path: Path
 }

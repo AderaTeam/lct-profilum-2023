@@ -28,7 +28,7 @@ export class PathStepContent {
     )
     text: string
 
-    @OneToOne(() => PathStep)
+    @OneToOne(() => PathStep,  {cascade: true})
     @JoinTable()
     user: PathStep
 }
