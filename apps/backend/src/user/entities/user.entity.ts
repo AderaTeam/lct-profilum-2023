@@ -1,6 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany, JoinColumn, JoinTable } from "typeorm"
 import { AchievementOwned } from "../../achievement/entities/achievementOwned.entity"
 import { Path } from "../../paths/entities/path.entity"
+import { OwnedPath } from "../../paths/entities/ownedPath.entity"
 
 @Entity()
 export class User {
@@ -91,9 +92,9 @@ export class User {
     )
     points: number
 
-    @OneToMany(() => Path, (path) => path.user)
+    @OneToMany(() => OwnedPath, (path) => path.user)
     @JoinTable()
-    paths: Path[]
+    paths: OwnedPath[]
 
     @OneToMany(() => AchievementOwned, (achievement) => achievement.user)
     @JoinColumn()
