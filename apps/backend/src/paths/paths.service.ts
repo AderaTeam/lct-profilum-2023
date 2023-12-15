@@ -40,16 +40,10 @@ export class PathsService {
           tags.push(await this.pathStepTagRepository.findOneBy({name: tag}))
         }
       }
-      let content = {}
-      if(!(await this.pathStepContentRepository.findOneBy(step.content)))
-      {
-        const newContent = this.pathStepContentRepository.create(step.content)
-        content = await this.pathStepContentRepository.save(newContent)
-      }
-      else
-      {
-        content = await this.pathStepContentRepository.findOneBy(step.content)
-      }
+
+      const newContent = this.pathStepContentRepository.create(step.content)
+      const content = await this.pathStepContentRepository.save(newContent)
+
       const newStep = this.pathStepRepository.create({...step, tags: tags, content: content})
       const stepToAdd = await this.pathStepRepository.save(newStep)
       Logger.log(stepToAdd)
