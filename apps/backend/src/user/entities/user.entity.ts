@@ -96,7 +96,7 @@ export class User {
 
     //IMAGES FOR USERS
 
-    @OneToMany(() => SocialUsers, (social) => social.user)
+    @OneToMany(() => SocialUsers, (social) => social.user, {eager: true})
     @JoinTable()
     socials: SocialUsers[]
 
@@ -108,7 +108,7 @@ export class User {
     @JoinTable()
     analyzedPaths: AnalyzedPath[]
 
-    @OneToMany(() => AchievementOwned, (achievement) => achievement.user)
+    @OneToMany(() => AchievementOwned, (achievement) => achievement.user, {eager: true})
     @JoinColumn()
     achievements: AchievementOwned[]
 }

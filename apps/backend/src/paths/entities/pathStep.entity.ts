@@ -30,11 +30,11 @@ export class PathStep {
     )
     points: number
 
-    @ManyToMany(() => PathStepTag, (pathTag) => pathTag.pathSteps)
+    @ManyToMany(() => PathStepTag, (pathTag) => pathTag.pathSteps, {eager: true})
     @JoinTable()
     tags: PathStepTag[]
 
-    @OneToOne(() => PathStepContent)
+    @OneToOne(() => PathStepContent, {eager: true})
     @JoinColumn()
     content: PathStepContent   
 

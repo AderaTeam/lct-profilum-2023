@@ -3,6 +3,8 @@ import { PathsService } from './paths.service';
 import { CreatePathDto } from './dto/create-path.dto';
 import { UpdatePathDto } from './dto/update-path.dto';
 import { CreateMultiplePathDto } from './dto/create-multiple-path.dto';
+import { CreateOwnedPathDto } from './dto/create-owned-path.dto';
+import { CreateAnalyzedPathDto } from './dto/create-analyzed-path.dto';
 
 @Controller('paths')
 export class PathsController {
@@ -11,6 +13,16 @@ export class PathsController {
   @Post()
   create(@Body() createPathDto: CreatePathDto) {
     return this.pathsService.create(createPathDto);
+  }
+
+  @Post('owned')
+  createOwnedPath(@Body() createPathDto: CreateOwnedPathDto) {
+    return this.pathsService.createOwnage(createPathDto);
+  }
+
+  @Post('analyzed')
+  createAnallyzedPath(@Body() createPathDto: CreateAnalyzedPathDto) {
+    return this.pathsService.createAnalyzed(createPathDto);
   }
 
   @Post('multiple')
