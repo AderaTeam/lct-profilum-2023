@@ -1,4 +1,4 @@
-import { Injectable, UseGuards } from '@nestjs/common';
+import { Injectable, Logger, UseGuards } from '@nestjs/common';
 import { CreateSocialDto } from './dto/create-social.dto';
 import { UpdateSocialDto } from './dto/update-social.dto';
 import { Social } from './entities/social.entity';
@@ -57,6 +57,7 @@ export class SocialsService {
 
   async addUsersSocial(userid: number, socialname: string, originalid: string)
   {
+    Logger.log("AddingUser")
     return await this.socialsUsersRepository.create({originaluserid: originalid, social: await this.socialsRepository.findOneBy({name: socialname}), user: await this.userService.getOneById(userid)})
   }
 
