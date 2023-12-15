@@ -43,7 +43,7 @@ export class UserController
     }
 
     @UseGuards(AccessTokenGuard)
-    @Delete('')
+    @Delete(':userid')
     public async deleteOne(@Req() req)
     {
         return await this.userService.deleteOne(req.user.id)
