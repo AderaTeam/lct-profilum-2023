@@ -2,7 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column, JoinTable, ManyToMany, JoinColu
 import { PathStep } from "./pathStep.entity"
 
 @Entity()
-export class PathTag {
+export class PathStepTag {
 
     @PrimaryGeneratedColumn()
     id: number
