@@ -23,7 +23,7 @@ export class Achievement {
     )
     image: Buffer
 
-    @OneToMany(() => AchievementOwned, (achievementOwned) => achievementOwned.achievement)
+    @OneToMany(() => AchievementOwned, (achievementOwned) => achievementOwned.achievement, {onDelete: 'CASCADE'})
     @JoinTable()
     achievementsOwned: AchievementOwned
 }
