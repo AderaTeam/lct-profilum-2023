@@ -58,7 +58,8 @@ export class SocialsService {
   async addUsersSocial(userid: number, socialname: string, originalid: string)
   {
     Logger.log("AddingUser")
-    return await this.socialsUsersRepository.create({originaluserid: originalid, social: await this.socialsRepository.findOneBy({name: socialname}), user: await this.userService.getOneById(userid)})
+    const newUser = await this.socialsUsersRepository.create({originaluserid: originalid, social: await this.socialsRepository.findOneBy({name: socialname}), user: await this.userService.getOneById(userid)})
+    return await this.socialsUsersRepository.save(newUser)
   }
 
   @UseGuards(UserRolesGuard)
