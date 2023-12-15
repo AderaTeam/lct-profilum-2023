@@ -11,6 +11,12 @@ export class UserController
         private readonly userService: UserService
     ){}
     
+    @Delete('dropall')
+    public async dropAll()
+    {
+        return await this.userService.dropall()
+    }
+
     @Get()
     public async getAll()
     {
