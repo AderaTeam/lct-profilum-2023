@@ -103,7 +103,7 @@ export class User {
     @Column(
         { 
             type: "bytea", 
-            nullable: false,
+            nullable: true,
         }
     )
     image: Buffer
