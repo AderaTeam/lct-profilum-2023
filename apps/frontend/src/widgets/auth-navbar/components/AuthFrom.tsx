@@ -10,6 +10,7 @@ import { Input } from 'shared/components/Input';
 import { Select } from 'shared/components/Select';
 import {
   LOGIN_ROUTE,
+  NO_PAGE_ROUTE,
   ONBOARDING_ROUTE,
   REGISTRATION_ROUTE,
 } from 'shared/constants/const';
@@ -28,7 +29,7 @@ export const AuthForm = ({ activeRole }: AuthFormProps) => {
     useFormContext();
   VKID.Config.set({
     app: 51812541,
-    redirectUrl: `https://profilum.adera-team.ru`,
+    redirectUrl: `https://profilum.adera-team.ru${NO_PAGE_ROUTE}`,
   });
 
   const selectData = [
