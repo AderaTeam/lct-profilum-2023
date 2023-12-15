@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { CreatePathDto } from './dto/create-path.dto';
 import { UpdatePathDto } from './dto/update-path.dto';
 import { CreateMultiplePathDto } from './dto/create-multiple-path.dto';
@@ -32,6 +32,7 @@ export class PathsService {
         {
           const newTag = this.pathStepTagRepository.create({name: tag})
           const tagToAdd = this.pathStepTagRepository.save(newTag)
+          Logger.log(tagToAdd)
           tags.push(tagToAdd)
         }
         else
@@ -51,6 +52,7 @@ export class PathsService {
       }
       const newStep = this.pathStepRepository.create({...step, tags: tags, content: content})
       const stepToAdd = this.pathStepRepository.save(newStep)
+      Logger.log(stepToAdd)
       steps.push(stepToAdd)
     }
     const path = this.pathRepository.create({...createPathDto, pathSteps: steps})
