@@ -15,6 +15,6 @@ export class PathTag {
     name: string
 
     @ManyToMany(() => PathStep, (pathstep) => pathstep.tags)
-    @JoinColumn()
+    @JoinTable()
     pathSteps: PathStep[]
 }

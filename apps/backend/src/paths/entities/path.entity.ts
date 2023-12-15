@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, JoinTable, OneToMany } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, JoinTable, OneToMany, JoinColumn } from "typeorm"
 import { PathStep } from "./pathStep.entity"
 
 @Entity()
@@ -15,6 +15,6 @@ export class Path {
     name: string
 
     @OneToMany(() => PathStep, (pathstep) => pathstep.path, {onDelete: 'CASCADE'})
-    @JoinTable()
+    @JoinColumn()
     pathSteps: PathStep[]
 }
