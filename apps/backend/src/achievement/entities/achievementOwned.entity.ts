@@ -12,7 +12,7 @@ export class AchievementOwned {
     @JoinColumn()
     achievement: Achievement
 
-    @ManyToOne(() => User, (user) => user.achievements)
+    @ManyToOne(() => User, (user) => user.achievements, {onDelete: 'CASCADE'})
     @JoinColumn()
     user: User
 

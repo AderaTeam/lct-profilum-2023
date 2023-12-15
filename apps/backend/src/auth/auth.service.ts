@@ -56,7 +56,7 @@ export class AuthService {
 
     const userData = await (await axios.get(datauri)).data.response
 
-    Logger.log(userData)
+    //Logger.log(userData)
 
     //Logger.log(await this.socialsService.findOneByUserId("VK",userData.id), userData.id)
 
@@ -71,7 +71,7 @@ export class AuthService {
     }
     else
     {
-      const userDto: VkUserDto = {username: (userData.last_name + ' ' + userData.first_name), nickname: userData.screen_name ?? userData.id, avataruri: userData.photo_200 ?? null, role: 'user'}
+      const userDto: VkUserDto = {username: (userData.last_name + ' ' + userData.first_name), nickname: '@' + userData.screen_name ?? userData.id, avataruri: userData.photo_200 ?? null, role: 'user'}
 
       Logger.log(userDto)
   
@@ -79,7 +79,7 @@ export class AuthService {
       //await this.socialsUsersService.
       const tokens = await this.getTokens(newUser.id, newUser.username);
       await this.updateRefreshToken(newUser.id, tokens.refreshToken);
-      Logger.log(userData)
+      //Logger.log(userData)
       await this.socialsService.addUsersSocial(newUser.id, "VK", userData.id)
       return {user: await this.usersService.getOneByNickname(newUser.nickname), ...tokens, firsttime: true};
     }

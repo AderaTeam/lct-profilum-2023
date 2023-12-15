@@ -20,7 +20,7 @@ export class UserService {
 
     public async create(user: CreateUserDto | VkUserDto)
     {
-        Logger.log(user)
+        //Logger.log(user)
         const newUser =  this.userRepository.create(user)
         await this.userRepository.save(newUser)
         return newUser
