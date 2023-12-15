@@ -7,11 +7,12 @@ export interface IUser {
   username: string;
   role: string;
   rank: string;
-  rating: number;
+  ratingPlacement: number;
   points: number;
   paths: IPath[];
   grade?: string;
   nickname?: string;
   analysedPaths?: IPath[];
-  avatar?: string;
+  image?: string;
+  avataruri?: string;
 }

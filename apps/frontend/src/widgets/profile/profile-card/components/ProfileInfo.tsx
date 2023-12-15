@@ -15,7 +15,11 @@ export const ProfileInfo = ({ user, rankImage }: ProfileInfoProps) => {
       <Stack gap={6}>
         <Flex align={'center'} gap={12}>
           <Text className={style.name}>{user.username}</Text>
-          <Tag variant="light">Топ {user.rating}</Tag>
+          {user.ratingPlacement ? (
+            <Tag variant="light">Топ {user.ratingPlacement}</Tag>
+          ) : (
+            <></>
+          )}
         </Flex>
         <Flex align={'center'} gap={16}>
           <p className="text">{user.nickname}</p>
