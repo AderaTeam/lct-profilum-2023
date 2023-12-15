@@ -44,8 +44,6 @@ export class AuthService {
 
     const accessuri = `https://api.vk.com/method/auth.exchangeSilentAuthToken?v=5.131&access_token=${clientdata.service_token}&token=${silentToken}&uuid=${uuid}`
 
-    Logger.log(accessuri)
-
     const result = await axios.get(accessuri)
 
     if (result.data.error)
@@ -56,19 +54,17 @@ export class AuthService {
 
     const datauri = `https://api.vk.com/method/account.getProfileInfo?v=5.131&access_token=${result.data.response.access_token}`
 
-    Logger.log(datauri)
-
     const userData = await (await axios.get(datauri)).data.response
 
     Logger.log(userData)
 
-    Logger.log(await this.socialsService.findOneByUserId("VK",userData.id), userData.id)
+    //Logger.log(await this.socialsService.findOneByUserId("VK",userData.id), userData.id)
 
     if (await this.socialsService.findOneByUserId("VK",userData.id))
     {
 
       const user = (await this.socialsService.findOneByUserId("VK",userData.id)).user
-      Logger.log(user)
+      Logger.log(await this.socialsService.findOneByUserId("VK",userData.id))
       const tokens = await this.getTokens(user.id, user.username);
       await this.updateRefreshToken(user.id, tokens.refreshToken);
       return {...user, ...tokens};
