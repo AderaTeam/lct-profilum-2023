@@ -1,6 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn, ManyToOne, JoinTable } from "typeorm"
-import { User } from "../../database/entities-index"
-import { Path } from "./path.entity"
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinTable } from "typeorm"
+import { PathStep } from "./pathStep.entity"
 
 @Entity()
 export class PathStepContent {
@@ -8,20 +7,28 @@ export class PathStepContent {
     @PrimaryGeneratedColumn()
     id: number
 
-    @ManyToOne(() => Path)
-    @JoinTable()
-    path: Path
-
-    @ManyToOne(() => User)
-    @JoinTable()
-    user: User
+    @Column(
+        {
+            nullable: true
+        }
+    )
+    link: string
 
     @Column(
         {
-            nullable: false,
-            default: 1
+            nullable: true
         }
     )
-    currentStep: number
-    
+    questionsCount: number
+
+    @Column(
+        {
+            nullable: true
+        }
+    )
+    text: string
+
+    @OneToOne(() => PathStep)
+    @JoinTable()
+    user: PathStep
 }

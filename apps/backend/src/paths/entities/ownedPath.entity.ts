@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn, ManyToOne, JoinTable } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinTable } from "typeorm"
 import { User } from "../../database/entities-index"
 import { Path } from "./path.entity"
 
@@ -23,5 +23,4 @@ export class OwnedPath {
         }
     )
     currentStep: number
-    
 }

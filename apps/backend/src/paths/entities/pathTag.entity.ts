@@ -1,8 +1,8 @@
-import { Entity, PrimaryGeneratedColumn, Column, JoinTable, OneToMany } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, JoinTable, ManyToMany } from "typeorm"
 import { PathStep } from "./pathStep.entity"
 
 @Entity()
-export class Path {
+export class PathTag {
 
     @PrimaryGeneratedColumn()
     id: number
@@ -14,7 +14,7 @@ export class Path {
     )
     name: string
 
-    @OneToMany(() => PathStep, (pathstep) => pathstep.path)
+    @ManyToMany(() => PathStep, (pathstep) => pathstep.tags)
     @JoinTable()
     pathSteps: PathStep[]
 }

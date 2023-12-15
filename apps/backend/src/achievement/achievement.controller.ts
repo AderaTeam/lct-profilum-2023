@@ -43,12 +43,14 @@ export class AchievementController {
     return this.achievementService.findOne(+id);
   }
 
+  @UseGuards(UserRolesGuard)
   @Roles('admin')
   @Post(':id')
   update(@Param('id') id: string, @Body() updateAchievementDto: UpdateAchievementDto) {
     return this.achievementService.update(+id, updateAchievementDto);
   }
 
+  @UseGuards(UserRolesGuard)
   @Roles('admin')
   @Delete(':id')
   remove(@Param('id') id: string) {

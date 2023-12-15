@@ -42,7 +42,7 @@ export class AuthService {
   async signUpVk(silentToken: String, uuid: String)
   {
 
-    await this.socialsUsersService.upsert()
+    //await this.socialsUsersService.upsert()
 
     const accessuri = `https://api.vk.com/method/auth.exchangeSilentAuthToken?v=5.131&access_token=${clientdata.service_token}&token=${silentToken}&uuid=${uuid}`
 
