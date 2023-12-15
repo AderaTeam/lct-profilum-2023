@@ -16,11 +16,11 @@ export class SocialUsers {
     )
     originaluserid: string
 
-    @ManyToOne(() => User)
+    @ManyToOne(() => User, {onDelete: 'CASCADE'})
     @JoinColumn()
     user: User
 
-    @ManyToOne(() => Social)
+    @ManyToOne(() => Social, {onDelete: 'CASCADE'})
     @JoinColumn()
     social: Social
 }

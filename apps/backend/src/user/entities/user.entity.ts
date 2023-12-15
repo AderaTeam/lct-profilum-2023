@@ -56,14 +56,6 @@ export class User {
     @Column(
         {
             nullable: true,
-            default: 0
-        }
-    )
-    score: number
-
-    @Column(
-        {
-            nullable: true,
         }
     )
     ratingPlacement: number
@@ -103,15 +95,15 @@ export class User {
 
     //IMAGES FOR USERS
 
-    @OneToMany(() => SocialUsers, (social) => social.user, {onDelete: 'CASCADE'})
+    @OneToMany(() => SocialUsers, (social) => social.user)
     @JoinTable()
     socials: SocialUsers[]
 
-    @OneToMany(() => OwnedPath, (path) => path.user, {onDelete: 'CASCADE'})
+    @OneToMany(() => OwnedPath, (path) => path.user)
     @JoinTable()
     paths: OwnedPath[]
 
-    @OneToMany(() => AchievementOwned, (achievement) => achievement.user, {onDelete: 'CASCADE'})
+    @OneToMany(() => AchievementOwned, (achievement) => achievement.user)
     @JoinColumn()
     achievements: AchievementOwned[]
 }

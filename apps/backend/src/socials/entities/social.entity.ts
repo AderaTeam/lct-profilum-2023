@@ -20,7 +20,7 @@ export class Social {
     )
     description: string
 
-    @OneToMany(() => SocialUsers, (socialUsers) => socialUsers.social, {onDelete: 'CASCADE'})
+    @OneToMany(() => SocialUsers, (socialUsers) => socialUsers.social)
     @JoinColumn()
     social: SocialUsers
 }
