@@ -2,6 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { PathsService } from './paths.service';
 import { CreatePathDto } from './dto/create-path.dto';
 import { UpdatePathDto } from './dto/update-path.dto';
+import { CreateMultiplePathDto } from './dto/create-multiple-path.dto';
 
 @Controller('paths')
 export class PathsController {
@@ -10,6 +11,11 @@ export class PathsController {
   @Post()
   create(@Body() createPathDto: CreatePathDto) {
     return this.pathsService.create(createPathDto);
+  }
+
+  @Post()
+  createMultiple(@Body() createPathDto: CreateMultiplePathDto) {
+    return this.pathsService.createMultiple(createPathDto);
   }
 
   @Get()
@@ -30,5 +36,10 @@ export class PathsController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.pathsService.remove(+id);
+  }
+
+  @Delete('')
+  removeAll(@Param('id') id: string) {
+    return this.pathsService.removeAll();
   }
 }
