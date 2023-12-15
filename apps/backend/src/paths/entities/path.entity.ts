@@ -1,6 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, JoinTable, OneToMany, JoinColumn, ManyToMany } from "typeorm"
 import { PathStep } from "./pathStep.entity"
 import { User } from "../../database/entities-index"
+import { Card } from "../../community/entities/card.entity"
 
 @Entity()
 export class Path {
@@ -18,6 +19,10 @@ export class Path {
     @ManyToMany(() => User, (user) => {user.analyzedPaths})
     @JoinTable()
     users: User[]
+
+    @ManyToMany(() => Card, (card) => {card.path})
+    @JoinTable()
+    cards: Card[]
 
     @OneToMany(() => PathStep, (pathstep) => pathstep.path, {onDelete: 'CASCADE', eager: true})
     @JoinColumn()

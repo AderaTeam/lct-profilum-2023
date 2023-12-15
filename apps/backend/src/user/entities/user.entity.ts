@@ -3,6 +3,7 @@ import { AchievementOwned } from "../../achievement/entities/achievementOwned.en
 import { OwnedPath } from "../../paths/entities/ownedPath.entity"
 import { SocialUsers } from "../../socials/entities/socialsUsers.entity"
 import { Path } from "../../paths/entities/path.entity"
+import { Card } from "../../community/entities/card.entity"
 
 @Entity()
 export class User {
@@ -106,6 +107,10 @@ export class User {
     @ManyToMany(() => Path, (path) => path.users, {eager: true})
     @JoinTable()
     analyzedPaths: Path[]
+
+    @ManyToMany(() => Card, (card) => card.author)
+    @JoinTable()
+    cards?: Card 
 
     @OneToMany(() => AchievementOwned, (achievement) => achievement.user)
     @JoinColumn()

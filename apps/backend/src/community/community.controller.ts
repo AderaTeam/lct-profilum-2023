@@ -1,34 +1,34 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { CommunityService } from './community.service';
-import { CreateCommunityDto } from './dto/create-community.dto';
-import { UpdateCommunityDto } from './dto/update-community.dto';
+import { CreateCardDto } from './dto/create-card.dto';
+import { UpdateCardDto } from './dto/update-card.dto';
 
 @Controller('community')
 export class CommunityController {
   constructor(private readonly communityService: CommunityService) {}
 
-  @Post()
-  create(@Body() createCommunityDto: CreateCommunityDto) {
-    return this.communityService.create(createCommunityDto);
+  @Post('card')
+  create(@Body() createCardDto: CreateCardDto) {
+    return this.communityService.createCard(createCardDto);
   }
 
-  @Get()
+  @Get('card')
   findAll() {
-    return this.communityService.findAll();
+    return this.communityService.findAllCards();
   }
 
-  @Get(':id')
+  @Get('card/:id')
   findOne(@Param('id') id: string) {
-    return this.communityService.findOne(+id);
+    return this.communityService.findOneCard(+id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCommunityDto: UpdateCommunityDto) {
-    return this.communityService.update(+id, updateCommunityDto);
+  @Patch('card/:id')
+  update(@Param('id') id: string, @Body() updateCommunityDto: UpdateCardDto) {
+    return this.communityService.updateCard(+id, updateCommunityDto);
   }
 
-  @Delete(':id')
+  @Delete('card/:id')
   remove(@Param('id') id: string) {
-    return this.communityService.remove(+id);
+    return this.communityService.removeCard(+id);
   }
 }
