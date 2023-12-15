@@ -1,4 +1,4 @@
 export class CreateOwnedPathDto {
-    pathId: number
+    pathIds: number[]
     userId: number
 }
