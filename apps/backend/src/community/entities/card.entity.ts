@@ -11,11 +11,4 @@ export class Card {
         }
     )
     title: string
-
-    @Column(
-        {
-
-        }
-    )
-    author: User
 }
