@@ -53,30 +53,32 @@ export class PathsService {
     return this.pathRepository.save(path)
   }
 
-  createMultiple(createPathDto: CreateMultiplePathDto) {
+  async createMultiple(createPathDto: CreateMultiplePathDto) {
+    let paths = []
     for(const path of createPathDto.paths)
     {
-
+      paths.push(await this.create(path))
     }
+    return paths
   }
 
   async findAll() {
     return await this.pathRepository.find({relations:{pathSteps: {content: true, tags: true}}})
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} path`;
+  async findOne(id: number) {
+    return await this.pathRepository.findOneBy({id: id})
   }
 
-  update(id: number, updatePathDto: UpdatePathDto) {
-    return `This action updates a #${id} path`;
+  async update(id: number, updatePathDto: UpdatePathDto) {
+    return await this.pathRepository.update(id, updatePathDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} path`;
+  async remove(id: number) {
+    return await this.pathRepository.delete({id: id});
   }
 
-  removeAll() {
+  async removeAll() {
     return this.pathRepository.delete({})
   }
 }
