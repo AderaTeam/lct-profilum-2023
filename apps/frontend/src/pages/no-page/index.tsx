@@ -3,7 +3,7 @@ import { Context } from 'main';
 import { useContext, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import $api from 'shared/api';
-import { MY_SOCIALS_ROUTE } from 'shared/constants/const';
+import { MY_SOCIALS_ROUTE, ONBOARDING_ROUTE } from 'shared/constants/const';
 
 const NoPage = () => {
   const navigate = useNavigate();
@@ -24,7 +24,11 @@ const NoPage = () => {
         localStorage.setItem('rtoken', response.data.refreshToken);
         UStore.setAuth(true);
         UStore.setUser(response.data.user);
-        navigate(MY_SOCIALS_ROUTE);
+        if (response.data.firsttime) {
+          navigate(ONBOARDING_ROUTE);
+        } else {
+          navigate(MY_SOCIALS_ROUTE);
+        }
       });
   }, []);
 

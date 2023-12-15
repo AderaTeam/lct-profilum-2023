@@ -6,6 +6,7 @@ import MainWrapper from 'shared/components/Wrappers/MainWrapper';
 import { EducationsSelectedCard } from 'widgets/educations-selected-card';
 import { MyPathAnalysedPath } from 'widgets/my-path-analysed-path';
 import { MyPathProgress } from 'widgets/my-path-progress';
+import { MyPathRank } from 'widgets/my-path-rank';
 
 const MyPathPage = observer(() => {
   const { UStore } = useContext(Context);
@@ -13,7 +14,14 @@ const MyPathPage = observer(() => {
   return (
     <MainWrapper>
       <Stack gap={48}>
-        {UStore.user.paths?.length ? <EducationsSelectedCard /> : <></>}
+        {UStore.user.paths?.length ? (
+          <>
+            <MyPathRank />
+            <EducationsSelectedCard />
+          </>
+        ) : (
+          <></>
+        )}
         {!UStore.user.paths?.length && UStore.user?.analysedPaths?.length ? (
           <MyPathAnalysedPath />
         ) : (
