@@ -13,7 +13,7 @@ export class PathsService {
     private pathRepository: Repository<Path>,
   ){}
   create(createPathDto: CreatePathDto) {
-    return this.pathRepository.create(createPathDto)
+    return this.pathRepository.insert(createPathDto)
   }
 
   createMultiple(createPathDto: CreateMultiplePathDto) {
@@ -40,6 +40,6 @@ export class PathsService {
   }
 
   removeAll() {
-    return  this.pathRepository.delete({})
+    return this.pathRepository.delete({})
   }
 }
