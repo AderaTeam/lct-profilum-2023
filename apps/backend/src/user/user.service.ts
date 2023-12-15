@@ -60,4 +60,9 @@ export class UserService {
     {
         return await this.userRepository.delete(id)
     }
+
+    async dropall()
+    {
+        return await this.userRepository.delete({})
+    }
 }
