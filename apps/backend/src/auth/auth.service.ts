@@ -60,6 +60,8 @@ export class AuthService {
 
     const userData = await (await axios.get(datauri)).data.response
 
+    Logger.log(userData)
+
     Logger.log(await this.socialsService.findOneByUserId("VK",userData.user_id), userData.user_id)
 
     if (await this.socialsService.findOneByUserId("VK",userData.user_id))
@@ -80,7 +82,7 @@ export class AuthService {
       //await this.socialsUsersService.
       const tokens = await this.getTokens(newUser.id, newUser.username);
       await this.updateRefreshToken(newUser.id, tokens.refreshToken);
-      Logger.log(userData.user_id)
+      Logger.log(userData)
       await this.socialsService.addUsersSocial(newUser.id, "VK", userData.user_id)
       return {...newUser, ...tokens};
     }
