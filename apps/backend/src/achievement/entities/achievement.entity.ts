@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, JoinTable } from "typeorm"
+import { AchievementOwned } from "./achievementOwned.entity"
 
 @Entity()
 export class Achievement {
@@ -21,4 +22,8 @@ export class Achievement {
         }
     )
     image: Buffer
+
+    @OneToMany(() => AchievementOwned, (achievementOwned) => achievementOwned.achievement)
+    @JoinTable()
+    achievementsOwned: AchievementOwned
 }
