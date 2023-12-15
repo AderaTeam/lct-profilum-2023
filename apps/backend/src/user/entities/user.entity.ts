@@ -103,15 +103,15 @@ export class User {
 
     //IMAGES FOR USERS
 
-    @OneToMany(() => SocialUsers, (social) => social.user)
+    @OneToMany(() => SocialUsers, (social) => social.user, {cascade: true})
     @JoinTable()
     socials: SocialUsers[]
 
-    @OneToMany(() => OwnedPath, (path) => path.user)
+    @OneToMany(() => OwnedPath, (path) => path.user, {cascade: true})
     @JoinTable()
     paths: OwnedPath[]
 
-    @OneToMany(() => AchievementOwned, (achievement) => achievement.user)
+    @OneToMany(() => AchievementOwned, (achievement) => achievement.user, {cascade: true})
     @JoinColumn()
     achievements: AchievementOwned[]
 }
