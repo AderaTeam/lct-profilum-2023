@@ -72,7 +72,7 @@ export class PathsService {
   {
     for (const pathId of createOwnedPathDto.pathIds)
     {
-      if (!(await this.userService.getOneById(createOwnedPathDto.userId)) || !(await this.pathRepository.findOneBy({id: createOwnedPathDto.pathId})))
+      if (!(await this.userService.getOneById(createOwnedPathDto.userId)) || !(await this.pathRepository.findOneBy({id: pathId})))
         {
           throw new HttpException('User or path does not exist', HttpStatus.BAD_REQUEST)
         }
