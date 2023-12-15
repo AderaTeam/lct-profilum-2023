@@ -9,6 +9,7 @@ export default class UserStore {
   user = {} as IUser;
   isAuth = false;
   isLoading = false;
+  error = '';
 
   constructor() {
     makeAutoObservable(this);
@@ -16,6 +17,10 @@ export default class UserStore {
 
   setAuth(bool: boolean) {
     this.isAuth = bool;
+  }
+
+  setError(error: string) {
+    this.error = error;
   }
 
   setUser(user: IUser) {
@@ -34,6 +39,7 @@ export default class UserStore {
       this.setAuth(true);
       this.setUser(response.data.user);
     } catch (e: any) {
+      this.setError('Ошибка');
       console.log(e.response?.data?.message);
     }
   }
@@ -58,6 +64,7 @@ export default class UserStore {
       this.setAuth(true);
       this.setUser(response.data.user);
     } catch (e: any) {
+      this.setError('Ошибка');
       console.log(e.response?.data?.message);
     }
   }

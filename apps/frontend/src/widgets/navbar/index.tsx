@@ -28,7 +28,6 @@ const Navbar = () => {
         <div
           onClick={() => {
             UStore.logout();
-            navigate(LOGIN_ROUTE);
           }}
           className={style['navbar__footer-link']}
         >

@@ -2,7 +2,7 @@ import { Flex, Image, Stack } from '@mantine/core';
 import { IconChevronRight } from '@tabler/icons-react';
 import * as VKID from '@vkid/sdk';
 import { Context } from 'main';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { Button } from 'shared/components/Button';
@@ -16,12 +16,13 @@ import {
 } from 'shared/constants/const';
 
 import vk from 'shared/assets/vk.svg';
+import { observer } from 'mobx-react-lite';
 
 interface AuthFormProps {
   activeRole: number;
 }
 
-export const AuthForm = ({ activeRole }: AuthFormProps) => {
+export const AuthForm = observer(({ activeRole }: AuthFormProps) => {
   const { UStore } = useContext(Context);
   const location = useLocation();
   const navigate = useNavigate();
@@ -57,8 +58,27 @@ export const AuthForm = ({ activeRole }: AuthFormProps) => {
     }
   });
 
+  useEffect(() => {
+    UStore.setError('');
+  }, []);
+
   return (
     <Stack align="center" gap={24}>
+      {UStore.error ? (
+        <Flex
+          w={'100%'}
+          p={'16px 24px'}
+          style={{ borderRadius: '12px' }}
+          bg={'#FFF0F7'}
+          gap={16}
+          justify={'center'}
+        >
+          Ошибка при попытке{' '}
+          {location.pathname === LOGIN_ROUTE ? 'авторизации' : 'регистрации'}
+        </Flex>
+      ) : (
+        <></>
+      )}
       <Stack gap={12}>
         {location.pathname === LOGIN_ROUTE ? (
           <>
@@ -235,4 +255,4 @@ export const AuthForm = ({ activeRole }: AuthFormProps) => {
       )}
     </Stack>
   );
-};
+});
