@@ -46,7 +46,6 @@ export class UserController
     @Delete('')
     public async deleteOne(@Req() req)
     {
-        Logger.log(req.user)
-        return await this.userService.deleteOne(req.user.id)
+        return await this.userService.deleteOne(req.user.sub)
     }
 }
