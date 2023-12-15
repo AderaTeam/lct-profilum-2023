@@ -68,6 +68,7 @@ export class AuthService {
     {
 
       const user = (await this.socialsService.findOneByUserId("VK",userData.id)).user
+      Logger.log(user)
       const tokens = await this.getTokens(user.id, user.username);
       await this.updateRefreshToken(user.id, tokens.refreshToken);
       return {...user, ...tokens};
