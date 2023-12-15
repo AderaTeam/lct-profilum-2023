@@ -83,7 +83,7 @@ export class PathsService {
           }
         )
     }
-    return (await this.userService.getOneById(createOwnedPathDto.userId)).paths
+    return {result: (await this.userService.getOneById(createOwnedPathDto.userId)).paths}
   }
 
   async findAll() {
