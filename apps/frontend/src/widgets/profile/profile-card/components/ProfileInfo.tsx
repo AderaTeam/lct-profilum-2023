@@ -28,8 +28,14 @@ export const ProfileInfo = ({ user, rankImage }: ProfileInfoProps) => {
             <Text className={style.rank}>{user.rank}</Text>
             <Image radius={'50%'} h={24} w={24} src={rankImage[user.rank]} />
           </Flex>
-          <div className={style.circle}></div>
-          <p className="text bold">{user.grade}</p>
+          {user.grade ? (
+            <>
+              <div className={style.circle}></div>
+              <p className="text bold">{user.grade}</p>
+            </>
+          ) : (
+            <></>
+          )}
         </Flex>
       </Stack>
       {user?.paths.length ? (
