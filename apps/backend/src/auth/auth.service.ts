@@ -60,8 +60,11 @@ export class AuthService {
 
     const userData = await (await axios.get(datauri)).data.response
 
+    Logger.log(await this.socialsService.findOneByUserId(userData.id, "VK"))
+
     if (await this.socialsService.findOneByUserId(userData.id, "VK"))
     {
+
       const user = (await this.socialsService.findOneByUserId(userData.id, "VK")).user
       const tokens = await this.getTokens(user.id, user.username);
       await this.updateRefreshToken(user.id, tokens.refreshToken);
