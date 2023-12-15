@@ -31,7 +31,7 @@ export class PathsService {
         if (!(await this.pathStepTagRepository.findOneBy({name: tag})))
         {
           const newTag = this.pathStepTagRepository.create({name: tag})
-          const tagToAdd = this.pathStepTagRepository.save(newTag)
+          const tagToAdd = await this.pathStepTagRepository.save(newTag)
           Logger.log(tagToAdd)
           tags.push(tagToAdd)
         }
@@ -51,7 +51,7 @@ export class PathsService {
         content = await this.pathStepContentRepository.findOneBy(step.content)
       }
       const newStep = this.pathStepRepository.create({...step, tags: tags, content: content})
-      const stepToAdd = this.pathStepRepository.save(newStep)
+      const stepToAdd = await this.pathStepRepository.save(newStep)
       Logger.log(stepToAdd)
       steps.push(stepToAdd)
     }
