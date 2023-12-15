@@ -4,7 +4,7 @@ import { IconChevronRight } from '@tabler/icons-react';
 import { useNavigate } from 'react-router-dom';
 import { MAGE_ROUTE, MY_SOCIALS_ROUTE } from 'shared/constants/const';
 
-import mage from 'shared/assets/card-bg.png';
+import small from 'shared/assets/card-bg-small.png';
 import steam from 'shared/assets/platforms/steam.svg';
 import vk from 'shared/assets/platforms/vk.svg';
 import od from 'shared/assets/platforms/od.svg';
@@ -31,7 +31,7 @@ export const AnalyseCard = observer(
           <Card.Section
             h={187}
             style={{
-              backgroundImage: `url(${mage})`,
+              backgroundImage: `url(${small})`,
               backgroundSize: 'cover',
             }}
           />

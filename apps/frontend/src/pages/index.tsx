@@ -7,6 +7,7 @@ import {
   HOME_ROUTE,
   MAGE_ROUTE,
   MY_PATH_ROUTE,
+  NO_PAGE_ROUTE,
   ONBOARDING_ROUTE,
 } from 'shared/constants/const';
 import { authRoutes, publicRoutes } from 'shared/constants/routes';
@@ -32,6 +33,7 @@ export const Routing = observer(() => {
       <Flex>
         {location.pathname !== MAGE_ROUTE &&
           location.pathname !== ONBOARDING_ROUTE &&
+          location.pathname !== NO_PAGE_ROUTE &&
           UStore.isAuth && (
             <div style={{ width: 'fit-content' }} className="wrapper">
               <Navbar />

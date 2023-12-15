@@ -1,5 +1,6 @@
-import { Flex, Stack } from '@mantine/core';
+import { Flex, Image, Stack } from '@mantine/core';
 import { IconChevronRight } from '@tabler/icons-react';
+import * as VKID from '@vkid/sdk';
 import { Context } from 'main';
 import { useContext } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
@@ -13,6 +14,8 @@ import {
   REGISTRATION_ROUTE,
 } from 'shared/constants/const';
 
+import vk from 'shared/assets/vk.svg';
+
 interface AuthFormProps {
   activeRole: number;
 }
@@ -23,6 +26,10 @@ export const AuthForm = ({ activeRole }: AuthFormProps) => {
   const navigate = useNavigate();
   const { control, watch, setValue, getValues, handleSubmit } =
     useFormContext();
+  VKID.Config.set({
+    app: 51812541,
+    redirectUrl: `https://profilum.adera-team.ru`,
+  });
 
   const selectData = [
     { label: '11 класс', value: '11 класс' },
@@ -170,41 +177,58 @@ export const AuthForm = ({ activeRole }: AuthFormProps) => {
           </>
         )}
       </Stack>
-      <Button
-        onClick={onSubmit}
-        disabled={
-          location.pathname === LOGIN_ROUTE
-            ? !watch('nickname') || !watch('password')
-            : !watch('nickname') ||
-              !watch('password') ||
-              !watch('username') ||
-              !watch('grade')
-        }
-        fullWidth
-      >
-        <Flex align={'center'} gap={8}>
-          {location.pathname === LOGIN_ROUTE ? 'Войти' : 'Зарегестрироваться'}
-          <IconChevronRight stroke={1.5} color="#FFFF" />
-        </Flex>
-      </Button>
+      <Stack w={'100%'} gap={12}>
+        <Button
+          onClick={onSubmit}
+          disabled={
+            location.pathname === LOGIN_ROUTE
+              ? !watch('nickname') || !watch('password')
+              : !watch('nickname') ||
+                !watch('password') ||
+                !watch('username') ||
+                !watch('grade')
+          }
+          fullWidth
+        >
+          <Flex align={'center'} gap={8}>
+            {location.pathname === LOGIN_ROUTE ? 'Войти' : 'Зарегестрироваться'}
+            <IconChevronRight stroke={1.5} color="#FFFF" />
+          </Flex>
+        </Button>
+        {activeRole === 1 ? (
+          <Flex style={{ margin: '0 auto' }} gap={4}>
+            {location.pathname === LOGIN_ROUTE ? (
+              <>
+                <p className="text black">Нет аккаунта?</p>
+                <NavLink to={REGISTRATION_ROUTE}>
+                  <p className="text pink">Зарегистрироваться</p>
+                </NavLink>
+              </>
+            ) : (
+              <>
+                <p className="text black">Есть аккаунт?</p>
+                <NavLink to={LOGIN_ROUTE}>
+                  <p className="text pink">Войти</p>
+                </NavLink>
+              </>
+            )}
+          </Flex>
+        ) : (
+          <></>
+        )}
+      </Stack>
       {activeRole === 1 ? (
-        <Flex gap={4}>
-          {location.pathname === LOGIN_ROUTE ? (
-            <>
-              <p className="text black">Нет аккаунта?</p>
-              <NavLink to={REGISTRATION_ROUTE}>
-                <p className="text pink">Зарегистрироваться</p>
-              </NavLink>
-            </>
-          ) : (
-            <>
-              <p className="text black">Есть аккаунт?</p>
-              <NavLink to={LOGIN_ROUTE}>
-                <p className="text pink">Войти</p>
-              </NavLink>
-            </>
-          )}
-        </Flex>
+        <Stack gap={40} mt={8}>
+          <p style={{ margin: '0 auto' }} className="text gray">
+            или
+          </p>
+          <Button onClick={() => VKID.Auth.login()} color="#0077ff">
+            <Flex align={'center'} gap={8}>
+              <Image src={vk} w={24} h={24} />
+              Войти через ВКонтакте
+            </Flex>
+          </Button>
+        </Stack>
       ) : (
         <></>
       )}

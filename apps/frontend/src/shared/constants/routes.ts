@@ -103,6 +103,13 @@ export const authRoutes = [
     isHide: true,
   },
   {
+    path: NO_PAGE_ROUTE,
+    Component: noPage,
+    title: 'Пустая страница',
+    isAdmin: true,
+    isHide: true,
+  },
+  {
     path: ONBOARDING_ROUTE,
     Component: onboarding,
     title: 'Онбординг',

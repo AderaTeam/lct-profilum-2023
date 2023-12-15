@@ -11,7 +11,7 @@ import { LOGIN_ROUTE, REGISTRATION_ROUTE } from 'shared/constants/const';
 
 export const AuthNavbar = () => {
   const location = useLocation();
-  const [activeRole, setActiveRole] = useState(0);
+  const [activeRole, setActiveRole] = useState(1);
   const authFrom = useForm();
 
   const handleRoleChange = (id: number) => {
