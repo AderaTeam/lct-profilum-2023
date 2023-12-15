@@ -1,10 +1,10 @@
 import MainWrapper from 'shared/components/Wrappers/MainWrapper';
-import { CommunityList } from 'widgets/community-list';
+import { CommunityEventsList } from 'widgets/community-events-list';
 
 const CommunityPage = () => {
   return (
     <MainWrapper>
-      <CommunityList />
+      <CommunityEventsList />
       <></>
     </MainWrapper>
   );

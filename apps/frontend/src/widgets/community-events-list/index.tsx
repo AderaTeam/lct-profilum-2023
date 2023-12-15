@@ -4,7 +4,7 @@ import { Card } from 'shared/components/Card';
 
 import mage from 'shared/assets/mage.png';
 
-export const CommunityList = () => {
+export const CommunityEventsList = () => {
   const data = [
     {
       title: 'Роман закончил Шаг 3 “Основы типографики”',
