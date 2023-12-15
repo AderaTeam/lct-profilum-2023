@@ -23,6 +23,13 @@ export class SocialsService {
     return await this.socialsRepository.save(social);
   }
 
+  async initialize()
+  {
+    this.socialsRepository.create({name: 'VK', description: 'Сообщества, записи на стене, комментарии'})
+    this.socialsRepository.create({name: 'LeaderID', description: 'Сообщества, записи на стене, комментарии'})
+
+  }
+
   async upsert()
   {
     this.socialsRepository.upsert({name: 'VK', description: 'Сообщества, записи на стене, комментарии'}, {conflictPaths: ["name"]})

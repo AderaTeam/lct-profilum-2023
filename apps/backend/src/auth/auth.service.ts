@@ -36,7 +36,7 @@ export class AuthService {
     });
     const tokens = await this.getTokens(newUser.id, newUser.username);
     await this.updateRefreshToken(newUser.id, tokens.refreshToken);
-    return {tokens, user: await this.usersService.getOneByNickname(createUserDto.nickname)};
+    return {...tokens, user: await this.usersService.getOneByNickname(createUserDto.nickname)};
   }
 
   async signUpVk(silentToken: String, uuid: String)
@@ -76,7 +76,7 @@ export class AuthService {
       Logger.log(userDto)
   
       const newUser = await this.usersService.create(userDto)
-
+      //await this.socialsUsersService.
       const tokens = await this.getTokens(newUser.id, newUser.username);
       await this.updateRefreshToken(newUser.id, tokens.refreshToken);
       return {user: newUser, ...tokens};
