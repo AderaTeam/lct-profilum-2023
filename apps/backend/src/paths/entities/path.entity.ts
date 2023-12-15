@@ -14,7 +14,7 @@ export class Path {
     )
     name: string
 
-    @OneToMany(() => PathStep, (pathstep) => pathstep.path, {onDelete: 'CASCADE', cascade: true})
+    @OneToMany(() => PathStep, (pathstep) => pathstep.path, {onDelete: 'CASCADE'})
     @JoinColumn()
     pathSteps: PathStep[]
 }
