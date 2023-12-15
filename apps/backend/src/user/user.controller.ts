@@ -39,7 +39,7 @@ export class UserController
     @Post('')
     public async updateOne(@Body() userDto: UserUpdateDto, @Req() req)
     {
-        return await this.userService.updateOne(req.user.id, userDto)
+        return await this.userService.updateOne(req.user.sub, userDto)
     }
 
     @UseGuards(AccessTokenGuard)

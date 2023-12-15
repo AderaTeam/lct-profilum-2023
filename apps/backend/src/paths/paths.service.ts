@@ -8,10 +8,16 @@ import { Repository } from 'typeorm';
 import { PathStep } from './entities/pathStep.entity';
 import { PathStepContent } from './entities/pathStepContent.entity';
 import { PathStepTag } from './entities/pathTag.entity';
+import { OwnedPath } from './entities/ownedPath.entity';
+import { CreateOwnedPathDto } from './dto/create-owned-path.dto';
+import { UserService } from '../user/user.service';
+import { AnalyzedPath } from './entities/analyzedPath.entity';
+import { CreateAnalyzedPathDto } from './dto/create-analyzed-path.dto';
 
 @Injectable()
 export class PathsService {
   constructor(
+    private userService: UserService,
     @InjectRepository(Path)
     private pathRepository: Repository<Path>,
     @InjectRepository(PathStep)
@@ -20,6 +26,10 @@ export class PathsService {
     private pathStepContentRepository: Repository<PathStepContent>,
     @InjectRepository(PathStepTag)
     private pathStepTagRepository: Repository<PathStepTag>,
+    @InjectRepository(OwnedPath)
+    private ownedPathRepository: Repository<OwnedPath>,
+    @InjectRepository(AnalyzedPath)
+    private analyzedPathRepository: Repository<AnalyzedPath>,
   ){}
   async create(createPathDto: CreatePathDto) {
     let steps = []
@@ -58,6 +68,26 @@ export class PathsService {
       paths.push(await this.create(path))
     }
     return paths
+  }
+
+  async createOwnage(createOwnedPathDto: CreateOwnedPathDto)
+  {
+    return await this.ownedPathRepository.create(
+        {
+          user: (await this.userService.getOneById(createOwnedPathDto.userId)),
+          path: (await this.pathRepository.findOneBy({id: createOwnedPathDto.pathId}))
+        }
+      )
+  }
+
+  async createAnalyzed(createOwnedPathDto: CreateAnalyzedPathDto)
+  {
+    return await this.analyzedPathRepository.create(
+        {
+          user: (await this.userService.getOneById(createOwnedPathDto.userId)),
+          path: (await this.pathRepository.findOneBy({id: createOwnedPathDto.pathId}))
+        }
+      )
   }
 
   async findAll() {

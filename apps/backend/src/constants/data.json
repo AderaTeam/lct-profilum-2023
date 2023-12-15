@@ -1,4 +1,4 @@
-[
+{"paths":[
     {
         "id": 0,
         "name": "Агроном",
@@ -12,8 +12,8 @@
                 "content": {
                     "link": "www.youtube.com/watch?v=61bgeP1fZEg&list=PLcsjsqLLSfNDtcG3YxmWaAQF59Ted2D3D",
                     "questionsCount":  4,
-                    "text": "Лекция",
-                },
+                    "text": "Лекция"
+                }
             },
             {
                 "step": 2,
@@ -24,8 +24,8 @@
                 "content": {
                     "link": "https://www.youtube.com/watch?v=iweBqg00piE",
                     "questionsCount":  3,
-                    "text": "Лекция",
-                },
+                    "text": "Лекция"
+                }
             },
             {
                 "step": 3,
@@ -36,8 +36,8 @@
                 "content": {
                     "link": "https//www.youtube.com/watch?v=5znj3O6I788",
                     "questionsCount":  5,
-                    "text": "Лекция",
-                },
+                    "text": "Лекция"
+                }
             }
             
             ,
@@ -50,10 +50,10 @@
                 "content": {
                     "link": "https://www.youtube.com/watch?v=5znj3O6I788",
                     "questionsCount":  7,
-                    "text": "Лекция",
-                },
+                    "text": "Лекция"
+                }
             }
-        ],
+        ]
 
       },
       {
@@ -69,8 +69,8 @@
                 "content": {
                     "link": "https://www.youtube.com/watch?v=qu_WEHvGXWk",
                     "questionsCount":  8,
-                    "text": "Лекция",
-                },
+                    "text": "Лекция"
+                }
             },
             {
                 "step": 2,
@@ -81,8 +81,8 @@
                 "content": {
                     "link": "https://www.youtube.com/watch?v=IVGk7sR9m4o",
                     "questionsCount":  4,
-                    "text": "Лекция",
-                },
+                    "text": "Лекция"
+                }
             },
             {
                 "step": 3,
@@ -93,8 +93,8 @@
                 "content": {
                     "link": "https://www.youtube.com/watch?v=7m-VmhOJLVk",
                     "questionsCount":  5,
-                    "text": "Лекция",
-                },
+                    "text": "Лекция"
+                }
             }
             
             ,
@@ -107,8 +107,8 @@
                 "content": {
                     "link": "https://www.youtube.com/watch?v=lvP46pQ3dxQ",
                     "questionsCount":  7,
-                    "text": "Лекция",
-                },
+                    "text": "Лекция"
+                }
             }
             ,
             {
@@ -120,10 +120,10 @@
                 "content": {
                     "link": "https://www.youtube.com/watch?v=w4CqokHA8-w",
                     "questionsCount":  9,
-                    "text": "Лекция",
-                },
+                    "text": "Лекция"
+                }
             }
-        ],
+        ]
 
       },
       {
@@ -139,8 +139,8 @@
                 "content": {
                     "link": "https://www.youtube.com/watch?v=eMTwSEl7zwA",
                     "questionsCount":  8,
-                    "text": "Лекция",
-                },
+                    "text": "Лекция"
+                }
             },
             {
                 "step": 2,
@@ -151,8 +151,8 @@
                 "content": {
                     "link": "https://babok-school.ru/blogs/analysis-artifacts-and-how-to-develop/",
                     "questionsCount":  4,
-                    "text": "Лекция",
-                },
+                    "text": "Лекция"
+                }
             },
             {
                 "step": 3,
@@ -163,8 +163,8 @@
                 "content": {
                     "link": "https://www.youtube.com/watch?v=UARZiX2gRKs",
                     "questionsCount":  5,
-                    "text": "Лекция",
-                },
+                    "text": "Лекция"
+                }
             }
             
             ,
@@ -177,10 +177,10 @@
                 "content": {
                     "link": "https://www.youtube.com/watch?v=dY1hgXvZGfM",
                     "questionsCount":  7,
-                    "text": "Лекция",
-                },
+                    "text": "Лекция"
+                }
             }
-        ],
+        ]
 
       },
       {
@@ -196,8 +196,8 @@
                 "content": {
                     "link": "https://www.youtube.com/watch?v=fjiNBEPIzGE",
                     "questionsCount":  8,
-                    "text": "Лекция",
-                },
+                    "text": "Лекция"
+                }
             },
             {
                 "step": 2,
@@ -208,8 +208,8 @@
                 "content": {
                     "link": "https://www.youtube.com/watch?v=gLW7ecQab08",
                     "questionsCount":  4,
-                    "text": "Лекция",
-                },
+                    "text": "Лекция"
+                }
             },
             {
                 "step": 3,
@@ -220,8 +220,8 @@
                 "content": {
                     "link": "https://www.youtube.com/watch?v=Xab13PUwHKw",
                     "questionsCount":  5,
-                    "text": "Лекция",
-                },
+                    "text": "Лекция"
+                }
             }
             
             ,
@@ -234,10 +234,10 @@
                 "content": {
                     "link": "https://www.youtube.com/watch?v=akimwg8k_3A&list=PLHJIPLA7xCMqwN10aj92s_sb67i9XVaek",
                     "questionsCount":  7,
-                    "text": "Лекция",
-                },
+                    "text": "Лекция"
+                }
             }
-        ],
+        ]
 
       },
       {
@@ -253,8 +253,8 @@
                 "content": {
                     "link": "https://www.youtube.com/watch?v=Q__XAwr9N00",
                     "questionsCount":  8,
-                    "text": "Лекция",
-                },
+                    "text": "Лекция"
+                }
             },
             {
                 "step": 2,
@@ -265,8 +265,8 @@
                 "content": {
                     "link": "https://www.youtube.com/watch?v=iyxnyMfMAic",
                     "questionsCount":  4,
-                    "text": "Лекция",
-                },
+                    "text": "Лекция"
+                }
             },
             {
                 "step": 3,
@@ -277,8 +277,8 @@
                 "content": {
                     "link": "https://www.youtube.com/watch?v=zcGwsCN5h0E",
                     "questionsCount":  5,
-                    "text": "Лекция",
-                },
+                    "text": "Лекция"
+                }
             }
             
             ,
@@ -291,10 +291,10 @@
                 "content": {
                     "link": "https://www.youtube.com/watch?v=AH9uowkPPFA",
                     "questionsCount":  7,
-                    "text": "Лекция",
-                },
+                    "text": "Лекция"
+                }
             }
-        ],
+        ]
 
       }
       ,
@@ -311,8 +311,8 @@
                 "content": {
                     "link": "https://www.youtube.com/watch?v=1a2aAeQ_h4Y&list=PLmu_y3-DV2_ko4Q36htOLjHM3QgGnbQY0",
                     "questionsCount":  8,
-                    "text": "Лекция",
-                },
+                    "text": "Лекция"
+                }
             },
             {
                 "step": 2,
@@ -323,8 +323,8 @@
                 "content": {
                     "link": "https://www.youtube.com/watch?v=TWOgp48dJco",
                     "questionsCount":  4,
-                    "text": "Лекция",
-                },
+                    "text": "Лекция"
+                }
             },
             {
                 "step": 3,
@@ -335,8 +335,8 @@
                 "content": {
                     "link": "https://www.youtube.com/watch?v=5YCmQDaMUqg",
                     "questionsCount":  5,
-                    "text": "Лекция",
-                },
+                    "text": "Лекция"
+                }
             }
             
             ,
@@ -349,10 +349,10 @@
                 "content": {
                     "link": "https://www.youtube.com/watch?v=y2iyuryrmwAA",
                     "questionsCount":  7,
-                    "text": "Лекция",
-                },
+                    "text": "Лекция"
+                }
             }
-        ],
+        ]
 
       }
       ,
@@ -369,8 +369,8 @@
                 "content": {
                     "link": "https://www.youtube.com/watch?v=iyxnyMfMAic",
                     "questionsCount":  8,
-                    "text": "Лекция",
-                },
+                    "text": "Лекция"
+                }
             },
             {
                 "step": 2,
@@ -381,8 +381,8 @@
                 "content": {
                     "link": "https://www.youtube.com/watch?v=egQvW17_soM",
                     "questionsCount":  4,
-                    "text": "Лекция",
-                },
+                    "text": "Лекция"
+                }
             },
             {
                 "step": 3,
@@ -393,8 +393,8 @@
                 "content": {
                     "link": "https://www.youtube.com/watch?v=LrQlVe0U2PY",
                     "questionsCount":  5,
-                    "text": "Лекция",
-                },
+                    "text": "Лекция"
+                }
             }
             
             ,
@@ -407,10 +407,10 @@
                 "content": {
                     "link": "https://www.youtube.com/watch?v=Eh451BzmfbQ",
                     "questionsCount":  7,
-                    "text": "Лекция",
-                },
+                    "text": "Лекция"
+                }
             }
-        ],
+        ]
 
       },
       {
@@ -426,8 +426,8 @@
                 "content": {
                     "link": "https://www.youtube.com/watch?v=InJFRfAHJ9g",
                     "questionsCount":  8,
-                    "text": "Лекция",
-                },
+                    "text": "Лекция"
+                }
             },
             {
                 "step": 2,
@@ -438,8 +438,8 @@
                 "content": {
                     "link": "https://www.youtube.com/watch?v=nrC-N0rfHD4",
                     "questionsCount":  4,
-                    "text": "Лекция",
-                },
+                    "text": "Лекция"
+                }
             },
             {
                 "step": 3,
@@ -450,8 +450,8 @@
                 "content": {
                     "link": "https://www.youtube.com/watch?v=livHOW3CQ3E",
                     "questionsCount":  5,
-                    "text": "Лекция",
-                },
+                    "text": "Лекция"
+                }
             }
             
             ,
@@ -464,10 +464,10 @@
                 "content": {
                     "link": "https://www.youtube.com/watch?v=YKcQz6BK5So",
                     "questionsCount":  7,
-                    "text": "Лекция",
-                },
+                    "text": "Лекция"
+                }
             }
-        ],
+        ]
 
       }
       ,
@@ -484,8 +484,8 @@
                 "content": {
                     "link": "https://www.youtube.com/watch?v=iyxnyMfMAic",
                     "questionsCount":  8,
-                    "text": "Лекция",
-                },
+                    "text": "Лекция"
+                }
             },
             {
                 "step": 2,
@@ -496,8 +496,8 @@
                 "content": {
                     "link": "https://www.youtube.com/watch?v=egQvW17_soM",
                     "questionsCount":  4,
-                    "text": "Лекция",
-                },
+                    "text": "Лекция"
+                }
             },
             {
                 "step": 3,
@@ -508,8 +508,8 @@
                 "content": {
                     "link": "https://www.youtube.com/watch?v=LrQlVe0U2PY",
                     "questionsCount":  5,
-                    "text": "Лекция",
-                },
+                    "text": "Лекция"
+                }
             }
             
             ,
@@ -522,10 +522,10 @@
                 "content": {
                     "link": "https://www.youtube.com/watch?v=Eh451BzmfbQ",
                     "questionsCount":  7,
-                    "text": "Лекция",
-                },
+                    "text": "Лекция"
+                }
             }
-        ],
+        ]
 
       },
       {
@@ -541,8 +541,8 @@
                 "content": {
                     "link": "https://www.youtube.com/watch?v=InJFRfAHJ9g",
                     "questionsCount":  8,
-                    "text": "Лекция",
-                },
+                    "text": "Лекция"
+                }
             },
             {
                 "step": 2,
@@ -553,8 +553,8 @@
                 "content": {
                     "link": "https://www.youtube.com/watch?v=nrC-N0rfHD4",
                     "questionsCount":  4,
-                    "text": "Лекция",
-                },
+                    "text": "Лекция"
+                }
             },
             {
                 "step": 3,
@@ -565,8 +565,8 @@
                 "content": {
                     "link": "https://www.youtube.com/watch?v=JJgavF0TnCE",
                     "questionsCount":  5,
-                    "text": "Лекция",
-                },
+                    "text": "Лекция"
+                }
             }
             
             ,
@@ -579,10 +579,10 @@
                 "content": {
                     "link": "https://www.youtube.com/watch?v=YKcQz6BK5So",
                     "questionsCount":  7,
-                    "text": "Лекция",
-                },
+                    "text": "Лекция"
+                }
             }
-        ],
+        ]
 
       }
       ,
@@ -599,8 +599,8 @@
                 "content": {
                     "link": "https://www.youtube.com/watch?v=4gaDttFBFJc&list=PLwuA0QpVldpaEwWqAG9AuaSEJgGxtB8IC",
                     "questionsCount":  8,
-                    "text": "Лекция",
-                },
+                    "text": "Лекция"
+                }
             },
             {
                 "step": 2,
@@ -611,8 +611,8 @@
                 "content": {
                     "link": "https://www.youtube.com/watch?v=ddMWZSw7A7A",
                     "questionsCount":  4,
-                    "text": "Лекция",
-                },
+                    "text": "Лекция"
+                }
             },
             {
                 "step": 3,
@@ -623,8 +623,8 @@
                 "content": {
                     "link": "https://www.youtube.com/watch?v=8t5gZB-UuRE",
                     "questionsCount":  5,
-                    "text": "Лекция",
-                },
+                    "text": "Лекция"
+                }
             }
             
             ,
@@ -637,10 +637,10 @@
                 "content": {
                     "link": "https://www.youtube.com/watch?v=jKxHV75X5YQ",
                     "questionsCount":  7,
-                    "text": "Лекция",
-                },
+                    "text": "Лекция"
+                }
             }
-        ],
+        ]
 
       },
       {
@@ -656,8 +656,8 @@
                 "content": {
                     "link": "https://www.youtube.com/watch?v=4gaDttFBFJc&list=PLwuA0QpVldpaEwWqAG9AuaSEJgGxtB8IC",
                     "questionsCount":  8,
-                    "text": "Лекция",
-                },
+                    "text": "Лекция"
+                }
             },
             {
                 "step": 2,
@@ -668,8 +668,8 @@
                 "content": {
                     "link": "https://www.youtube.com/watch?v=zWCKjoo6hNI&list=PLt3fgqeygGTVk5khY228EBHujarUgyLfv",
                     "questionsCount":  4,
-                    "text": "Лекция",
-                },
+                    "text": "Лекция"
+                }
             },
             {
                 "step": 3,
@@ -680,8 +680,8 @@
                 "content": {
                     "link": "https://www.youtube.com/watch?v=F--zn09WPU8",
                     "questionsCount":  5,
-                    "text": "Лекция",
-                },
+                    "text": "Лекция"
+                }
             }
             
             ,
@@ -694,10 +694,9 @@
                 "content": {
                     "link": "https://www.youtube.com/watch?v=jKxHV75X5YQ",
                     "questionsCount":  7,
-                    "text": "Лекция",
-                },
+                    "text": "Лекция"
+                }
             }
-        ],
-
+        ]
       }
-]
+]}
