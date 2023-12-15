@@ -7,6 +7,7 @@ import {
   MY_PATH_ROUTE,
   MY_SOCIALS_ROUTE,
   NO_PAGE_ROUTE,
+  ONBOARDING_ROUTE,
   PATH_DB_ROUTE,
   PROFILE_ROUTE,
   PROF_DB_ROUTE,
@@ -35,6 +36,7 @@ const profile = lazy(() => import('pages/profile'));
 const mySocials = lazy(() => import('pages/my-socials'));
 const mage = lazy(() => import('pages/mage'));
 const noPage = lazy(() => import('pages/no-page'));
+const onboarding = lazy(() => import('pages/onboarding'));
 
 export const authRoutes = [
   {
@@ -97,6 +99,13 @@ export const authRoutes = [
     path: NO_PAGE_ROUTE,
     Component: noPage,
     title: 'Пустая страница',
+    isAdmin: false,
+    isHide: true,
+  },
+  {
+    path: ONBOARDING_ROUTE,
+    Component: onboarding,
+    title: 'Онбординг',
     isAdmin: false,
     isHide: true,
   },

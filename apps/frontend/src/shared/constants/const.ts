@@ -13,3 +13,4 @@ export const NO_PAGE_ROUTE = '/no_page';
 export const STAT_ROUTE = '/stat';
 export const PROF_DB_ROUTE = '/prof_db';
 export const PATH_DB_ROUTE = '/path_db';
+export const ONBOARDING_ROUTE = '/onboarding';

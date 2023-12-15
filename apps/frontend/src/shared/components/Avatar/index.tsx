@@ -1,4 +1,4 @@
-import { Flex, Avatar as MantineAvatar } from "@mantine/core";
+import { Flex, Avatar as MantineAvatar } from '@mantine/core';
 
 interface AvatarProps {
   name: string;
@@ -7,7 +7,7 @@ interface AvatarProps {
 
 export const Avatar = ({ name, image }: AvatarProps) => {
   return (
-    <Flex align={"center"} gap={12}>
+    <Flex align={'center'} gap={12}>
       <MantineAvatar src={image} h={40} w={40} />
       <h3 className="h3">{name}</h3>
     </Flex>

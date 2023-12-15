@@ -1,6 +1,6 @@
 import { Flex, Loader, Stack } from '@mantine/core';
 import { Card } from 'shared/components/Card';
-import { Avatar } from './components/Avatar';
+import { Avatar } from 'shared/components/Avatar';
 
 import mage from 'shared/assets/mage.png';
 

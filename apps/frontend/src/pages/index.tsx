@@ -1,26 +1,19 @@
 import { Flex, Stack } from '@mantine/core';
 import { Context } from 'main';
 import { observer } from 'mobx-react-lite';
-import { useContext, useEffect } from 'react';
-import {
-  Route,
-  Routes,
-  useLocation,
-  Navigate,
-  useNavigate,
-} from 'react-router-dom';
+import { useContext } from 'react';
+import { Route, Routes, useLocation, Navigate } from 'react-router-dom';
 import {
   HOME_ROUTE,
-  LOGIN_ROUTE,
   MAGE_ROUTE,
   MY_PATH_ROUTE,
+  ONBOARDING_ROUTE,
 } from 'shared/constants/const';
 import { authRoutes, publicRoutes } from 'shared/constants/routes';
 import Navbar from 'widgets/navbar';
 
 export const Routing = observer(() => {
   const location = useLocation();
-  const navigate = useNavigate();
   const { UStore } = useContext(Context);
 
   if (location.pathname === HOME_ROUTE) {
@@ -37,11 +30,13 @@ export const Routing = observer(() => {
   return (
     <Flex bg={'gray.0'} className="wrapper" style={{ height: '100vh' }}>
       <Flex>
-        {location.pathname !== MAGE_ROUTE && UStore.isAuth && (
-          <div style={{ width: 'fit-content' }} className="wrapper">
-            <Navbar />
-          </div>
-        )}
+        {location.pathname !== MAGE_ROUTE &&
+          location.pathname !== ONBOARDING_ROUTE &&
+          UStore.isAuth && (
+            <div style={{ width: 'fit-content' }} className="wrapper">
+              <Navbar />
+            </div>
+          )}
         <Stack w={'100%'} align="center">
           <Routes>
             {UStore.isAuth && UStore.user.role === 'user'
