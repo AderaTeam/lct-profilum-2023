@@ -1,4 +1,4 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { HttpCode, HttpException, HttpStatus, Injectable, Logger } from '@nestjs/common';
 import { CreatePathDto } from './dto/create-path.dto';
 import { UpdatePathDto } from './dto/update-path.dto';
 import { CreateMultiplePathDto } from './dto/create-multiple-path.dto';
@@ -13,6 +13,7 @@ import { CreateOwnedPathDto } from './dto/create-owned-path.dto';
 import { UserService } from '../user/user.service';
 import { AnalyzedPath } from './entities/analyzedPath.entity';
 import { CreateAnalyzedPathDto } from './dto/create-analyzed-path.dto';
+import { STATUS_CODES } from 'http';
 
 @Injectable()
 export class PathsService {
@@ -72,7 +73,11 @@ export class PathsService {
 
   async createOwnage(createOwnedPathDto: CreateOwnedPathDto)
   {
-    return await this.ownedPathRepository.create(
+    if (!(await this.userService.getOneById(createOwnedPathDto.userId)) || !(await this.pathRepository.findOneBy({id: createOwnedPathDto.pathId})))
+    {
+      throw new HttpException('User or path does not exist', HttpStatus.BAD_REQUEST)
+    }
+    return await this.ownedPathRepository.insert(
         {
           user: (await this.userService.getOneById(createOwnedPathDto.userId)),
           path: (await this.pathRepository.findOneBy({id: createOwnedPathDto.pathId}))
@@ -82,7 +87,11 @@ export class PathsService {
 
   async createAnalyzed(createOwnedPathDto: CreateAnalyzedPathDto)
   {
-    return await this.analyzedPathRepository.create(
+    if (!(await this.userService.getOneById(createOwnedPathDto.userId)) || !(await this.pathRepository.findOneBy({id: createOwnedPathDto.pathId})))
+    {
+      throw new HttpException('User or path does not exist', HttpStatus.BAD_REQUEST)
+    }
+    return await this.analyzedPathRepository.insert(
         {
           user: (await this.userService.getOneById(createOwnedPathDto.userId)),
           path: (await this.pathRepository.findOneBy({id: createOwnedPathDto.pathId}))
