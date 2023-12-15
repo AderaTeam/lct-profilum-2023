@@ -13,7 +13,7 @@ export class PathsController {
     return this.pathsService.create(createPathDto);
   }
 
-  @Post()
+  @Post('multiple')
   createMultiple(@Body() createPathDto: CreateMultiplePathDto) {
     return this.pathsService.createMultiple(createPathDto);
   }

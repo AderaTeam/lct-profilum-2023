@@ -32,7 +32,6 @@ export class PathsService {
         {
           const newTag = this.pathStepTagRepository.create({name: tag})
           const tagToAdd = await this.pathStepTagRepository.save(newTag)
-          Logger.log(tagToAdd)
           tags.push(tagToAdd)
         }
         else
@@ -46,7 +45,6 @@ export class PathsService {
 
       const newStep = this.pathStepRepository.create({...step, tags: tags, content: content})
       const stepToAdd = await this.pathStepRepository.save(newStep)
-      Logger.log(stepToAdd)
       steps.push(stepToAdd)
     }
     const path = this.pathRepository.create({...createPathDto, pathSteps: steps})
