@@ -60,7 +60,7 @@ export class AuthService {
 
     const userData = await (await axios.get(datauri)).data.response
 
-    Logger.log(await this.socialsService.findOneByUserId("VK",userData.user_id))
+    Logger.log(await this.socialsService.findOneByUserId("VK",userData.user_id), userData.user_id)
 
     if (await this.socialsService.findOneByUserId("VK",userData.user_id))
     {

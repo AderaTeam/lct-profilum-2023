@@ -41,6 +41,11 @@ export class SocialsService {
     return await this.socialsRepository.find();
   }
 
+  async getAllUsersSocial()
+  {
+    return await this.socialsUsersRepository.find()
+  }
+
   async findOneByUserId(socialname: string, originalid: string)
   {
     return await this.socialsUsersRepository.findOneBy({originaluserid: originalid, social: await this.socialsRepository.findOneBy({name: socialname})})

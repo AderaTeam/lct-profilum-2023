@@ -17,6 +17,11 @@ export class SocialsController {
     return this.socialsService.findAll();
   }
 
+  @Get('users')
+  findAllUsers() {
+    return this.socialsService.getAllUsersSocial();
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.socialsService.findOne(+id);
