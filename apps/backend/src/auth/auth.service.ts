@@ -18,7 +18,7 @@ export class AuthService {
         private usersService: UserService,
         private jwtService: JwtService,
         private configService: ConfigService,
-        private socialsUsersService: SocialsService,
+        private socialsService: SocialsService,
     ) {}
 
   async signUp(createUserDto: CreateUserDto): Promise<any> {
@@ -42,8 +42,6 @@ export class AuthService {
   async signUpVk(silentToken: String, uuid: String)
   {
 
-    //await this.socialsUsersService.upsert()
-
     const accessuri = `https://api.vk.com/method/auth.exchangeSilentAuthToken?v=5.131&access_token=${clientdata.service_token}&token=${silentToken}&uuid=${uuid}`
 
     Logger.log(accessuri)
@@ -62,9 +60,9 @@ export class AuthService {
 
     const userData = await (await axios.get(datauri)).data.response
 
-    if (await this.socialsUsersService.findOneByUserId(userData.id))
+    if (await this.socialsService.findOneByUserId(userData.id, "VK"))
     {
-      const user = (await this.socialsUsersService.findOneByUserId(userData.id)).user
+      const user = (await this.socialsService.findOneByUserId(userData.id, "VK")).user
       const tokens = await this.getTokens(user.id, user.username);
       await this.updateRefreshToken(user.id, tokens.refreshToken);
       return {...user, ...tokens};
@@ -79,7 +77,8 @@ export class AuthService {
       //await this.socialsUsersService.
       const tokens = await this.getTokens(newUser.id, newUser.username);
       await this.updateRefreshToken(newUser.id, tokens.refreshToken);
-      return {user: newUser, ...tokens};
+      this.socialsService.addUsersSocial(newUser.id, "VK")
+      return {...newUser, ...tokens};
     }
   }
 

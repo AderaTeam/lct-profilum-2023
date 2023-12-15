@@ -26,7 +26,7 @@ export class SocialsService {
   async initialize()
   {
     this.socialsRepository.create({name: 'VK', description: 'Сообщества, записи на стене, комментарии'})
-    this.socialsRepository.create({name: 'LeaderID', description: 'Сообщества, записи на стене, комментарии'})
+    this.socialsRepository.create({name: 'LeaderID', description: 'Мероприятия, команды'})
 
   }
 
@@ -39,14 +39,20 @@ export class SocialsService {
     return await this.socialsRepository.find();
   }
 
-  async findOneByUserId(id: number)
+  async findOneByUserId(id: number, socialname: string)
   {
-    return await this.socialsUsersRepository.findOne({where:{originaluserid: id}})
+    return await this.socialsUsersRepository.findOne({where:{originaluserid: id, social: await this.socialsRepository.findOneBy({name: socialname})}})
   }
 
   async findOne(id: number) {
     return await this.socialsRepository.findOneBy({id: id});
   }
+
+  async addUsersSocial(userid: number, socialname: string)
+  {
+    return await this.socialsUsersRepository.create({originaluserid: userid, social: await this.socialsRepository.findOneBy({name: socialname})})
+  }
+
   @UseGuards(UserRolesGuard)
   @Roles('admin')
   async update(id: number, updateSocialDto: UpdateSocialDto) {
