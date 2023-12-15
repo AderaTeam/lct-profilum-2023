@@ -1,0 +1,703 @@
+[
+    {
+        "id": 0,
+        "name": "Агроном",
+        "steps": [
+            {
+                "step": 1,
+                "title": "Ботаника и физиология растений",
+                "status": "В процессе",
+                "points": 20,
+                "tags": ["Агрономия", "Садоводство"],
+                "content": {
+                    "link": "www.youtube.com/watch?v=61bgeP1fZEg&list=PLcsjsqLLSfNDtcG3YxmWaAQF59Ted2D3D",
+                    "questionsCount":  4,
+                    "text": "Лекция",
+                },
+            },
+            {
+                "step": 2,
+                "title": "Основы животноводства и пчеловодства",
+                "status": "Завершено",
+                "points": 20,
+                "tags": ["Животноводство", "Пчеловодство"],
+                "content": {
+                    "link": "https://www.youtube.com/watch?v=iweBqg00piE",
+                    "questionsCount":  3,
+                    "text": "Лекция",
+                },
+            },
+            {
+                "step": 3,
+                "title": "Основы механизации, электрификации и автоматизации сельскохозяйственного производства",
+                "status": "В процессе",
+                "points": 20,
+                "tags": ["Механизация", "Электрификация","Автоматизация"],
+                "content": {
+                    "link": "https//www.youtube.com/watch?v=5znj3O6I788",
+                    "questionsCount":  5,
+                    "text": "Лекция",
+                },
+            }
+            
+            ,
+            {
+                "step": 4,
+                "title": "Основы предпринимательской деятельности",
+                "status": "Не начато",
+                "points": 30,
+                "tags": ["Предпринимательская деятельность"],
+                "content": {
+                    "link": "https://www.youtube.com/watch?v=5znj3O6I788",
+                    "questionsCount":  7,
+                    "text": "Лекция",
+                },
+            }
+        ],
+
+      },
+      {
+        "id": 1,
+        "name": "Специалист по машинному обучению",
+        "steps": [
+            {
+                "step": 1,
+                "title": "Выберите язык программирования и приступайте к работе!",
+                "status": "Завершено",
+                "points": 40,
+                "tags": ["Программирование", "Информационные технологии"],
+                "content": {
+                    "link": "https://www.youtube.com/watch?v=qu_WEHvGXWk",
+                    "questionsCount":  8,
+                    "text": "Лекция",
+                },
+            },
+            {
+                "step": 2,
+                "title": " Изучите линейную алгебру",
+                "status": "Завершено",
+                "points": 50,
+                "tags": ["Математика", "Программирование"],
+                "content": {
+                    "link": "https://www.youtube.com/watch?v=IVGk7sR9m4o",
+                    "questionsCount":  4,
+                    "text": "Лекция",
+                },
+            },
+            {
+                "step": 3,
+                "title": "Изучите вероятность и статистику",
+                "status": "В процессе",
+                "points": 40,
+                "tags": ["Математика", "Машинное обучение"],
+                "content": {
+                    "link": "https://www.youtube.com/watch?v=7m-VmhOJLVk",
+                    "questionsCount":  5,
+                    "text": "Лекция",
+                },
+            }
+            
+            ,
+            {
+                "step": 4,
+                "title": "Изучите основные алгоритмы ML",
+                "status": "Не начато",
+                "points": 30,
+                "tags": ["Алгоритмы", "Машинное обучение"],
+                "content": {
+                    "link": "https://www.youtube.com/watch?v=lvP46pQ3dxQ",
+                    "questionsCount":  7,
+                    "text": "Лекция",
+                },
+            }
+            ,
+            {
+                "step": 5,
+                "title": "Изучите развёртывание систем",
+                "status": "Не начато",
+                "points": 30,
+                "tags": ["Машинное обучение", "Информационные системы"],
+                "content": {
+                    "link": "https://www.youtube.com/watch?v=w4CqokHA8-w",
+                    "questionsCount":  9,
+                    "text": "Лекция",
+                },
+            }
+        ],
+
+      },
+      {
+        "id": 2,
+        "name": "Системный аналитик",
+        "steps": [
+            {
+                "step": 1,
+                "title": "Изучите процесс разработки ПО",
+                "status": "Завершено",
+                "points": 40,
+                "tags": ["Программное обеспечение", "Информационные системы"],
+                "content": {
+                    "link": "https://www.youtube.com/watch?v=eMTwSEl7zwA",
+                    "questionsCount":  8,
+                    "text": "Лекция",
+                },
+            },
+            {
+                "step": 2,
+                "title": "Документация к системе и другие артефакты деятельности аналитика",
+                "status": "Завершено",
+                "points": 50,
+                "tags": ["Документация", "Информационные системы"],
+                "content": {
+                    "link": "https://babok-school.ru/blogs/analysis-artifacts-and-how-to-develop/",
+                    "questionsCount":  4,
+                    "text": "Лекция",
+                },
+            },
+            {
+                "step": 3,
+                "title": "Проектирование решений",
+                "status": "В процессе",
+                "points": 40,
+                "tags": ["Информационные системы", "Программное обеспечение"],
+                "content": {
+                    "link": "https://www.youtube.com/watch?v=UARZiX2gRKs",
+                    "questionsCount":  5,
+                    "text": "Лекция",
+                },
+            }
+            
+            ,
+            {
+                "step": 4,
+                "title": "Основы интеграции",
+                "status": "Не начато",
+                "points": 30,
+                "tags": ["Информационные системы"],
+                "content": {
+                    "link": "https://www.youtube.com/watch?v=dY1hgXvZGfM",
+                    "questionsCount":  7,
+                    "text": "Лекция",
+                },
+            }
+        ],
+
+      },
+      {
+        "id": 3,
+        "name": "Менеджер по работе с маркетплейсами",
+        "steps": [
+            {
+                "step": 1,
+                "title": "Освойте умение формировать поставки и планировать логистику",
+                "status": "Завершено",
+                "points": 40,
+                "tags": ["Менеджмент", "Логистика"],
+                "content": {
+                    "link": "https://www.youtube.com/watch?v=fjiNBEPIzGE",
+                    "questionsCount":  8,
+                    "text": "Лекция",
+                },
+            },
+            {
+                "step": 2,
+                "title": "Масштабирование продаж",
+                "status": "Завершено",
+                "points": 50,
+                "tags": ["Менеджмент", "Маркетинг"],
+                "content": {
+                    "link": "https://www.youtube.com/watch?v=gLW7ecQab08",
+                    "questionsCount":  4,
+                    "text": "Лекция",
+                },
+            },
+            {
+                "step": 3,
+                "title": "Digital - маркетинг",
+                "status": "В процессе",
+                "points": 40,
+                "tags": ["Информационные системы", "Маркетинг"],
+                "content": {
+                    "link": "https://www.youtube.com/watch?v=Xab13PUwHKw",
+                    "questionsCount":  5,
+                    "text": "Лекция",
+                },
+            }
+            
+            ,
+            {
+                "step": 4,
+                "title": "Основы копирайтинга",
+                "status": "Не начато",
+                "points": 30,
+                "tags": ["Маркетинг"],
+                "content": {
+                    "link": "https://www.youtube.com/watch?v=akimwg8k_3A&list=PLHJIPLA7xCMqwN10aj92s_sb67i9XVaek",
+                    "questionsCount":  7,
+                    "text": "Лекция",
+                },
+            }
+        ],
+
+      },
+      {
+        "id": 4,
+        "name": "Инженер-технолог",
+        "steps": [
+            {
+                "step": 1,
+                "title": "Знание основ Word",
+                "status": "Завершено",
+                "points": 40,
+                "tags": ["Информационные системы", "Документация"],
+                "content": {
+                    "link": "https://www.youtube.com/watch?v=Q__XAwr9N00",
+                    "questionsCount":  8,
+                    "text": "Лекция",
+                },
+            },
+            {
+                "step": 2,
+                "title": "Введение в AutoCad",
+                "status": "Завершено",
+                "points": 50,
+                "tags": ["Моделирование", "Инженерия"],
+                "content": {
+                    "link": "https://www.youtube.com/watch?v=iyxnyMfMAic",
+                    "questionsCount":  4,
+                    "text": "Лекция",
+                },
+            },
+            {
+                "step": 3,
+                "title": "Основы Компас 3D",
+                "status": "В процессе",
+                "points": 40,
+                "tags": ["Информационные системы", "Моделирование"],
+                "content": {
+                    "link": "https://www.youtube.com/watch?v=zcGwsCN5h0E",
+                    "questionsCount":  5,
+                    "text": "Лекция",
+                },
+            }
+            
+            ,
+            {
+                "step": 4,
+                "title": "Введение в 1:C",
+                "status": "Не начато",
+                "points": 30,
+                "tags": ["Информационные системы"],
+                "content": {
+                    "link": "https://www.youtube.com/watch?v=AH9uowkPPFA",
+                    "questionsCount":  7,
+                    "text": "Лекция",
+                },
+            }
+        ],
+
+      }
+      ,
+      {
+        "id": 5,
+        "name": "Электромеханик",
+        "steps": [
+            {
+                "step": 1,
+                "title": "Электротехника",
+                "status": "Завершено",
+                "points": 40,
+                "tags": ["Техника", "Машиностроение"],
+                "content": {
+                    "link": "https://www.youtube.com/watch?v=1a2aAeQ_h4Y&list=PLmu_y3-DV2_ko4Q36htOLjHM3QgGnbQY0",
+                    "questionsCount":  8,
+                    "text": "Лекция",
+                },
+            },
+            {
+                "step": 2,
+                "title": "Алгоритмы работы вычислительной техники",
+                "status": "Завершено",
+                "points": 50,
+                "tags": ["Информационные системы", "Техника"],
+                "content": {
+                    "link": "https://www.youtube.com/watch?v=TWOgp48dJco",
+                    "questionsCount":  4,
+                    "text": "Лекция",
+                },
+            },
+            {
+                "step": 3,
+                "title": "Основы работы с измерительными приборами",
+                "status": "В процессе",
+                "points": 40,
+                "tags": ["Техника", "Машиностроение"],
+                "content": {
+                    "link": "https://www.youtube.com/watch?v=5YCmQDaMUqg",
+                    "questionsCount":  5,
+                    "text": "Лекция",
+                },
+            }
+            
+            ,
+            {
+                "step": 4,
+                "title": "Основы чтения электросхем",
+                "status": "Не начато",
+                "points": 30,
+                "tags": ["Техника", "Документация"],
+                "content": {
+                    "link": "https://www.youtube.com/watch?v=y2iyuryrmwAA",
+                    "questionsCount":  7,
+                    "text": "Лекция",
+                },
+            }
+        ],
+
+      }
+      ,
+      {
+        "id": 6,
+        "name": "Маркшейдер",
+        "steps": [
+            {
+                "step": 1,
+                "title": "Введение в AutoCad",
+                "status": "Завершено",
+                "points": 40,
+                "tags": ["Моделирование", "Инженерия"],
+                "content": {
+                    "link": "https://www.youtube.com/watch?v=iyxnyMfMAic",
+                    "questionsCount":  8,
+                    "text": "Лекция",
+                },
+            },
+            {
+                "step": 2,
+                "title": "Освойте умение работы с первичной документацией",
+                "status": "Завершено",
+                "points": 50,
+                "tags": ["Менеджмент", "Документация"],
+                "content": {
+                    "link": "https://www.youtube.com/watch?v=egQvW17_soM",
+                    "questionsCount":  4,
+                    "text": "Лекция",
+                },
+            },
+            {
+                "step": 3,
+                "title": "Основы графической документации",
+                "status": "В процессе",
+                "points": 40,
+                "tags": ["Документация", "Моделирование"],
+                "content": {
+                    "link": "https://www.youtube.com/watch?v=LrQlVe0U2PY",
+                    "questionsCount":  5,
+                    "text": "Лекция",
+                },
+            }
+            
+            ,
+            {
+                "step": 4,
+                "title": "Введение в геодезию",
+                "status": "Не начато",
+                "points": 30,
+                "tags": ["Техника", "Геодезия"],
+                "content": {
+                    "link": "https://www.youtube.com/watch?v=Eh451BzmfbQ",
+                    "questionsCount":  7,
+                    "text": "Лекция",
+                },
+            }
+        ],
+
+      },
+      {
+        "id": 7,
+        "name": "Медсестра или Медбрат",
+        "steps": [
+            {
+                "step": 1,
+                "title": "Основы санитарно-эпидемиологических норм",
+                "status": "Завершено",
+                "points": 40,
+                "tags": ["Медицина", "Санитария"],
+                "content": {
+                    "link": "https://www.youtube.com/watch?v=InJFRfAHJ9g",
+                    "questionsCount":  8,
+                    "text": "Лекция",
+                },
+            },
+            {
+                "step": 2,
+                "title": "Основы первой медицинской помощи",
+                "status": "Завершено",
+                "points": 50,
+                "tags": ["Медицина", "Реанимация"],
+                "content": {
+                    "link": "https://www.youtube.com/watch?v=nrC-N0rfHD4",
+                    "questionsCount":  4,
+                    "text": "Лекция",
+                },
+            },
+            {
+                "step": 3,
+                "title": "Введение в медицинскую документацию",
+                "status": "В процессе",
+                "points": 40,
+                "tags": ["Документация", "Медицина"],
+                "content": {
+                    "link": "https://www.youtube.com/watch?v=livHOW3CQ3E",
+                    "questionsCount":  5,
+                    "text": "Лекция",
+                },
+            }
+            
+            ,
+            {
+                "step": 4,
+                "title": "Введение в фармакологию",
+                "status": "Не начато",
+                "points": 30,
+                "tags": ["Медицина", "Фармацевтика"],
+                "content": {
+                    "link": "https://www.youtube.com/watch?v=YKcQz6BK5So",
+                    "questionsCount":  7,
+                    "text": "Лекция",
+                },
+            }
+        ],
+
+      }
+      ,
+      {
+        "id": 6,
+        "name": "Маркшейдер",
+        "steps": [
+            {
+                "step": 1,
+                "title": "Введение в AutoCad",
+                "status": "Завершено",
+                "points": 40,
+                "tags": ["Моделирование", "Инженерия"],
+                "content": {
+                    "link": "https://www.youtube.com/watch?v=iyxnyMfMAic",
+                    "questionsCount":  8,
+                    "text": "Лекция",
+                },
+            },
+            {
+                "step": 2,
+                "title": "Освойте умение работы с первичной документацией",
+                "status": "Завершено",
+                "points": 50,
+                "tags": ["Менеджмент", "Документация"],
+                "content": {
+                    "link": "https://www.youtube.com/watch?v=egQvW17_soM",
+                    "questionsCount":  4,
+                    "text": "Лекция",
+                },
+            },
+            {
+                "step": 3,
+                "title": "Основы графической документации",
+                "status": "В процессе",
+                "points": 40,
+                "tags": ["Документация", "Моделирование"],
+                "content": {
+                    "link": "https://www.youtube.com/watch?v=LrQlVe0U2PY",
+                    "questionsCount":  5,
+                    "text": "Лекция",
+                },
+            }
+            
+            ,
+            {
+                "step": 4,
+                "title": "Введение в геодезию",
+                "status": "Не начато",
+                "points": 30,
+                "tags": ["Техника", "Геодезия"],
+                "content": {
+                    "link": "https://www.youtube.com/watch?v=Eh451BzmfbQ",
+                    "questionsCount":  7,
+                    "text": "Лекция",
+                },
+            }
+        ],
+
+      },
+      {
+        "id": 8,
+        "name": "Врач",
+        "steps": [
+            {
+                "step": 1,
+                "title": "Основы санитарно-эпидемиологических норм",
+                "status": "Завершено",
+                "points": 40,
+                "tags": ["Медицина", "Санитария"],
+                "content": {
+                    "link": "https://www.youtube.com/watch?v=InJFRfAHJ9g",
+                    "questionsCount":  8,
+                    "text": "Лекция",
+                },
+            },
+            {
+                "step": 2,
+                "title": "Основы первой медицинской помощи",
+                "status": "Завершено",
+                "points": 50,
+                "tags": ["Медицина", "Реанимация"],
+                "content": {
+                    "link": "https://www.youtube.com/watch?v=nrC-N0rfHD4",
+                    "questionsCount":  4,
+                    "text": "Лекция",
+                },
+            },
+            {
+                "step": 3,
+                "title": "Введение анатомию",
+                "status": "В процессе",
+                "points": 40,
+                "tags": ["Медицина"],
+                "content": {
+                    "link": "https://www.youtube.com/watch?v=JJgavF0TnCE",
+                    "questionsCount":  5,
+                    "text": "Лекция",
+                },
+            }
+            
+            ,
+            {
+                "step": 4,
+                "title": "Введение в реанимацию",
+                "status": "Не начато",
+                "points": 30,
+                "tags": ["Медицина", "Реанимация"],
+                "content": {
+                    "link": "https://www.youtube.com/watch?v=YKcQz6BK5So",
+                    "questionsCount":  7,
+                    "text": "Лекция",
+                },
+            }
+        ],
+
+      }
+      ,
+      {
+        "id": 9,
+        "name": "Дошкольный педагог",
+        "steps": [
+            {
+                "step": 1,
+                "title": "Основы педагогики",
+                "status": "Завершено",
+                "points": 40,
+                "tags": ["Медицина", "Санитария"],
+                "content": {
+                    "link": "https://www.youtube.com/watch?v=4gaDttFBFJc&list=PLwuA0QpVldpaEwWqAG9AuaSEJgGxtB8IC",
+                    "questionsCount":  8,
+                    "text": "Лекция",
+                },
+            },
+            {
+                "step": 2,
+                "title": "Введение в возрастную психологию",
+                "status": "Завершено",
+                "points": 50,
+                "tags": ["Медицина", "Реанимация"],
+                "content": {
+                    "link": "https://www.youtube.com/watch?v=ddMWZSw7A7A",
+                    "questionsCount":  4,
+                    "text": "Лекция",
+                },
+            },
+            {
+                "step": 3,
+                "title": "Основы дошкольного образования",
+                "status": "В процессе",
+                "points": 40,
+                "tags": ["Медицина"],
+                "content": {
+                    "link": "https://www.youtube.com/watch?v=8t5gZB-UuRE",
+                    "questionsCount":  5,
+                    "text": "Лекция",
+                },
+            }
+            
+            ,
+            {
+                "step": 4,
+                "title": "Основы организационной деятельности",
+                "status": "Не начато",
+                "points": 30,
+                "tags": ["Медицина", "Реанимация"],
+                "content": {
+                    "link": "https://www.youtube.com/watch?v=jKxHV75X5YQ",
+                    "questionsCount":  7,
+                    "text": "Лекция",
+                },
+            }
+        ],
+
+      },
+      {
+        "id": 90,
+        "name": "Учитель",
+        "steps": [
+            {
+                "step": 1,
+                "title": "Основы педагогики",
+                "status": "Завершено",
+                "points": 40,
+                "tags": ["Медицина", "Санитария"],
+                "content": {
+                    "link": "https://www.youtube.com/watch?v=4gaDttFBFJc&list=PLwuA0QpVldpaEwWqAG9AuaSEJgGxtB8IC",
+                    "questionsCount":  8,
+                    "text": "Лекция",
+                },
+            },
+            {
+                "step": 2,
+                "title": "Введение в психологию",
+                "status": "Завершено",
+                "points": 50,
+                "tags": ["Медицина", "Реанимация"],
+                "content": {
+                    "link": "https://www.youtube.com/watch?v=zWCKjoo6hNI&list=PLt3fgqeygGTVk5khY228EBHujarUgyLfv",
+                    "questionsCount":  4,
+                    "text": "Лекция",
+                },
+            },
+            {
+                "step": 3,
+                "title": "Основы медицинского права",
+                "status": "В процессе",
+                "points": 40,
+                "tags": ["Медицина"],
+                "content": {
+                    "link": "https://www.youtube.com/watch?v=F--zn09WPU8",
+                    "questionsCount":  5,
+                    "text": "Лекция",
+                },
+            }
+            
+            ,
+            {
+                "step": 4,
+                "title": "Основы организационной деятельности",
+                "status": "Не начато",
+                "points": 30,
+                "tags": ["Медицина", "Реанимация"],
+                "content": {
+                    "link": "https://www.youtube.com/watch?v=jKxHV75X5YQ",
+                    "questionsCount":  7,
+                    "text": "Лекция",
+                },
+            }
+        ],
+
+      }
+]
