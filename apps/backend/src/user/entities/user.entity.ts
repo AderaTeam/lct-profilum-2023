@@ -100,13 +100,7 @@ export class User {
     )
     avataruri: string
 
-    @Column(
-        { 
-            type: "bytea", 
-            nullable: true,
-        }
-    )
-    image: Buffer
+    //IMAGES FOR USERS
 
     @OneToMany(() => OwnedPath, (path) => path.user)
     @JoinTable()

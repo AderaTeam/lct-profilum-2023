@@ -2,7 +2,7 @@ export class VkUserDto
 {
     username: string
     nickname: string
-    role?: string
+    role?: "user" | "admin" 
     type?: string
     avataruri?: string
 }
