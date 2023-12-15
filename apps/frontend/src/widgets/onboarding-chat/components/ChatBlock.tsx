@@ -96,7 +96,7 @@ export const ChatBlock = ({ step, isLoading }: ChatBlockProps) => {
           <Stack gap={16}>
             <Avatar
               name={UStore.user.username}
-              image={UStore.user.avatar || rank}
+              image={UStore.user.image || UStore.user.avataruri || rank}
             />
             <p className="text black">{chatData[step - 2].user}</p>
           </Stack>

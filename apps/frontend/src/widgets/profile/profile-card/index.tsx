@@ -53,7 +53,11 @@ export const ProfileCard = observer(() => {
               size={194}
               radius={32}
               mt={-97 - 32}
-              src={UStore.user.avatar || rankImage[UStore.user.rank]}
+              src={
+                UStore.user.image ||
+                UStore.user.avataruri ||
+                rankImage[UStore.user.rank]
+              }
             />
             {isEdit ? (
               <Button

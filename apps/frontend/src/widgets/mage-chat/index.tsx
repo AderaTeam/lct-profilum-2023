@@ -113,7 +113,10 @@ export const MageChat = observer(() => {
       <Stack align="flex-end">
         <Card outline radius="24px 2px 24px 24px" w={480} bg="transparent">
           <Stack gap={16}>
-            <Avatar name={UStore.user.username} image={UStore.user.avatar!} />
+            <Avatar
+              name={UStore.user.username}
+              image={UStore.user.image! || UStore.user.avataruri!}
+            />
             <p className={style.text}>
               Профилум, помоги! Хочу знать на кого пойти учиться!
             </p>

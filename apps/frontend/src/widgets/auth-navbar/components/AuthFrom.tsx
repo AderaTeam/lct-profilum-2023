@@ -218,7 +218,7 @@ export const AuthForm = ({ activeRole }: AuthFormProps) => {
           <></>
         )}
       </Stack>
-      {activeRole === 1 ? (
+      {activeRole === 1 && location.pathname === LOGIN_ROUTE ? (
         <Stack gap={40} mt={8}>
           <p style={{ margin: '0 auto' }} className="text gray">
             или
