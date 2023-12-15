@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Logger, Param, Post, Req, UseGuards } from '@nestjs/common';
 import { UserService } from './user.service';
 import { AuthDto } from '../auth/dtos/auth.dto';
 import { UserUpdateDto } from './dtos/userUpdate.dto';
@@ -46,6 +46,7 @@ export class UserController
     @Delete(':userid')
     public async deleteOne(@Req() req)
     {
+        Logger.log(req.user)
         return await this.userService.deleteOne(req.user.id)
     }
 }
