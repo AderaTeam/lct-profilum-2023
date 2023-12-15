@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToOne, ManyToOne, JoinTable, ManyToMany, JoinColumn } from "typeorm"
 import { Path } from "./path.entity"
-import { PathTag } from "./pathTag.entity"
+import { PathStepTag } from "./pathTag.entity"
 import { PathStepContent } from "./pathStepContent.entity"
 
 @Entity()
@@ -30,9 +30,9 @@ export class PathStep {
     )
     points: number
 
-    @ManyToMany(() => PathTag, (pathTag) => pathTag.pathSteps)
+    @ManyToMany(() => PathStepTag, (pathTag) => pathTag.pathSteps)
     @JoinTable()
-    tags: PathTag[]
+    tags: PathStepTag[]
 
     @OneToOne(() => PathStepContent)
     @JoinColumn()
