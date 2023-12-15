@@ -106,7 +106,7 @@ export class User {
 
     @ManyToMany(() => Path, (path) => path.users, {eager: true})
     @JoinTable()
-    analyzedPaths: Path[]
+    analysedPaths: Path[]
 
     @ManyToMany(() => Card, (card) => card.author)
     @JoinTable()

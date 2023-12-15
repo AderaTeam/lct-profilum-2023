@@ -16,7 +16,7 @@ export class Path {
     )
     name: string
 
-    @ManyToMany(() => User, (user) => {user.analyzedPaths})
+    @ManyToMany(() => User, (user) => {user.analysedPaths})
     @JoinTable()
     users: User[]
 
