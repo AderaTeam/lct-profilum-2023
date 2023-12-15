@@ -48,7 +48,7 @@ export class SocialsService {
 
   async findOneByUserId(socialname: string, originalid: string)
   {
-    return await this.socialsUsersRepository.findOneBy({originaluserid: originalid, social: await this.socialsRepository.findOneBy({name: socialname})})
+    return await this.socialsUsersRepository.findOne({where: {originaluserid: originalid, social: await this.socialsRepository.findOneBy({name: socialname})}, relations:{user: true, social: true}})
   }
 
   async findOne(id: number) {
