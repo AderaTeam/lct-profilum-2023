@@ -43,7 +43,7 @@ export class UserController
     }
 
     @UseGuards(AccessTokenGuard)
-    @Delete(':userid')
+    @Delete('')
     public async deleteOne(@Req() req)
     {
         Logger.log(req.user)
