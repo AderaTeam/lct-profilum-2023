@@ -1,9 +1,14 @@
-import { Avatar, Card, Flex, Stack, Image, Text } from '@mantine/core';
+import { Avatar, Card, Flex, Stack } from '@mantine/core';
 import { Button } from 'shared/components/Button';
 import { IconPencil, IconSettings } from '@tabler/icons-react';
-import { Tag } from 'shared/components/Tag';
 
 import profileBg from 'shared/assets/profile-bg.png';
+
+import rank0 from 'shared/assets/ranks/0.png';
+import rank1 from 'shared/assets/ranks/1.png';
+import rank2 from 'shared/assets/ranks/2.png';
+import rank3 from 'shared/assets/ranks/3.png';
+import rank4 from 'shared/assets/ranks/4.png';
 
 import style from './ProfileCard.module.scss';
 import { useContext, useState } from 'react';
@@ -17,6 +22,14 @@ export const ProfileCard = observer(() => {
   const { UStore } = useContext(Context);
   const profileForm = useForm({ mode: 'onSubmit', defaultValues: UStore.user });
   const [isEdit, setIsEdit] = useState(false);
+
+  const rankImage: { [key: string]: string } = {
+    Незнайка: rank0,
+    'Маг-самоучка': rank1,
+    'Первый шар': rank2,
+    Волшебник: rank3,
+    Оракул: rank4,
+  };
 
   const onSubmit = profileForm.handleSubmit((formData) => {
     UStore.setUser(formData);
@@ -40,7 +53,7 @@ export const ProfileCard = observer(() => {
               size={194}
               radius={32}
               mt={-97 - 32}
-              src={UStore.user.avatar}
+              src={UStore.user.avatar || rankImage[UStore.user.rank]}
             />
             {isEdit ? (
               <Button
@@ -73,7 +86,7 @@ export const ProfileCard = observer(() => {
               <ProfileEdit />{' '}
             </FormProvider>
           ) : (
-            <ProfileInfo {...UStore.user} />
+            <ProfileInfo rankImage={rankImage} user={UStore.user} />
           )}
         </Stack>
       </Card.Section>

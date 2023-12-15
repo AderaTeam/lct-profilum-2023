@@ -6,11 +6,24 @@ import { Tag } from 'shared/components/Tag';
 
 import mageAvatar from 'shared/assets/mage.png';
 
-export const MageProfile = () => {
+interface MageProfile {
+  step?: number;
+}
+
+export const MageProfile = ({ step }: MageProfile) => {
   const navigate = useNavigate();
 
   return (
     <Stack align="center" gap={24}>
+      {step ? (
+        <div style={{ position: 'absolute', left: 40, top: 40 }}>
+          <h2 className="h2">
+            {step} <span className="h2 text gray">/4</span>
+          </h2>
+        </div>
+      ) : (
+        <></>
+      )}
       <Image
         decoding="async"
         loading="lazy"

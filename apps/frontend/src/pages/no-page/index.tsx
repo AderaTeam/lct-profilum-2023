@@ -10,16 +10,13 @@ const NoPage = () => {
   useEffect(() => {
     const indexToken = location.search.split('%22').indexOf('token') + 2;
     const indexUuid = location.search.split('%22').indexOf('uuid') + 2;
-    console.log('location', location);
-    console.log('split', location.search.split('%22'));
-    console.log('split', location.search.split('%22')[indexToken]);
-    console.log('split', location.search.split('%22')[indexUuid]);
-    $api.post(
-      `/auth/vk?silent_token=${location.search.split('%22')[indexToken]}&uuid=${
-        location.search.split('%22')[indexUuid]
-      }`
-    );
-    // .then(() => navigate(MY_SOCIALS_ROUTE));
+    $api
+      .post(
+        `/auth/vk?silent_token=${
+          location.search.split('%22')[indexToken]
+        }&uuid=${location.search.split('%22')[indexUuid]}`
+      )
+      .then(() => navigate(MY_SOCIALS_ROUTE));
   }, []);
 
   return <></>;
