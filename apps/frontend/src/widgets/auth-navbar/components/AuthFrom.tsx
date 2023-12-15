@@ -3,11 +3,15 @@ import { IconChevronRight } from '@tabler/icons-react';
 import { Context } from 'main';
 import { useContext } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { Button } from 'shared/components/Button';
 import { Input } from 'shared/components/Input';
 import { Select } from 'shared/components/Select';
-import { LOGIN_ROUTE, REGISTRATION_ROUTE } from 'shared/constants/const';
+import {
+  LOGIN_ROUTE,
+  ONBOARDING_ROUTE,
+  REGISTRATION_ROUTE,
+} from 'shared/constants/const';
 
 interface AuthFormProps {
   activeRole: number;
@@ -16,6 +20,7 @@ interface AuthFormProps {
 export const AuthForm = ({ activeRole }: AuthFormProps) => {
   const { UStore } = useContext(Context);
   const location = useLocation();
+  const navigate = useNavigate();
   const { control, watch, setValue, getValues, handleSubmit } =
     useFormContext();
 
@@ -28,11 +33,19 @@ export const AuthForm = ({ activeRole }: AuthFormProps) => {
 
   const onSubmit = handleSubmit((formData) => {
     if (location.pathname === LOGIN_ROUTE) {
-      UStore.setUser({ ...UStore.user, ...formData });
-      UStore.setAuth(true);
+      UStore.login(
+        formData.nickname,
+        formData.password,
+        activeRole === 0 ? 'admin' : 'user'
+      );
     } else {
-      UStore.setUser({ ...UStore.user, ...formData });
-      UStore.setAuth(true);
+      UStore.registration(
+        formData.username,
+        formData.nickname,
+        formData.password,
+        formData.grade,
+        activeRole === 0 ? 'admin' : 'user'
+      ).then(() => navigate(ONBOARDING_ROUTE));
     }
   });
 

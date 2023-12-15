@@ -7,13 +7,19 @@ import {
   MY_PATH_ROUTE,
   MY_SOCIALS_ROUTE,
   NO_PAGE_ROUTE,
+  ONBOARDING_ROUTE,
+  PATH_DB_ROUTE,
   PROFILE_ROUTE,
+  PROF_DB_ROUTE,
   REGISTRATION_ROUTE,
+  STAT_ROUTE,
   TRAINING_ROUTE,
 } from 'shared/constants/const';
 import { lazy } from 'react';
 import {
+  IconChartHistogram,
   IconChessRook,
+  IconFileDescription,
   IconMessageChatbot,
   IconMessages,
   IconRoute,
@@ -30,70 +36,99 @@ const profile = lazy(() => import('pages/profile'));
 const mySocials = lazy(() => import('pages/my-socials'));
 const mage = lazy(() => import('pages/mage'));
 const noPage = lazy(() => import('pages/no-page'));
+const onboarding = lazy(() => import('pages/onboarding'));
 
 export const authRoutes = [
   {
     path: MY_PATH_ROUTE,
     Component: myPath,
     title: 'Мой путь',
-    isAdmin: true,
+    isAdmin: false,
     icon: IconRoute,
   },
   {
     path: COMMUNITY_ROUTE,
     Component: community,
     title: 'Сообщества',
-    isAdmin: true,
+    isAdmin: false,
     icon: IconMessages,
   },
   {
     path: TRAINING_ROUTE,
     Component: training,
     title: 'Тренажер',
-    isAdmin: true,
+    isAdmin: false,
     icon: IconChessRook,
   },
   {
     path: EDUCATIONS_ROUTE,
     Component: educations,
     title: 'Уч. заведения',
-    isAdmin: true,
+    isAdmin: false,
     icon: IconSchool,
   },
   {
     path: ASSISTANT_ROUTE,
     Component: assistant,
     title: 'Ассистент',
-    isAdmin: true,
+    isAdmin: false,
     icon: IconMessageChatbot,
   },
   {
     path: PROFILE_ROUTE,
     Component: profile,
     title: 'Профиль',
-    isAdmin: true,
+    isAdmin: false,
     isHide: true,
   },
   {
     path: MY_SOCIALS_ROUTE,
     Component: mySocials,
     title: 'Мои соц. сети',
-    isAdmin: true,
+    isAdmin: false,
     isHide: true,
   },
   {
     path: MAGE_ROUTE,
     Component: mage,
     title: 'Маг',
-    isAdmin: true,
+    isAdmin: false,
     isHide: true,
   },
   {
     path: NO_PAGE_ROUTE,
     Component: noPage,
     title: 'Пустая страница',
-    isAdmin: true,
+    isAdmin: false,
     isHide: true,
+  },
+  {
+    path: ONBOARDING_ROUTE,
+    Component: onboarding,
+    title: 'Онбординг',
+    isAdmin: false,
+    isHide: true,
+  },
+  {
+    path: STAT_ROUTE,
+    Component: mySocials,
+    title: 'Статистика',
+    isAdmin: true,
+    icon: IconChartHistogram,
+  },
+  {
+    path: PROF_DB_ROUTE,
+    Component: mage,
+    title: 'База профессий',
+    isAdmin: true,
+    icon: IconFileDescription,
+  },
+  {
+    path: PATH_DB_ROUTE,
+    Component: noPage,
+    title: 'База путей',
+    isAdmin: true,
+    icon: IconRoute,
   },
 ];
 
