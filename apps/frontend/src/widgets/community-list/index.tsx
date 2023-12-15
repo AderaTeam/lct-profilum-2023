@@ -21,7 +21,7 @@ export const CommunityList = () => {
   return (
     <Stack gap={12}>
       {data.map((item) => (
-        <Card radius="32px">
+        <Card key={item.title} radius="32px">
           <Stack gap={24}>
             <Flex gap={8} align={'center'}>
               <Flex

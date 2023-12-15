@@ -63,7 +63,6 @@ export const ProfileCard = observer(() => {
             {isEdit ? (
               <Button
                 disabled={
-                  !profileForm.watch('grade') ||
                   !profileForm.watch('nickname') ||
                   !profileForm.watch('username')
                 }
