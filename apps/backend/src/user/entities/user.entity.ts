@@ -100,11 +100,11 @@ export class User {
     @JoinTable()
     socials: SocialUsers[]
 
-    @OneToMany(() => OwnedPath, (path) => path.user)
+    @OneToMany(() => OwnedPath, (path) => path.user, {eager: true})
     @JoinTable()
     paths: OwnedPath[]
 
-    @OneToMany(() => AnalyzedPath, (path) => path.user)
+    @OneToMany(() => AnalyzedPath, (path) => path.user, {eager: true})
     @JoinTable()
     analyzedPaths: AnalyzedPath[]
 

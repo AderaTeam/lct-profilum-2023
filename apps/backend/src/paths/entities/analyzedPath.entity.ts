@@ -8,7 +8,7 @@ export class AnalyzedPath {
     @PrimaryGeneratedColumn()
     id: number
 
-    @ManyToOne(() => Path)
+    @ManyToOne(() => Path, {eager: true})
     @JoinTable()
     path: Path
 
