@@ -76,6 +76,15 @@ export class PathsService {
         {
           throw new HttpException('User or path does not exist', HttpStatus.BAD_REQUEST)
         }
+      if (await this.ownedPathRepository.findOneBy(
+          {
+            path: await this.pathRepository.findOneBy({id: pathId}),
+            user: await this.userService.getOneById(createOwnedPathDto.userId)
+          }
+        ))
+        {
+          continue
+        }
       await this.ownedPathRepository.insert(
           {
             user: (await this.userService.getOneById(createOwnedPathDto.userId)),

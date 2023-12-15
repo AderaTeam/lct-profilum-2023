@@ -45,6 +45,11 @@ export class PathsController {
     return this.pathsService.update(+id, updatePathDto);
   }
 
+  @Delete('user/:id')
+  removeFromUser(@Param('id') id: string) {
+    return this.pathsService.dropOwnageForUser(+id);
+  }
+
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.pathsService.remove(+id);
