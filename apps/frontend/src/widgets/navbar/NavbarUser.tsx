@@ -28,7 +28,11 @@ const NavbarUser = observer(() => {
   return (
     <Flex gap={12} align={'center'}>
       <Avatar
-        src={UStore.user.avatar || rankImage[UStore.user.rank]}
+        src={
+          UStore.user.image ||
+          UStore.user.avataruri ||
+          rankImage[UStore.user.rank]
+        }
         h={56}
         w={56}
       />
