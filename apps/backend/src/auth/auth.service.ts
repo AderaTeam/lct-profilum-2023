@@ -52,7 +52,7 @@ export class AuthService {
     {
       throw new TokenExpiredOrInvalidException()
     }
-    Logger.log(result.data)
+    //Logger.log(result.data)
 
     const datauri = `https://api.vk.com/method/account.getProfileInfo?v=5.131&access_token=${result.data.response.access_token}`
 
@@ -62,19 +62,19 @@ export class AuthService {
 
     Logger.log(userData)
 
-    Logger.log(await this.socialsService.findOneByUserId("VK",userData.user_id), userData.user_id)
+    Logger.log(await this.socialsService.findOneByUserId("VK",userData.id), userData.id)
 
-    if (await this.socialsService.findOneByUserId("VK",userData.user_id))
+    if (await this.socialsService.findOneByUserId("VK",userData.id))
     {
 
-      const user = (await this.socialsService.findOneByUserId("VK",userData.user_id)).user
+      const user = (await this.socialsService.findOneByUserId("VK",userData.id)).user
       const tokens = await this.getTokens(user.id, user.username);
       await this.updateRefreshToken(user.id, tokens.refreshToken);
       return {...user, ...tokens};
     }
     else
     {
-      const userDto: VkUserDto = {username: (userData.last_name + ' ' + userData.first_name), nickname: userData.screen_name ?? userData.user_id}
+      const userDto: VkUserDto = {username: (userData.last_name + ' ' + userData.first_name), nickname: userData.screen_name ?? userData.id}
 
       Logger.log(userDto)
   
@@ -83,7 +83,7 @@ export class AuthService {
       const tokens = await this.getTokens(newUser.id, newUser.username);
       await this.updateRefreshToken(newUser.id, tokens.refreshToken);
       Logger.log(userData)
-      await this.socialsService.addUsersSocial(newUser.id, "VK", userData.user_id)
+      await this.socialsService.addUsersSocial(newUser.id, "VK", userData.id)
       return {...newUser, ...tokens};
     }
   }
