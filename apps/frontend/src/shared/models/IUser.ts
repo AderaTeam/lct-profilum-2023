@@ -1,3 +1,4 @@
+import { IAnalazedResult } from './IAnalazedResult';
 import { IPath } from './IPath';
 
 export interface IUser {

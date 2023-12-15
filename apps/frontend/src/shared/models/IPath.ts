@@ -1,20 +1,20 @@
 export interface IPathStepContent {
+  id: number;
   link?: string;
   questionsCount?: number;
   text?: string;
 }
-
 export interface IPathStep {
+  id: number;
   step: number;
   title: string;
-  status: "Завершено" | "В процессе" | "Не начато";
   points: number;
-  tags: string[];
+  tags: { id: number; name: string }[];
   content: IPathStepContent;
 }
 
 export interface IPath {
   id: number;
   name: string;
-  steps: IPathStep[];
+  pathSteps: IPathStep[];
 }

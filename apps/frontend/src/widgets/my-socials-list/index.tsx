@@ -12,11 +12,12 @@ import { MAGE_ROUTE } from 'shared/constants/const';
 import { FormProvider, useForm } from 'react-hook-form';
 import { Card } from 'shared/components/Card';
 import { IconAlertCircleFilled } from '@tabler/icons-react';
+import { IPath } from 'shared/models/IPath';
 
 interface MySocialsListProps {
   isLoading: boolean;
   handleAnalysis: Function;
-  result: boolean;
+  result: IPath[];
 }
 
 export const MySocialsList = ({
@@ -79,12 +80,12 @@ export const MySocialsList = ({
               <Button
                 disabled={isLoading}
                 onClick={
-                  !result
-                    ? () => handleAnalysisSubmit()
+                  !result.length
+                    ? () => handleAnalysis()
                     : () => navigate(MAGE_ROUTE)
                 }
               >
-                {result ? 'Узнать результат' : 'Проанализировать'}
+                {result.length ? 'Узнать результат' : 'Проанализировать'}
               </Button>
             </Flex>
             <Stack gap={12}>
@@ -127,7 +128,6 @@ export const MySocialsList = ({
         {data.filter((item) => item.status === 'soon').length ? (
           <Stack gap={24}>
             <h2 className="h2">Скоро</h2>
-
             <Stack gap={12}>
               {data
                 .filter((item) => item.status === 'soon')
