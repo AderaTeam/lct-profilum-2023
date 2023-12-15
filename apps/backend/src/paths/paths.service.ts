@@ -13,8 +13,7 @@ export class PathsService {
     private pathRepository: Repository<Path>,
   ){}
   create(createPathDto: CreatePathDto) {
-    this.pathRepository.create(createPathDto)
-    return 'This action adds a new path';
+    return this.pathRepository.create(createPathDto)
   }
 
   createMultiple(createPathDto: CreateMultiplePathDto) {
@@ -24,8 +23,8 @@ export class PathsService {
     }
   }
 
-  findAll() {
-    return `This action returns all paths`;
+  async findAll() {
+    return await this.pathRepository.find()
   }
 
   findOne(id: number) {
