@@ -30,6 +30,11 @@ export class PathsController {
     return this.pathsService.createMultiple(createPathDto);
   }
 
+  @Get('fakeanalyze')
+  find3() {
+    return this.pathsService.find3();
+  }
+
   @Get()
   findAll() {
     return this.pathsService.findAll();

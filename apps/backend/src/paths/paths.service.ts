@@ -103,6 +103,10 @@ export class PathsService {
     return await this.pathRepository.find({relations:{pathSteps: {content: true, tags: true}}})
   }
 
+  async find3() {
+    return await this.pathRepository.find({relations:{pathSteps: {content: true, tags: true}}, take: 3})
+  }
+
   async findOne(id: number) {
     return await this.pathRepository.findOneBy({id: id})
   }
