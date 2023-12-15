@@ -20,11 +20,6 @@ export class PathsController {
     return this.pathsService.createOwnage(createPathDto);
   }
 
-  @Post('analyzed')
-  createAnallyzedPath(@Body() createPathDto: CreateAnalyzedPathDto) {
-    return this.pathsService.createAnalyzed(createPathDto);
-  }
-
   @Post('multiple')
   createMultiple(@Body() createPathDto: CreateMultiplePathDto) {
     return this.pathsService.createMultiple(createPathDto);

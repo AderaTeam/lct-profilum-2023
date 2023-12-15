@@ -1,8 +1,8 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, JoinColumn, JoinTable } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, JoinColumn, JoinTable, ManyToMany } from "typeorm"
 import { AchievementOwned } from "../../achievement/entities/achievementOwned.entity"
 import { OwnedPath } from "../../paths/entities/ownedPath.entity"
 import { SocialUsers } from "../../socials/entities/socialsUsers.entity"
-import { AnalyzedPath } from "../../paths/entities/analyzedPath.entity"
+import { Path } from "../../paths/entities/path.entity"
 
 @Entity()
 export class User {
@@ -103,9 +103,9 @@ export class User {
     @JoinTable()
     paths: OwnedPath[]
 
-    @OneToMany(() => AnalyzedPath, (path) => path.user, {eager: true})
+    @ManyToMany(() => Path, (path) => path.users, {eager: true})
     @JoinTable()
-    analyzedPaths: AnalyzedPath[]
+    analyzedPaths: Path[]
 
     @OneToMany(() => AchievementOwned, (achievement) => achievement.user)
     @JoinColumn()

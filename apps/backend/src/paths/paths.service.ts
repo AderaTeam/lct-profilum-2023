@@ -11,7 +11,6 @@ import { PathStepTag } from './entities/pathTag.entity';
 import { OwnedPath } from './entities/ownedPath.entity';
 import { CreateOwnedPathDto } from './dto/create-owned-path.dto';
 import { UserService } from '../user/user.service';
-import { AnalyzedPath } from './entities/analyzedPath.entity';
 import { CreateAnalyzedPathDto } from './dto/create-analyzed-path.dto';
 import { STATUS_CODES } from 'http';
 
@@ -29,8 +28,6 @@ export class PathsService {
     private pathStepTagRepository: Repository<PathStepTag>,
     @InjectRepository(OwnedPath)
     private ownedPathRepository: Repository<OwnedPath>,
-    @InjectRepository(AnalyzedPath)
-    private analyzedPathRepository: Repository<AnalyzedPath>,
   ){}
   async create(createPathDto: CreatePathDto) {
     let steps = []
@@ -78,20 +75,6 @@ export class PathsService {
       throw new HttpException('User or path does not exist', HttpStatus.BAD_REQUEST)
     }
     return await this.ownedPathRepository.insert(
-        {
-          user: (await this.userService.getOneById(createOwnedPathDto.userId)),
-          path: (await this.pathRepository.findOneBy({id: createOwnedPathDto.pathId}))
-        }
-      )
-  }
-
-  async createAnalyzed(createOwnedPathDto: CreateAnalyzedPathDto)
-  {
-    if (!(await this.userService.getOneById(createOwnedPathDto.userId)) || !(await this.pathRepository.findOneBy({id: createOwnedPathDto.pathId})))
-    {
-      throw new HttpException('User or path does not exist', HttpStatus.BAD_REQUEST)
-    }
-    return await this.analyzedPathRepository.insert(
         {
           user: (await this.userService.getOneById(createOwnedPathDto.userId)),
           path: (await this.pathRepository.findOneBy({id: createOwnedPathDto.pathId}))
