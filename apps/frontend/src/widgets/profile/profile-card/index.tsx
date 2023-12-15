@@ -17,6 +17,7 @@ import { ProfileInfo } from './components/ProfileInfo';
 import { observer } from 'mobx-react-lite';
 import { ProfileEdit } from './components/ProfileEdit';
 import { FormProvider, useForm } from 'react-hook-form';
+import $api from 'shared/api';
 
 export const ProfileCard = observer(() => {
   const { UStore } = useContext(Context);
@@ -72,9 +73,10 @@ export const ProfileCard = observer(() => {
               </Button>
             ) : (
               <Flex gap={8}>
-                <Button outline>
+                <Button onClick={() => $api.delete(`/user`)} outline>
                   <Flex gap={8}>
-                    Настройки <IconSettings color="#ADB5BD" stroke={1.5} />
+                    Удалить аккаунт{' '}
+                    <IconSettings color="#ADB5BD" stroke={1.5} />
                   </Flex>
                 </Button>
                 <Button onClick={() => setIsEdit(true)} outline>
