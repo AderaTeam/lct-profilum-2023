@@ -13,7 +13,8 @@ export class PathsService {
     private pathRepository: Repository<Path>,
   ){}
   create(createPathDto: CreatePathDto) {
-    return this.pathRepository.insert(createPathDto)
+    const path = this.pathRepository.create(createPathDto)
+    return this.pathRepository.save(path)
   }
 
   createMultiple(createPathDto: CreateMultiplePathDto) {
