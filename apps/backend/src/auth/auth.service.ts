@@ -80,6 +80,7 @@ export class AuthService {
       //await this.socialsUsersService.
       const tokens = await this.getTokens(newUser.id, newUser.username);
       await this.updateRefreshToken(newUser.id, tokens.refreshToken);
+      Logger.log(userData.user_id)
       await this.socialsService.addUsersSocial(newUser.id, "VK", userData.user_id)
       return {...newUser, ...tokens};
     }
