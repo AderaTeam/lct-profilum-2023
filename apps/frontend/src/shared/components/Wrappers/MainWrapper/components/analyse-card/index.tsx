@@ -14,9 +14,10 @@ import more from 'shared/assets/platforms/more.svg';
 import style from './AnalyseCard.module.scss';
 import { IPath } from 'shared/models/IPath';
 import { observer } from 'mobx-react-lite';
+import { IAnalazedResult } from 'shared/models/IAnalazedResult';
 interface AnalyseCardProps {
   isAnalysed?: boolean;
-  paths?: IPath[];
+  paths?: IAnalazedResult[];
   analysedPaths?: IPath[];
 }
 

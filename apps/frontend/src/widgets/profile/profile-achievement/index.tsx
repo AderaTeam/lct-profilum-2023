@@ -1,10 +1,12 @@
 import { Flex, Image, Stack, Text } from '@mantine/core';
 import { Card } from 'shared/components/Card';
-
-import style from './ProfileAchievement.module.scss';
 import { useContext, useEffect, useState } from 'react';
 import $api, { API_URL } from 'shared/api';
 import { Context } from 'main';
+
+import empty from 'shared/assets/no-achivments.svg';
+
+import style from './ProfileAchievement.module.scss';
 
 export const ProfileAchievement = () => {
   const { UStore } = useContext(Context);
@@ -45,7 +47,10 @@ export const ProfileAchievement = () => {
             ))}
           </Flex>
         ) : (
-          <p className="text black">У вас пока нет полученных достижений(</p>
+          <Stack align="center" gap={14}>
+            <Image src={empty} w={160} style={{ objectFit: 'cover' }} />
+            <p className="text bold">У тебя пока нет достижений :(</p>
+          </Stack>
         )}
       </Stack>
     </Card>

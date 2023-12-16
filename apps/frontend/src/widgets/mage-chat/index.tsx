@@ -12,6 +12,8 @@ import { useNavigate } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { Context } from 'main';
+import $api from 'shared/api';
+import { MY_PATH_ROUTE } from 'shared/constants/const';
 
 export const MageChat = observer(() => {
   const { UStore } = useContext(Context);
@@ -19,94 +21,42 @@ export const MageChat = observer(() => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isShow, setIsShow] = useState<boolean>(false);
+  const [activeIds, setActiveIds] = useState<number[]>(
+    UStore.user.paths.length
+      ? UStore.user.paths.map((item) => item.path.id)
+      : []
+  );
 
   useEffect(() => {
-    setTimeout(() => {
+    if (!UStore.user.paths.length) {
+      setTimeout(() => {
+        setIsShow(true);
+      }, 4500);
+    } else {
       setIsShow(true);
-    }, 4500);
+    }
   }, []);
 
   useEffect(() => {
-    if (isShow) {
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 3000);
+    if (!UStore.user.paths.length) {
+      if (isShow) {
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 3000);
+      }
+    } else {
+      setIsLoading(false);
     }
   }, [isShow]);
 
-  useEffect(() => {
-    if (!isLoading) {
-      UStore.setUser({
-        ...UStore.user,
-        analysedPaths: [
-          {
-            id: 0,
-            name: 'Frontend - разработка',
-            steps: [
-              {
-                step: 1,
-                title:
-                  'Посмотрите видео “Что такое клиент-серверное взаимодействие?”',
-                status: 'Завершено',
-                points: 20,
-                tags: ['#КЛИЕНТ-СЕРВЕРНОЕ ВЗАИМОДЕЙСТВИЕ', '#WEB'],
-                content: {
-                  link: '123',
-                  questionsCount: 2,
-                },
-              },
-              {
-                step: 2,
-                title:
-                  'Посмотрите видео “Что такое клиент-серверное взаимодействие?”',
-                status: 'В процессе',
-                points: 20,
-                tags: ['#КЛИЕНТ-СЕРВЕРНОЕ ВЗАИМОДЕЙСТВИЕ', '#WEB'],
-                content: {
-                  link: '123',
-                  questionsCount: 2,
-                },
-              },
-              {
-                step: 3,
-                title: 'test',
-                status: 'Не начато',
-                points: 20,
-                tags: ['#КЛИЕНТ-СЕРВЕРНОЕ ВЗАИМОДЕЙСТВИЕ', '#WEB'],
-                content: {
-                  link: '123',
-                  questionsCount: 2,
-                },
-              },
-              {
-                step: 4,
-                title:
-                  'Посмотрите видео “Что такое клиент-серверное взаимодействие?”',
-                status: 'Не начато',
-                points: 20,
-                tags: ['#КЛИЕНТ-СЕРВЕРНОЕ ВЗАИМОДЕЙСТВИЕ', '#WEB'],
-                content: {
-                  link: '123',
-                  questionsCount: 2,
-                },
-              },
-              {
-                step: 5,
-                title: 'test',
-                status: 'Не начато',
-                points: 20,
-                tags: ['#КЛИЕНТ-СЕРВЕРНОЕ ВЗАИМОДЕЙСТВИЕ', '#WEB'],
-                content: {
-                  link: '123',
-                  questionsCount: 2,
-                },
-              },
-            ],
-          },
-        ],
+  const handleSelectPaths = () => {
+    $api
+      .post('/paths/owned', { pathIds: activeIds, userId: UStore.user.id })
+      .then((response) => {
+        UStore.setUser({ ...UStore.user, paths: response.data.result });
+        navigate(MY_PATH_ROUTE);
       });
-    }
-  }, [isLoading]);
+  };
 
   return (
     <Stack w={'100%'} gap={12}>
@@ -117,9 +67,15 @@ export const MageChat = observer(() => {
               name={UStore.user.username}
               image={UStore.user.image! || UStore.user.avataruri!}
             />
-            <p className={style.text}>
-              Профилум, помоги! Хочу знать на кого пойти учиться!
-            </p>
+            {UStore.user.paths.length ? (
+              <p className="text black">
+                Профилум, помоги! Хочу знать на кого пойти учиться!
+              </p>
+            ) : (
+              <p className={style.text}>
+                Профилум, помоги! Хочу знать на кого пойти учиться!
+              </p>
+            )}
           </Stack>
         </Card>
       </Stack>
@@ -136,11 +92,17 @@ export const MageChat = observer(() => {
                     <p className="text black">
                       Вижу... тебя в учебном заведении твоей мечты! А там... что
                       это? Программирование... Дизайн... IT... Хмммм. <br />{' '}
-                      Точно! Я вижу, тебе суждено стать{' '}
-                      <span className="text pink">Системным аналитиком!</span>
+                      Точно! Я вижу, тебе суждено получить профессию{' '}
+                      <span className="text pink">
+                        {UStore.user.analysedPaths?.length &&
+                          `${UStore.user.analysedPaths[0].name!}.`}
+                      </span>
                     </p>
                   </Stack>
-                  <ResultList />
+                  <ResultList
+                    activeIds={activeIds}
+                    setActiveIds={setActiveIds}
+                  />
                   <Flex justify={'space-between'}>
                     <Button onClick={() => navigate(-1)}>
                       <Flex gap={8}>
@@ -148,7 +110,10 @@ export const MageChat = observer(() => {
                         Назад
                       </Flex>
                     </Button>
-                    <Button disabled>
+                    <Button
+                      onClick={() => handleSelectPaths()}
+                      disabled={!activeIds.length}
+                    >
                       <Flex gap={8}>
                         К мои путям
                         <IconChevronRight stroke={1.5} color="#ffff" />

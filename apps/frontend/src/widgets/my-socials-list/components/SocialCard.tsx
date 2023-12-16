@@ -1,6 +1,5 @@
 import { Flex, Image, Stack } from '@mantine/core';
-import { IconArrowUpRight, IconCircleCheckFilled } from '@tabler/icons-react';
-import { Button } from 'shared/components/Button';
+import { IconCircleCheckFilled } from '@tabler/icons-react';
 import { Card } from 'shared/components/Card';
 import { LoadingOverlay } from 'shared/components/LoadingOverlay';
 import { ISocial } from 'shared/models/ISocial';
@@ -9,9 +8,14 @@ import { SocialCardForm } from './SocialCardForm';
 interface SocialCardProps {
   social: ISocial;
   isLoading?: boolean;
+  getSocials?: Function;
 }
 
-export const SocialCard = ({ social, isLoading }: SocialCardProps) => {
+export const SocialCard = ({
+  social,
+  isLoading,
+  getSocials,
+}: SocialCardProps) => {
   return (
     <Card>
       <Stack gap={24}>
@@ -19,7 +23,9 @@ export const SocialCard = ({ social, isLoading }: SocialCardProps) => {
         <Flex align={'center'} gap={16}>
           <Image src={social.image} w={64} h={64} />
           <Stack gap={12}>
-            <h3 className="h3 text black">{social.name}</h3>
+            <h3 className="h3 text black">
+              {social.name === 'VK' ? 'ВКонтакте' : social.name}
+            </h3>
             <p style={{ color: '#212529' }} className="text">
               {social.description}
             </p>
@@ -41,8 +47,8 @@ export const SocialCard = ({ social, isLoading }: SocialCardProps) => {
             )}
           </div>
         </Flex>
-        {social.status === 'available' ? (
-          <SocialCardForm name={social.name} />
+        {social.status === 'avalible' ? (
+          <SocialCardForm getSocials={getSocials} name={social.name} />
         ) : (
           <></>
         )}

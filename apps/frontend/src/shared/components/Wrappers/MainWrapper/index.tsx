@@ -36,21 +36,27 @@ const MainWrapper = observer(
             </Stack>
             <Stack className={style.right}>
               <div className="wrapper">
-                {children?.length ? (
-                  <Stack gap={16}>
-                    {/* <ProgressCard /> */}
-                    {!UStore?.user?.isAnalyzed ? (
-                      <AnalyseCard
-                        paths={UStore.user.paths}
-                        analysedPaths={UStore.user.analysedPaths}
-                      />
-                    ) : (
-                      <AnalyseCard isAnalysed />
-                    )}
-                    {children[1]}
-                  </Stack>
-                ) : (
+                {UStore.user.role === 'admin' ? ( //admin
                   <></>
+                ) : (
+                  <>
+                    {children?.length ? (
+                      <Stack gap={16}>
+                        {/* <ProgressCard /> */}
+                        {!UStore?.user?.isAnalyzed ? (
+                          <AnalyseCard
+                            paths={UStore.user.paths}
+                            analysedPaths={UStore.user.analysedPaths}
+                          />
+                        ) : (
+                          <AnalyseCard isAnalysed />
+                        )}
+                        {children[1]}
+                      </Stack>
+                    ) : (
+                      <></>
+                    )}
+                  </>
                 )}
               </div>
             </Stack>

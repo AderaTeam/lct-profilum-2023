@@ -1,29 +1,32 @@
-import { Flex, Text } from "@mantine/core";
-import { endingFormater } from "shared/helpers/endingFormater";
-import { IPath } from "shared/models/IPath";
+import { Flex, Text } from '@mantine/core';
+import { endingFormater } from 'shared/helpers/endingFormater';
+import { IAnalazedResult } from 'shared/models/IAnalazedResult';
+import { IPath } from 'shared/models/IPath';
 
 interface PathInfoProps {
-  activePath: IPath | undefined;
+  activePath: IAnalazedResult | undefined;
+  currentStep: number;
 }
 
-export const PathInfo = ({ activePath }: PathInfoProps) => {
+export const PathInfo = ({ activePath, currentStep }: PathInfoProps) => {
   const stepsCount = {
-    complete: activePath?.steps.filter((item) => item.status === "Завершено")
-      .length,
-    left: activePath?.steps.filter((item) => item.status !== "Завершено")
+    complete: activePath?.path.pathSteps.filter(
+      (item) => item.step < currentStep
+    ).length,
+    left: activePath?.path.pathSteps.filter((item) => item.step >= currentStep)
       .length,
   };
 
   return (
     <Flex gap={24}>
       <p className="text">
-        Пройдено:{" "}
+        Пройдено:{' '}
         <span className="text bold">
           {stepsCount.complete} {endingFormater(stepsCount?.complete!)}
         </span>
       </p>
       <p className="text">
-        Осталось:{" "}
+        Осталось:{' '}
         <span className="text bold">
           {stepsCount.left} {endingFormater(stepsCount?.left!)}
         </span>

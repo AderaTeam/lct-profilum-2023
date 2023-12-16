@@ -2,8 +2,11 @@ import { Flex, Stack } from '@mantine/core';
 import { Card } from 'shared/components/Card';
 import { EducationsCard } from './components/EducationsCard';
 
-import img1 from 'shared/assets/university/1.png';
-import img2 from 'shared/assets/university/2.png';
+import { IUniversity } from 'shared/models/IUniversity';
+
+interface EducationsSelectedCardProps {
+  selectedUniversity: IUniversity[];
+}
 
 const CardsList = (dataLen: number) => {
   const cards = [];
@@ -13,12 +16,9 @@ const CardsList = (dataLen: number) => {
   return cards;
 };
 
-export const EducationsSelectedCard = () => {
-  const data = [
-    { name: 'Омский Государственный Технический Унвиерситет', image: img1 },
-    { name: 'МГУ имени Ломоносова', image: img2 },
-  ];
-
+export const EducationsSelectedCard = ({
+  selectedUniversity,
+}: EducationsSelectedCardProps) => {
   return (
     <Card>
       <Stack gap={24}>
@@ -30,14 +30,14 @@ export const EducationsSelectedCard = () => {
           </p>
         </Stack>
         <Flex gap={8}>
-          {data.map((item) => (
+          {selectedUniversity.map((item) => (
             <EducationsCard
               key={item.name}
               name={item.name}
               image={item.image}
             />
           ))}
-          {CardsList(data.length).map((index) => (
+          {CardsList(selectedUniversity.length).map((index) => (
             <EducationsCard key={index} />
           ))}
         </Flex>
