@@ -13,3 +13,4 @@ datasets
 vk-api
 transformers
 razdel
+beautifulsoup4
