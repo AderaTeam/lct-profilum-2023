@@ -2,6 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column, JoinTable, OneToMany, JoinColum
 import { PathStep } from "./pathStep.entity"
 import { User } from "../../database/entities-index"
 import { Card } from "../../community/entities/card.entity"
+import { Speciality } from "./spaciality.entity"
 
 @Entity()
 export class Path {
@@ -15,6 +16,16 @@ export class Path {
         }
     )
     name: string
+
+    @Column(
+        {
+            nullable: true,
+        }
+    )
+    description: string
+
+    @ManyToMany(() => Speciality, (speciality) => speciality.paths)
+    specialities: Speciality[]
 
     @ManyToMany(() => User, (user) => {user.analysedPaths})
     @JoinTable()

@@ -13,6 +13,7 @@ import { CreateOwnedPathDto } from './dto/create-owned-path.dto';
 import { UserService } from '../user/user.service';
 import { CreateAnalyzedPathDto } from './dto/create-analyzed-path.dto';
 import { STATUS_CODES } from 'http';
+import { Speciality } from './entities/spaciality.entity';
 
 @Injectable()
 export class PathsService {
@@ -28,8 +29,11 @@ export class PathsService {
     private pathStepTagRepository: Repository<PathStepTag>,
     @InjectRepository(OwnedPath)
     private ownedPathRepository: Repository<OwnedPath>,
+    @InjectRepository(Speciality)
+    private specialitiesRepository: Repository<Speciality>,
   ){}
   async create(createPathDto: CreatePathDto) {
+
     let steps = []
     for (const step of createPathDto.steps)
     {
@@ -55,7 +59,23 @@ export class PathsService {
       const stepToAdd = await this.pathStepRepository.save(newStep)
       steps.push(stepToAdd)
     }
-    const path = this.pathRepository.create({...createPathDto, pathSteps: steps})
+
+    let specialities = []
+      for(const speciality of createPathDto.specialities)
+      {
+        if(!(await this.specialitiesRepository.findOneBy({name: speciality.name})))
+        {
+          const newSpeciality = this.specialitiesRepository.create({name: speciality.name})
+          const specToAdd = this.specialitiesRepository.save(newSpeciality)
+          specialities.push(specToAdd)
+        }
+        else
+        {
+          specialities.push(await this.specialitiesRepository.findOneBy({name: speciality.name}))
+        }
+      }
+    
+    const path = this.pathRepository.create({...createPathDto, pathSteps: steps, specialities: specialities})
     return this.pathRepository.save(path)
   }
 
@@ -70,20 +90,16 @@ export class PathsService {
 
   async createOwnage(createOwnedPathDto: CreateOwnedPathDto)
   {
+
     for (const pathId of createOwnedPathDto.pathIds)
     {
       if (!(await this.userService.getOneById(createOwnedPathDto.userId)) || !(await this.pathRepository.findOneBy({id: pathId})))
         {
           throw new HttpException('User or path does not exist', HttpStatus.BAD_REQUEST)
         }
-      if (await this.ownedPathRepository.findOneBy(
-          {
-            path: await this.pathRepository.findOneBy({id: pathId}),
-            user: await this.userService.getOneById(createOwnedPathDto.userId)
-          }
-        ))
+      if (await this.ownedPathRepository.find({where:{user: (await this.userService.getOneById(createOwnedPathDto.userId))}}))
         {
-          continue
+          await this.ownedPathRepository.delete({user: (await this.userService.getOneById(createOwnedPathDto.userId))})
         }
       await this.ownedPathRepository.insert(
           {
