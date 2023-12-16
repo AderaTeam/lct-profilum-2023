@@ -7,7 +7,10 @@ import { Path } from "./path.entity"
 @Entity()
 export class Speciality {
 
-    @PrimaryColumn(
+    @PrimaryGeneratedColumn()
+    id: number
+
+    @Column(
         {
             nullable: false,
         }
