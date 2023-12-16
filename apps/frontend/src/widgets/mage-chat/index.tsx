@@ -21,19 +21,31 @@ export const MageChat = observer(() => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isShow, setIsShow] = useState<boolean>(false);
-  const [activeIds, setActiveIds] = useState<number[]>([]);
+  const [activeIds, setActiveIds] = useState<number[]>(
+    UStore.user.paths.length
+      ? UStore.user.paths.map((item) => item.path.id)
+      : []
+  );
 
   useEffect(() => {
-    setTimeout(() => {
+    if (!UStore.user.paths.length) {
+      setTimeout(() => {
+        setIsShow(true);
+      }, 4500);
+    } else {
       setIsShow(true);
-    }, 4500);
+    }
   }, []);
 
   useEffect(() => {
-    if (isShow) {
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 3000);
+    if (!UStore.user.paths.length) {
+      if (isShow) {
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 3000);
+      }
+    } else {
+      setIsLoading(false);
     }
   }, [isShow]);
 
@@ -41,7 +53,7 @@ export const MageChat = observer(() => {
     $api
       .post('/paths/owned', { pathIds: activeIds, userId: UStore.user.id })
       .then((response) => {
-        UStore.setUser({ ...UStore.user, paths: response.data });
+        UStore.setUser({ ...UStore.user, paths: response.data.result });
         navigate(MY_PATH_ROUTE);
       });
   };
@@ -55,9 +67,15 @@ export const MageChat = observer(() => {
               name={UStore.user.username}
               image={UStore.user.image! || UStore.user.avataruri!}
             />
-            <p className={style.text}>
-              Профилум, помоги! Хочу знать на кого пойти учиться!
-            </p>
+            {UStore.user.paths.length ? (
+              <p className="text black">
+                Профилум, помоги! Хочу знать на кого пойти учиться!
+              </p>
+            ) : (
+              <p className={style.text}>
+                Профилум, помоги! Хочу знать на кого пойти учиться!
+              </p>
+            )}
           </Stack>
         </Card>
       </Stack>

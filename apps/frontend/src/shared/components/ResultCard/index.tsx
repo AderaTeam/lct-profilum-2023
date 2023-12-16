@@ -29,7 +29,7 @@ export const ResultCard = ({
           <Stack w={668} gap={12}>
             <h2 className="h2">{name}</h2>
             <p className="text black">{descriptions}</p>
-            <Flex gap={12}>
+            <Flex wrap={'wrap'} gap={12}>
               {specialities.map((item) => (
                 <div key={item.name} className="text gray">
                   #{item.name}

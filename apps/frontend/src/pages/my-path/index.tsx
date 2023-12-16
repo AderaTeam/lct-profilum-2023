@@ -22,7 +22,9 @@ const MyPathPage = observer(() => {
         ) : (
           <></>
         )}
-        {!UStore.user.paths?.length && UStore.user?.analysedPaths?.length ? (
+        {UStore.user.paths.length ? (
+          <MyPathProgress />
+        ) : UStore.user?.analysedPaths?.length ? (
           <MyPathAnalysedPath />
         ) : (
           <MyPathProgress />
