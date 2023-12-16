@@ -65,7 +65,9 @@ export class UserService {
         {   
             user.ratingPlacement = iteration
             await this.userRepository.save(user)
+            iteration += 1
         }
+        return await this.userRepository.find({order: {points: 'DESC'}})
     }
 
     public async deleteOne(id: number)
