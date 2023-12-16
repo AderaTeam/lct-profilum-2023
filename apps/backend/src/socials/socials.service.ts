@@ -3,7 +3,7 @@ import { CreateSocialDto } from './dto/create-social.dto';
 import { UpdateSocialDto } from './dto/update-social.dto';
 import { Social } from './entities/social.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Equal, Repository } from 'typeorm';
+import { Equal, FindOperator, Repository } from 'typeorm';
 import { UserRolesGuard } from '../user/user.guard';
 import { Roles } from '../decorators/roles.decorator';
 import { SocialUsers } from './entities/socialsUsers.entity';
@@ -50,7 +50,7 @@ export class SocialsService {
 
   async findOneByUserId(socialname: string, originalid: string)
   {
-    return await this.socialsUsersRepository.findOne({where: {originaluserid: originalid, social: Equal<string>(socialname)}, relations:{user: true, social: true}})
+    return await this.socialsUsersRepository.findOne({where: {originaluserid: originalid, social: {name: socialname}}, relations:{user: true, social: true}})
   }
 
   async findAllByUserId(userid: number)
