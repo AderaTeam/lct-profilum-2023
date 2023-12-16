@@ -35,12 +35,20 @@ export class UserController
         return await this.userService.getOneByNickname((await this.userService.getOneById(userid)).nickname)
     }
 
+    @Post(':id')
+    public async updateOneAdmined(@Body() userDto: UserUpdateDto, @Param('id')id: number)
+    {
+        return await this.userService.updateOne(id, userDto)
+    }
+
     //@UseGuards(AccessTokenGuard)
     @Post('')
     public async updateOne(@Body() userDto: UserUpdateDto, @Req() req)
     {
         return await this.userService.updateOne(req.user.sub, userDto)
     }
+
+    
 
     //@UseGuards(AccessTokenGuard)
     @Delete('')
