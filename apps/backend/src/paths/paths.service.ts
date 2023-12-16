@@ -4,7 +4,7 @@ import { UpdatePathDto } from './dto/update-path.dto';
 import { CreateMultiplePathDto } from './dto/create-multiple-path.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Path } from './entities/path.entity';
-import { Repository } from 'typeorm';
+import { Any, Repository } from 'typeorm';
 import { PathStep } from './entities/pathStep.entity';
 import { PathStepContent } from './entities/pathStepContent.entity';
 import { PathStepTag } from './entities/pathTag.entity';
@@ -137,6 +137,21 @@ export class PathsService {
   }
 
   async removeAll() {
+    for(const path of await this.pathRepository.find())
+    {
+      for (const user of path.users)
+      {
+        const newList: Path[] = []
+        for (const usersPath of user.analyzedPaths)
+        {
+          if(usersPath.id != path.id)
+          {
+            newList.push(usersPath)
+          }
+        }
+        this.userService.updateOne(user.id, {...user, analyzedPaths: newList})
+      }
+    }
     return this.pathRepository.delete({})
   }
 }

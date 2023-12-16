@@ -110,7 +110,7 @@ export class User {
 
     @ManyToMany(() => Card, (card) => card.author, {onDelete: 'CASCADE'})
     @JoinTable()
-    cards?: Card 
+    cards?: Card[]
 
     @OneToMany(() => AchievementOwned, (achievement) => achievement.user)
     @JoinColumn()
