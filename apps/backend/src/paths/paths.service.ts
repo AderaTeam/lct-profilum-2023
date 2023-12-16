@@ -125,7 +125,7 @@ export class PathsService {
     let user = await this.userService.getOneById(ownedPath.user.id)
     user.points += (await this.pathStepRepository.findOneBy({path: ownedPath.path, step: ownedPath.currentStep})).points
     ownedPath.currentStep = ownedPath.currentStep + 1;
-    await this.userService.updateOne(ownedPath.user.id, ownedPath.user)
+    await this.userService.updateOne(ownedPath.user.id, user)
     await this.ownedPathRepository.save(ownedPath)
     return this.userService.getOneById(ownedPath.user.id)
   }
