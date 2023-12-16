@@ -53,7 +53,9 @@ export class UserService {
 
     public async updateOne(userid: number, userDto: UserUpdateDto)
     {
-        return await this.userRepository.update(userid, userDto)
+        let user = await this.getOneById(userid)
+        Object.assign(user, userDto)
+        return await this.userRepository.save(user)
     }
 
     public async deleteOne(id: number)
