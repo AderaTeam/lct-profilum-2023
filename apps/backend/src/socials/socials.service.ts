@@ -93,6 +93,16 @@ export class SocialsService {
     return await this.socialsUsersRepository.save(newUser)
   }
 
+  async removeUsersSocialsByUserId(id: number)
+  {
+    return this.socialsUsersRepository.delete({user: {id: id}})
+  }
+
+  async removeUsersSocials(id: number, socialname: string)
+  {
+    return this.socialsUsersRepository.delete({user: {id: id}, social: {name: socialname}})
+  }
+
   @UseGuards(UserRolesGuard)
   @Roles('admin')
   async update(id: number, updateSocialDto: UpdateSocialDto) {

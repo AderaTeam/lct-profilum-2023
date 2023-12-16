@@ -23,6 +23,16 @@ export class SocialsController {
     return this.socialsService.findAll();
   }
 
+  @Delete('user/')
+  removeUserSocial(@Body() dto: CreateUsersSocialDto) {
+    return this.socialsService.removeUsersSocials(dto.userid, dto.socialname);
+  }
+
+  @Delete('user/:id')
+  removeUserSocialByUser(@Param('id') id: string) {
+    return this.socialsService.removeUsersSocialsByUserId(+id);
+  }  
+
   @Get('user/:id')
   findUser(@Param('id') id: number) {
     return this.socialsService.findAllByUserId(id);
