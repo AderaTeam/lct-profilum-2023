@@ -21,7 +21,7 @@ export class AnalyzeService {
             const userVKid = userSocials.filter((obj) => obj.social.name == 'VK')[0].originaluserid
 
             Logger.log(userVKid)
-            var vkResultWorks = (await axios.get(`https://py.adera-team.ru/vk/simple_analize_interests/?user_id=${userVKid}&n_of_works=4`)).data
+            var vkResultWorks = (await axios.get(`http://178.170.192.87:9000/vk/simple_analize_interests/?user_id=${userVKid}&n_of_works=4`)).data
         }  
         if(userSocials.filter((obj) => obj.social.name == 'LeaderID'))
         {
