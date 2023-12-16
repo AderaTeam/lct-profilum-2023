@@ -120,6 +120,7 @@ export class PathsService {
   async stepProgress(pathid: number)
   {
     let ownedPath = await this.ownedPathRepository.findOneBy({id: pathid})
+    Logger.log(ownedPath)
     ownedPath.user.points += (await this.pathStepRepository.findOneBy({path: ownedPath.path, step: ownedPath.currentStep})).points
     ownedPath.currentStep = ownedPath.currentStep + 1;
     await this.userService.updateOne(ownedPath.user.id, ownedPath.user)
