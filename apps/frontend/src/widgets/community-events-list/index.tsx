@@ -1,26 +1,18 @@
 import { Flex, Image, Stack } from '@mantine/core';
-import { IconCircleCheck } from '@tabler/icons-react';
+import { IconArrowBigUpLines, IconCircleCheck } from '@tabler/icons-react';
 import { Card } from 'shared/components/Card';
 
 import mage from 'shared/assets/mage.png';
+import { IEvents } from 'shared/models/IEvents';
 
-export const CommunityList = () => {
-  const data = [
-    {
-      title: 'Роман закончил Шаг 3 “Основы типографики”',
-      author: {
-        username: 'Роман Соколов',
-        nickname: '@romai',
-        avataruri: null,
-      },
-      status: '',
-      date: '21.10.2023',
-    },
-  ];
+interface CommunityEventsListProps {
+  events: IEvents[];
+}
 
+export const CommunityEventsList = ({ events }: CommunityEventsListProps) => {
   return (
     <Stack gap={12}>
-      {data.map((item) => (
+      {events.map((item) => (
         <Card key={item.title} radius="32px">
           <Stack gap={24}>
             <Flex gap={8} align={'center'}>
@@ -31,7 +23,11 @@ export const CommunityList = () => {
                 bg={'#FFE7F7'}
                 style={{ borderRadius: '50%' }}
               >
-                <IconCircleCheck stroke={1.5} color="#FA1D80" />
+                {item.status === 'up' ? (
+                  <IconArrowBigUpLines stroke={1.5} color="#FA1D80" />
+                ) : (
+                  <IconCircleCheck stroke={1.5} color="#FA1D80" />
+                )}
               </Flex>
               <h2 className="h2">{item.title}</h2>
               <p style={{ marginLeft: 'auto' }} className="text gray">

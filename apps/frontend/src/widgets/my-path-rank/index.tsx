@@ -64,13 +64,17 @@ export const MyPathRank = observer(() => {
         <Stack gap={12}>
           <Flex justify={'space-between'}>
             <h3 className="h3">{UStore.user.points} б.</h3>
-            <h3 className="h3 text gray">{UStore.user.points} б.</h3>
+            <h3 className="h3 text gray">
+              {rankLevel[UStore.user.rank] * 100} б.
+            </h3>
           </Flex>
           <Progress
             h={12}
             radius={6}
             color="myColor"
-            value={UStore.user.points}
+            value={
+              (UStore.user.points * 100) / (rankLevel[UStore.user.rank] * 100)
+            }
           />
         </Stack>
       </Stack>

@@ -1,9 +1,9 @@
 import { Flex } from '@mantine/core';
 import { Chip } from 'shared/components/Chip';
-import { IPath } from 'shared/models/IPath';
+import { IAnalazedResult } from 'shared/models/IAnalazedResult';
 
 interface ActivePathSwitchProps {
-  paths: IPath[];
+  paths: IAnalazedResult[];
   setActivePathId: React.Dispatch<React.SetStateAction<number>>;
   activePathId: number;
 }
@@ -21,7 +21,7 @@ export const ActivePathSwitch = ({
           id={item.id}
           onClick={() => setActivePathId(item.id)}
           key={item.id}
-          text={item.name}
+          text={item.path.name}
         />
       ))}
     </Flex>

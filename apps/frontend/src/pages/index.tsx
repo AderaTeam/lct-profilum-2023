@@ -1,14 +1,8 @@
 import { Flex, Stack } from '@mantine/core';
 import { Context } from 'main';
 import { observer } from 'mobx-react-lite';
-import { useContext, useEffect } from 'react';
-import {
-  Route,
-  Routes,
-  useLocation,
-  Navigate,
-  useNavigate,
-} from 'react-router-dom';
+import { useContext } from 'react';
+import { Route, Routes, useLocation, Navigate } from 'react-router-dom';
 import {
   HOME_ROUTE,
   LOGIN_ROUTE,
@@ -16,14 +10,12 @@ import {
   MY_PATH_ROUTE,
   NO_PAGE_ROUTE,
   ONBOARDING_ROUTE,
-  REGISTRATION_ROUTE,
 } from 'shared/constants/const';
 import { authRoutes, publicRoutes } from 'shared/constants/routes';
 import Navbar from 'widgets/navbar';
 
 export const Routing = observer(() => {
   const location = useLocation();
-  const navigate = useNavigate();
   const { UStore } = useContext(Context);
 
   if (
@@ -58,14 +50,14 @@ export const Routing = observer(() => {
           <Routes>
             {UStore.isAuth && UStore.user.role === 'user'
               ? authRoutes
-                  .filter((item) => !item.isAdmin)
+                  .filter((item) => !item.isAdmin) //!
                   .map(({ path, Component }) => (
                     <Route key={path} path={path} element={<Component />} />
                   ))
               : UStore.isAuth &&
                 UStore.user.role === 'admin' &&
                 authRoutes
-                  .filter((item) => item.isAdmin)
+                  .filter((item) => item.isAdmin) //
                   .map(({ path, Component }) => (
                     <Route key={path} path={path} element={<Component />} />
                   ))}

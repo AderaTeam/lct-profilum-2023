@@ -1,8 +1,8 @@
-import MainWrapper from 'shared/components/Wrappers/MainWrapper';
+import { Flex, Stack } from '@mantine/core';
 import { IEvents } from 'shared/models/IEvents';
 import { CommunityEventsList } from 'widgets/community-events-list';
 
-const CommunityPage = () => {
+export const ProfileEvents = () => {
   const data: IEvents[] = [
     {
       title: 'Роман закончил Шаг 3 “Основы типографики”',
@@ -17,11 +17,17 @@ const CommunityPage = () => {
   ];
 
   return (
-    <MainWrapper>
-      <CommunityEventsList events={data} />
-      <></>
-    </MainWrapper>
+    <>
+      {data.length ? (
+        <Stack gap={24}>
+          <Flex p={'0 32px'}>
+            <h1 className="h1">События</h1>
+          </Flex>
+          <CommunityEventsList events={data} />
+        </Stack>
+      ) : (
+        <></>
+      )}
+    </>
   );
 };
-
-export default CommunityPage;

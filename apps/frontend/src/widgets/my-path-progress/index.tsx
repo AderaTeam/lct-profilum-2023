@@ -4,28 +4,40 @@ import { ActivePathSwitch } from './components/ActivePathSwitch';
 import { Flex, Stack } from '@mantine/core';
 import { PathInfo } from './components/PathInfo';
 import { observer } from 'mobx-react-lite';
-import { IPath } from 'shared/models/IPath';
 import { PathSteps } from './components/PathSteps';
 import { NoPath } from './components/NoPath';
+import { IAnalazedResult } from 'shared/models/IAnalazedResult';
+import $api from 'shared/api';
+import { IUser } from 'shared/models/IUser';
 
 export const MyPathProgress = observer(() => {
   const { UStore } = useContext(Context);
   const [activePathId, setActivePathId] = useState<number>(
     UStore?.user?.paths.length && UStore.user.paths[0].id
   );
-  const [activePath, setActivePath] = useState<IPath | undefined>(
+  const [activePath, setActivePath] = useState<IAnalazedResult | undefined>(
     UStore?.user?.paths?.find((item) => item.id === UStore?.user?.paths[0]?.id)
+  );
+  const [currentStep, setCurrentStep] = useState<number>(
+    UStore?.user?.paths.length ? UStore.user.paths[0].currentStep : 0
   );
 
   useEffect(() => {
     if (typeof activePathId !== 'undefined') {
       const info = UStore.user.paths.find((item) => item.id === activePathId);
       setActivePath(info);
+      setCurrentStep(info?.currentStep!);
     }
   }, [activePathId]);
 
   const handleStepComplete = (id: number) => {
-    console.log(id);
+    $api.post<IUser>(`/paths/progress/${id}`).then((response) => {
+      UStore.setUser(response.data);
+      setCurrentStep(
+        response.data.paths.find((item) => item.id === activePathId)
+          ?.currentStep!
+      );
+    });
   };
 
   return (
@@ -38,9 +50,10 @@ export const MyPathProgress = observer(() => {
               activePathId={activePathId}
               setActivePathId={setActivePathId}
             />
-            <PathInfo activePath={activePath} />
+            <PathInfo currentStep={currentStep} activePath={activePath} />
           </Flex>
           <PathSteps
+            currentStep={currentStep}
             handleStepComplete={handleStepComplete}
             activePath={activePath}
           />

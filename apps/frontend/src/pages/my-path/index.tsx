@@ -1,8 +1,9 @@
 import { Stack } from '@mantine/core';
 import { Context } from 'main';
 import { observer } from 'mobx-react-lite';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import MainWrapper from 'shared/components/Wrappers/MainWrapper';
+import { IUniversity } from 'shared/models/IUniversity';
 import { EducationsSelectedCard } from 'widgets/educations-selected-card';
 import { MyPathAnalysedPath } from 'widgets/my-path-analysed-path';
 import { MyPathProgress } from 'widgets/my-path-progress';
@@ -10,6 +11,13 @@ import { MyPathRank } from 'widgets/my-path-rank';
 
 const MyPathPage = observer(() => {
   const { UStore } = useContext(Context);
+  const [selectedUniversity, setSelectedUniversity] = useState<IUniversity[]>(
+    []
+  );
+
+  useEffect(() => {
+    setSelectedUniversity([]);
+  }, []);
 
   return (
     <MainWrapper>
@@ -17,12 +25,14 @@ const MyPathPage = observer(() => {
         {UStore.user.paths?.length ? (
           <>
             <MyPathRank />
-            <EducationsSelectedCard />
+            <EducationsSelectedCard selectedUniversity={selectedUniversity} />
           </>
         ) : (
           <></>
         )}
-        {!UStore.user.paths?.length && UStore.user?.analysedPaths?.length ? (
+        {UStore.user.paths.length ? (
+          <MyPathProgress />
+        ) : UStore.user?.analysedPaths?.length ? (
           <MyPathAnalysedPath />
         ) : (
           <MyPathProgress />

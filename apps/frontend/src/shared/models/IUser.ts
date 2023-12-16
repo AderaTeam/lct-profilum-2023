@@ -1,3 +1,4 @@
+import { IAnalazedResult } from './IAnalazedResult';
 import { IPath } from './IPath';
 
 export interface IUser {
@@ -9,7 +10,7 @@ export interface IUser {
   rank: string;
   ratingPlacement: number;
   points: number;
-  paths: IPath[];
+  paths: IAnalazedResult[];
   grade?: string;
   nickname?: string;
   analysedPaths?: IPath[];

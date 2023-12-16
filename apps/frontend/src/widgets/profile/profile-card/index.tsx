@@ -32,10 +32,19 @@ export const ProfileCard = observer(() => {
     Оракул: rank4,
   };
 
-  const onSubmit = profileForm.handleSubmit((formData) => {
-    UStore.setUser(formData);
-    setIsEdit(false);
-  });
+  const onSubmit = profileForm.handleSubmit(
+    ({ nickname, username, grade, ...formData }) => {
+      $api.post('/user', { nickname, username, grade }).then(() => {
+        UStore.setUser({
+          nickname: nickname,
+          username: username,
+          grade: grade,
+          ...formData,
+        });
+        setIsEdit(false);
+      });
+    }
+  );
 
   return (
     <Card radius={32}>
