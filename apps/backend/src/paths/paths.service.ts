@@ -135,22 +135,30 @@ export class PathsService {
   async remove(id: number) {
     return await this.pathRepository.delete({id: id});
   }
+//removeSome
+  // async removeAll() {
+  //   for(const path of await this.pathRepository.find())
+  //   {
+  //     for (const user of path.users)
+  //     {
+  //       const newList: Path[] = []
+  //       for (const usersPath of user.analyzedPaths)
+  //       {
+  //         if(usersPath.id != path.id)
+  //         {
+  //           newList.push(usersPath)
+  //         }
+  //       }
+  //       this.userService.updateOne(user.id, {...user, analyzedPaths: [newList]})
+  //     }
+  //   }
+  //   return this.pathRepository.delete({})
+  // }
 
   async removeAll() {
-    for(const path of await this.pathRepository.find())
+    for (const user of await this.userService.getAll())
     {
-      for (const user of path.users)
-      {
-        const newList: Path[] = []
-        for (const usersPath of user.analyzedPaths)
-        {
-          if(usersPath.id != path.id)
-          {
-            newList.push(usersPath)
-          }
-        }
-        this.userService.updateOne(user.id, {...user, analyzedPaths: newList})
-      }
+      await this.userService.updateOne(user.id, {...user, analyzedPaths: []})
     }
     return this.pathRepository.delete({})
   }
