@@ -24,7 +24,7 @@ export class Path {
     )
     description: string
 
-    @ManyToMany(() => Speciality, (speciality) => speciality.paths)
+    @ManyToMany(() => Speciality, (speciality) => speciality.paths, {eager: true})
     @JoinTable()
     specialities: Speciality[]
 
