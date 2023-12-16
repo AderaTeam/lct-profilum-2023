@@ -70,7 +70,7 @@ export class UserService {
 
     public async deleteOne(id: number)
     {
-        return await this.userRepository.delete(id)
+        return await this.userRepository.delete({id: id})
     }
 
     async dropall()
