@@ -31,6 +31,7 @@ export class SocialsService {
     await this.socialsRepository.insert({name: 'VK', description: 'Сообщества, записи на стене, комментарии'})
     await this.socialsRepository.insert({name: 'LeaderID', description: 'Мероприятия, команды'})
     await this.socialsRepository.insert({name: 'Steam', description: 'Игры, сообщества'})
+    return 'ok'
   }
 
   async upsert()
@@ -58,10 +59,10 @@ export class SocialsService {
     Logger.log(userSocials)
     const socials = await this.socialsRepository.find()
     let ans = {}
-    for (const socialConnect of userSocials)
-    {
+    // for (const socialConnect of userSocials)
+    // {
       
-    }
+    // }
     return{...(userSocials)}
   }
 

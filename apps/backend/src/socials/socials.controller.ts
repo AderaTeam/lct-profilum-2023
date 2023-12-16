@@ -32,6 +32,11 @@ export class SocialsController {
     return this.socialsService.getAllUsersSocial();
   }
 
+  @Post('init')
+  intitalize() {
+    return this.socialsService.initialize();
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.socialsService.findOne(+id);
