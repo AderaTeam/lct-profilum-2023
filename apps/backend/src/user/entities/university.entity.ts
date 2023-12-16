@@ -46,13 +46,13 @@ export class Univercity {
     )
     budgetPlaces: boolean
 
-    @Column(
-        {
-            nullable: false,
-            array: true,
-        }
-    )
-    tags: string[]
+    // @Column(
+    //     {
+    //         nullable: false,
+    //         array: true,
+    //     }
+    // )
+    // tags: string[]
 
     @Column(
         {
