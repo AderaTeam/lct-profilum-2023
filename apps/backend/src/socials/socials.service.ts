@@ -52,7 +52,7 @@ export class SocialsService {
 
   async getAllUsersSocial()
   {
-    return await this.socialsUsersRepository.find()
+    return await this.socialsUsersRepository.find({relations: {social: true, user: true}})
   }
 
   async findOneByUserId(socialname: string, originalid: string)
