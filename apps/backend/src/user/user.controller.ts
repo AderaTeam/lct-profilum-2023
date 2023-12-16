@@ -41,7 +41,7 @@ export class UserController
         return await this.userService.updateOne(id, userDto)
     }
 
-    //@UseGuards(AccessTokenGuard)
+    @UseGuards(AccessTokenGuard)
     @Post('')
     public async updateOne(@Body() userDto: UserUpdateDto, @Req() req)
     {
@@ -50,7 +50,7 @@ export class UserController
 
     
 
-    //@UseGuards(AccessTokenGuard)
+    @UseGuards(AccessTokenGuard)
     @Delete('')
     public async deleteOne(@Req() req)
     {
