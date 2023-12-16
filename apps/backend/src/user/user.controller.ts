@@ -18,7 +18,7 @@ export class UserController
     }
 
     @Delete(':userid')
-    public async dropExact(@Param('id') id: number)
+    public async dropExact(@Param('userid') id: number)
     {
         return await this.userService.deleteOne(id)
     }
