@@ -31,7 +31,7 @@ export class Path {
     @JoinTable()
     users: User[]
 
-    @ManyToMany(() => Card, (card) => {card.path})
+    @ManyToMany(() => Card, (card) => {card.path}, {onDelete: 'SET NULL'})
     @JoinTable()
     cards: Card[]
 
