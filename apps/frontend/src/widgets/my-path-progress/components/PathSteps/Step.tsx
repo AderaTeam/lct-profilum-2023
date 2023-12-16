@@ -30,8 +30,11 @@ export const Step = ({
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
-    <Flex h={'100%'} gap={16} align={'center'}>
-      <StepProgressBar {...step} />
+    <Flex h={'100%'} gap={16}>
+      <div>
+        <StepProgressBar step={step} currentStep={currentStep} />
+      </div>
+
       <Card mb={8} mt={8} w={'100%'}>
         <Stack gap={24}>
           <Flex justify={'space-between'}>
