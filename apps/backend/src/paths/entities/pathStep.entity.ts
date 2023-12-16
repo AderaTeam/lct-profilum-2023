@@ -38,7 +38,7 @@ export class PathStep {
     @JoinColumn()
     content: PathStepContent   
 
-    @ManyToOne(() => Path, (path) => path.pathSteps,  {cascade: true, onUpdate: 'CASCADE'})
+    @ManyToOne(() => Path, (path) => path.pathSteps,  {cascade: true, onUpdate: 'CASCADE', onDelete: 'CASCADE'})
     @JoinColumn()
     path: Path
 }

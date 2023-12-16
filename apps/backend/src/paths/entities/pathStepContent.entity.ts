@@ -28,7 +28,7 @@ export class PathStepContent {
     )
     text: string
 
-    @OneToOne(() => PathStep,  {cascade: true})
+    @OneToOne(() => PathStep,  {cascade: true, onDelete: 'CASCADE'})
     @JoinColumn()
     step: PathStep
 }

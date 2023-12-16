@@ -8,11 +8,11 @@ export class OwnedPath {
     @PrimaryGeneratedColumn()
     id: number
 
-    @ManyToOne(() => Path, {eager: true})
+    @ManyToOne(() => Path, {eager: true, onDelete: 'CASCADE'})
     @JoinColumn()
     path: Path
 
-    @ManyToOne(() => User)
+    @ManyToOne(() => User, {onDelete: 'CASCADE'})
     @JoinColumn()
     user: User
 
