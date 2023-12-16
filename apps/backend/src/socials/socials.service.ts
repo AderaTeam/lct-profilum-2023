@@ -19,11 +19,17 @@ export class SocialsService {
     @InjectRepository(SocialUsers)
     private socialsUsersRepository: Repository<SocialUsers>
   ){}
-  @UseGuards(UserRolesGuard)
-  @Roles('admin')
+
   async create(createSocialDto: CreateSocialDto) {
-    const social = this.socialsRepository.create(createSocialDto)
-    return await this.socialsRepository.save(social);
+    let social = await this.socialsRepository.create(createSocialDto)
+    await this.socialsRepository.save(social);
+    social.image = `https://api.adera-team.ru/socials/image/${social.id}`
+    return await this.socialsRepository.save(social)
+  }
+
+  async getImage(id: number)
+  {
+    return (await this.socialsRepository.findOneBy({id: id})).imagebuff
   }
 
   async initialize()
@@ -56,7 +62,7 @@ export class SocialsService {
   async findAllByUserId(userid: number)
   {
     const userSocials = await this.socialsUsersRepository.find({where: {user: Equal<number>(userid)}, relations:{user: false, social: true}, select:{id: false, originaluserid: false}})
-    const socials = await this.socialsRepository.find()
+    const socials = await this.socialsRepository.find({select: {description: true, id: true, image: true, name: true}})
     let pureSocials = []
     for (const socialConnect of userSocials)
     {

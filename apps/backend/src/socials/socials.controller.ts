@@ -1,16 +1,24 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFile, StreamableFile } from '@nestjs/common';
 import { SocialsService } from './socials.service';
 import { CreateSocialDto } from './dto/create-social.dto';
 import { UpdateSocialDto } from './dto/update-social.dto';
 import { CreateUsersSocialDto } from './dto/create-users-social.dto';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('socials')
 export class SocialsController {
   constructor(private readonly socialsService: SocialsService) {}
 
   @Post()
-  create(@Body() createSocialDto: CreateSocialDto) {
-    return this.socialsService.create(createSocialDto);
+  @UseInterceptors(FileInterceptor('file'))
+  create(@Body() createAchievementDto: CreateSocialDto, @UploadedFile() file: Express.Multer.File) {
+    return this.socialsService.create({...createAchievementDto, imagebuff: file.buffer});
+  }
+
+  @Get('image/:id')
+  async getImage(@Param('id')id: number)
+  {
+    return new StreamableFile(await this.socialsService.getImage(id))
   }
 
   @Post('user')
