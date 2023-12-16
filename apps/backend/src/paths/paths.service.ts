@@ -63,7 +63,7 @@ export class PathsService {
     let specialities = []
     for(const speciality of createPathDto.specialities)
     {
-      Logger.log(speciality)
+      //Logger.log(speciality)
       if(!(await this.specialitiesRepository.findOneBy({name: speciality})))
       {
         const newSpeciality = this.specialitiesRepository.create({name: speciality})
