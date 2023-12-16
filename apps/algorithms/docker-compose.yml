@@ -6,7 +6,7 @@ services:
       - ./:/app/
     working_dir: /app
     command:
-      bash -c "pip install -r req.txt &&
+      bash -c "pip install -r req.txt -f https://download.pytorch.org/whl/torch_stable.html &&
       cd app && 
       gunicorn -k uvicorn.workers.UvicornWorker --log-level trace main:app -b :80"
     ports:
