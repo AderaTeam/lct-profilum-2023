@@ -1,0 +1,5 @@
+LofDT
+secrets.json
+DATA/*
+!DATA/less_semantic_words.txt
+chroma_db/
