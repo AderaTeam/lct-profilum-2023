@@ -62,7 +62,7 @@ export class SocialsService {
     {
       
     }
-    return{...(userSocials.)}
+    return{...(userSocials)}
   }
 
   async findOne(id: number) {
