@@ -24,6 +24,7 @@ export class Social {
         { 
             type: "bytea", 
             nullable: true,
+            select: false
         }
     )
     imagebuff: Buffer
