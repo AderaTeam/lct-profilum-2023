@@ -27,6 +27,26 @@ app = FastAPI()
 defInitiator()
 valuesInitiator()
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=
+    [
+        "http://localhost:5173/",
+        "http://127.0.0.1:5173/",
+        "http://178.170.192.87:8000/",
+        "http://localhost:5173",
+        "http://127.0.0.1:5173",
+        "http://178.170.192.87:8000",
+        "http://178.170.192.87:3000",
+        "http://178.170.192.87:3000/",
+        "https://api.adera-team.ru",
+        "https://api.adera-team.ru/"
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"]
+
+)
 class WorkRes(BaseModel):
     name: list[str]
     value: list[float]
