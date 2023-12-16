@@ -27,8 +27,8 @@ export class AchievementService {
 
   async createOwned(createAchievementOwnedDto: CreateAchievementOwnedDto) {
     if (await this.achievementOwnedRepository.findOneBy({
-      user: Equal<User>(await this.userRepository.findOneBy({id: createAchievementOwnedDto.userid})), 
-      achievement: Equal<Achievement>(await this.achievementRepository.findOneBy({id: createAchievementOwnedDto.achievementid})),
+      user: Equal<number>(createAchievementOwnedDto.userid), 
+      achievement: Equal<number>(createAchievementOwnedDto.achievementid)
     }))
       {
         throw new DuplicateException()
