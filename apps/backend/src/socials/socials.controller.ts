@@ -42,13 +42,13 @@ export class SocialsController {
     return this.socialsService.findOne(+id);
   }
 
-  @Post(':id')
-  update(@Param('id') id: string, @Body() updateSocialDto: UpdateSocialDto) {
-    return this.socialsService.update(+id, updateSocialDto);
-  }
+  // @Post(':id')
+  // update(@Param('id') id: string, @Body() updateSocialDto: UpdateSocialDto) {
+  //   return this.socialsService.update(+id, updateSocialDto);
+  // }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.socialsService.remove(+id);
-  }
+  // @Delete(':id')
+  // remove(@Param('id') id: string) {
+  //   return this.socialsService.remove(+id);
+  // }
 }
