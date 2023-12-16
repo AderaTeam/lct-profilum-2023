@@ -116,38 +116,38 @@ export class User {
     @JoinColumn()
     achievements: AchievementOwned[]
 
-    // @BeforeInsert()
-    // @BeforeUpdate()
-    // updateRank()
-    // {
-    //     if(this.points > 400)
-    //     {
-    //         this.rank = "Оракул"
-    //     }
-    //     else
-    //     {
-    //         if(this.points > 300)
-    //         {
-    //             this.rank = "Волшебник"
-    //         }
-    //         else
-    //         {
-    //             if(this.points > 200)
-    //             {
-    //                 this.rank = "Первый шар"
-    //             }
-    //             else
-    //             {
-    //                 if(this.points > 100)
-    //                 {
-    //                     this.rank = "Маг-самоучка"
-    //                 }
-    //                 else
-    //                 {
-    //                     this.rank = "Незнайка"
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
+    @BeforeInsert()
+    @BeforeUpdate()
+    updateRank()
+    {
+        if(this.points > 400)
+        {
+            this.rank = "Оракул"
+        }
+        else
+        {
+            if(this.points > 300)
+            {
+                this.rank = "Волшебник"
+            }
+            else
+            {
+                if(this.points > 200)
+                {
+                    this.rank = "Первый шар"
+                }
+                else
+                {
+                    if(this.points > 100)
+                    {
+                        this.rank = "Маг-самоучка"
+                    }
+                    else
+                    {
+                        this.rank = "Незнайка"
+                    }
+                }
+            }
+        }
+    }
 }

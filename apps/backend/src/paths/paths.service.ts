@@ -4,7 +4,7 @@ import { UpdatePathDto } from './dto/update-path.dto';
 import { CreateMultiplePathDto } from './dto/create-multiple-path.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Path } from './entities/path.entity';
-import { Any, Repository } from 'typeorm';
+import { Any, Equal, Repository } from 'typeorm';
 import { PathStep } from './entities/pathStep.entity';
 import { PathStepContent } from './entities/pathStepContent.entity';
 import { PathStepTag } from './entities/pathTag.entity';
@@ -14,6 +14,7 @@ import { UserService } from '../user/user.service';
 import { CreateAnalyzedPathDto } from './dto/create-analyzed-path.dto';
 import { STATUS_CODES } from 'http';
 import { Speciality } from './entities/spaciality.entity';
+import { User } from '../database/entities-index';
 
 @Injectable()
 export class PathsService {
@@ -92,9 +93,9 @@ export class PathsService {
   async createOwnage(createOwnedPathDto: CreateOwnedPathDto)
   {
 
-    if (await this.ownedPathRepository.find({where:{user: (await this.userService.getOneById(createOwnedPathDto.userId))}}))
+    if (await this.ownedPathRepository.find({where:{user: Equal<User>(await this.userService.getOneById(createOwnedPathDto.userId))}}))
         {
-          await this.ownedPathRepository.delete({user: (await this.userService.getOneById(createOwnedPathDto.userId))})
+          await this.ownedPathRepository.delete({user: Equal<User>(await this.userService.getOneById(createOwnedPathDto.userId))})
         }
     for (const pathId of createOwnedPathDto.pathIds)
     {
@@ -114,7 +115,7 @@ export class PathsService {
 
   async dropOwnageForUser(id: number)
   {
-    return await this.ownedPathRepository.delete({user: await this.userService.getOneById(id)})
+    return await this.ownedPathRepository.delete({user: Equal<User>(await this.userService.getOneById(id))})
   }
 
   async stepProgress(pathid: number)
@@ -123,7 +124,7 @@ export class PathsService {
     Logger.log(JSON.stringify(ownedPath))
     Logger.log(JSON.stringify(ownedPath.user))
     let user = await this.userService.getOneById(ownedPath.user.id)
-    user.points += (await this.pathStepRepository.findOneBy({path: ownedPath.path, step: ownedPath.currentStep})).points
+    user.points += (await this.pathStepRepository.findOneBy({path: Equal<Path>(ownedPath.path), step: ownedPath.currentStep})).points
     ownedPath.currentStep = ownedPath.currentStep + 1;
     await this.userService.updateOne(ownedPath.user.id, user)
     await this.ownedPathRepository.save(ownedPath)
