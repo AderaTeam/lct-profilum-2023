@@ -14,8 +14,8 @@ export class SocialsController {
   }
 
   @Post('user')
-  createUsersSocial(@Body() createUsersSocialDto: CreateUsersSocialDto) {
-    this.socialsService.addUsersSocial(createUsersSocialDto);
+  async createUsersSocial(@Body() createUsersSocialDto: CreateUsersSocialDto) {
+    await this.socialsService.addUsersSocial(createUsersSocialDto);
     return this.socialsService.findAllByUserId(createUsersSocialDto.userid)
   }
   @Get()
