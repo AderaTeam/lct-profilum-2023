@@ -12,23 +12,31 @@ from fastapi import FastAPI
 import ioc
 import pandas as pd
 import numpy as np
+from typing import List
+from fastapi import FastAPI, Query
 
 
 import requests
 from bs4 import BeautifulSoup
 import vk_api
 import json
+from fastapi.encoders import jsonable_encoder
+from pydantic import BaseModel
 
 app = FastAPI()
 defInitiator()
 valuesInitiator()
+
+class WorkRes(BaseModel):
+    name: list[str]
+    value: list[float]
 
 # 2234799
 @app.get("/leaderid/get_works")
 def root1(user_id: int, n_of_works: int=-1):
     res = ioc.require('leaderidUserInterestsAnalizer')(user_id, n_of_works)
     # res = ioc.require('leaderidUserEventsAnalizer')(user_id, n_of_works)
-    return res
+    return {'name': [i for i in res], 'value': [res[i] for i in res]}
 
 
 # 2234799
@@ -78,7 +86,8 @@ def root3(user_id: int, n_of_works: int=-1):
     res = ioc.require('simpleDistAnalizer')(v, text_samples_vectors)
     res_i = np.argsort(res.to_numpy())[::-1]
     print(prof_ways_data.shape, res.shape, res_i)
-    return {prof_ways_data['Название профессии'][i]: res[i] for i in res_i[0:n_of_works-1]}
+    return {'name': [prof_ways_data['Название профессии'][i] for i in res_i[0:n_of_works-1]], 'value': [res[i] for i in res_i[0:n_of_works-1]]}
+    # return {prof_ways_data['Название профессии'][i]: res[i] for i in res_i[0:n_of_works-1]}
 
 
 # 393854543
@@ -109,3 +118,19 @@ def root4(user_id: int, n_of_works: int=-1):
     
     return {'spec_names': spec_data['name'].iloc[sa_res].to_list(), 'spec_nums': spec_data['num'].iloc[sa_res].to_list()}
 
+
+
+@app.post("/extract/")
+def compareIntersections(wp: WorkRes):
+    data = jsonable_encoder(wp)
+    work_spec_desc = ioc.require('workSpecDesc')
+    res = dict()
+    print(list(work_spec_desc.keys()))
+    for i in data['name']:
+        res[i] = work_spec_desc[i]
+    return res
+        
+
+
+
+    
