@@ -21,6 +21,7 @@ export class SocialsService {
   ){}
 
   async create(createSocialDto: CreateSocialDto) {
+    Logger.log(createSocialDto)
     let social = await this.socialsRepository.create(createSocialDto)
     await this.socialsRepository.save(social);
     social.image = `https://api.adera-team.ru/socials/image/${social.id}`
@@ -115,8 +116,7 @@ export class SocialsService {
     return await this.socialsRepository.update(id, updateSocialDto);
   }
 
-  @UseGuards(UserRolesGuard)
-  @Roles('admin')
+
   async remove(id: number) {
     return await this.socialsRepository.delete({id: id});
   }
