@@ -5,11 +5,10 @@ import { EducationsSelectedCard } from 'widgets/educations-selected-card';
 import { EducationsUniversity } from 'widgets/educations-university';
 import { IUniversity } from 'shared/models/IUniversity';
 import { Input } from 'shared/components/Input';
+import { useEffect, useState } from 'react';
 
 import img1 from 'shared/assets/university/1.png';
 import img2 from 'shared/assets/university/2.png';
-import { useEffect, useState } from 'react';
-import { ResultCard } from 'shared/components/ResultCard';
 
 const EducationsPage = () => {
   const { control, watch } = useForm();

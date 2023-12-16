@@ -13,7 +13,7 @@ export const PathInfo = ({ activePath, currentStep }: PathInfoProps) => {
     complete: activePath?.path.pathSteps.filter(
       (item) => item.step < currentStep
     ).length,
-    left: activePath?.path.pathSteps.filter((item) => item.step > currentStep)
+    left: activePath?.path.pathSteps.filter((item) => item.step >= currentStep)
       .length,
   };
 
