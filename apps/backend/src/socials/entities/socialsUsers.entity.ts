@@ -11,10 +11,18 @@ export class SocialUsers {
     @Column(
         {
             unique: true,
-            nullable: false
+            nullable: true
         }
     )
     originaluserid: string
+
+    @Column(
+        {
+            unique: true,
+            nullable: true
+        }
+    )
+    url: string
 
     @ManyToOne(() => User, {onDelete: 'CASCADE'})
     @JoinColumn()

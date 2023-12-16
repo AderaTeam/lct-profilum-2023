@@ -14,17 +14,38 @@ export class SocialsController {
   }
 
   @Post('user')
-  createUsersSocial(@Body() createUsersSocialDto: CreateUsersSocialDto) {
-    return this.socialsService.addUsersSocial(createUsersSocialDto);
+  async createUsersSocial(@Body() createUsersSocialDto: CreateUsersSocialDto) {
+    await this.socialsService.addUsersSocial(createUsersSocialDto);
+    return this.socialsService.findAllByUserId(createUsersSocialDto.userid)
   }
   @Get()
   findAll() {
     return this.socialsService.findAll();
   }
 
+  @Delete('user/')
+  removeUserSocial(@Body() dto: CreateUsersSocialDto) {
+    return this.socialsService.removeUsersSocials(dto.userid, dto.socialname);
+  }
+
+  @Delete('user/:id')
+  removeUserSocialByUser(@Param('id') id: string) {
+    return this.socialsService.removeUsersSocialsByUserId(+id);
+  }  
+
+  @Get('user/:id')
+  findUser(@Param('id') id: number) {
+    return this.socialsService.findAllByUserId(id);
+  }
+
   @Get('users')
   findAllUsers() {
     return this.socialsService.getAllUsersSocial();
+  }
+
+  @Post('init')
+  intitalize() {
+    return this.socialsService.initialize();
   }
 
   @Get(':id')

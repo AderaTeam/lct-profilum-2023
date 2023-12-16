@@ -16,5 +16,6 @@ razdel
 beautifulsoup4
 ioc
 fastapi
-uvicorn[standard]
 python-ioc
+uvicorn
+gunicorn

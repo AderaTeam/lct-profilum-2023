@@ -1,5 +1,6 @@
 export class CreateUsersSocialDto {
     userid: number
     socialname: string
-    originaluserid: string
+    url?: string
+    originaluserid?: string
 }
