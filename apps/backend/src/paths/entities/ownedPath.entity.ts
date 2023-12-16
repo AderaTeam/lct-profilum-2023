@@ -12,7 +12,7 @@ export class OwnedPath {
     @JoinColumn()
     path: Path
 
-    @ManyToOne(() => User, {eager: true, onDelete: 'CASCADE'})
+    @ManyToOne(() => User, {onDelete: 'CASCADE'})
     @JoinColumn()
     user: User
 

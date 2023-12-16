@@ -119,7 +119,7 @@ export class PathsService {
 
   async stepProgress(pathid: number)
   {
-    let ownedPath = await this.ownedPathRepository.findOneBy({id: pathid})
+    let ownedPath = await this.ownedPathRepository.findOne({where: {id: pathid}, relations:{user: true}})
     Logger.log(JSON.stringify(ownedPath))
     Logger.log(JSON.stringify(ownedPath.user))
     let user = await this.userService.getOneById(ownedPath.user.id)
