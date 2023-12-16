@@ -23,7 +23,7 @@ export class Social {
     @Column(
         { 
             type: "bytea", 
-            nullable: false,
+            nullable: true,
         }
     )
     imagebuff: Buffer

@@ -56,7 +56,6 @@ export class SocialsService {
   async findAllByUserId(userid: number)
   {
     const userSocials = await this.socialsUsersRepository.find({where: {user: Equal<number>(userid)}, relations:{user: false, social: true}, select:{id: false, originaluserid: false}})
-    Logger.log(userSocials)
     const socials = await this.socialsRepository.find()
     let pureSocials = []
     for (const socialConnect of userSocials)
