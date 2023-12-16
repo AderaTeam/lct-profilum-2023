@@ -15,7 +15,8 @@ export class SocialsController {
 
   @Post('user')
   createUsersSocial(@Body() createUsersSocialDto: CreateUsersSocialDto) {
-    return this.socialsService.addUsersSocial(createUsersSocialDto);
+    this.socialsService.addUsersSocial(createUsersSocialDto);
+    return this.socialsService.findAllByUserId(createUsersSocialDto.userid)
   }
   @Get()
   findAll() {
