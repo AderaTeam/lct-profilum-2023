@@ -106,7 +106,7 @@ export class User {
 
     @ManyToMany(() => Path, (path) => path.users, {eager: true, onDelete: 'SET NULL'})
     @JoinTable()
-    analyzedPaths: Path[]
+    analysedPaths: Path[]
 
     @ManyToMany(() => Card, (card) => card.author, {onDelete: 'CASCADE'})
     @JoinTable()
