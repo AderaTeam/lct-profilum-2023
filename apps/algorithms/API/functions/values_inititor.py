@@ -24,6 +24,9 @@ def valuesInitiator():
     with open('./DATA/large_spec_desc_processed.json', 'r') as f:
         large_spec_desc_processed = json.load(f)
 
+    with open('./DATA/work_spec_desc.json', 'r') as f:
+        work_spec_desc = json.load(f)
+
     small_spec_desc = pd.read_csv(
         './DATA/spec_num_name_pairs.csv'
     )
@@ -39,6 +42,7 @@ def valuesInitiator():
     vk_session.auth(token_only=True)
     small_description_vectors = torch.load('../DATA/small_description_vectors.pt')
     prof_ways_data = pd.read_excel('./DATA/Профессии_ОКСО_ ЛЦТ_Профилум.xlsx', index_col='№').loc[:, ['Отрасль текстом', 'Название профессии']]
+    # work_spec_desc = pd.read_excel('./DATA/Профессии_ОКСО_ ЛЦТ_Профилум.xlsx', index_col='№').loc[:, ['Название профессии', 'Специальности ОКСО - по одной специальности может быть множетсво программ обучения, которые открывают колледжии и вузы. Специальность - то, что написано у тебя в дипломе после окончания одной из программ обучения.', ]]
 
     
     vk_session.auth(token_only=True)
@@ -59,3 +63,4 @@ def valuesInitiator():
     ioc.provide('profWaysData', prof_ways_data)
     ioc.provide('largeSpecDescProcessed', large_spec_desc_processed)
     ioc.provide('smallSpecDesc', small_spec_desc)
+    ioc.provide('workSpecDesc', work_spec_desc)
