@@ -5,6 +5,6 @@ export class CreatePathDto {
     id?: number
     name: string
     steps: CreatePathStepDto[]
-    specialities: CreateSpecialityDto[]
+    specialities: string[] //CreateSpecialityDto[] | 
     description: string
 }

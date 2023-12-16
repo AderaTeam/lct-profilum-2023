@@ -42,7 +42,7 @@ export class PathsController {
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updatePathDto: UpdatePathDto) {
-    return this.pathsService.update(+id, updatePathDto);
+   // return this.pathsService.update(+id, updatePathDto);
   }
 
   @Delete('user/:id')

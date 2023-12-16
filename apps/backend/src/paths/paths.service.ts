@@ -61,19 +61,19 @@ export class PathsService {
     }
 
     let specialities = []
-      for(const speciality of createPathDto.specialities)
+    for(const speciality of createPathDto.specialities)
+    {
+      if(!(await this.specialitiesRepository.findOneBy({name: speciality})))
       {
-        if(!(await this.specialitiesRepository.findOneBy({name: speciality.name})))
-        {
-          const newSpeciality = this.specialitiesRepository.create({name: speciality.name})
-          const specToAdd = this.specialitiesRepository.save(newSpeciality)
-          specialities.push(specToAdd)
-        }
-        else
-        {
-          specialities.push(await this.specialitiesRepository.findOneBy({name: speciality.name}))
-        }
+        const newSpeciality = this.specialitiesRepository.create({name: speciality})
+        const specToAdd = this.specialitiesRepository.save(newSpeciality)
+        specialities.push(specToAdd)
       }
+      else
+      {
+        specialities.push(await this.specialitiesRepository.findOneBy({name: speciality}))
+      }
+    }
     
     const path = this.pathRepository.create({...createPathDto, pathSteps: steps, specialities: specialities})
     return this.pathRepository.save(path)
@@ -128,9 +128,9 @@ export class PathsService {
     return await this.pathRepository.findOneBy({id: id})
   }
 
-  async update(id: number, updatePathDto: UpdatePathDto) {
-    return await this.pathRepository.update(id, updatePathDto);
-  }
+  // async update(id: number, updatePathDto: UpdatePathDto) {
+  //   return await this.pathRepository.update(id, updatePathDto);
+  // }
 
   async remove(id: number) {
     return await this.pathRepository.delete({id: id});
