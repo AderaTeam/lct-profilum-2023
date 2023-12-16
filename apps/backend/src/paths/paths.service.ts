@@ -102,7 +102,6 @@ export class PathsService {
         {
           throw new HttpException('User or path does not exist', HttpStatus.BAD_REQUEST)
         }
-      
       await this.ownedPathRepository.insert(
           {
             user: (await this.userService.getOneById(createOwnedPathDto.userId)),
@@ -116,6 +115,16 @@ export class PathsService {
   async dropOwnageForUser(id: number)
   {
     return await this.ownedPathRepository.delete({user: await this.userService.getOneById(id)})
+  }
+
+  async stepProgress(pathid: number)
+  {
+    let ownedPath = await this.ownedPathRepository.findOneBy({id: pathid})
+    ownedPath.user.points += (await this.pathStepRepository.findOneBy({path: ownedPath.path, step: ownedPath.currentStep})).points
+    ownedPath.currentStep = ownedPath.currentStep + 1;
+    await this.userService.updateOne(ownedPath.user.id, ownedPath.user)
+    await this.ownedPathRepository.save(ownedPath)
+    return this.userService.getOneById(ownedPath.user.id)
   }
 
   async findAll() {

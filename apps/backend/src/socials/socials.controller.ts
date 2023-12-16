@@ -2,6 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { SocialsService } from './socials.service';
 import { CreateSocialDto } from './dto/create-social.dto';
 import { UpdateSocialDto } from './dto/update-social.dto';
+import { CreateUsersSocialDto } from './dto/create-users-social.dto';
 
 @Controller('socials')
 export class SocialsController {
@@ -12,6 +13,10 @@ export class SocialsController {
     return this.socialsService.create(createSocialDto);
   }
 
+  @Post('user')
+  createUsersSocial(@Body() createUsersSocialDto: CreateUsersSocialDto) {
+    return this.socialsService.addUsersSocial(createUsersSocialDto);
+  }
   @Get()
   findAll() {
     return this.socialsService.findAll();

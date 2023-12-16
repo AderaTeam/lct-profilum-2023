@@ -20,6 +20,11 @@ export class PathsController {
     return this.pathsService.createOwnage(createPathDto);
   }
 
+  @Post('progress/:pathid')
+  progressPath(@Param('pathid') id: number) {
+    return this.pathsService.stepProgress(id);
+  }
+
   @Post('multiple')
   createMultiple(@Body() createPathDto: CreateMultiplePathDto) {
     return this.pathsService.createMultiple(createPathDto);

@@ -8,6 +8,7 @@ import { UserRolesGuard } from '../user/user.guard';
 import { Roles } from '../decorators/roles.decorator';
 import { SocialUsers } from './entities/socialsUsers.entity';
 import { UserService } from '../user/user.service';
+import { CreateUsersSocialDto } from './dto/create-users-social.dto';
 
 @Injectable()
 export class SocialsService {
@@ -55,13 +56,13 @@ export class SocialsService {
     return await this.socialsRepository.findOneBy({id: id});
   }
 
-  async addUsersSocial(userid: number, socialname: string, originalid: string)
+  async addUsersSocial(createUsersSocialDto: CreateUsersSocialDto)
   {
     const newUser = await this.socialsUsersRepository.create(
       {
-        originaluserid: originalid, 
-        social: await this.socialsRepository.findOneBy({name: socialname}), 
-        user: await this.userService.getOneById(userid)
+        originaluserid: createUsersSocialDto.originaluserid, 
+        social: await this.socialsRepository.findOneBy({name: createUsersSocialDto.socialname}), 
+        user: await this.userService.getOneById(createUsersSocialDto.userid)
       }
       )
     return await this.socialsUsersRepository.save(newUser)
