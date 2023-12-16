@@ -52,6 +52,9 @@ class WorkRes(BaseModel):
     name: list[str]
     value: list[float]
 
+@app.get("/hi")
+def hello():
+    return {"message": "hi"}
 # 2234799
 @app.get("/leaderid/get_works")
 def root1(user_id: int, n_of_works: int=-1):
