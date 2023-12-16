@@ -27,7 +27,7 @@ export class Path {
     @ManyToMany(() => Speciality, (speciality) => speciality.paths)
     specialities: Speciality[]
 
-    @ManyToMany(() => User, (user) => {user.analysedPaths})
+    @ManyToMany(() => User, (user) => {user.analysedPaths}, {onDelete: 'SET NULL'})
     @JoinTable()
     users: User[]
 

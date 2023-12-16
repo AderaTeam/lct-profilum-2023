@@ -104,7 +104,7 @@ export class User {
     @JoinTable()
     paths: OwnedPath[]
 
-    @ManyToMany(() => Path, (path) => path.users, {eager: true, onDelete: 'SET NULL'})
+    @ManyToMany(() => Path, (path) => path.users, {eager: true})
     @JoinTable()
     analysedPaths: Path[]
 
