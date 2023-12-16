@@ -20,6 +20,7 @@ import requests
 from bs4 import BeautifulSoup
 import vk_api
 import json
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel
 
