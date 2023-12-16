@@ -20,8 +20,7 @@ export class UserService {
 
     public async create(user: CreateUserDto | VkUserDto)
     {
-        //Logger.log(user)
-        const newUser =  this.userRepository.create(user)
+        const newUser = this.userRepository.create(user)
         await this.userRepository.save(newUser)
         return newUser
     }
@@ -56,6 +55,17 @@ export class UserService {
         let user = await this.getOneById(userid)
         Object.assign(user, userDto)
         return await this.userRepository.save(user)
+    }
+
+    public async updatePlacement()
+    {
+        const users = await this.userRepository.find({order: {points: 'DESC'}})
+        let iteration = 1
+        for(let user of users)
+        {   
+            user.ratingPlacement = iteration
+            await this.userRepository.save(user)
+        }
     }
 
     public async deleteOne(id: number)

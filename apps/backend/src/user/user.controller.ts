@@ -48,7 +48,11 @@ export class UserController
         return await this.userService.updateOne(req.user.sub, userDto)
     }
 
-    
+    @Post('placement')
+    public async updatePlacement()
+    {
+        return await this.userService.updatePlacement()
+    }
 
     @UseGuards(AccessTokenGuard)
     @Delete('')

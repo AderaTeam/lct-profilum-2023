@@ -28,9 +28,9 @@ export class SocialsService {
 
   async initialize()
   {
-    this.socialsRepository.create({name: 'VK', description: 'Сообщества, записи на стене, комментарии'})
-    this.socialsRepository.create({name: 'LeaderID', description: 'Мероприятия, команды'})
-
+    await this.socialsRepository.insert({name: 'VK', description: 'Сообщества, записи на стене, комментарии'})
+    await this.socialsRepository.insert({name: 'LeaderID', description: 'Мероприятия, команды'})
+    await this.socialsRepository.insert({name: 'Steam', description: 'Игры, сообщества'})
   }
 
   async upsert()
@@ -49,7 +49,7 @@ export class SocialsService {
 
   async findOneByUserId(socialname: string, originalid: string)
   {
-    return await this.socialsUsersRepository.findOne({where: {originaluserid: originalid, social: Equal<Social>(await this.socialsRepository.findOneBy({name: socialname}))}, relations:{user: true, social: true}})
+    return await this.socialsUsersRepository.findOne({where: {originaluserid: originalid, social: Equal<string>(socialname)}, relations:{user: true, social: true}})
   }
 
   async findOne(id: number) {
