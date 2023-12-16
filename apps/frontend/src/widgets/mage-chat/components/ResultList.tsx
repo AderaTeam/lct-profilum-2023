@@ -25,6 +25,8 @@ export const ResultList = observer(
       <Stack gap={12}>
         {UStore.user.analysedPaths?.map((item) => (
           <ResultCard
+            descriptions={item.description}
+            specialities={item.specialities}
             activeIds={activeIds}
             name={item.name}
             key={item.id}

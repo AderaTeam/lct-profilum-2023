@@ -17,4 +17,6 @@ export interface IPath {
   id: number;
   name: string;
   pathSteps: IPathStep[];
+  description: string;
+  specialities: { name: string }[];
 }

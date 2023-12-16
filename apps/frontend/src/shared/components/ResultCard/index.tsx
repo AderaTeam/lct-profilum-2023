@@ -9,6 +9,8 @@ interface ResultCardProps {
   id: number;
   activeIds: number[];
   handleChange: Function;
+  specialities: { name: string }[];
+  descriptions: string;
 }
 
 export const ResultCard = ({
@@ -16,6 +18,8 @@ export const ResultCard = ({
   id,
   activeIds,
   handleChange,
+  specialities,
+  descriptions,
 }: ResultCardProps) => {
   return (
     <Card>
@@ -24,14 +28,13 @@ export const ResultCard = ({
           <Avatar src={avatar} size={64} />
           <Stack w={668} gap={12}>
             <h2 className="h2">{name}</h2>
-            <p className="text black">
-              Небольшое описание специальности и ключевые навыки бла бла бла
-              ыываваыв а. Программирование... Дизайн... IT
-            </p>
+            <p className="text black">{descriptions}</p>
             <Flex gap={12}>
-              <div className="text gray">#09.03.02</div>
-              <div className="text gray">#09.03.02</div>
-              <div className="text gray">#09.03.02</div>
+              {specialities.map((item) => (
+                <div key={item.name} className="text gray">
+                  #{item.name}
+                </div>
+              ))}
             </Flex>
           </Stack>
         </Flex>

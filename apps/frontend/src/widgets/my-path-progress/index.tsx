@@ -4,16 +4,16 @@ import { ActivePathSwitch } from './components/ActivePathSwitch';
 import { Flex, Stack } from '@mantine/core';
 import { PathInfo } from './components/PathInfo';
 import { observer } from 'mobx-react-lite';
-import { IPath } from 'shared/models/IPath';
 import { PathSteps } from './components/PathSteps';
 import { NoPath } from './components/NoPath';
+import { IAnalazedResult } from 'shared/models/IAnalazedResult';
 
 export const MyPathProgress = observer(() => {
   const { UStore } = useContext(Context);
   const [activePathId, setActivePathId] = useState<number>(
     UStore?.user?.paths.length && UStore.user.paths[0].id
   );
-  const [activePath, setActivePath] = useState<IPath | undefined>(
+  const [activePath, setActivePath] = useState<IAnalazedResult | undefined>(
     UStore?.user?.paths?.find((item) => item.id === UStore?.user?.paths[0]?.id)
   );
 
