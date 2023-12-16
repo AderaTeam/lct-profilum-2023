@@ -34,7 +34,7 @@ export class SocialsService {
 
   async getImage(id: number)
   {
-    return (await this.socialsRepository.findOneBy({id: id})).imagebuff
+    return (await this.socialsRepository.findOne({where: {id: id}, select: {imagebuff: true}})).imagebuff
   }
 
   async initialize()
