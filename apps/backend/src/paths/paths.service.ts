@@ -93,9 +93,9 @@ export class PathsService {
   async createOwnage(createOwnedPathDto: CreateOwnedPathDto)
   {
 
-    if (await this.ownedPathRepository.find({where:{user: Equal<User>(await this.userService.getOneById(createOwnedPathDto.userId))}}))
+    if (await this.ownedPathRepository.find({where:{user: Equal<number>(createOwnedPathDto.userId)}}))
         {
-          await this.ownedPathRepository.delete({user: Equal<User>(await this.userService.getOneById(createOwnedPathDto.userId))})
+          await this.ownedPathRepository.delete({user: Equal<number>(createOwnedPathDto.userId)})
         }
     for (const pathId of createOwnedPathDto.pathIds)
     {
