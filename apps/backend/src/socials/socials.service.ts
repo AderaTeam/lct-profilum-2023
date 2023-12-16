@@ -94,15 +94,15 @@ export class SocialsService {
     return await this.socialsUsersRepository.save(newUser)
   }
 
-  // @UseGuards(UserRolesGuard)
-  // @Roles('admin')
-  // async update(id: number, updateSocialDto: UpdateSocialDto) {
-  //   return await this.socialsRepository.update(id, updateSocialDto);
-  // }
+  @UseGuards(UserRolesGuard)
+  @Roles('admin')
+  async update(id: number, updateSocialDto: UpdateSocialDto) {
+    return await this.socialsRepository.update(id, updateSocialDto);
+  }
 
-  // @UseGuards(UserRolesGuard)
-  // @Roles('admin')
-  // async remove(id: number) {
-  //   return await this.socialsRepository.delete({id: id});
-  // }
+  @UseGuards(UserRolesGuard)
+  @Roles('admin')
+  async remove(id: number) {
+    return await this.socialsRepository.delete({id: id});
+  }
 }

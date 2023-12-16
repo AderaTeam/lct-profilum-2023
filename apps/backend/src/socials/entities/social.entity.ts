@@ -20,6 +20,21 @@ export class Social {
     )
     description: string
 
+    @Column(
+        { 
+            type: "bytea", 
+            nullable: false,
+        }
+    )
+    imagebuff: Buffer
+
+    @Column(
+        {
+            nullable: true
+        }
+    )
+    image: string
+
     @OneToMany(() => SocialUsers, (socialUsers) => socialUsers.social)
     @JoinColumn()
     social: SocialUsers
