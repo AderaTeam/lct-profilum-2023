@@ -3,9 +3,10 @@ import { CreateCardDto } from './dto/create-card.dto';
 import { UpdateCardDto } from './dto/update-card.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Card } from './entities/card.entity';
-import { Repository } from 'typeorm';
+import { Equal, Repository } from 'typeorm';
 import { UserService } from '../user/user.service';
 import { PathsService } from '../paths/paths.service';
+import { User } from '../database/entities-index';
 
 @Injectable()
 export class CommunityService {
@@ -29,7 +30,7 @@ export class CommunityService {
   }
 
   async findAllCardsByUser(id: number) {
-    return await this.cardRepository.find({where: {author: await this.userService.getOneById(id)}});
+    return await this.cardRepository.find({where: {author: Equal<User>(await this.userService.getOneById(id))}});
   }
 
   findOneCard(id: number) {

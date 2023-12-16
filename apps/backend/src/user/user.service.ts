@@ -1,6 +1,6 @@
 import { BadRequestException, Inject, Injectable, Logger, UnauthorizedException } from '@nestjs/common';
 import { User } from './entities/user.entity';
-import { Repository } from 'typeorm';
+import { Equal, EqualOperator, Repository } from 'typeorm';
 import { UserResponseDto } from './dtos/userResponse.dto';
 import { UserUpdateDto } from './dtos/userUpdate.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -33,7 +33,7 @@ export class UserService {
 
     public async getAchievements(id: number)
     {
-        return await this.achievementOwnedRepository.find({where: {user: await this.userRepository.findOneBy({id: id})}, relations: {achievement: true}, select: {achievement: {image: false, id: true, name: true}}} )
+        return await this.achievementOwnedRepository.find({where: {user: Equal<User>(await this.userRepository.findOneBy({id: id}))}, relations: {achievement: true}, select: {achievement: {image: false, id: true, name: true}}} )
     }
 
     public async getOneByUsername(username: string)

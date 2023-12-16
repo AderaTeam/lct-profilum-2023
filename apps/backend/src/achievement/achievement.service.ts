@@ -3,7 +3,7 @@ import { CreateAchievementDto } from './dto/create-achievement.dto';
 import { UpdateAchievementDto } from './dto/update-achievement.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Achievement } from './entities/achievement.entity';
-import { Repository } from 'typeorm';
+import { Equal, Repository } from 'typeorm';
 import { AchievementOwned } from './entities/achievementOwned.entity';
 import { User } from '../database/entities-index';
 import { CreateAchievementOwnedDto } from './dto/create-achievementOwned.dto';
@@ -27,8 +27,8 @@ export class AchievementService {
 
   async createOwned(createAchievementOwnedDto: CreateAchievementOwnedDto) {
     if (await this.achievementOwnedRepository.findOneBy({
-      user: await this.userRepository.findOneBy({id: createAchievementOwnedDto.userid}), 
-      achievement: await this.achievementRepository.findOneBy({id: createAchievementOwnedDto.achievementid}),
+      user: Equal<User>(await this.userRepository.findOneBy({id: createAchievementOwnedDto.userid})), 
+      achievement: Equal<Achievement>(await this.achievementRepository.findOneBy({id: createAchievementOwnedDto.achievementid})),
     }))
       {
         throw new DuplicateException()
@@ -42,8 +42,8 @@ export class AchievementService {
 
   async deleteOwned(createAchievementOwnedDto: CreateAchievementOwnedDto) {
     return this.achievementOwnedRepository.delete({
-      user: await this.userRepository.findOneBy({id: createAchievementOwnedDto.userid}), 
-      achievement: await this.achievementRepository.findOneBy({id: createAchievementOwnedDto.achievementid}),
+      user: Equal<User>(await this.userRepository.findOneBy({id: createAchievementOwnedDto.userid})), 
+      achievement: Equal<Achievement>(await this.achievementRepository.findOneBy({id: createAchievementOwnedDto.achievementid})),
     })
   }
 
