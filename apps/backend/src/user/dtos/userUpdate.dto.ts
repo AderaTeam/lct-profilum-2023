@@ -20,7 +20,7 @@ export class UserUpdateDto
     avataruri?: string
     socials?: SocialUsers[]
     paths?: OwnedPath[]
-    analysedPaths?: Path[]
+    analyzedPaths?: Path[]
     cards?: Card[]
     achievements?: AchievementOwned[]
 }

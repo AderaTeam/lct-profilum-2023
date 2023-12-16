@@ -158,7 +158,7 @@ export class PathsService {
   async removeAll() {
     for (const user of await this.userService.getAll())
     {
-      await this.userService.updateOne(user.id, {...user, analysedPaths: []})
+      await this.userService.updateOne(user.id, {...user, analyzedPaths: []})
     }
     return this.pathRepository.delete({})
   }
