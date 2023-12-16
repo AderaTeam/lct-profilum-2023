@@ -80,7 +80,7 @@ export class AuthService {
       const tokens = await this.getTokens(newUser.id, newUser.username);
       await this.updateRefreshToken(newUser.id, tokens.refreshToken);
       //Logger.log(userData)
-      await this.socialsService.addUsersSocial(newUser.id, "VK", userData.id)
+      await this.socialsService.addUsersSocial({userid: newUser.id, socialname: "VK", originaluserid: userData.id})
       return {user: await this.usersService.getOneByNickname(newUser.nickname), ...tokens, firsttime: true};
     }
   }
