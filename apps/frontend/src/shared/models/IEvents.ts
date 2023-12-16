@@ -4,7 +4,7 @@ export interface IAuthor {
   avataruri: string;
 }
 
-export interface IEvets {
+export interface IEvents {
   title: string;
   author: IAuthor;
   status: string;
