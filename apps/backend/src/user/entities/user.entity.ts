@@ -54,6 +54,7 @@ export class User {
     )
     refreshToken: string
 
+    
     @Column(
         {
             nullable: true,
