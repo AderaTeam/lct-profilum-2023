@@ -2,6 +2,7 @@ import { Loader, Stack } from '@mantine/core';
 import { TableButtonRow } from './components/TableButtonRow';
 import { TableHeader } from './components/TableHeader';
 import { TableBody } from './components/TableBody';
+import { useState } from 'react';
 
 interface TableProps {
   rowsData: any[];
@@ -9,6 +10,12 @@ interface TableProps {
 }
 
 export const Table = ({ rowsData, type }: TableProps) => {
+  const [activeIds, setAvtiveIds] = useState<number[]>([]);
+
+  const handleAllCheck = (e) => {
+    const ids = e.target.checked ? [] : [];
+  };
+
   return (
     <Stack gap={0}>
       {rowsData.length ? (

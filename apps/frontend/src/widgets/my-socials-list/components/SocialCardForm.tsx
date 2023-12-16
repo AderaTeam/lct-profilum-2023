@@ -6,6 +6,8 @@ import { Input } from 'shared/components/Input';
 import * as VKID from '@vkid/sdk';
 import { NO_PAGE_ROUTE } from 'shared/constants/const';
 import $api from 'shared/api';
+import { useContext } from 'react';
+import { Context } from 'main';
 
 interface SocialCardFormProps {
   name: string;
@@ -14,17 +16,25 @@ interface SocialCardFormProps {
 
 export const SocialCardForm = ({ name, getSocials }: SocialCardFormProps) => {
   const { control, watch, handleSubmit } = useForm();
+  const { UStore } = useContext(Context);
   VKID.Config.set({
     app: 51812541,
     redirectUrl: `https://profilum.adera-team.ru${NO_PAGE_ROUTE}`,
   });
 
   const handleConnect = handleSubmit((formData) => {
-    if (name === 'Вконтакте') {
+    if (name === 'VK') {
       VKID.Auth.login();
     } else {
-      console.log(formData);
-      //getSocials && $api.post('/').then(() => getSocials());
+      getSocials &&
+        $api
+          .post('/socials/user', {
+            userid: UStore.user.id,
+            socialname: name,
+            url: formData.url,
+            originaluserid: formData.originaluserid,
+          })
+          .then(() => getSocials());
     }
   });
 
@@ -32,10 +42,10 @@ export const SocialCardForm = ({ name, getSocials }: SocialCardFormProps) => {
     <Stack gap={24}>
       <Flex align={'center'} justify={'space-between'}>
         <Controller
-          name={`${name}.id`}
+          name={`originaluserid`}
           defaultValue={''}
           control={control}
-          disabled={watch(`${name}.link`)}
+          disabled={watch(`url`)}
           render={(field) => (
             <Input
               placeholder="53627832"
@@ -46,10 +56,10 @@ export const SocialCardForm = ({ name, getSocials }: SocialCardFormProps) => {
           )}
         />
         <Controller
-          name={`${name}.link`}
+          name={`url`}
           control={control}
           defaultValue={''}
-          disabled={watch(`${name}.id`)}
+          disabled={watch(`originaluserid`)}
           render={(field) => (
             <Input
               placeholder="https://hailie.org"

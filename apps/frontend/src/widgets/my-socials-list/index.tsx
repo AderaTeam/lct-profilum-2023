@@ -6,15 +6,12 @@ import { MAGE_ROUTE } from 'shared/constants/const';
 import { Card } from 'shared/components/Card';
 import { IconAlertCircleFilled } from '@tabler/icons-react';
 import { IPath } from 'shared/models/IPath';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { ISocial } from 'shared/models/ISocial';
+import $api from 'shared/api';
+import { Context } from 'main';
 
-import od from 'shared/assets/mock/od.png';
-import tg from 'shared/assets/mock/tg.png';
-import vk from 'shared/assets/mock/vk.png';
-import steam from 'shared/assets/mock/steam.png';
 import pt from 'shared/assets/mock/pt.png';
-
 interface MySocialsListProps {
   isLoading: boolean;
   handleAnalysis: Function;
@@ -28,9 +25,12 @@ export const MySocialsList = ({
 }: MySocialsListProps) => {
   const navigate = useNavigate();
   const [socials, setSocials] = useState<ISocial[]>([]);
+  const { UStore } = useContext(Context);
 
   const getSocials = () => {
-    setSocials(data);
+    $api
+      .get(`/socials/user/${UStore.user.id}`)
+      .then((response) => setSocials(response.data.socials));
   };
 
   useEffect(() => {
@@ -38,34 +38,6 @@ export const MySocialsList = ({
   }, []);
 
   const data = [
-    {
-      id: 0,
-      name: 'Вконтакте',
-      description: 'Сообщества, записи на стене, комментарии',
-      image: vk,
-      status: 'connected',
-    },
-    {
-      id: 1,
-      name: 'Steam',
-      description: 'Библиотека игр, статистика по аккаунту',
-      image: steam,
-      status: 'connected',
-    },
-    {
-      id: 2,
-      name: 'Одноклассники',
-      description: 'Сообщества, записи на стене, комментарии',
-      image: od,
-      status: 'available',
-    },
-    {
-      id: 3,
-      name: 'Telegram',
-      description: 'Подписки на  каналы',
-      image: tg,
-      status: 'available',
-    },
     {
       id: 4,
       name: 'Pinterest',
@@ -103,7 +75,7 @@ export const MySocialsList = ({
       ) : (
         <></>
       )}
-      {socials.filter((item) => item.status === 'available').length ? (
+      {socials.filter((item) => item.status === 'avalible').length ? (
         <Stack gap={24}>
           <h2 className="h2">Доступные соц.сети для подключения</h2>
           <Card bg="#E0EEFF" p="24px 32px" radius="12px">
@@ -116,7 +88,7 @@ export const MySocialsList = ({
           </Card>
           <Stack gap={12}>
             {socials
-              .filter((item) => item.status === 'available')
+              .filter((item) => item.status === 'avalible')
               .map((item) => (
                 <SocialCard
                   getSocials={getSocials}
@@ -129,11 +101,11 @@ export const MySocialsList = ({
       ) : (
         <></>
       )}
-      {socials.filter((item) => item.status === 'soon').length ? (
+      {data.filter((item) => item.status === 'soon').length ? (
         <Stack gap={24}>
           <h2 className="h2">Скоро</h2>
           <Stack gap={12}>
-            {socials
+            {data
               .filter((item) => item.status === 'soon')
               .map((item) => (
                 <SocialCard key={item.id} social={item} />
