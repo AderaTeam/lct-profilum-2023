@@ -36,7 +36,7 @@ const MainWrapper = observer(
             </Stack>
             <Stack className={style.right}>
               <div className="wrapper">
-                {UStore.user.role === 'admin' ? (
+                {UStore.user.role === 'admin' ? ( //admin
                   <></>
                 ) : (
                   <>

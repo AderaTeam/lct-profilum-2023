@@ -5,16 +5,17 @@ import { Checkbox } from 'shared/components/Checkbox';
 
 interface TableHeaderProps {
   type: string;
+  handleAllCheck: Function;
 }
 
-export const TableHeader = ({ type }: TableHeaderProps) => {
+export const TableHeader = ({ type, handleAllCheck }: TableHeaderProps) => {
   return (
     <Flex align={'center'}>
       <Flex w={136} className={style.cell}>
         <p className="text bold">Действия</p>
       </Flex>
       <Flex className={style.cell}>
-        <Checkbox />
+        <Checkbox onChange={(e) => handleAllCheck(e)} />
       </Flex>
       <Flex className={style.cell} w={100}>
         <p className="text bold">№</p>

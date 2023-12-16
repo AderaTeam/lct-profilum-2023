@@ -10,30 +10,43 @@ interface TableRowProps {
   type: string;
   row: any;
   index: number;
+  handleRowDelete: Function;
+  handleRowEdit: Function;
+  handleModalOpen: Function;
 }
 
-export const TableRow = ({ index, row, type }: TableRowProps) => {
+export const TableRow = ({
+  index,
+  row,
+  type,
+  handleRowDelete,
+  handleModalOpen,
+  handleRowEdit,
+}: TableRowProps) => {
   return (
     <Flex align={'flex-start'} className={style.row} gap={0}>
       <Flex w={136} align={'center'} className={style.cell} gap={10}>
         <IconArrowsMaximize
+          onClick={() => handleModalOpen(row.id)}
           style={{ cursor: 'pointer' }}
           stroke={'2'}
           color={'#212529'}
         />
         <IconEdit
+          onClick={() => handleRowEdit(row.id)}
           style={{ cursor: 'pointer' }}
           stroke={'2'}
           color={'#212529'}
         />
         <IconTrashX
+          onClick={() => handleRowDelete(row.id)}
           style={{ cursor: 'pointer' }}
           stroke={'2'}
           color={'#F03E3E'}
         />
       </Flex>
       <Flex className={style.cell}>
-        <Checkbox />
+        <Checkbox value={`${row.id}`} />
       </Flex>
       <Flex w={100} className={style.cell}>
         <p className="text bold">{index}</p>
@@ -61,7 +74,7 @@ export const TableRow = ({ index, row, type }: TableRowProps) => {
           </Flex>
           <Flex gap={8} wrap={'wrap'} w={448} className={style.cell}>
             {row.specialities.map((item: { name: string }, index: number) => (
-              <p className="text black">
+              <p key={item.name} className="text black">
                 #{item.name}
                 {row.specialities[index + 1] ? ',' : ''}
               </p>
