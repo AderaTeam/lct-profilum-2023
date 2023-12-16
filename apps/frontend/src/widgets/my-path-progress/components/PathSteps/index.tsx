@@ -19,6 +19,7 @@ export const PathSteps = ({
           <Step
             currentStep={activePath.currentStep}
             key={step.step}
+            id={activePath.id}
             handleStepComplete={handleStepComplete}
             step={step}
           />

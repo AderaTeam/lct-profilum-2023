@@ -18,9 +18,15 @@ interface StepProps {
   step: IPathStep;
   handleStepComplete: Function;
   currentStep: number;
+  id: number;
 }
 
-export const Step = ({ step, handleStepComplete, currentStep }: StepProps) => {
+export const Step = ({
+  step,
+  handleStepComplete,
+  currentStep,
+  id,
+}: StepProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
@@ -77,7 +83,7 @@ export const Step = ({ step, handleStepComplete, currentStep }: StepProps) => {
             ))}
           </Flex>
           {step.step === currentStep && (
-            <Button onClick={() => handleStepComplete(step.step)}>
+            <Button onClick={() => handleStepComplete(id)}>
               <Flex gap={8}>
                 Подтвердить <IconChevronRight stroke={1.5} color="#FFFF" />
               </Flex>

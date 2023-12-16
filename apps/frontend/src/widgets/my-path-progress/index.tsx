@@ -26,6 +26,12 @@ export const MyPathProgress = observer(() => {
 
   const handleStepComplete = (id: number) => {
     console.log(id);
+    UStore.setUser({
+      ...UStore.user,
+      paths: UStore.user.paths.map((item) =>
+        item.id === id ? { ...item, currentStep: item.currentStep + 1 } : item
+      ),
+    });
   };
 
   return (

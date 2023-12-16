@@ -26,6 +26,7 @@ import {
   IconSchool,
 } from '@tabler/icons-react';
 
+//User
 const auth = lazy(() => import('pages/auth'));
 const myPath = lazy(() => import('pages/my-path'));
 const community = lazy(() => import('pages/community'));
@@ -38,7 +39,13 @@ const mage = lazy(() => import('pages/mage'));
 const noPage = lazy(() => import('pages/no-page'));
 const onboarding = lazy(() => import('pages/onboarding'));
 
+//Admin
+const stat = lazy(() => import('pages/stat'));
+const profDb = lazy(() => import('pages/prof-db'));
+const pathfDb = lazy(() => import('pages/path-db'));
+
 export const authRoutes = [
+  //User
   {
     path: MY_PATH_ROUTE,
     Component: myPath,
@@ -109,23 +116,24 @@ export const authRoutes = [
     isAdmin: false,
     isHide: true,
   },
+  //Admin
   {
     path: STAT_ROUTE,
-    Component: mySocials,
+    Component: stat,
     title: 'Статистика',
     isAdmin: true,
     icon: IconChartHistogram,
   },
   {
     path: PROF_DB_ROUTE,
-    Component: mage,
+    Component: profDb,
     title: 'База профессий',
     isAdmin: true,
     icon: IconFileDescription,
   },
   {
     path: PATH_DB_ROUTE,
-    Component: noPage,
+    Component: pathfDb,
     title: 'База путей',
     isAdmin: true,
     icon: IconRoute,
