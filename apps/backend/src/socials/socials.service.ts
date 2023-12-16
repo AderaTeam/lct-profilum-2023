@@ -58,12 +58,24 @@ export class SocialsService {
     const userSocials = await this.socialsUsersRepository.find({where: {user: Equal<number>(userid)}, relations:{user: false, social: true}, select:{id: false, originaluserid: false}})
     Logger.log(userSocials)
     const socials = await this.socialsRepository.find()
-    let ans = {}
-    // for (const socialConnect of userSocials)
-    // {
-      
-    // }
-    return{...(userSocials)}
+    let pureSocials = []
+    for (const socialConnect of userSocials)
+    {
+      pureSocials.push(socialConnect.social.name)
+    }
+    let ans = {socials: []}
+    for (const social of socials)
+    {
+      if (pureSocials.includes(social.name))
+      {
+        ans.socials.push({...social, status: 'connected'})
+      }
+      else
+      {
+        ans.socials.push({...social, status: 'avalible'})
+      }
+    }
+    return ans
   }
 
   async findOne(id: number) {
