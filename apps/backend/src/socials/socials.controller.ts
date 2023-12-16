@@ -1,9 +1,10 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFile, StreamableFile } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFile, StreamableFile, UseGuards, Req, Query } from '@nestjs/common';
 import { SocialsService } from './socials.service';
 import { CreateSocialDto } from './dto/create-social.dto';
 import { UpdateSocialDto } from './dto/update-social.dto';
 import { CreateUsersSocialDto } from './dto/create-users-social.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { AccessTokenGuard } from '../auth/accessToken.guard';
 
 @Controller('socials')
 export class SocialsController {
@@ -29,6 +30,13 @@ export class SocialsController {
   @Get()
   findAll() {
     return this.socialsService.findAll();
+  }
+
+  @UseGuards(AccessTokenGuard)
+  @Post('vk')
+  async attachVk(@Query('silent_token') silentToken: string, @Query('uuid') uuid: string,@Req () req: Record<string, any>)
+  {
+    return await this.attachVk(silentToken, uuid, req.user.sub)
   }
 
   @Delete('user/')

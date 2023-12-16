@@ -50,15 +50,10 @@ export class AuthService {
     {
       throw new TokenExpiredOrInvalidException()
     }
-    //Logger.log(result.data)
 
     const datauri = `https://api.vk.com/method/account.getProfileInfo?v=5.131&access_token=${result.data.response.access_token}`
 
     const userData = await (await axios.get(datauri)).data.response
-
-    //Logger.log(userData)
-
-    //Logger.log(await this.socialsService.findOneByUserId("VK",userData.id), userData.id)
 
     if (await this.socialsService.findOneByUserId("VK",userData.id))
     {

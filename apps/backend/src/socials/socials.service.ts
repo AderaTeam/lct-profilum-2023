@@ -9,6 +9,10 @@ import { Roles } from '../decorators/roles.decorator';
 import { SocialUsers } from './entities/socialsUsers.entity';
 import { UserService } from '../user/user.service';
 import { CreateUsersSocialDto } from './dto/create-users-social.dto';
+import { AccessTokenGuard } from '../auth/accessToken.guard';
+import axios from 'axios';
+import { TokenExpiredOrInvalidException } from '../exceptions/tokenExpired.exception';
+import clientdata from '../constants/clientdata';
 
 @Injectable()
 export class SocialsService {
@@ -87,6 +91,24 @@ export class SocialsService {
   async findOne(id: number) {
     return await this.socialsRepository.findOneBy({id: id});
   }
+
+  async attachVk(silentToken: string, uuid: string, userid: number)
+  {
+    const accessuri = `https://api.vk.com/method/auth.exchangeSilentAuthToken?v=5.131&access_token=${clientdata.service_token}&token=${silentToken}&uuid=${uuid}`
+
+    const result = await axios.get(accessuri)
+
+    if (result.data.error)
+    {
+      throw new TokenExpiredOrInvalidException()
+    }
+
+    const datauri = `https://api.vk.com/method/account.getProfileInfo?v=5.131&access_token=${result.data.response.access_token}`
+
+    const userData = await (await axios.get(datauri)).data.response
+
+    return await this.addUsersSocial({originaluserid: userData.id, socialname: "VK", userid: userid})
+  } 
 
   async addUsersSocial(createUsersSocialDto: CreateUsersSocialDto)
   {
