@@ -92,16 +92,17 @@ export class PathsService {
   async createOwnage(createOwnedPathDto: CreateOwnedPathDto)
   {
 
+    if (await this.ownedPathRepository.find({where:{user: (await this.userService.getOneById(createOwnedPathDto.userId))}}))
+        {
+          await this.ownedPathRepository.delete({user: (await this.userService.getOneById(createOwnedPathDto.userId))})
+        }
     for (const pathId of createOwnedPathDto.pathIds)
     {
       if (!(await this.userService.getOneById(createOwnedPathDto.userId)) || !(await this.pathRepository.findOneBy({id: pathId})))
         {
           throw new HttpException('User or path does not exist', HttpStatus.BAD_REQUEST)
         }
-      if (await this.ownedPathRepository.find({where:{user: (await this.userService.getOneById(createOwnedPathDto.userId))}}))
-        {
-          await this.ownedPathRepository.delete({user: (await this.userService.getOneById(createOwnedPathDto.userId))})
-        }
+      
       await this.ownedPathRepository.insert(
           {
             user: (await this.userService.getOneById(createOwnedPathDto.userId)),
