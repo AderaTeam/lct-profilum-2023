@@ -17,13 +17,19 @@ export class UserController
         return await this.userService.dropall()
     }
 
+    @Delete(':userid')
+    public async dropExact(@Param('id') id: number)
+    {
+        return await this.userService.deleteOne(id)
+    }
+
 
     @Post('placement')
     public async updatePlacement()
     {
         return await this.userService.updatePlacement()
     }
-    
+
     @Get()
     public async getAll()
     {

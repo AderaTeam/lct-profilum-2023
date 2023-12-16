@@ -1,10 +1,8 @@
 import { BadRequestException, Inject, Injectable, Logger, UnauthorizedException } from '@nestjs/common';
 import { User } from './entities/user.entity';
 import { Equal, EqualOperator, Repository } from 'typeorm';
-import { UserResponseDto } from './dtos/userResponse.dto';
 import { UserUpdateDto } from './dtos/userUpdate.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { UserDto } from './dtos/user.dto';
 import { AchievementOwned } from '../database/entities-index';
 import { VkUserDto } from '../auth/dtos/vk.user.dto';
 import { CreateUserDto } from './dtos/createUser.dto';

@@ -54,6 +54,14 @@ export class SocialsService {
     return await this.socialsRepository.find();
   }
 
+  async findLinksByUserId(id: number) {
+    return await this.socialsUsersRepository.find({where: {user: {id: id}}, relations: {social: true}});
+  }
+
+  async findSocialByName(name: string) {
+    return await this.socialsRepository.findOneBy({name: name})
+  }
+
   async getAllUsersSocial()
   {
     return await this.socialsUsersRepository.find({relations: {social: true, user: true}})
