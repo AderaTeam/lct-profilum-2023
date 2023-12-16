@@ -58,14 +58,14 @@ export const Routing = observer(() => {
           <Routes>
             {UStore.isAuth && UStore.user.role === 'user'
               ? authRoutes
-                  .filter((item) => !item.isAdmin) //!
+                  .filter((item) => item.isAdmin) //!
                   .map(({ path, Component }) => (
                     <Route key={path} path={path} element={<Component />} />
                   ))
               : UStore.isAuth &&
                 UStore.user.role === 'admin' &&
                 authRoutes
-                  .filter((item) => item.isAdmin) //
+                  .filter((item) => !item.isAdmin) //
                   .map(({ path, Component }) => (
                     <Route key={path} path={path} element={<Component />} />
                   ))}
