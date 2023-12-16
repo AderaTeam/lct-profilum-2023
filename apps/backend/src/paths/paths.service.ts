@@ -67,7 +67,7 @@ export class PathsService {
       if(!(await this.specialitiesRepository.findOneBy({name: speciality})))
       {
         const newSpeciality = this.specialitiesRepository.create({name: speciality})
-        const specToAdd = this.specialitiesRepository.save(newSpeciality)
+        const specToAdd = await this.specialitiesRepository.save(newSpeciality)
         specialities.push(specToAdd)
       }
       else
