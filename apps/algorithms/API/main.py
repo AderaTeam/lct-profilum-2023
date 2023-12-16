@@ -52,11 +52,12 @@ def root2(user_id: int, n_of_works: int=-1):
         t+=1
     # res = res.sort_values(ascending=0)
     print(d2)
-    res = np.argsort(list(d2.values()))
     print(spec_data)
     print(v0)
-    # pd.DataFrame().reset_index()
-    return spec_data['name'].iloc[res].to_list()
+    v_res = list(d2.values())
+    sa_res = np.argsort(v_res)
+    
+    return {'spec_names': spec_data['name'].iloc[sa_res].to_list(), 'spec_nums': spec_data['num'].iloc[sa_res].to_list()}
 
 
 # 393854543
@@ -103,6 +104,8 @@ def root4(user_id: int, n_of_works: int=-1):
         # print(v1.shape)
         d2[t] = torch.nn.CosineSimilarity(dim=1)(v1.detach(), v0.detach()).item()
         t+=1
-    res = np.argsort(list(d2.values()))[::-1]
-    return spec_data['name'].iloc[res].to_list()
+    v_res = list(d2.values())
+    sa_res = np.argsort(v_res)[::-1]
+    
+    return {'spec_names': spec_data['name'].iloc[sa_res].to_list(), 'spec_nums': spec_data['num'].iloc[sa_res].to_list()}
 
