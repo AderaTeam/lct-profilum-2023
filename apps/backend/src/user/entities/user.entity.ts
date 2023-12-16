@@ -97,7 +97,7 @@ export class User {
     //IMAGES FOR USERS
 
     @OneToMany(() => SocialUsers, (social) => social.user, {eager: true})
-    @JoinTable()
+    @JoinColumn()
     socials: SocialUsers[]
 
     @OneToMany(() => OwnedPath, (path) => path.user, {eager: true})
