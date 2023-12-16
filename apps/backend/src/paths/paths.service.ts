@@ -122,9 +122,9 @@ export class PathsService {
   {
     let ownedPath: OwnedPath = await this.ownedPathRepository.findOne({where: {id: pathid}, relations:{user: true}})
     let user: User = await this.userService.getOneById(ownedPath.user.id)
-    Logger.log(ownedPath.path.id)
-    Logger.log(JSON.stringify(await this.pathRepository.findOneBy({id: ownedPath.path.id})))
-    user.points += (await this.pathStepRepository.findOne({where: {path: Equal<Path>(await this.pathRepository.findOneBy({id: (ownedPath.path.id)})), step: ownedPath.currentStep}})).points
+    const ownedpathid = ownedPath.path.id
+    Logger.log(ownedpathid)
+    user.points += (await this.pathStepRepository.findOne({where: {path: Equal<number>(ownedpathid), step: ownedPath.currentStep}})).points
     ownedPath.currentStep = ownedPath.currentStep + 1;
     await this.userService.updateOne(ownedPath.user.id, user)
     await this.ownedPathRepository.save(ownedPath)
