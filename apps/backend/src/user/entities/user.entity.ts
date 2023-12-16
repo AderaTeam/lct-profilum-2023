@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, JoinColumn, JoinTable, ManyToMany, AfterUpdate } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, JoinColumn, JoinTable, ManyToMany, BeforeInsert, BeforeUpdate } from "typeorm"
 import { AchievementOwned } from "../../achievement/entities/achievementOwned.entity"
 import { OwnedPath } from "../../paths/entities/ownedPath.entity"
 import { SocialUsers } from "../../socials/entities/socialsUsers.entity"
@@ -116,37 +116,38 @@ export class User {
     @JoinColumn()
     achievements: AchievementOwned[]
 
-    @AfterUpdate()
-    updateRank()
-    {
-        if(this.points > 400)
-        {
-            this.rank = "Оракул"
-        }
-        else
-        {
-            if(this.points > 300)
-            {
-                this.rank = "Волшебник"
-            }
-            else
-            {
-                if(this.points > 200)
-                {
-                    this.rank = "Первый шар"
-                }
-                else
-                {
-                    if(this.points > 100)
-                    {
-                        this.rank = "Маг-самоучка"
-                    }
-                    else
-                    {
-                        this.rank = "Незнайка"
-                    }
-                }
-            }
-        }
-    }
+    // @BeforeInsert()
+    // @BeforeUpdate()
+    // updateRank()
+    // {
+    //     if(this.points > 400)
+    //     {
+    //         this.rank = "Оракул"
+    //     }
+    //     else
+    //     {
+    //         if(this.points > 300)
+    //         {
+    //             this.rank = "Волшебник"
+    //         }
+    //         else
+    //         {
+    //             if(this.points > 200)
+    //             {
+    //                 this.rank = "Первый шар"
+    //             }
+    //             else
+    //             {
+    //                 if(this.points > 100)
+    //                 {
+    //                     this.rank = "Маг-самоучка"
+    //                 }
+    //                 else
+    //                 {
+    //                     this.rank = "Незнайка"
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
 }
