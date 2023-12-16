@@ -37,12 +37,12 @@ export class UserService {
 
     public async getOneByUsername(username: string)
     {
-        return await this.userRepository.findOne({where:{username: username}})
+        return await this.userRepository.findOne({where:{username: username}, order: {paths: {path: {pathSteps: {step: 'ASC'}}}}})
     }
 
     public async getOneByNickname(nickname: string)
     {
-        return await this.userRepository.findOne({where:{nickname: nickname}, relations:{paths: true}})
+        return await this.userRepository.findOne({where:{nickname: nickname}, relations:{paths: true}, order: {paths: {path: {pathSteps: {step: 'ASC'}}}}})
     }
 
     public async getAll()
