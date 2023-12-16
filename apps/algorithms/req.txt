@@ -14,5 +14,8 @@ vk-api
 transformers
 razdel
 beautifulsoup4
+ioc
+fastapi
+python-ioc
 uvicorn
 gunicorn
