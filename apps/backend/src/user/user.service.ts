@@ -27,7 +27,7 @@ export class UserService {
 
     public async getOneById(id: number)
     {
-        return await this.userRepository.findOne({where:{id: id}})
+        return await this.userRepository.findOne({where:{id: id}, order: {paths: {path: {pathSteps: {step: 'ASC'}}}}})
     }
 
     public async getAchievements(id: number)
