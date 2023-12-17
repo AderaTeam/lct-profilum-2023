@@ -1,10 +1,10 @@
 import { Flex, Stack } from '@mantine/core';
 import { IconArrowUpRight } from '@tabler/icons-react';
-import { Controller, useForm, useFormContext } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { Button } from 'shared/components/Button';
 import { Input } from 'shared/components/Input';
 import * as VKID from '@vkid/sdk';
-import { NO_PAGE_ROUTE } from 'shared/constants/const';
+import { CONNECT_NO_PAGE_ROUTE } from 'shared/constants/const';
 import $api from 'shared/api';
 import { useContext } from 'react';
 import { Context } from 'main';
@@ -19,7 +19,7 @@ export const SocialCardForm = ({ name, getSocials }: SocialCardFormProps) => {
   const { UStore } = useContext(Context);
   VKID.Config.set({
     app: 51812541,
-    redirectUrl: `https://profilum.adera-team.ru${NO_PAGE_ROUTE}`,
+    redirectUrl: `https://profilum.adera-team.ru${CONNECT_NO_PAGE_ROUTE}`,
   });
 
   const handleConnect = handleSubmit((formData) => {
