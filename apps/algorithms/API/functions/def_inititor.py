@@ -10,6 +10,7 @@ from functions.processor.stopwords_cleaner import stopwordsCleaner
 from functions.processor.text_normalizer import textNormalizer
 from functions.processor.leader_id_main_user_info_processor import leaderIdMainUserInfoProcessor
 from functions.getters.leader_id.get_leader_id_main_user_info import mainLeaderIdUserInfo
+from functions.processor.fast_text_vectorizer import fastTextVectorizer
 import ioc
 
 def defInitiator():
@@ -24,6 +25,8 @@ def defInitiator():
     ioc.provide('getVkUserSubscribes', getVkUserSubscribes)
     ioc.provide('vkSubscribesProcessor', vkSubscribesProcessor)
     ioc.provide('vkWallMainInfoTextExtractor', vkWallMainInfoTextExtractor)
+    ioc.provide('vkSubsInfoTextExtractor', vkWallMainInfoTextExtractor)
     ioc.provide('vkDistAnalizer', distAnalizer)
+    ioc.provide('fastTextVectorizer', fastTextVectorizer)
     
     
