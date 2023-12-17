@@ -63,9 +63,10 @@ export class UniversityService {
             tags.push(tagToAdd)
         }
         
-        const newUser = this.uniRepository.create({...uni, tags})
-        await this.uniRepository.save(newUser)
-        return newUser
+        const newUni = this.uniRepository.create({...uni, tags: []})
+        const newnewUni = await this.uniRepository.update(newUni.id, {...uni, tags: tags})
+        // await this.uniRepository.save(newnewUni)
+        return newnewUni
     }
 
     public async getAll()
