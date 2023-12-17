@@ -21,8 +21,8 @@ export class CommunityService {
   async createCard(createCardDto: CreateCardDto) {
     const card = this.cardRepository.create({
       ...createCardDto,
-      author: await this.userService.getOneById(createCardDto.author_id),
-      path: await this.pathRepository.findOne({where:{id: createCardDto.path_id}})
+      author: (await this.userService.getOneById(createCardDto.author_id)),
+      path: (await this.pathRepository.findOne({where:{id: createCardDto.path_id}}))
     })
     Logger.log(JSON.stringify(card))
     return this.cardRepository.save(card)
