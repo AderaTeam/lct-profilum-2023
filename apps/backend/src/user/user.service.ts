@@ -54,7 +54,10 @@ export class UserService {
 
         if(user.universities)
         {
-            user.universities.push(uni)
+            if(!(user.universities.includes(uni)))
+            {
+                user.universities.push(uni)
+            }
         }
         else
         {
