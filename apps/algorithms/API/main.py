@@ -63,101 +63,114 @@ def hello():
 # 2234799
 @app.get("/leaderid/get_works")
 def root1(user_id: int, n_of_works: int=-1):
-    res = ioc.require('leaderidUserInterestsAnalizer')(user_id, n_of_works)
+    try:
+        res = ioc.require('leaderidUserInterestsAnalizer')(user_id, n_of_works)
     # res = ioc.require('leaderidUserEventsAnalizer')(user_id, n_of_works)
-    return {'name': [i for i in res], 'value': [res[i] for i in res]}
+        return {'name': [i for i in res], 'value': [res[i] for i in res]}
+    except:
+        return {'name': [], 'value': []}
 
 
 # 2234799
 @app.get("/leaderid/get_spec")
 def root2(user_id: int, n_of_works: int=-1):
-    data = ioc.require('mainLeaderIdUserInfo')(user_id)
-    # vectorizer = ioc.require('stdTextVectorizer')
-    vectorizer = ioc.require('fastTextVectorizer')
-    # spec_data = ioc.require('largeSpecDescProcessed')
-    # distAnalizer = ioc.require('simpleDistAnalizer')
-    spec_data = ioc.require('smallSpecDesc')
-    print(data)
-    v0 = torch.zeros([1, 1024])
-    d2 = dict()
-    t = 0
-    print( data['Интересы'])
-    v0 = vectorizer(data['Интересы'], 5).sum(dim=0).unsqueeze(0)
-    for j in spec_data['desc']:
-        v1 = vectorizer(j, 256).unsqueeze(0)
-        # print(v1.shape)
-        d2[t] = torch.nn.CosineSimilarity(dim=1)(v1.detach(), v0.detach()).item()
-        t+=1
-    # res = res.sort_values(ascending=0)
-    print(d2)
-    print(spec_data)
-    print(v0)
-    v_res = list(d2.values())
-    sa_res = np.argsort(v_res)[::-1]
-    return {'spec_names': spec_data['name'].iloc[sa_res].to_list(), 'spec_nums': spec_data['num'].iloc[sa_res].to_list(), 'spec_values': np.sort(v_res)[::-1].tolist()}
-
-
-# 393854543
-@app.get("/vk/simple_analize_interests")
-def root3(user_id: int, n_of_works: int=-1):
-    logging.warning("start vk fetch")
-    prof_ways_data = ioc.require('profWaysData').reset_index()
-    text_samples_vectors = ioc.require('smallDescriptionVectors')
-    vectorizer = ioc.require('fastTextVectorizer')
-    vk_session = ioc.require('vkSession')
-    subscribes = ioc.require('getVkUserSubscribes')(vk_session=vk_session, user_id=user_id)
-    subscribes_processed = ioc.require('vkSubscribesProcessor')(subscribes)
-    logging.warning("done vk fetch")
-    logging.warning("subscriptions amount:" + str(len(subscribes_processed)))
-
-    texts = []
-    for i in subscribes_processed:
-        texts += ioc.require('vkWallMainInfoTextExtractor')(i['main_description'][0])
-    logging.warning("texts amount:" + str(len(texts)))
-
-    print(texts)
-    # v = torch.zeros(1024).detach()
-    v = vectorizer(texts, 100)
-    logging.warning("vectorizer works")
-
-    # for i in texts:
-    #     v += vectorizer(i, 100)
-    res = ioc.require('simpleDistAnalizer')(v, text_samples_vectors)
-    logging.warning("dist analizer works")
-    res_i = np.argsort(res.to_numpy())[::-1]
-    # print(prof_ways_data.shape, res.shape, res_i)
-    return {'name': [prof_ways_data['Название профессии'][i] for i in res_i[0:n_of_works-1]], 'value': [res[i] for i in res_i[0:n_of_works-1]]}
-    # return {prof_ways_data['Название профессии'][i]: res[i] for i in res_i[0:n_of_works-1]}
-
-
-# 393854543
-@app.get("/vk/get_spec")
-def root4(user_id: int, n_of_works: int=-1):
-    prof_ways_data = ioc.require('profWaysData').reset_index()
-    spec_data = ioc.require('smallSpecDesc')
-    vectorizer = ioc.require('stdTextVectorizer')
-    vk_session = ioc.require('vkSession')
-    subscribes = ioc.require('getVkUserSubscribes')(vk_session=vk_session, user_id=user_id)
-    subscribes_processed = ioc.require('vkSubscribesProcessor')(subscribes)
-    texts = []
-    for i in subscribes_processed:
-        texts += ioc.require('vkWallMainInfoTextExtractor')(i['main_description'][0])
-    v0 = torch.zeros(1024)
-    v0 = torch.zeros([1, 1024])
-    d2 = dict()
-    t = 0
-    with torch.no_grad():
-        for i in texts:
-            v0 += vectorizer(i, 100)
+    try: 
+        data = ioc.require('mainLeaderIdUserInfo')(user_id)
+        # vectorizer = ioc.require('stdTextVectorizer')
+        vectorizer = ioc.require('fastTextVectorizer')
+        # spec_data = ioc.require('largeSpecDescProcessed')
+        # distAnalizer = ioc.require('simpleDistAnalizer')
+        spec_data = ioc.require('smallSpecDesc')
+        print(data)
+        v0 = torch.zeros([1, 1024])
+        d2 = dict()
+        t = 0
+        print( data['Интересы'])
+        v0 = vectorizer(data['Интересы'], 5).sum(dim=0).unsqueeze(0)
         for j in spec_data['desc']:
             v1 = vectorizer(j, 256).unsqueeze(0)
             # print(v1.shape)
             d2[t] = torch.nn.CosineSimilarity(dim=1)(v1.detach(), v0.detach()).item()
             t+=1
-    v_res = list(d2.values())
-    sa_res = np.argsort(v_res)[::-1]
-    
-    return {'spec_names': spec_data['name'].iloc[sa_res].to_list(), 'spec_nums': spec_data['num'].iloc[sa_res].to_list()}
+        # res = res.sort_values(ascending=0)
+        print(d2)
+        print(spec_data)
+        print(v0)
+        v_res = list(d2.values())
+        sa_res = np.argsort(v_res)[::-1]
+        # return {'spec_names': spec_data['name'].iloc[sa_res].to_list(), 'spec_nums': spec_data['num'].iloc[sa_res].to_list(), 'spec_values': np.sort(v_res)[::-1].tolist()}
+        return {'spec_names': spec_data['name'].iloc[sa_res].to_list(), 'spec_nums': spec_data['num'].iloc[sa_res].to_list()}
+    except:
+        return {'spec_names': [], 'spec_nums': []}
+
+
+# 393854543
+@app.get("/vk/simple_analize_interests")
+def root3(user_id: int, n_of_works: int=-1):
+    try:
+        logging.warning("start vk fetch")
+        prof_ways_data = ioc.require('profWaysData').reset_index()
+        text_samples_vectors = ioc.require('smallDescriptionVectors')
+        vectorizer = ioc.require('fastTextVectorizer')
+        vk_session = ioc.require('vkSession')
+        subscribes = ioc.require('getVkUserSubscribes')(vk_session=vk_session, user_id=user_id)
+        subscribes_processed = ioc.require('vkSubscribesProcessor')(subscribes)
+        logging.warning("done vk fetch")
+        logging.warning("subscriptions amount:" + str(len(subscribes_processed)))
+
+        texts = []
+        for i in subscribes_processed:
+            texts += ioc.require('vkWallMainInfoTextExtractor')(i['main_description'][0])
+        logging.warning("texts amount:" + str(len(texts)))
+
+        print(texts)
+        # v = torch.zeros(1024).detach()
+        v = vectorizer(texts, 100)
+        logging.warning("vectorizer works")
+
+        # for i in texts:
+        #     v += vectorizer(i, 100)
+        res = ioc.require('simpleDistAnalizer')(v, text_samples_vectors)
+        logging.warning("dist analizer works")
+        res_i = np.argsort(res.to_numpy())[::-1]
+        # print(prof_ways_data.shape, res.shape, res_i)
+        return {'name': [prof_ways_data['Название профессии'][i] for i in res_i[0:n_of_works-1]], 'value': [res[i] for i in res_i[0:n_of_works-1]]}
+        # return {prof_ways_data['Название профессии'][i]: res[i] for i in res_i[0:n_of_works-1]}
+    except:
+        return {'name': [], 'value': []}
+
+# 393854543
+@app.get("/vk/get_spec")
+def root4(user_id: int, n_of_works: int=-1):
+    try:
+        prof_ways_data = ioc.require('profWaysData').reset_index()
+        spec_data = ioc.require('smallSpecDesc')
+        vectorizer = ioc.require('stdTextVectorizer')
+        vk_session = ioc.require('vkSession')
+        subscribes = ioc.require('getVkUserSubscribes')(vk_session=vk_session, user_id=user_id)
+        subscribes_processed = ioc.require('vkSubscribesProcessor')(subscribes)
+        texts = []
+        for i in subscribes_processed:
+            texts += ioc.require('vkWallMainInfoTextExtractor')(i['main_description'][0])
+        v0 = torch.zeros(1024)
+        v0 = torch.zeros([1, 1024])
+        d2 = dict()
+        t = 0
+        with torch.no_grad():
+            for i in texts:
+                v0 += vectorizer(i, 100)
+            for j in spec_data['desc']:
+                v1 = vectorizer(j, 256).unsqueeze(0)
+                # print(v1.shape)
+                d2[t] = torch.nn.CosineSimilarity(dim=1)(v1.detach(), v0.detach()).item()
+                t+=1
+        v_res = list(d2.values())
+        sa_res = np.argsort(v_res)[::-1]
+        
+        return {'spec_names': spec_data['name'].iloc[sa_res].to_list(), 'spec_nums': spec_data['num'].iloc[sa_res].to_list()}
+    except:
+        return {'spec_names': [], 'spec_nums': []}
+
 
 
 
