@@ -23,7 +23,6 @@ export class UserController
         return await this.userService.deleteOne(id)
     }
 
-
     @Post('placement')
     public async updatePlacement()
     {

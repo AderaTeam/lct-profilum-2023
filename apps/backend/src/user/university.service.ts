@@ -31,40 +31,34 @@ export class UniversityService {
         //         tags.push(tagToAdd)
         //     }
         // }
-        if (await this.uniTagRepository.findOneBy({name: 'После 9'}))
-        {
-            tags.push(await this.uniTagRepository.findOneBy({name: 'После 9'}))
-        }
-        else
-        {
-            const newTag = this.uniTagRepository.create({name: 'После 9'})
-            const tagToAdd = await this.uniTagRepository.save(newTag)
-            tags.push(tagToAdd)
-        }
-        if (await this.uniTagRepository.findOneBy({name: 'После 11'}))
-        {
-            tags.push(await this.uniTagRepository.findOneBy({name: 'После 11'}))
-        }
-        else
-        {
-            const newTag = this.uniTagRepository.create({name: 'После 11'})
-            const tagToAdd = await this.uniTagRepository.save(newTag)
-            tags.push(tagToAdd)
-        }if (await this.uniTagRepository.findOneBy({name: uni.tags}))
-        {
-            tags.push(await this.uniTagRepository.findOneBy({name: uni.tags}))
-        }
-        else
-        {
-            const newTag = this.uniTagRepository.create({name: uni.tags})
-            const tagToAdd = await this.uniTagRepository.save(newTag)
-            tags.push(tagToAdd)
-        }
+        const newTag1 = this.uniTagRepository.create({name: 'После 9'})
+        const tagToAdd1 = await this.uniTagRepository.save(newTag1)
+        tags.push(tagToAdd1)
+        const newTag2 = this.uniTagRepository.create({name: 'После 11'})
+        const tagToAdd2 = await this.uniTagRepository.save(newTag2)
+        tags.push(tagToAdd2)
+        const newTag = this.uniTagRepository.create({name: uni.tags})
+        const tagToAdd = await this.uniTagRepository.save(newTag)
+        tags.push(tagToAdd)
         const newUni = this.uniRepository.create({...uni, tags: tags})
         await this.uniRepository.save(newUni)
         newUni.image = `https://api.adera-team.ru/university/image/${newUni.id}`
         return await this.uniRepository.save(newUni)
     }
+
+public async addTags(id: number, tags: string[])
+{
+    let uni = await this.uniRepository.findOne({where: {id: id}})
+    let newTags = []
+    for (const tagName in tags)
+    {
+        const newTag = this.uniTagRepository.create({name: tagName})
+        const tagToAdd = await this.uniTagRepository.save(newTag)
+        newTags.push(tagToAdd)
+    }
+    uni.tags = uni.tags.concat(newTags)
+    return this.uniRepository.save(uni)
+}
 
     public async droptags()
     {
