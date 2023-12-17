@@ -34,7 +34,6 @@ export class UserService {
     {
         const user = await this.userRepository.findOne({where:{id: id}, order: {paths: {path: {pathSteps: {step: 'ASC'}}}}})
 
-        Logger.log(JSON.stringify(await this.getOneByNicknameWithPass(user.nickname)))
         return await this.userRepository.findOne({where:{id: id}, order: {paths: {path: {pathSteps: {step: 'ASC'}}}}})
     }
 
