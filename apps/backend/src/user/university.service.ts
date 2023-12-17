@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common"
+import { Injectable, Logger } from "@nestjs/common"
 import { InjectRepository } from "@nestjs/typeorm"
 import { Univercity } from "./entities/university.entity"
 import { Repository } from "typeorm"
@@ -16,6 +16,7 @@ export class UniversityService {
 
     public async create(uni: CreateUniDto)
     {
+        Logger.log(uni.tags)
         let tags:UniTag[] = []
         for (const tag of uni.tags)
         {
