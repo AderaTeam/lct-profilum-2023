@@ -12,6 +12,7 @@ import { IUser } from 'shared/models/IUser';
 
 export const MyPathProgress = observer(() => {
   const { UStore } = useContext(Context);
+  const [isLoading, setIsLoading] = useState(false);
   const [activePathId, setActivePathId] = useState<number>(
     UStore?.user?.paths.length && UStore.user.paths[0].id
   );
@@ -31,28 +32,36 @@ export const MyPathProgress = observer(() => {
   }, [activePathId]);
 
   const handleStepComplete = (id: number) => {
-    $api.post<IUser>(`/paths/progress/${id}`).then((response) => {
-      UStore.setUser(response.data);
-      setCurrentStep(
-        response.data.paths.find((item) => item.id === activePathId)
-          ?.currentStep!
-      );
-    });
+    setIsLoading(true);
+    try {
+      $api.post<IUser>(`/paths/progress/${id}`).then((response) => {
+        UStore.setUser(response.data);
+        setCurrentStep(
+          response.data.paths.find((item) => item.id === activePathId)
+            ?.currentStep!
+        );
+      });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
     <Stack gap={32}>
-      {UStore.user.paths.length ? (
+      {UStore?.user?.paths.length ? (
         <>
           <Flex justify={'space-between'} align={'center'}>
             <ActivePathSwitch
-              paths={UStore.user.paths}
+              paths={UStore.user?.paths ? UStore.user?.paths : []}
               activePathId={activePathId}
               setActivePathId={setActivePathId}
             />
             <PathInfo currentStep={currentStep} activePath={activePath} />
           </Flex>
           <PathSteps
+            isLoading={isLoading}
             currentStep={currentStep}
             handleStepComplete={handleStepComplete}
             activePath={activePath}

@@ -21,13 +21,13 @@ const EducationsPage = () => {
 
   const getAllUniversity = () => {
     $api.get('/university').then((response) => {
-      setUniversity(response.data);
+      setUniversity(response.data ? response.data : []);
     });
   };
 
   const getSelectedUniversity = () => {
     $api.get(`/user/${UStore.user.id}/uni`).then((response) => {
-      setSelectedUniversity(response.data);
+      setSelectedUniversity(response.data ? response.data : []);
     });
   };
 

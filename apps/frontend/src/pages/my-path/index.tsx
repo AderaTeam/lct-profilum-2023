@@ -18,7 +18,7 @@ const MyPathPage = observer(() => {
 
   useEffect(() => {
     $api.get(`/user/${UStore.user.id}/uni`).then((response) => {
-      setSelectedUniversity(response.data);
+      setSelectedUniversity(response.data ? response.data : []);
     });
   }, []);
 

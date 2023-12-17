@@ -28,7 +28,7 @@ interface TrainingCardProps {
 export const TrainingCard = ({ card }: TrainingCardProps) => {
   const difImage: { [key: string]: string } = {
     'Низкая сложность': easy,
-    'Средняя сложность': medium,
+    'Cредняя сложность': medium,
     'Высокая сложность': hard,
   };
 
