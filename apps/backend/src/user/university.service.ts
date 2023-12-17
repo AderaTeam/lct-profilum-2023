@@ -50,7 +50,7 @@ public async addTags(id: number, tags: string[])
 {
     let uni = await this.uniRepository.findOne({where: {id: id}})
     let newTags = []
-    for (const tagName in tags)
+    for (const tagName of tags)
     {
         const newTag = this.uniTagRepository.create({name: tagName})
         const tagToAdd = await this.uniTagRepository.save(newTag)
