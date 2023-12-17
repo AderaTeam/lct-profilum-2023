@@ -20,7 +20,14 @@ export const UniversityCard = ({
   selectedIds,
 }: UniversityCardProps) => {
   return (
-    <Flex gap={0}>
+    <Flex
+      style={
+        selectedIds.includes(university.id)
+          ? { outline: '2px solid #FA1D80', borderRadius: '24px' }
+          : {}
+      }
+      gap={0}
+    >
       <Image w={220} radius={'24px 0 0 24px'} src={university.image} />
       <Card w={'100%'} radius="0 24px 24px 0">
         <Stack gap={24}>
@@ -47,6 +54,9 @@ export const UniversityCard = ({
                 : () => handleSelectUnivercity(university)
             }
             outline
+            disabled={
+              selectedIds.length === 3 && !selectedIds.includes(university.id)
+            }
           >
             <Flex gap={8}>
               {selectedIds.includes(university.id) ? (
@@ -56,7 +66,16 @@ export const UniversityCard = ({
                 </>
               ) : (
                 <>
-                  Добавить в мой ТОП-3 <IconPlus stroke={1.5} color="#ADB5BD" />
+                  Добавить в мой ТОП-3{' '}
+                  <IconPlus
+                    stroke={1.5}
+                    color={
+                      selectedIds.length === 3 &&
+                      !selectedIds.includes(university.id)
+                        ? '#CED4DA'
+                        : '#ADB5BD'
+                    }
+                  />
                 </>
               )}
             </Flex>
