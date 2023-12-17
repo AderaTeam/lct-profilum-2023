@@ -117,7 +117,7 @@ Frontend сервиса написан на React + Ts, под капотом и
 ## Стек технологий
 Frontend - React + Typescript, Mantine, MobX
 
-Backend - NestJS, Python, NGINX, PostgreSQl
+Backend - NestJS, Python, NGINX, PostgreSQl, DockerCompose
 
-ML - PyTorch, Pandas, Python, Sbert
+ML - PyTorch, Pandas, Python, Sbert, NumPy
 
