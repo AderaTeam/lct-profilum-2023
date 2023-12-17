@@ -7,8 +7,7 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_DB: profdb
     restart: "always"
-    ports:
-      - 5432:5432
+
     volumes:
       #- ./postgres/data:/docker-entrypoint-initdb.d/
       - ./postgres/postgres-data:/var/lib/postgresql/data
