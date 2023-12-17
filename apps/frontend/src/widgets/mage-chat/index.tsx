@@ -1,10 +1,6 @@
 import { Flex, Loader, Stack } from '@mantine/core';
 import { Card } from 'shared/components/Card';
 import { Avatar } from 'shared/components/Avatar';
-
-import mage from 'shared/assets/mage.png';
-
-import style from './MageChat.module.scss';
 import { Button } from 'shared/components/Button';
 import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react';
 import { ResultList } from './components/ResultList';
@@ -14,6 +10,15 @@ import { observer } from 'mobx-react-lite';
 import { Context } from 'main';
 import $api from 'shared/api';
 import { MY_PATH_ROUTE } from 'shared/constants/const';
+
+import mage from 'shared/assets/mage.png';
+import rank0 from 'shared/assets/ranks/0.png';
+import rank1 from 'shared/assets/ranks/1.png';
+import rank2 from 'shared/assets/ranks/2.png';
+import rank3 from 'shared/assets/ranks/3.png';
+import rank4 from 'shared/assets/ranks/4.png';
+
+import style from './MageChat.module.scss';
 
 export const MageChat = observer(() => {
   const { UStore } = useContext(Context);
@@ -26,6 +31,14 @@ export const MageChat = observer(() => {
       ? UStore.user.paths.map((item) => item.path.id)
       : []
   );
+
+  const rankImage: { [key: string]: string } = {
+    Незнайка: rank0,
+    'Маг-самоучка': rank1,
+    'Первый шар': rank2,
+    Волшебник: rank3,
+    Оракул: rank4,
+  };
 
   useEffect(() => {
     if (!UStore.user.paths.length) {
@@ -65,7 +78,11 @@ export const MageChat = observer(() => {
           <Stack gap={16}>
             <Avatar
               name={UStore.user.username}
-              image={UStore.user.image! || UStore.user.avataruri!}
+              image={
+                UStore.user.image! ||
+                UStore.user.avataruri! ||
+                rankImage[UStore.user.rank]
+              }
             />
             {UStore.user.paths.length ? (
               <p className="text black">
