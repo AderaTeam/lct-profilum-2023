@@ -17,6 +17,7 @@ import {
 
 import vk from 'shared/assets/vk.svg';
 import { observer } from 'mobx-react-lite';
+import { eventsTitleFormater } from 'shared/helpers/eventsTitleFormater';
 
 interface AuthFormProps {
   activeRole: number;
