@@ -68,7 +68,9 @@ export class UserService {
 
         if(user.universities)
         {
-            user.universities = user.universities.filter((obj) => obj.id != uniid)
+            Logger.log(user.universities)
+            user.universities = user.universities.filter((obj) => {obj.id != uniid})
+            Logger.log(user.universities)
         }
 
         return await this.userRepository.save(user)
