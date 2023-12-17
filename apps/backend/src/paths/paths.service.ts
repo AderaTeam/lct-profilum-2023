@@ -128,12 +128,12 @@ export class PathsService {
     const ownedpathid = ownedPath.path.id
     Logger.log(ownedpathid)
     user.points += (await this.pathStepRepository.findOne({where: {path: Equal<number>(ownedpathid), step: ownedPath.currentStep}})).points
+    await this.communityService.createCard({author_id: user.id, path_id: ownedpathid, status: "completed", title:`${user.username} прошел шаг № ${ownedPath.currentStep}!`})
     ownedPath.currentStep = ownedPath.currentStep + 1;
-    await this.communityService.createCard({author_id: user.id, path_id: ownedpathid, status: "completed", title:`${user.username} прошел шаг!`})
     await this.userService.updateOne(ownedPath.user.id, user)
     if(await user.updateRank())
     {
-      await this.communityService.createCard({author_id: user.id, path_id: ownedpathid, status: "up", title:`${user.username} повысил уровень шаг!`})
+      await this.communityService.createCard({author_id: user.id, path_id: ownedpathid, status: "up", title:`${user.username} повысил уровень до ${user.rank}!`})
     }
     await this.ownedPathRepository.save(ownedPath)
     return this.userService.getOneById(ownedPath.user.id)
