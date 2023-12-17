@@ -18,7 +18,7 @@ export const EducationsUniversity = ({
           <UniversityCard
             handleSelectUnivercity={handleSelectUnivercity}
             university={item}
-            key={item.name}
+            key={item.id}
           />
         ))}
       </Stack>

@@ -5,12 +5,14 @@ import { EducationsSelectedCard } from 'widgets/educations-selected-card';
 import { EducationsUniversity } from 'widgets/educations-university';
 import { IUniversity } from 'shared/models/IUniversity';
 import { Input } from 'shared/components/Input';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import $api from 'shared/api';
+import { Context } from 'main';
 
 const EducationsPage = () => {
   const { control, watch } = useForm();
+  const { UStore } = useContext(Context);
   const [selectedUniversity, setSelectedUniversity] = useState<IUniversity[]>(
     []
   );
@@ -23,11 +25,15 @@ const EducationsPage = () => {
   };
 
   const getSelectedUnivercity = () => {
-    setSelectedUniversity([]);
+    $api.get(`/user/${UStore.user.id}/uni`).then((response) => {
+      setSelectedUniversity(response.data);
+    });
   };
 
   const handleSelectUnivercity = (university: IUniversity) => {
-    getSelectedUnivercity();
+    $api
+      .post('/user/uni', { userid: UStore.user.id, uniid: university.id })
+      .then(() => getSelectedUnivercity());
   };
 
   useEffect(() => {

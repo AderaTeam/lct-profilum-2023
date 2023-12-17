@@ -1,4 +1,5 @@
 export interface IUniversity {
+  id: number;
   name: string;
   city: string;
   popularity: string;

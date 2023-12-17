@@ -21,6 +21,7 @@ export const EducationsCard = ({ name, image }: EducationsCardProps) => {
           ? {
               background: `url(${image})`,
               backgroundSize: 'cover',
+              backgroundPosition: '50%',
             }
           : {}
       }
