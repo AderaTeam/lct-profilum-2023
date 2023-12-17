@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  node:
+    image: node:20
+    volumes:
+      - ../../:/app
+    working_dir: /app
+    entrypoint: bash -c "ls && npm install && npx nx serve frontend --host"
+    ports:
+      - 4200:4200
