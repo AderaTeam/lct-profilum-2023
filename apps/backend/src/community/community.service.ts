@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { CreateCardDto } from './dto/create-card.dto';
 import { UpdateCardDto } from './dto/update-card.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -24,7 +24,7 @@ export class CommunityService {
       author: await this.userService.getOneById(createCardDto.author_id),
       path: await this.pathRepository.findOne({where:{id: createCardDto.path_id}})
     })
-
+    Logger.log(JSON.stringify(card))
     return this.cardRepository.save(card)
   }
 
