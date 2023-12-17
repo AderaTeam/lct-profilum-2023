@@ -5,11 +5,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Card } from './entities/card.entity';
 import { UserService } from '../user/user.service';
 import { PathsModule } from '../paths/paths.module';
+import { UserModule } from '../user/user.module';
 
 @Module({
   imports:[
     TypeOrmModule.forFeature([Card]),
-    UserService,
+    UserModule,
     PathsModule
   ],
   controllers: [CommunityController],
