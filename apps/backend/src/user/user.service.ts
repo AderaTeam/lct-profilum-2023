@@ -142,6 +142,9 @@ export class UserService {
 
     public async deleteOne(id: number)
     {
+        let user = await this.userRepository.findOne({where: {id: id}, relations: {paths: true}})
+        user.paths = []
+        await this.userRepository.save(user)
         return await this.userRepository.delete({id: id})
     }
 
