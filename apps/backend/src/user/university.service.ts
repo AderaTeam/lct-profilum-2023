@@ -75,7 +75,7 @@ export class UniversityService {
 
     public async getAll()
     {
-        return await this.uniRepository.find()
+        return await this.uniRepository.find({relations: {tags: true}})
     }
 
     public async getImage(id: number)
