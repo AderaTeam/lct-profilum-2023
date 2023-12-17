@@ -55,7 +55,7 @@ export class UserService {
 
     public async getOneByNicknameWithPass(nickname: string)
     {
-        return await this.userRepository.findOne({where:{nickname: nickname}})
+        return await this.userRepository.findOne({where:{nickname: nickname}, select: {avataruri: true, grade: true, id: true, password: true}})
     }
 
     public async addUni(userid: number, uniid: number)
