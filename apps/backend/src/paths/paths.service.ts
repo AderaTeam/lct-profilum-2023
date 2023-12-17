@@ -176,7 +176,9 @@ export class PathsService {
 
     let users = await this.userService.getAll()
 
-    users = users.filter((user) => {return (user.paths.filter((userpath) => {return userpath.path.id == path.id})).length > 0})
+    
+
+    users = users.filter((user) => {(user.paths.filter((userpath) => {userpath.path.id == path.id})).length > 0})
 
     Logger.log(users)
 
