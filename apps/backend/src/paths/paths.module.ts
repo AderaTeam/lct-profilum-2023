@@ -17,5 +17,6 @@ import { Speciality } from './entities/spaciality.entity';
   ],
   controllers: [PathsController],
   providers: [PathsService],
+  exports: [PathsService]
 })
 export class PathsModule {}
