@@ -62,7 +62,7 @@ export class UniversityService {
             const tagToAdd = await this.uniTagRepository.save(newTag)
             tags.push(tagToAdd)
         }
-        
+        Logger.log(tags)
         const newUni = this.uniRepository.create({...uni, tags: []})
         const newnewUni = await this.uniRepository.update(newUni.id, {...uni, tags: tags})
         // await this.uniRepository.save(newnewUni)
