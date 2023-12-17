@@ -113,11 +113,11 @@ def root3(user_id: int, n_of_works: int=-1):
     texts = []
     for i in subscribes_processed:
         texts += ioc.require('vkWallMainInfoTextExtractor')(i['main_description'][0])
-    logging.warning('total subscribes amount: ' + len(subscribes_processed))
+    logging.warning('total subscribes amount: ' + str(len(subscribes_processed)))
     v = torch.zeros(1024)
     for i in texts:
         v += vectorizer(i, 100)
-    logging.warning('total texts amount: ' + len(texts))
+    logging.warning('total texts amount: ' + str(len(texts)))
     res = ioc.require('simpleDistAnalizer')(v, text_samples_vectors)
     res_i = np.argsort(res.to_numpy())[::-1]
     print(prof_ways_data.shape, res.shape, res_i)
