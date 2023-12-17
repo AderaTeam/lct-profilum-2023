@@ -64,7 +64,8 @@ export class UniversityService {
         }
         Logger.log(tags)
         const newUni = this.uniRepository.create({...uni, tags: tags})
-        this.uniRepository.update(newUni.id, {image: `https://api.adera-team.ru/university/image/${newUni.id}`})
+        Logger.log(newUni.id)
+        this.uniRepository.update({id: newUni.id}, {image: `https://api.adera-team.ru/university/image/${newUni.id}`})
         const uniReturn = await this.uniRepository.save(newUni)
         return uniReturn
     }
