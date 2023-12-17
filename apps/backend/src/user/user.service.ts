@@ -62,6 +62,18 @@ export class UserService {
         return await this.userRepository.save(user)
     }
 
+    public async removeUni(userid: number, uniid: number)
+    {
+        let user = await this.userRepository.findOneBy({id: userid})
+
+        if(user.universities)
+        {
+            user.universities = user.universities.filter((obj) => obj.id != uniid)
+        }
+
+        return await this.userRepository.save(user)
+    }
+
     public async getAll()
     {
         return await this.userRepository.find({relations: {socials: {social: true}}})

@@ -37,6 +37,12 @@ export class UserController
         return await this.userService.addUni(data.userid, data.uniid)
     }
 
+    @Delete('uni/')
+    public async removeUni(@Body() data: Record<string, any>)
+    {
+        return await this.userService.removeUni(data.userid, data.uniid)
+    }
+
     @Get()
     public async getAll()
     {
@@ -66,9 +72,7 @@ export class UserController
     public async updateOne(@Body() userDto: UserUpdateDto, @Req() req)
     {
         return await this.userService.updateOne(req.user.sub, userDto)
-    }
-
-    
+    }    
 
     @UseGuards(AccessTokenGuard)
     @Delete('')
