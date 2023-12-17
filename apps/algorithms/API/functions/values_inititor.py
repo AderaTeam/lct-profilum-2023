@@ -40,7 +40,7 @@ def valuesInitiator():
         scope=vk_api.VkUserPermissions.GROUPS
     )
     vk_session.auth(token_only=True)
-    small_description_vectors = torch.load('../DATA/small_description_vectors.pt')
+    small_description_vectors = torch.load('./DATA/small_description_vectors.pt')
     prof_ways_data = pd.read_excel('./DATA/Профессии_ОКСО_ ЛЦТ_Профилум.xlsx', index_col='№').loc[:, ['Отрасль текстом', 'Название профессии']]
     # work_spec_desc = pd.read_excel('./DATA/Профессии_ОКСО_ ЛЦТ_Профилум.xlsx', index_col='№').loc[:, ['Название профессии', 'Специальности ОКСО - по одной специальности может быть множетсво программ обучения, которые открывают колледжии и вузы. Специальность - то, что написано у тебя в дипломе после окончания одной из программ обучения.', ]]
 
