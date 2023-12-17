@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { User } from "../../database/entities-index";
 import { Path } from "../../paths/entities/path.entity";
 @Entity()
@@ -24,11 +24,11 @@ export class Card {
     @CreateDateColumn()
     date: string
 
-    @ManyToMany(() => User, (user) => user.cards)
+    @ManyToOne(() => User, (user) => user.cards)
     @JoinTable()
     author: User 
 
-    @ManyToMany(() => Path, (path) => path.cards)
+    @ManyToOne(() => Path, (path) => path.cards)
     @JoinTable()
     path?: Path 
 }
