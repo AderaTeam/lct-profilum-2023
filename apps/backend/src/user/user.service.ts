@@ -47,7 +47,7 @@ export class UserService {
 
     public async addUni(userid: number, uniid: number)
     {
-        let user = await this.userRepository.findOneBy({id: userid})
+        let user = await this.userRepository.findOne({where: {id: userid}, relations: {universities: true}})
         const uni = await this.uniService.getOne(uniid)
 
         Logger.log(user.universities)
