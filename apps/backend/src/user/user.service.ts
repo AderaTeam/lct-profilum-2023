@@ -54,7 +54,17 @@ export class UserService {
 
     public async getOneByNicknameWithPass(nickname: string)
     {
-        return await this.userRepository.findOne({where:{nickname: nickname}, select: {avataruri: true, grade: true, id: true, password: true}})
+        return await this.userRepository.findOne({where:{nickname: nickname}, select: {
+            avataruri: true,
+            grade: true, 
+            id: true, 
+            password: true,
+            role: true,
+            rank: true,
+            nickname: true,
+            image: true,
+            username: true    
+        }})
     }
 
     public async addUni(userid: number, uniid: number)
