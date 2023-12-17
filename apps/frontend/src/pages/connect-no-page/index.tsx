@@ -19,13 +19,13 @@ const ConnectNoPage = () => {
           location.search.split('%22')[indexToken]
         }&uuid=${location.search.split('%22')[indexUuid]}`
       )
-      .then((response) => {
-        localStorage.setItem('token', response.data.accessToken);
-        localStorage.setItem('rtoken', response.data.refreshToken);
-        UStore.setAuth(true);
-        UStore.setUser(response.data.user);
-        navigate(MY_SOCIALS_ROUTE);
-      });
+      .then(
+        (response) => console.log(response.data)
+        // localStorage.setItem('token', response.data.accessToken);
+        // localStorage.setItem('rtoken', response.data.refreshToken);
+        // UStore.setAuth(true);
+        // UStore.setUser(response.data.user);
+      );
   }, []);
 
   return (
