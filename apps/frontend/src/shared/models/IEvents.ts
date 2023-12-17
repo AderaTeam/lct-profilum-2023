@@ -1,12 +1,10 @@
-export interface IAuthor {
-  username: string;
-  nickname: string;
-  avataruri: string;
-}
-
+import { IPath } from './IPath';
+import { IUser } from './IUser';
 export interface IEvents {
+  id: number;
   title: string;
-  author: IAuthor;
+  author: IUser;
+  path: IPath;
   status: string;
   date: string;
 }

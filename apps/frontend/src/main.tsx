@@ -1,10 +1,12 @@
-import { StrictMode, createContext } from 'react';
+import { createContext } from 'react';
 import * as ReactDOM from 'react-dom/client';
-
 import App from 'app/app';
 import { MantineProvider } from '@mantine/core';
 import { theme } from 'app/styles/theme';
 import UserStore from 'shared/store/user';
+import dayjs from 'dayjs';
+import 'dayjs/locale/ru';
+dayjs.locale('ru');
 
 interface State {
   UStore: UserStore;
