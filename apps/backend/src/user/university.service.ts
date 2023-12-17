@@ -17,6 +17,7 @@ export class UniversityService {
     public async create(uni: CreateUniDto)
     {
         Logger.log(uni.tags)
+        Logger.log(uni.tags[0])
         let tags:UniTag[] = []
         for (const tag of uni.tags)
         {
