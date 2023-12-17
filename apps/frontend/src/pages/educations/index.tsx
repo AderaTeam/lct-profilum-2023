@@ -16,30 +16,43 @@ const EducationsPage = () => {
   const [selectedUniversity, setSelectedUniversity] = useState<IUniversity[]>(
     []
   );
+  const [selectedIds, setSelectedIds] = useState<number[]>([]);
   const [university, setUniversity] = useState<IUniversity[]>([]);
 
-  const getAllUnivercity = () => {
+  const getAllUniversity = () => {
     $api.get('/university').then((response) => {
       setUniversity(response.data);
     });
   };
 
-  const getSelectedUnivercity = () => {
+  const getSelectedUniversity = () => {
     $api.get(`/user/${UStore.user.id}/uni`).then((response) => {
       setSelectedUniversity(response.data);
     });
   };
 
-  const handleSelectUnivercity = (university: IUniversity) => {
+  const handleSelectUniversity = (university: IUniversity) => {
     $api
       .post('/user/uni', { userid: UStore.user.id, uniid: university.id })
-      .then(() => getSelectedUnivercity());
+      .then(() => getSelectedUniversity());
+  };
+
+  const handleDeleteUniversity = (university: IUniversity) => {
+    $api
+      .delete('/user/uni', {
+        data: { userid: UStore.user.id, uniid: university.id },
+      })
+      .then(() => getSelectedUniversity());
   };
 
   useEffect(() => {
-    getAllUnivercity();
-    getSelectedUnivercity();
+    getAllUniversity();
+    getSelectedUniversity();
   }, []);
+
+  useEffect(() => {
+    setSelectedIds(selectedUniversity.map((item) => item.id));
+  }, [selectedUniversity]);
 
   return (
     <MainWrapper>
@@ -54,7 +67,9 @@ const EducationsPage = () => {
           />
         </Flex>
         <EducationsUniversity
-          handleSelectUnivercity={handleSelectUnivercity}
+          selectedIds={selectedIds}
+          handleSelectUniversity={handleSelectUniversity}
+          handleDeleteUniversity={handleDeleteUniversity}
           university={university.filter((item) =>
             item.name
               .toLowerCase()

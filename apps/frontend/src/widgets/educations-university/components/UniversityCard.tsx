@@ -4,16 +4,20 @@ import { IUniversity } from 'shared/models/IUniversity';
 import { UniversityInfo } from './UniversityInfo';
 import { Tag } from 'shared/components/Tag';
 import { Button } from 'shared/components/Button';
-import { IconPlus } from '@tabler/icons-react';
+import { IconMinus, IconPlus } from '@tabler/icons-react';
 
 interface UniversityCardProps {
   university: IUniversity;
   handleSelectUnivercity: Function;
+  handleDeleteUniversity: Function;
+  selectedIds: number[];
 }
 
 export const UniversityCard = ({
   university,
   handleSelectUnivercity,
+  handleDeleteUniversity,
+  selectedIds,
 }: UniversityCardProps) => {
   return (
     <Flex gap={0}>
@@ -36,9 +40,25 @@ export const UniversityCard = ({
               />
             ))}
           </Flex>
-          <Button onClick={() => handleSelectUnivercity(university)} outline>
+          <Button
+            onClick={
+              selectedIds.includes(university.id)
+                ? () => handleDeleteUniversity(university)
+                : () => handleSelectUnivercity(university)
+            }
+            outline
+          >
             <Flex gap={8}>
-              Добавить в мой ТОП-3 <IconPlus stroke={1.5} color="#ADB5BD" />
+              {selectedIds.includes(university.id) ? (
+                <>
+                  Удалить из моего ТОП-3{' '}
+                  <IconMinus stroke={1.5} color="#ADB5BD" />
+                </>
+              ) : (
+                <>
+                  Добавить в мой ТОП-3 <IconPlus stroke={1.5} color="#ADB5BD" />
+                </>
+              )}
             </Flex>
           </Button>
         </Stack>
