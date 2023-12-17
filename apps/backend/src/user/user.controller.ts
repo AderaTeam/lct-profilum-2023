@@ -3,11 +3,13 @@ import { UserService } from './user.service';
 import { AuthDto } from '../auth/dtos/auth.dto';
 import { UserUpdateDto } from './dtos/userUpdate.dto';
 import { AccessTokenGuard } from '../auth/accessToken.guard';
+import { UniversityService } from './university.service';
 
 @Controller('user')
 export class UserController
 {
     constructor(
+        private uniService: UniversityService,
         private readonly userService: UserService
     ){}
     
@@ -27,6 +29,12 @@ export class UserController
     public async updatePlacement()
     {
         return await this.userService.updatePlacement()
+    }
+
+    @Post('uni/')
+    public async addUni(@Body() data: Record<string, any>)
+    {
+        return await this.userService.addUni(data.userid, data.uniid)
     }
 
     @Get()

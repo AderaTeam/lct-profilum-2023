@@ -70,6 +70,11 @@ public async addTags(id: number, tags: string[])
         return await this.uniRepository.find({relations: {tags: true}})
     }
 
+    public async getOne(id: number)
+    {
+        return await this.uniRepository.findOne({where: {id: id},relations: {tags: true}})
+    }
+
     public async getImage(id: number)
     {
         return (await this.uniRepository.findOne({where: {id: id}, select: {imageBuff: true}})).imageBuff

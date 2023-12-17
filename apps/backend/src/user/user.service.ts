@@ -6,10 +6,12 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { AchievementOwned } from '../database/entities-index';
 import { VkUserDto } from '../auth/dtos/vk.user.dto';
 import { CreateUserDto } from './dtos/createUser.dto';
+import { UniversityService } from './university.service';
 
 @Injectable()
 export class UserService {
     constructor(
+        private uniService: UniversityService,
         @InjectRepository(User)
         private userRepository: Repository<User>,
         @InjectRepository(AchievementOwned)
@@ -41,6 +43,16 @@ export class UserService {
     public async getOneByNickname(nickname: string)
     {
         return await this.userRepository.findOne({where:{nickname: nickname}, relations:{paths: true}, order: {paths: {path: {pathSteps: {step: 'ASC'}}}}})
+    }
+
+    public async addUni(userid: number, uniid: number)
+    {
+        let user = await this.userRepository.findOneBy({id: userid})
+        const uni = await this.uniService.getOne(uniid)
+
+        user.universities.push(uni)
+
+        return await this.userRepository.save(user)
     }
 
     public async getAll()
