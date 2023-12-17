@@ -82,7 +82,7 @@ export class AuthService {
 
 	async signIn(data: AuthDto) {
     // Check if user exists
-    const user = await this.usersService.getOneByNickname(data.nickname);
+    const user = await this.usersService.getOneByNicknameWithPass(data.nickname);
     if (!user) throw new BadRequestException('User does not exist');
     const passwordMatches = await argon2.verify(user.password, data.password);
     if (!passwordMatches)

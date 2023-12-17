@@ -45,6 +45,11 @@ export class UserService {
         return await this.userRepository.findOne({where:{nickname: nickname}, relations:{paths: true}, order: {paths: {path: {pathSteps: {step: 'ASC'}}}}})
     }
 
+    public async getOneByNicknameWithPass(nickname: string)
+    {
+        return await this.userRepository.findOne({where:{nickname: nickname}, select: {password: true}})
+    }
+
     public async addUni(userid: number, uniid: number)
     {
         let user = await this.userRepository.findOne({where: {id: userid}, relations: {universities: true}})
