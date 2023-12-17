@@ -62,7 +62,6 @@ export class UserService {
             role: true,
             rank: true,
             nickname: true,
-            image: true,
             username: true    
         }})
     }
