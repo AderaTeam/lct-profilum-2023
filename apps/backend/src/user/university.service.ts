@@ -30,6 +30,12 @@ export class UniversityService {
                 tags.push(tagToAdd)
             }
         }
+        const newTag = this.uniTagRepository.create({name: 'После 9'})
+        const tagToAdd = await this.uniTagRepository.save(newTag)
+        tags.push(tagToAdd)
+        const newTag2 = this.uniTagRepository.create({name: 'После 11'})
+        const tagToAdd2 = await this.uniTagRepository.save(newTag2)
+        tags.push(tagToAdd2)
         const newUser = this.uniRepository.create({...uni, tags})
         await this.uniRepository.save(newUser)
         return newUser

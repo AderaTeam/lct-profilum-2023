@@ -59,9 +59,9 @@ export class Univercity {
     image: string
 
     @Column(
-        {
+        { 
+            type: "bytea", 
             nullable: false,
-            select: false
         }
     )
     imageBuff: Buffer
