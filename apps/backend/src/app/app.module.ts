@@ -8,6 +8,8 @@ import { AchievementModule } from '../achievement/achievement.module';
 import { PathsModule } from '../paths/paths.module';
 import { AnalyzeModule } from '../analyze/analyze.module';
 import { CommunityModule } from '../community/community.module';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
 
 
 @Module({
@@ -21,7 +23,7 @@ import { CommunityModule } from '../community/community.module';
     CommunityModule,
     TypeOrmModule.forRoot(ormconfig as TypeOrmModuleOptions),
   ],
-  controllers: [],
-  providers: [],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}
