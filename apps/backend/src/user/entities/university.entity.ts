@@ -62,6 +62,7 @@ export class Univercity {
         { 
             type: "bytea", 
             nullable: false,
+            select: false
         }
     )
     imageBuff: Buffer
