@@ -25,7 +25,7 @@ export const OnboardingChat = () => {
   return (
     <Card radius="32px" w={700} p={'40px'}>
       <Stack gap={32}>
-        <MageProfile step={step} />
+        <MageProfile isOnboarding step={step} />
         <ChatBlock step={step} isLoading={isLoading} />
         <Flex justify={'space-between'}>
           <Button

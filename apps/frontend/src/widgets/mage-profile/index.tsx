@@ -5,12 +5,14 @@ import { ActionIcon } from 'shared/components/ActionIcon';
 import { Tag } from 'shared/components/Tag';
 
 import mageAvatar from 'shared/assets/mage.png';
+import { MY_PATH_ROUTE } from 'shared/constants/const';
 
 interface MageProfile {
   step?: number;
+  isOnboarding?: boolean;
 }
 
-export const MageProfile = ({ step }: MageProfile) => {
+export const MageProfile = ({ step, isOnboarding }: MageProfile) => {
   const navigate = useNavigate();
 
   return (
@@ -37,7 +39,12 @@ export const MageProfile = ({ step }: MageProfile) => {
         }}
       />
       <div style={{ position: 'absolute', right: 40, top: 40 }}>
-        <ActionIcon onClick={() => navigate(-1)} outline>
+        <ActionIcon
+          onClick={
+            isOnboarding ? () => navigate(MY_PATH_ROUTE) : () => navigate(-1)
+          }
+          outline
+        >
           <IconPlus style={{ rotate: '45deg' }} stroke={1.5} color="#ADB5BD" />
         </ActionIcon>
       </div>
