@@ -2,6 +2,7 @@ import { Stack } from '@mantine/core';
 import { Context } from 'main';
 import { observer } from 'mobx-react-lite';
 import { useContext, useEffect, useState } from 'react';
+import $api from 'shared/api';
 import MainWrapper from 'shared/components/Wrappers/MainWrapper';
 import { IUniversity } from 'shared/models/IUniversity';
 import { EducationsSelectedCard } from 'widgets/educations-selected-card';
@@ -16,7 +17,9 @@ const MyPathPage = observer(() => {
   );
 
   useEffect(() => {
-    setSelectedUniversity([]);
+    $api.get(`/user/${UStore.user.id}/uni`).then((response) => {
+      setSelectedUniversity(response.data);
+    });
   }, []);
 
   return (
