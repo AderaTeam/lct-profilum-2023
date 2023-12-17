@@ -174,17 +174,17 @@ export class PathsService {
 
     await this.pathRepository.save(path)
 
-    // let users = await this.userService.getAll()
+    let users = await this.userService.getAll()
 
-    // users = users.filter((user) => {return (user.paths.filter((userpath) => {return userpath.path.id == path.id}).length > 0)})
+    users = users.filter((user) => {return (user.paths.filter((userpath) => {return userpath.path.id == path.id})).length > 0})
 
-    // Logger.log(users)
+    Logger.log(users)
 
-    // for(let user of users)
-    // {
-    //   user.paths = user.paths.filter((userpath) => {return userpath.path == path})
-    //   await this.userService.save(user)
-    // }
+    for(let user of users)
+    {
+      user.paths = user.paths.filter((userpath) => {return userpath.path == path})
+      await this.userService.save(user)
+    }
 
     return await this.pathRepository.delete({id: id});
   }
