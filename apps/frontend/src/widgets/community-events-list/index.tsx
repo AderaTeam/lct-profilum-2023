@@ -2,7 +2,7 @@ import { Flex, Image, Stack } from '@mantine/core';
 import { IconArrowBigUpLines, IconCircleCheck } from '@tabler/icons-react';
 import { Card } from 'shared/components/Card';
 
-import mage from 'shared/assets/mage.png';
+import user from 'shared/assets/user.svg';
 import { IEvents } from 'shared/models/IEvents';
 
 interface CommunityEventsListProps {
@@ -40,7 +40,7 @@ export const CommunityEventsList = ({ events }: CommunityEventsListProps) => {
               gap={12}
             >
               <Image
-                src={item.author.avataruri || mage}
+                src={item.author.avataruri || user}
                 w={48}
                 h={48}
                 style={{ objectFit: 'cover', borderRadius: '8px' }}
