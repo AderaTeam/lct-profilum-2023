@@ -72,7 +72,7 @@ export class UserService {
         let user = await this.userRepository.findOne({where: {id: userid}, relations: {universities: true}})
         Logger.log(user)
 
-        let newUnis: Univercity[]
+        let newUnis: Univercity[] = []
         if(user.universities)
         {
             for(const uni of user.universities)
