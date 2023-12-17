@@ -64,7 +64,7 @@ export class UniversityService {
         }
         Logger.log(tags)
         const newUni = this.uniRepository.create({...uni, tags: []})
-        const newnewUni = await this.uniRepository.update(newUni.id, {...uni, tags: tags})
+        const newnewUni = await this.uniRepository.update(newUni.id, {tags: tags})
         // await this.uniRepository.save(newnewUni)
         return newnewUni
     }
