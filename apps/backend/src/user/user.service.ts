@@ -70,14 +70,11 @@ export class UserService {
     public async removeUni(userid: number, uniid: number)
     {
         let user = await this.userRepository.findOne({where: {id: userid}, relations: {universities: true}})
-        Logger.log(user)
 
         if(user.universities)
         {
-            Logger.log(JSON.stringify(user.universities))
-            Logger.log(uniid)
+
             user.universities = user.universities.filter((obj) => {return obj.id != uniid})
-            Logger.log(JSON.stringify(user.universities))
         }
 
         return await this.userRepository.save(user)

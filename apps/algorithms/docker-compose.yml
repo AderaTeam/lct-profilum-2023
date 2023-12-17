@@ -11,3 +11,8 @@ services:
       gunicorn -k uvicorn.workers.UvicornWorker --log-level trace main:app -b :80 -t 750"
     ports:
       - 9000:80
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 2048M
