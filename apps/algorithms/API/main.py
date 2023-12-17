@@ -100,15 +100,21 @@ def root2(user_id: int, n_of_works: int=-1):
 # 393854543
 @app.get("/vk/simple_analize_interests")
 def root3(user_id: int, n_of_works: int=-1):
+    logging.warning("start vk fetch")
     prof_ways_data = ioc.require('profWaysData').reset_index()
     text_samples_vectors = ioc.require('smallDescriptionVectors')
     vectorizer = ioc.require('fastTextVectorizer')
     vk_session = ioc.require('vkSession')
     subscribes = ioc.require('getVkUserSubscribes')(vk_session=vk_session, user_id=user_id)
     subscribes_processed = ioc.require('vkSubscribesProcessor')(subscribes)
+    logging.warning("done vk fetch")
+    logging.warning("subscriptions amount:" + str(len(subscribes_processed)))
+
     texts = []
     for i in subscribes_processed:
         texts += ioc.require('vkWallMainInfoTextExtractor')(i['main_description'][0])
+    logging.warning("texts amount:" + str(len(texts)))
+
     # print(texts)
     # v = torch.zeros(1024)
     v = vectorizer(texts, 100)
