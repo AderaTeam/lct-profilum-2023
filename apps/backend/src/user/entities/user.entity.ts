@@ -112,7 +112,7 @@ export class User {
     @JoinTable()
     analysedPaths: Path[]
 
-    @ManyToMany(() => Card, (card) => card.author, {onDelete: 'CASCADE'})
+    @OneToMany(() => Card, (card) => card.author, {onDelete: 'CASCADE'})
     @JoinTable()
     cards?: Card[]
 
