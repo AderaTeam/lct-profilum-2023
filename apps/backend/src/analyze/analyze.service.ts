@@ -21,7 +21,7 @@ export class AnalyzeService {
 
         Logger.log(JSON.stringify(userSocials))
 
-        if(userSocials.filter((obj) => {return obj.social.name == 'VK'}))
+        if(userSocials.filter((obj) => {return obj.social.name == 'VK'}).length > 0)
         {
             Logger.log(userSocials.filter((obj) => {return obj.social.name == 'VK'}))
 
@@ -29,9 +29,9 @@ export class AnalyzeService {
 
             var vkResultWorks: VKResultDto = (await axios.get(`http://178.170.192.87:9000/vk/simple_analize_interests/?user_id=${userVKid}&n_of_works=4`)).data
         }  
-        if(userSocials.filter((obj) => obj.social.name == 'LeaderID'))
+        if(userSocials.filter((obj) => {return obj.social.name == 'LeaderID'}).length > 0)
         {
-            const leaderID = userSocials.filter((obj) => obj.social.name == 'LeaderID')[0].originaluserid
+            const leaderID = userSocials.filter((obj) => {return obj.social.name == 'LeaderID'})[0].originaluserid
             Logger.log(leaderID)
 
             var leaderResultWorks = (await axios.get(`http://178.170.192.87:9000/leaderid/get_works/?user_id=${leaderID}&n_of_works=4`)).data
