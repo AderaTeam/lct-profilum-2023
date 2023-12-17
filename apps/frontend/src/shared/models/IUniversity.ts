@@ -4,6 +4,6 @@ export interface IUniversity {
   popularity: string;
   students: number;
   budgetPlaces: boolean;
-  tags: string[];
+  tags: { id: number; name: string }[];
   image: string;
 }

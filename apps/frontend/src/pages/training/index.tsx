@@ -1,9 +1,14 @@
-import MainWrapper from "shared/components/Wrappers/MainWrapper";
+import { Stack } from '@mantine/core';
+import MainWrapper from 'shared/components/Wrappers/MainWrapper';
+import { TrainingTop } from 'widgets/training-top';
 
 const TrainingPage = () => {
   return (
     <MainWrapper>
-      123<></>
+      <Stack gap={48}>
+        <TrainingTop />
+      </Stack>
+      <></>
     </MainWrapper>
   );
 };

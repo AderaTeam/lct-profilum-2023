@@ -7,8 +7,7 @@ import { IUniversity } from 'shared/models/IUniversity';
 import { Input } from 'shared/components/Input';
 import { useEffect, useState } from 'react';
 
-import img1 from 'shared/assets/university/1.png';
-import img2 from 'shared/assets/university/2.png';
+import $api from 'shared/api';
 
 const EducationsPage = () => {
   const { control, watch } = useForm();
@@ -17,67 +16,17 @@ const EducationsPage = () => {
   );
   const [university, setUniversity] = useState<IUniversity[]>([]);
 
-  const data: IUniversity[] = [
-    {
-      name: 'Омский Государственный Технический Университет',
-      city: 'Омск',
-      popularity: 'Средняя',
-      students: 5000,
-      budgetPlaces: true,
-      tags: ['ТОП 20', 'ПОДХОДИТ ПОД ВАШ ПУТЬ', 'МИН БАЛЛ - 200'],
-      image: img1,
-    },
-    {
-      name: 'МГУ имени Ломоносова',
-      city: 'Омск',
-      popularity: 'Высокая',
-      students: 5000,
-      budgetPlaces: true,
-      tags: ['ТОП 20', 'ПОДХОДИТ ПОД ВАШ ПУТЬ', 'МИН БАЛЛ - 200'],
-      image: img2,
-    },
-    {
-      name: 'Достоевского',
-      city: 'Омск',
-      popularity: 'Низкая',
-      students: 5000,
-      budgetPlaces: true,
-      tags: ['ТОП 20', 'ПОДХОДИТ ПОД ВАШ ПУТЬ', 'МИН БАЛЛ - 200'],
-      image: img2,
-    },
-  ];
-
-  const data2 = [
-    {
-      name: 'Омский Государственный Технический Университет',
-      city: 'Омск',
-      popularity: 'Средняя',
-      students: 5000,
-      budgetPlaces: true,
-      tags: ['ТОП 20', 'ПОДХОДИТ ПОД ВАШ ПУТЬ', 'МИН БАЛЛ - 200'],
-      image: img1,
-    },
-    {
-      name: 'МГУ имени Ломоносова',
-      city: 'Омск',
-      popularity: 'Высокая',
-      students: 5000,
-      budgetPlaces: true,
-      tags: ['ТОП 20', 'ПОДХОДИТ ПОД ВАШ ПУТЬ', 'МИН БАЛЛ - 200'],
-      image: img2,
-    },
-  ];
-
   const getAllUnivercity = () => {
-    setUniversity(data);
+    $api.get('/university').then((response) => {
+      setUniversity(response.data);
+    });
   };
 
   const getSelectedUnivercity = () => {
-    setSelectedUniversity(data2);
+    setSelectedUniversity([]);
   };
 
   const handleSelectUnivercity = (university: IUniversity) => {
-    console.log(university);
     getSelectedUnivercity();
   };
 

@@ -30,9 +30,9 @@ export const UniversityCard = ({
           <Flex gap={8} wrap={'wrap'}>
             {university.tags.map((item, index) => (
               <Tag
-                key={item}
+                key={item.name}
                 variant={index === 0 ? 'filled' : 'light'}
-                text={item}
+                text={item.name}
               />
             ))}
           </Flex>

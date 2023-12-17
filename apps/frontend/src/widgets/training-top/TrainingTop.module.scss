@@ -1,0 +1,42 @@
+.user-card {
+  border-radius: 16px;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  background: #f8f9fa;
+  color: #adb5bd;
+  &.one {
+    background: #fff7e8;
+    color: #ffa800;
+  }
+
+  &.two {
+    background: #e0edff;
+    color: #2f80ed;
+  }
+
+  &.three {
+    background: #ffece4;
+    color: #ff4c00;
+  }
+
+  &.points {
+    font-weight: 500;
+  }
+
+  &.circle {
+    background: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.scroll {
+  overflow: hidden;
+  float: left;
+}
