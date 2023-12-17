@@ -43,7 +43,7 @@ export class AnalyzeService {
 
         let resultsVK = []
 
-        for (const work of vkResultWorks.names)
+        for (const work of vkResultWorks.name)
         {
             if(await this.pathService.findOneByName(work))
             {

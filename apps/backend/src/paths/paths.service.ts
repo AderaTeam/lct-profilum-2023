@@ -68,15 +68,15 @@ export class PathsService {
     for(const speciality of createPathDto.specialities)
     {
       //Logger.log(speciality)
-      if(!(await this.specialitiesRepository.findOneBy({name: speciality})))
+      if(!(await this.specialitiesRepository.findOneBy({name: speciality.name})))
       {
-        const newSpeciality = this.specialitiesRepository.create({name: speciality})
+        const newSpeciality = this.specialitiesRepository.create({name: speciality.name})
         const specToAdd = await this.specialitiesRepository.save(newSpeciality)
         specialities.push(specToAdd)
       }
       else
       {
-        specialities.push(await this.specialitiesRepository.findOneBy({name: speciality}))
+        specialities.push(await this.specialitiesRepository.findOneBy({name: speciality.name}))
       }
     }
     
