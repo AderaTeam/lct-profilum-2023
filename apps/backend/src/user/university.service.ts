@@ -33,16 +33,36 @@ export class UniversityService {
         //         tags.push(tagToAdd)
         //     }
         // }
-
-        const newTag0 = this.uniTagRepository.create({name: uni.tags})
-        const tagToAdd0 = await this.uniTagRepository.save(newTag0)
-        tags.push(tagToAdd0)
-        const newTag = this.uniTagRepository.create({name: 'После 9'})
-        const tagToAdd = await this.uniTagRepository.save(newTag)
-        tags.push(tagToAdd)
-        const newTag2 = this.uniTagRepository.create({name: 'После 11'})
-        const tagToAdd2 = await this.uniTagRepository.save(newTag2)
-        tags.push(tagToAdd2)
+        if (await this.uniTagRepository.findOneBy({name: 'После 9'}))
+        {
+            tags.push(await this.uniTagRepository.findOneBy({name: 'После 9'}))
+        }
+        else
+        {
+            const newTag = this.uniTagRepository.create({name: 'После 9'})
+            const tagToAdd = await this.uniTagRepository.save(newTag)
+            tags.push(tagToAdd)
+        }
+        if (await this.uniTagRepository.findOneBy({name: 'После 11'}))
+        {
+            tags.push(await this.uniTagRepository.findOneBy({name: 'После 11'}))
+        }
+        else
+        {
+            const newTag = this.uniTagRepository.create({name: 'После 11'})
+            const tagToAdd = await this.uniTagRepository.save(newTag)
+            tags.push(tagToAdd)
+        }if (await this.uniTagRepository.findOneBy({name: uni.tags}))
+        {
+            tags.push(await this.uniTagRepository.findOneBy({name: uni.tags}))
+        }
+        else
+        {
+            const newTag = this.uniTagRepository.create({name: uni.tags})
+            const tagToAdd = await this.uniTagRepository.save(newTag)
+            tags.push(tagToAdd)
+        }
+        
         const newUser = this.uniRepository.create({...uni, tags})
         await this.uniRepository.save(newUser)
         return newUser

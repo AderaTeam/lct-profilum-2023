@@ -47,7 +47,7 @@ export class Univercity {
     )
     budgetPlaces: boolean
 
-    @ManyToMany(() => UniTag, (uni) => uni.universities)
+    @ManyToMany(() => UniTag, (tag) => tag.universities)
     @JoinTable()
     tags: UniTag[]
 
@@ -70,6 +70,6 @@ export class Univercity {
     @BeforeUpdate()
     updateImage()
     {
-        this.image = ''
+        this.image = `https://api.adera-team.ru/university/image/${this.id}`
     }
 }
