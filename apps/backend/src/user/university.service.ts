@@ -56,7 +56,7 @@ public async addTags(id: number, tags: string[])
         const tagToAdd = await this.uniTagRepository.save(newTag)
         newTags.push(tagToAdd)
     }
-    uni.tags = uni.tags.concat(newTags)
+    uni.tags = uni.tags ? uni.tags.concat(newTags) : newTags
     return this.uniRepository.save(uni)
 }
 
