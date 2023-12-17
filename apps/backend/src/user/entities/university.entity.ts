@@ -47,7 +47,7 @@ export class Univercity {
     )
     budgetPlaces: boolean
 
-    @ManyToMany(() => UniTag, (tag) => tag.universities)
+    @OneToMany(() => UniTag, (tag) => tag.universities)
     @JoinTable()
     tags: UniTag[]
 
