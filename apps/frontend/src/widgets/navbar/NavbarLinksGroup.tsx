@@ -34,14 +34,14 @@ const NavbarLinksGroup = ({ role }: NavbarLinksGroupProps) => {
   const links =
     role === 'user'
       ? authRoutes
-          .filter((item) => item.isAdmin) //!
+          .filter((item) => !item.isAdmin) //!
           .map((link) => {
             if (!link?.isHide) {
               return <NavbarLink {...link} key={link.title} />;
             }
           })
       : authRoutes
-          .filter((item) => !item.isAdmin) //
+          .filter((item) => item.isAdmin) //
           .map((link) => {
             if (!link?.isHide) {
               return <NavbarLink {...link} key={link.title} />;
