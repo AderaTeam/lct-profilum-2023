@@ -5,86 +5,54 @@ import { EducationsSelectedCard } from 'widgets/educations-selected-card';
 import { EducationsUniversity } from 'widgets/educations-university';
 import { IUniversity } from 'shared/models/IUniversity';
 import { Input } from 'shared/components/Input';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
-import img1 from 'shared/assets/university/1.png';
-import img2 from 'shared/assets/university/2.png';
+import $api from 'shared/api';
+import { Context } from 'main';
 
 const EducationsPage = () => {
   const { control, watch } = useForm();
+  const { UStore } = useContext(Context);
   const [selectedUniversity, setSelectedUniversity] = useState<IUniversity[]>(
     []
   );
+  const [selectedIds, setSelectedIds] = useState<number[]>([]);
   const [university, setUniversity] = useState<IUniversity[]>([]);
 
-  const data: IUniversity[] = [
-    {
-      name: 'Омский Государственный Технический Университет',
-      city: 'Омск',
-      popularity: 'Средняя',
-      students: 5000,
-      budgetPlaces: true,
-      tags: ['ТОП 20', 'ПОДХОДИТ ПОД ВАШ ПУТЬ', 'МИН БАЛЛ - 200'],
-      image: img1,
-    },
-    {
-      name: 'МГУ имени Ломоносова',
-      city: 'Омск',
-      popularity: 'Высокая',
-      students: 5000,
-      budgetPlaces: true,
-      tags: ['ТОП 20', 'ПОДХОДИТ ПОД ВАШ ПУТЬ', 'МИН БАЛЛ - 200'],
-      image: img2,
-    },
-    {
-      name: 'Достоевского',
-      city: 'Омск',
-      popularity: 'Низкая',
-      students: 5000,
-      budgetPlaces: true,
-      tags: ['ТОП 20', 'ПОДХОДИТ ПОД ВАШ ПУТЬ', 'МИН БАЛЛ - 200'],
-      image: img2,
-    },
-  ];
-
-  const data2 = [
-    {
-      name: 'Омский Государственный Технический Университет',
-      city: 'Омск',
-      popularity: 'Средняя',
-      students: 5000,
-      budgetPlaces: true,
-      tags: ['ТОП 20', 'ПОДХОДИТ ПОД ВАШ ПУТЬ', 'МИН БАЛЛ - 200'],
-      image: img1,
-    },
-    {
-      name: 'МГУ имени Ломоносова',
-      city: 'Омск',
-      popularity: 'Высокая',
-      students: 5000,
-      budgetPlaces: true,
-      tags: ['ТОП 20', 'ПОДХОДИТ ПОД ВАШ ПУТЬ', 'МИН БАЛЛ - 200'],
-      image: img2,
-    },
-  ];
-
-  const getAllUnivercity = () => {
-    setUniversity(data);
+  const getAllUniversity = () => {
+    $api.get('/university').then((response) => {
+      setUniversity(response.data ? response.data : []);
+    });
   };
 
-  const getSelectedUnivercity = () => {
-    setSelectedUniversity(data2);
+  const getSelectedUniversity = () => {
+    $api.get(`/user/${UStore.user.id}/uni`).then((response) => {
+      setSelectedUniversity(response.data ? response.data : []);
+    });
   };
 
-  const handleSelectUnivercity = (university: IUniversity) => {
-    console.log(university);
-    getSelectedUnivercity();
+  const handleSelectUniversity = (university: IUniversity) => {
+    $api
+      .post('/user/uni', { userid: UStore.user.id, uniid: university.id })
+      .then(() => getSelectedUniversity());
+  };
+
+  const handleDeleteUniversity = (university: IUniversity) => {
+    $api
+      .delete('/user/uni', {
+        data: { userid: UStore.user.id, uniid: university.id },
+      })
+      .then(() => getSelectedUniversity());
   };
 
   useEffect(() => {
-    getAllUnivercity();
-    getSelectedUnivercity();
+    getAllUniversity();
+    getSelectedUniversity();
   }, []);
+
+  useEffect(() => {
+    setSelectedIds(selectedUniversity.map((item) => item.id));
+  }, [selectedUniversity]);
 
   return (
     <MainWrapper>
@@ -99,7 +67,9 @@ const EducationsPage = () => {
           />
         </Flex>
         <EducationsUniversity
-          handleSelectUnivercity={handleSelectUnivercity}
+          selectedIds={selectedIds}
+          handleSelectUniversity={handleSelectUniversity}
+          handleDeleteUniversity={handleDeleteUniversity}
           university={university.filter((item) =>
             item.name
               .toLowerCase()

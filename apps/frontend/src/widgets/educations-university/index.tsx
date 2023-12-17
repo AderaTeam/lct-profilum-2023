@@ -4,21 +4,27 @@ import { IUniversity } from 'shared/models/IUniversity';
 
 interface EducationsUniversityProps {
   university: IUniversity[];
-  handleSelectUnivercity: Function;
+  handleSelectUniversity: Function;
+  handleDeleteUniversity: Function;
+  selectedIds: number[];
 }
 
 export const EducationsUniversity = ({
   university,
-  handleSelectUnivercity,
+  handleSelectUniversity,
+  handleDeleteUniversity,
+  selectedIds,
 }: EducationsUniversityProps) => {
   return (
     <Stack gap={48}>
       <Stack gap={12}>
         {university.map((item) => (
           <UniversityCard
-            handleSelectUnivercity={handleSelectUnivercity}
+            selectedIds={selectedIds}
+            handleDeleteUniversity={handleDeleteUniversity}
+            handleSelectUnivercity={handleSelectUniversity}
             university={item}
-            key={item.name}
+            key={item.id}
           />
         ))}
       </Stack>

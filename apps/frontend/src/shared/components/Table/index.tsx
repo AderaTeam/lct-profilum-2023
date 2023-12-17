@@ -6,15 +6,20 @@ import { useState } from 'react';
 import FileDownload from 'js-file-download';
 import $api from 'shared/api';
 import { useDisclosure } from '@mantine/hooks';
+import { IPath } from 'shared/models/IPath';
+import { ModalInfo } from './components/ModalInfo';
+import { ModalEdit } from './components/ModalEdit';
 
 interface TableProps {
   rowsData: any[];
   type: string;
+  getPaths: Function;
 }
 
-export const Table = ({ rowsData, type }: TableProps) => {
+export const Table = ({ rowsData, type, getPaths }: TableProps) => {
   const [activeIds, setActiveIds] = useState<string[]>([]);
   const [openedInfo, setOpenInfo] = useState<boolean>(false);
+  const [activeRow, setActiveRow] = useState<IPath>();
   const [opened, { open, close }] = useDisclosure(false);
   const allIds = rowsData.map((item) => `${item.id}`);
 
@@ -37,14 +42,14 @@ export const Table = ({ rowsData, type }: TableProps) => {
     console.log('delete', id);
   };
 
-  const handleRowEdit = (id: number) => {
-    console.log('edit', id);
-    setOpenInfo(true);
+  const handleRowEdit = (row: IPath) => {
+    setActiveRow(row);
+    open();
   };
 
-  const handleModalOpen = (id: number) => {
-    console.log('open', id);
-    open();
+  const handleModalOpen = (row: IPath) => {
+    setActiveRow(row);
+    setOpenInfo(true);
   };
 
   return (
@@ -70,10 +75,10 @@ export const Table = ({ rowsData, type }: TableProps) => {
             size={600}
             radius={24}
           >
-            <div>321</div>
+            <ModalInfo close={setOpenInfo} activeRow={activeRow} type={type} />
           </Modal>
           <Modal
-            size={508}
+            size={600}
             lockScroll={false}
             trapFocus={false}
             style={{ zIndex: 10000000, position: 'absolute' }}
@@ -81,10 +86,16 @@ export const Table = ({ rowsData, type }: TableProps) => {
             opened={opened}
             onClose={close}
             centered
-            padding={'32px'}
+            padding={'40px'}
             radius={24}
           >
-            <div>123</div>
+            <ModalEdit
+              getPaths={getPaths}
+              setActiveRow={setActiveRow}
+              close={close}
+              activeRow={activeRow}
+              type={type}
+            />
           </Modal>
           <TableBody
             handleRowDelete={handleRowDelete}

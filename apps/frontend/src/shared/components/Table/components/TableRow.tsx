@@ -27,13 +27,13 @@ export const TableRow = ({
     <Flex align={'flex-start'} className={style.row} gap={0}>
       <Flex w={136} align={'center'} className={style.cell} gap={10}>
         <IconArrowsMaximize
-          onClick={() => handleModalOpen(row.id)}
+          onClick={() => handleModalOpen(row)}
           style={{ cursor: 'pointer' }}
           stroke={'2'}
           color={'#212529'}
         />
         <IconEdit
-          onClick={() => handleRowEdit(row.id)}
+          onClick={() => handleRowEdit(row)}
           style={{ cursor: 'pointer' }}
           stroke={'2'}
           color={'#212529'}

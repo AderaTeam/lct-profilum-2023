@@ -21,8 +21,8 @@ def valuesInitiator():
     with open('./DATA/secrets.json', 'r') as f:
         secrets = json.load(f)
 
-    with open('./DATA/large_spec_desc_processed.json', 'r') as f:
-        large_spec_desc_processed = json.load(f)
+    # with open('./DATA/large_spec_desc_processed.json', 'r') as f:
+    #     large_spec_desc_processed = json.load(f)
 
     with open('./DATA/work_spec_desc.json', 'r') as f:
         work_spec_desc = json.load(f)
@@ -40,7 +40,7 @@ def valuesInitiator():
         scope=vk_api.VkUserPermissions.GROUPS
     )
     vk_session.auth(token_only=True)
-    small_description_vectors = torch.load('./DATA/small_description_vectors.pt')
+    small_description_vectors = torch.load('./DATA/small_description_vectors.pt').detach()
     prof_ways_data = pd.read_excel('./DATA/Профессии_ОКСО_ ЛЦТ_Профилум.xlsx', index_col='№').loc[:, ['Отрасль текстом', 'Название профессии']]
     # work_spec_desc = pd.read_excel('./DATA/Профессии_ОКСО_ ЛЦТ_Профилум.xlsx', index_col='№').loc[:, ['Название профессии', 'Специальности ОКСО - по одной специальности может быть множетсво программ обучения, которые открывают колледжии и вузы. Специальность - то, что написано у тебя в дипломе после окончания одной из программ обучения.', ]]
 
@@ -61,6 +61,6 @@ def valuesInitiator():
     ioc.provide('maxPostHistLength', 10)
     ioc.provide('smallDescriptionVectors', small_description_vectors)
     ioc.provide('profWaysData', prof_ways_data)
-    ioc.provide('largeSpecDescProcessed', large_spec_desc_processed)
+    # ioc.provide('largeSpecDescProcessed', large_spec_desc_processed)
     ioc.provide('smallSpecDesc', small_spec_desc)
     ioc.provide('workSpecDesc', work_spec_desc)
