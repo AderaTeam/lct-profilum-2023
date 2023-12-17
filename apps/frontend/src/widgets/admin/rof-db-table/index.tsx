@@ -1,14 +1,18 @@
 import { useEffect, useState } from 'react';
 import $api from 'shared/api';
 import { Table } from 'shared/components/Table';
-import { IPath, IPathStep } from 'shared/models/IPath';
+import { IPath } from 'shared/models/IPath';
 
 export const ProfDbTable = () => {
   const [rowsData, setRowsData] = useState<IPath[]>([]);
 
-  useEffect(() => {
+  const getPaths = () => {
     $api.get<IPath[]>('/paths').then((response) => setRowsData(response.data));
+  };
+
+  useEffect(() => {
+    getPaths();
   }, []);
 
-  return <Table rowsData={rowsData} type={'prof'} />;
+  return <Table getPaths={getPaths} rowsData={rowsData} type={'prof'} />;
 };

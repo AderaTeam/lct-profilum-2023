@@ -5,6 +5,7 @@ import { SocialUsers } from "../../socials/entities/socialsUsers.entity"
 import { Path } from "../../paths/entities/path.entity"
 import { Card } from "../../community/entities/card.entity"
 import { UniTag } from "./uniTag.entity"
+import { User } from "./user.entity"
 
 @Entity()
 export class Univercity {
@@ -66,5 +67,8 @@ export class Univercity {
         }
     )
     imageBuff: Buffer
+
+    @ManyToMany(() => User, (user) => user.universities, {onDelete: 'SET NULL'})
+    users: User[]
 
 }

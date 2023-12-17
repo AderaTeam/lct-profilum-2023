@@ -40,11 +40,15 @@ const NavbarUser = observer(() => {
         <Text className={style['navbar__name']}>{UStore.user.username}</Text>
         <Text className={style['navbar__tag']}>{UStore.user.nickname}</Text>
       </Stack>
-      <div style={{ marginLeft: 'auto' }}>
-        <NavLink to={PROFILE_ROUTE}>
-          <IconChevronRight stroke={1.5} color="#ADB5BD" />
-        </NavLink>
-      </div>
+      {UStore.user.role === 'user' ? (
+        <div style={{ marginLeft: 'auto' }}>
+          <NavLink to={PROFILE_ROUTE}>
+            <IconChevronRight stroke={1.5} color="#ADB5BD" />
+          </NavLink>
+        </div>
+      ) : (
+        <></>
+      )}
     </Flex>
   );
 });

@@ -19,7 +19,7 @@ export class UniTag {
     )
     name: string
 
-    @ManyToOne(() => Univercity, (uni) => uni.tags)
+    @ManyToOne(() => Univercity, (uni) => uni.tags, {onDelete: 'CASCADE'})
     @JoinTable()
     universities: Univercity[]
 }

@@ -3,14 +3,28 @@ import { UserService } from './user.service';
 import { AuthDto } from '../auth/dtos/auth.dto';
 import { UserUpdateDto } from './dtos/userUpdate.dto';
 import { AccessTokenGuard } from '../auth/accessToken.guard';
+import { UniversityService } from './university.service';
 
 @Controller('user')
 export class UserController
 {
     constructor(
+        private uniService: UniversityService,
         private readonly userService: UserService
     ){}
     
+    @Delete('uni/')
+    public async removeUni(@Body() data: Record<string, any>)
+    {
+        return await this.userService.removeUni(data.userid, data.uniid)
+    }
+
+    @Get(':id/uni/')
+    public async getUni(@Param('id') userid: number)
+    {
+        return await this.userService.get3uni(userid)
+    }
+
     @Delete('dropall')
     public async dropAll()
     {
@@ -23,12 +37,19 @@ export class UserController
         return await this.userService.deleteOne(id)
     }
 
-
     @Post('placement')
     public async updatePlacement()
     {
         return await this.userService.updatePlacement()
     }
+
+    @Post('uni/')
+    public async addUni(@Body() data: Record<string, any>)
+    {
+        return await this.userService.addUni(data.userid, data.uniid)
+    }
+
+    
 
     @Get()
     public async getAll()
@@ -59,9 +80,7 @@ export class UserController
     public async updateOne(@Body() userDto: UserUpdateDto, @Req() req)
     {
         return await this.userService.updateOne(req.user.sub, userDto)
-    }
-
-    
+    }    
 
     @UseGuards(AccessTokenGuard)
     @Delete('')

@@ -22,6 +22,12 @@ export class UniversityController
         return await this.uniService.droptags()
     }
 
+    @Post('tags/:id')
+    async changeTags(@Param('id') uniid: number, @Body() data: Record<string, any>)
+    {
+        return await this.uniService.addTags(uniid, data.tags)
+    }
+
     @Post()
     @UseInterceptors(FileInterceptor('file'))
     create(@Body() createUniDto: CreateUniDto, @UploadedFile() file: Express.Multer.File) {

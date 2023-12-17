@@ -27,7 +27,6 @@ export const Select = ({
       placeholder={placeholder}
       data={data}
       className={custom ? style.custom : style.select}
-      searchable
     />
   );
 };

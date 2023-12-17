@@ -6,10 +6,12 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { AchievementOwned } from '../database/entities-index';
 import { VkUserDto } from '../auth/dtos/vk.user.dto';
 import { CreateUserDto } from './dtos/createUser.dto';
+import { UniversityService } from './university.service';
 
 @Injectable()
 export class UserService {
     constructor(
+        private uniService: UniversityService,
         @InjectRepository(User)
         private userRepository: Repository<User>,
         @InjectRepository(AchievementOwned)
@@ -41,6 +43,46 @@ export class UserService {
     public async getOneByNickname(nickname: string)
     {
         return await this.userRepository.findOne({where:{nickname: nickname}, relations:{paths: true}, order: {paths: {path: {pathSteps: {step: 'ASC'}}}}})
+    }
+
+    public async addUni(userid: number, uniid: number)
+    {
+        let user = await this.userRepository.findOne({where: {id: userid}, relations: {universities: true}})
+        const uni = await this.uniService.getOne(uniid)
+
+        Logger.log(user.universities)
+
+        if(user.universities)
+        {
+            if(!(user.universities.includes(uni)))
+            {
+                user.universities.push(uni)
+            }
+        }
+        else
+        {
+            user.universities = [uni]
+        }
+
+        return await this.userRepository.save(user)
+    }
+
+    public async removeUni(userid: number, uniid: number)
+    {
+        let user = await this.userRepository.findOne({where: {id: userid}, relations: {universities: true}})
+
+        if(user.universities)
+        {
+
+            user.universities = user.universities.filter((obj) => {return obj.id != uniid})
+        }
+
+        return await this.userRepository.save(user)
+    }
+
+    public async get3uni(userid: number)
+    {
+        return (await this.userRepository.findOne({where: {id: userid}, relations: {universities: true}, select: {universities: true}})).universities.slice(0, 3)
     }
 
     public async getAll()
