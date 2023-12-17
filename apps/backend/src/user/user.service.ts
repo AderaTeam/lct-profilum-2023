@@ -66,6 +66,8 @@ export class UserService {
     {
         let user = await this.userRepository.findOneBy({id: userid})
 
+        Logger.log(user)
+
         if(user.universities)
         {
             Logger.log(user.universities)
