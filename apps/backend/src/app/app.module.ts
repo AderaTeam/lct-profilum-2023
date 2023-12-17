@@ -7,6 +7,7 @@ import { AuthModule } from '../auth/auth.module';
 import { AchievementModule } from '../achievement/achievement.module';
 import { PathsModule } from '../paths/paths.module';
 import { AnalyzeModule } from '../analyze/analyze.module';
+import { CommunityModule } from '../community/community.module';
 
 
 @Module({
@@ -17,6 +18,7 @@ import { AnalyzeModule } from '../analyze/analyze.module';
     AchievementModule,
     PathsModule,
     AnalyzeModule,
+    CommunityModule,
     TypeOrmModule.forRoot(ormconfig as TypeOrmModuleOptions),
   ],
   controllers: [],

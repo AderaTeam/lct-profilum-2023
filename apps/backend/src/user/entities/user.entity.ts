@@ -1,10 +1,12 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, JoinColumn, JoinTable, ManyToMany, BeforeInsert, BeforeUpdate } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, JoinColumn, JoinTable, ManyToMany, BeforeInsert, BeforeUpdate, Repository } from "typeorm"
 import { AchievementOwned } from "../../achievement/entities/achievementOwned.entity"
 import { OwnedPath } from "../../paths/entities/ownedPath.entity"
 import { SocialUsers } from "../../socials/entities/socialsUsers.entity"
 import { Path } from "../../paths/entities/path.entity"
 import { Card } from "../../community/entities/card.entity"
 import { Univercity as University } from "./university.entity"
+import { UserService } from "../user.service"
+import { InjectRepository } from "@nestjs/typeorm"
 
 @Entity()
 export class User {
