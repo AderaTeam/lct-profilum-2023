@@ -43,7 +43,7 @@ const MainWrapper = observer(
                     {children?.length ? (
                       <Stack gap={16}>
                         {/* <ProgressCard /> */}
-                        {!UStore?.user?.isAnalyzed ? (
+                        {!UStore?.user?.paths?.length ? (
                           <AnalyseCard
                             paths={UStore.user.paths}
                             analysedPaths={UStore.user.analysedPaths}

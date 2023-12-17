@@ -4,7 +4,7 @@ export const eventsTitleFormater = (
   pathTitle: string
 ) => {
   if (status === 'up') {
-    const splitTtile = title.split(' ');
+    const splitTtile = title.split('до');
     const lastElem = splitTtile[splitTtile.length - 1];
     splitTtile.pop();
     return { arr: splitTtile, lastElem: lastElem };

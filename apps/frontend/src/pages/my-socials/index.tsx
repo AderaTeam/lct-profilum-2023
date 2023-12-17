@@ -1,5 +1,5 @@
 import { Context } from 'main';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import $api from 'shared/api';
 import MainWrapper from 'shared/components/Wrappers/MainWrapper';
 import { IPath } from 'shared/models/IPath';
@@ -12,16 +12,18 @@ const MySocialsPage = () => {
 
   const handleAnalysis = () => {
     setIsLoading(true);
-    try {
-      $api.get('/analyze').then((response) => {
+    $api.get('/analyze').then((response) => {
+      if (response) {
+        setIsLoading(false);
         setResult(response.data.result);
-        UStore.setUser({ ...UStore.user, analysedPaths: response.data.result });
-      });
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsLoading(false);
-    }
+        UStore.setUser({
+          ...UStore.user,
+          analysedPaths: response.data.result,
+        });
+      } else {
+        setIsLoading(false);
+      }
+    });
   };
 
   return (

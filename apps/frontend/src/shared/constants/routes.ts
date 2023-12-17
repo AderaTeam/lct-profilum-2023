@@ -1,6 +1,7 @@
 import {
   ASSISTANT_ROUTE,
   COMMUNITY_ROUTE,
+  CONNECT_NO_PAGE_ROUTE,
   EDUCATIONS_ROUTE,
   LOGIN_ROUTE,
   MAGE_ROUTE,
@@ -37,6 +38,7 @@ const profile = lazy(() => import('pages/profile'));
 const mySocials = lazy(() => import('pages/my-socials'));
 const mage = lazy(() => import('pages/mage'));
 const noPage = lazy(() => import('pages/no-page'));
+const connectNoPage = lazy(() => import('pages/connect-no-page'));
 const onboarding = lazy(() => import('pages/onboarding'));
 
 //Admin
@@ -105,6 +107,13 @@ export const authRoutes = [
   {
     path: NO_PAGE_ROUTE,
     Component: noPage,
+    title: 'Пустая страница',
+    isAdmin: false,
+    isHide: true,
+  },
+  {
+    path: CONNECT_NO_PAGE_ROUTE,
+    Component: connectNoPage,
     title: 'Пустая страница',
     isAdmin: false,
     isHide: true,
