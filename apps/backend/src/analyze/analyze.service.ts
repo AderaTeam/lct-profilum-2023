@@ -43,7 +43,29 @@ export class AnalyzeService {
 
         let results = []
 
-        const worksname: string[] = [...new Set(vkResultWorks.name.concat(leaderResultWorks.name))]
+        if(vkResultWorks)
+        {
+            if(leaderResultWorks)
+            {
+                const worksname: string[] = [...new Set(vkResultWorks.name.concat(leaderResultWorks.name))]
+            }
+            else
+            {
+                const worksname: string[] = vkResultWorks.name
+            }
+        }
+        else
+        {
+            if(leaderResultWorks)
+            {
+                const worksname: string[] = leaderResultWorks.name
+            }
+            else
+            {
+                const worksname: string[] = []
+            }
+        }
+       
 
         for (const work of worksname)
         {
