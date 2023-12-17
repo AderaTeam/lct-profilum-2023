@@ -4,12 +4,15 @@ import { UserService } from './user.service';
 import { databaseProvider } from '../providers/database.provider';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
-import { AchievementOwned } from '../database/entities-index';
+import { AchievementOwned, Univercity } from '../database/entities-index';
+import { UniversityController } from './university.controller';
+import { UniversityService } from './university.service';
+import { UniTag } from './entities/uniTag.entity';
 
 @Module({
-        imports:[TypeOrmModule.forFeature([User, AchievementOwned])],
-        controllers: [UserController],
+        imports:[TypeOrmModule.forFeature([User, AchievementOwned, Univercity, UniTag])],
+        controllers: [UserController, UniversityController],
         providers: [UserService, databaseProvider],
-        exports: [UserService]
+        exports: [UserService, UniversityService]
     })
 export class UserModule {}

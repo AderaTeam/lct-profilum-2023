@@ -4,6 +4,7 @@ import { OwnedPath } from "../../paths/entities/ownedPath.entity"
 import { SocialUsers } from "../../socials/entities/socialsUsers.entity"
 import { Path } from "../../paths/entities/path.entity"
 import { Card } from "../../community/entities/card.entity"
+import { UniTag } from "./uniTag.entity"
 
 @Entity()
 export class Univercity {
@@ -46,13 +47,9 @@ export class Univercity {
     )
     budgetPlaces: boolean
 
-    // @Column(
-    //     {
-    //         nullable: false,
-    //         array: true,
-    //     }
-    // )
-    // tags: string[]
+    @ManyToMany(() => UniTag, (uni) => uni.universities)
+    @JoinTable()
+    tags: UniTag[]
 
     @Column(
         {
