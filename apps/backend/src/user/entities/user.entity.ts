@@ -110,15 +110,15 @@ export class User {
     @JoinTable()
     paths: OwnedPath[]
 
-    @ManyToMany(() => Path, (path) => path.users, {eager: true, onDelete: 'SET NULL'})
+    @ManyToMany(() => Path, (path) => path.users, {eager: true, onDelete: 'SET NULL', nullable: true})
     @JoinTable()
     analysedPaths: Path[]
 
-    @OneToMany(() => Card, (card) => card.author, {onDelete: 'CASCADE'})
+    @OneToMany(() => Card, (card) => card.author, {onDelete: 'CASCADE', nullable: true})
     @JoinTable()
     cards?: Card[]
 
-    @ManyToMany(() => University, (uni) => uni.users, {onDelete: 'SET NULL'})
+    @ManyToMany(() => University, (uni) => uni.users, {onDelete: 'SET NULL', nullable: true})
     @JoinTable()
     universities: University[]
 
