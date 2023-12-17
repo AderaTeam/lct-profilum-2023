@@ -19,6 +19,7 @@ interface StepProps {
   handleStepComplete: Function;
   currentStep: number;
   id: number;
+  isLoading: boolean;
 }
 
 export const Step = ({
@@ -26,12 +27,16 @@ export const Step = ({
   handleStepComplete,
   currentStep,
   id,
+  isLoading,
 }: StepProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
-    <Flex h={'100%'} gap={16} align={'center'}>
-      <StepProgressBar {...step} />
+    <Flex h={'100%'} gap={16}>
+      <div>
+        <StepProgressBar step={step} currentStep={currentStep} />
+      </div>
+
       <Card mb={8} mt={8} w={'100%'}>
         <Stack gap={24}>
           <Flex justify={'space-between'}>
@@ -83,7 +88,7 @@ export const Step = ({
             ))}
           </Flex>
           {step.step === currentStep && (
-            <Button onClick={() => handleStepComplete(id)}>
+            <Button disabled={isLoading} onClick={() => handleStepComplete(id)}>
               <Flex gap={8}>
                 Подтвердить <IconChevronRight stroke={1.5} color="#FFFF" />
               </Flex>

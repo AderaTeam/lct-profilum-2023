@@ -1,22 +1,31 @@
-import { Textarea } from "@mantine/core"
+import { Textarea } from '@mantine/core';
 import style from './TextArea.module.scss';
-import { ControllerRenderProps, FieldValues } from "react-hook-form";
+import { ControllerRenderProps, FieldValues } from 'react-hook-form';
 
 interface Props {
-  field: ControllerRenderProps<FieldValues, "text">,
-  disabled?: boolean, 
+  field: ControllerRenderProps<FieldValues, any>;
+  disabled?: boolean;
+  h?: number;
+  label?: string;
+  placeholder?: string;
+  custom?: boolean;
 }
 
-export const TextArea = ({field, disabled}: Props) => {
-
+export const TextArea = ({
+  field,
+  disabled,
+  label,
+  placeholder,
+  custom,
+}: Props) => {
   return (
     <Textarea
       {...field}
       disabled={disabled}
-      label="Ввод"
-      placeholder="Введите или вставьте текст обращения"
-      className={style.textarea}
+      label={label}
+      placeholder={placeholder}
+      className={custom ? style['custom-textarea'] : style.textarea}
       variant="filled"
     />
-  )
-}
+  );
+};

@@ -1,4 +1,4 @@
-import { Flex } from '@mantine/core';
+import { Flex, Image } from '@mantine/core';
 import { AuthNavbar } from 'widgets/auth-navbar';
 
 import bg from 'shared/assets/auth-bg.png';
@@ -6,17 +6,20 @@ import bg from 'shared/assets/auth-bg.png';
 const AuthPage = () => {
   return (
     <div className="wrapper">
-      <Flex gap={0} w={'100%'}>
+      <Flex gap={0}>
         <AuthNavbar />
-        <div
-          style={{
-            backgroundImage: `url(${bg})`,
-            objectFit: 'contain',
-            backgroundRepeat: 'no-repeat',
-            width: '100%',
-            height: '100%',
-          }}
-        ></div>
+        <div style={{ position: 'relative', width: '100%' }}>
+          <Image
+            style={{
+              position: 'absolute',
+              top: 0,
+              right: 0,
+              width: '100%',
+              height: '100%',
+            }}
+            src={bg}
+          />
+        </div>
       </Flex>
     </div>
   );

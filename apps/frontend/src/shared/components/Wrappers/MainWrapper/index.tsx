@@ -37,7 +37,7 @@ const MainWrapper = observer(
             <Stack className={style.right}>
               <div className="wrapper">
                 {UStore.user.role === 'admin' ? ( //admin
-                  <></>
+                  <>{children?.length ? children[1] : <></>}</>
                 ) : (
                   <>
                     {children?.length ? (
