@@ -69,7 +69,7 @@ export class UserService {
 
     public async removeUni(userid: number, uniid: number)
     {
-        let user = await this.userRepository.findOneBy({id: userid})
+        let user = await this.userRepository.findOne({where: {id: userid}, relations: {universities: true}})
         Logger.log(user)
 
         if(user.universities)
