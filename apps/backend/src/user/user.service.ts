@@ -62,7 +62,16 @@ export class UserService {
             role: true,
             rank: true,
             nickname: true,
-            username: true    
+            username: true,
+            points: true,
+            isAnalyzed: true,
+            ratingPlacement: true,
+            analysedPaths: true,
+            paths: true,
+            socials: true,
+            universities: true,
+            achievements: true,
+            cards: true,    
         }})
     }
 
