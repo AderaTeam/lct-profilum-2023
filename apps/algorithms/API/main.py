@@ -118,9 +118,12 @@ def root3(user_id: int, n_of_works: int=-1):
     # print(texts)
     # v = torch.zeros(1024)
     v = vectorizer(texts, 100)
+    logging.warning("vectorizer works")
+
     # for i in texts:
     #     v += vectorizer(i, 100)
     res = ioc.require('simpleDistAnalizer')(v, text_samples_vectors)
+    logging.warning("dist analizer works")
     res_i = np.argsort(res.to_numpy())[::-1]
     # print(prof_ways_data.shape, res.shape, res_i)
     return {'name': [prof_ways_data['Название профессии'][i] for i in res_i[0:n_of_works-1]], 'value': [res[i] for i in res_i[0:n_of_works-1]]}
