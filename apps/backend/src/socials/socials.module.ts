@@ -11,7 +11,7 @@ import { RefreshTokenStrategy } from '../auth/strategies/refreshToken.strategy';
 @Module({
   imports:[TypeOrmModule.forFeature([Social, SocialUsers]), UserModule],
   controllers: [SocialsController],
-  providers: [SocialsService, AccessTokenStrategy, RefreshTokenStrategy],
+  providers: [SocialsService],
   exports: [SocialsService]
 })
 export class SocialsModule {}

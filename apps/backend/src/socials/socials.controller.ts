@@ -26,7 +26,7 @@ export class SocialsController {
   @Post('vk')
   async attachVk(@Query('silent_token') silentToken: string, @Query('uuid') uuid: string, @Req() req: Record<string, any>)
   {
-    return await this.attachVk(silentToken, uuid, req.user.sub)
+    return await this.socialsService.attachVk(silentToken, uuid, req.user.sub)
   }
 
   @Post('user')
