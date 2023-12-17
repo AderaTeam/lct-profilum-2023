@@ -35,7 +35,7 @@ export class CommunityService {
     return await this.cardRepository.find({where: {author: {id: id}}});
   }
 
-  async removeAll(id: number) {
+  async removeAll() {
     return await this.cardRepository.delete({})
   }
 

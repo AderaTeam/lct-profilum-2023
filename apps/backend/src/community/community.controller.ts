@@ -7,6 +7,11 @@ import { UpdateCardDto } from './dto/update-card.dto';
 export class CommunityController {
   constructor(private readonly communityService: CommunityService) {}
 
+  @Delete('dropall')
+  dropall() {
+    return this.communityService.removeAll();
+  }
+
   @Post('card')
   create(@Body() createCardDto: CreateCardDto) {
     return this.communityService.createCard(createCardDto);

@@ -31,6 +31,7 @@ export class User {
     @Column(
         {
             nullable: true,
+            select: false
         }
     )
     password: string
