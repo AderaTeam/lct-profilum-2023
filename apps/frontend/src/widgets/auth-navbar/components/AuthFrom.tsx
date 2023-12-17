@@ -17,7 +17,7 @@ import {
 
 import vk from 'shared/assets/vk.svg';
 import { observer } from 'mobx-react-lite';
-import { eventsTitleFormater } from 'shared/helpers/eventsTitleFormater';
+import { Checkbox } from 'shared/components/Checkbox';
 
 interface AuthFormProps {
   activeRole: number;
@@ -27,6 +27,7 @@ export const AuthForm = observer(({ activeRole }: AuthFormProps) => {
   const { UStore } = useContext(Context);
   const location = useLocation();
   const navigate = useNavigate();
+  const [isFamiliarized, setIsFamiliarized] = useState<boolean>(false);
   const { control, watch, setValue, getValues, handleSubmit } =
     useFormContext();
   VKID.Config.set({
@@ -199,6 +200,29 @@ export const AuthForm = observer(({ activeRole }: AuthFormProps) => {
           </>
         )}
       </Stack>
+      {location.pathname === REGISTRATION_ROUTE ? (
+        <Flex gap={12} w={360}>
+          <Checkbox onChange={(e) => setIsFamiliarized(e.target.checked)} />
+          <p className="text gray">
+            Я согласен(на){' '}
+            <span
+              style={{ textDecorationLine: 'underline', cursor: 'pointer' }}
+              className="text pink"
+            >
+              с условиями пользовательского соглашения
+            </span>{' '}
+            и{' '}
+            <span
+              style={{ textDecorationLine: 'underline', cursor: 'pointer' }}
+              className="text pink"
+            >
+              политикой конфиденциальности
+            </span>
+          </p>
+        </Flex>
+      ) : (
+        <></>
+      )}
       <Stack w={'100%'} gap={12}>
         <Button
           onClick={onSubmit}
@@ -208,7 +232,8 @@ export const AuthForm = observer(({ activeRole }: AuthFormProps) => {
               : !watch('nickname') ||
                 !watch('password') ||
                 !watch('username') ||
-                !watch('grade')
+                !watch('grade') ||
+                !isFamiliarized
           }
           fullWidth
         >

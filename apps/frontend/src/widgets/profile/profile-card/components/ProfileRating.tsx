@@ -17,5 +17,13 @@ export const ProfileRating = ({ id }: ProfileRatingProps) => {
     });
   }, []);
 
-  return <>{rating ? <Tag variant="light">Топ {rating + 1}</Tag> : <></>}</>;
+  return (
+    <>
+      {rating || rating === 0 ? (
+        <Tag variant="light">Топ {rating + 1}</Tag>
+      ) : (
+        <></>
+      )}
+    </>
+  );
 };

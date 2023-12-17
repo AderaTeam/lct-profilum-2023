@@ -6,12 +6,16 @@
     background: transparent;
     width: 24px;
     height: 24px;
+    &:checked {
+      background: #fa1d80;
+      border: none;
+    }
   }
   div {
     width: 24px;
     height: 24px;
   }
   svg {
-    color: #fa1d80;
+    color: #ffff;
   }
 }
