@@ -67,8 +67,8 @@ export class Univercity {
     )
     imageBuff: Buffer
 
-    @AfterInsert()
-    @AfterUpdate()
+    @BeforeInsert()
+    @BeforeUpdate()
     updateImage()
     {
         this.image = `https://api.adera-team.ru/university/image/${this.id}`
