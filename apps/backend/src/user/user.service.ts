@@ -50,7 +50,7 @@ export class UserService {
         let user = await this.userRepository.findOneBy({id: userid})
         const uni = await this.uniService.getOne(uniid)
 
-        if(user.universities)
+        if(user.universities.length > 0)
         {
             user.universities.push(uni)
         }
