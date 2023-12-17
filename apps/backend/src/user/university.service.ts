@@ -18,20 +18,25 @@ export class UniversityService {
     {
         Logger.log(uni.tags)
         Logger.log(uni.tags[0])
+        uni.tags = String(uni.tags)
         let tags:UniTag[] = []
-        for (const tag of uni.tags)
-        {
-            if (await this.uniTagRepository.findOneBy({name: tag}))
-            {
-                tags.push(await this.uniTagRepository.findOneBy({name: tag}))
-            }
-            else
-            {
-                const newTag = this.uniTagRepository.create({name: tag})
-                const tagToAdd = await this.uniTagRepository.save(newTag)
-                tags.push(tagToAdd)
-            }
-        }
+        // for (const tag of uni.tags)
+        // {
+        //     if (await this.uniTagRepository.findOneBy({name: tag}))
+        //     {
+        //         tags.push(await this.uniTagRepository.findOneBy({name: tag}))
+        //     }
+        //     else
+        //     {
+        //         const newTag = this.uniTagRepository.create({name: tag})
+        //         const tagToAdd = await this.uniTagRepository.save(newTag)
+        //         tags.push(tagToAdd)
+        //     }
+        // }
+
+        const newTag0 = this.uniTagRepository.create({name: uni.tags})
+        const tagToAdd0 = await this.uniTagRepository.save(newTag0)
+        tags.push(tagToAdd0)
         const newTag = this.uniTagRepository.create({name: 'После 9'})
         const tagToAdd = await this.uniTagRepository.save(newTag)
         tags.push(tagToAdd)

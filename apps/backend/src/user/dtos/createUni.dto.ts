@@ -5,7 +5,7 @@ export class CreateUniDto
     popularity: string
     students: number
     budgetPlaces: boolean
-    tags: string[]
+    tags: string[] | string
     image?: string
     imageBuff?: Buffer
 }
