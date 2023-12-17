@@ -35,7 +35,7 @@ export const ProfileInfo = ({ user, rankImage }: ProfileInfoProps) => {
           )}
         </Flex>
       </Stack>
-      {user?.paths.length ? (
+      {user?.paths?.length ? (
         <Flex wrap={'wrap'} gap={8}>
           {user.paths.map((item) => (
             <Tag key={item.id} variant="outline">

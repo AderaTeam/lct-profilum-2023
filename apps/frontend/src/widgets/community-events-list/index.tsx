@@ -1,6 +1,7 @@
 import { Flex, Image, Stack } from '@mantine/core';
 import { IconArrowBigUpLines, IconCircleCheck } from '@tabler/icons-react';
 import { Card } from 'shared/components/Card';
+import dayjs from 'dayjs';
 
 import user from 'shared/assets/user.svg';
 import { IEvents } from 'shared/models/IEvents';
@@ -13,7 +14,7 @@ export const CommunityEventsList = ({ events }: CommunityEventsListProps) => {
   return (
     <Stack gap={12}>
       {events.map((item) => (
-        <Card key={item.title} radius="32px">
+        <Card key={item.id} radius="32px">
           <Stack gap={24}>
             <Flex gap={8} align={'center'}>
               <Flex
@@ -31,7 +32,7 @@ export const CommunityEventsList = ({ events }: CommunityEventsListProps) => {
               </Flex>
               <h2 className="h2">{item.title}</h2>
               <p style={{ marginLeft: 'auto' }} className="text gray">
-                {item.date}
+                {dayjs(item.date).format('D MMMM')}
               </p>
             </Flex>
             <Flex

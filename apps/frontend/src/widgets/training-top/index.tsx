@@ -1,4 +1,4 @@
-import { Flex, Image, Stack } from '@mantine/core';
+import { Flex, Image, Loader, Stack } from '@mantine/core';
 import { useEffect, useState } from 'react';
 import $api from 'shared/api';
 import { Card } from 'shared/components/Card';
@@ -101,7 +101,9 @@ export const TrainingTop = () => {
           </Stack>
         </Card>
       ) : (
-        <></>
+        <Stack align="center" justify="center">
+          <Loader size={'lg'} color="myColor" />
+        </Stack>
       )}
     </>
   );
