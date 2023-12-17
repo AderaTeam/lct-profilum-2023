@@ -121,6 +121,18 @@ export class PathsService {
     return await this.ownedPathRepository.delete({user: Equal<User>(await this.userService.getOneById(id))})
   }
 
+  async findOneByName(name: string)
+  {
+    return await this.pathRepository.findOne({where: {name: name}})
+  }
+
+  async createProfMock(name: string)
+  {
+    let path = await this.pathRepository.findOneBy({name: "Профессия"})
+    const newPath = this.pathRepository.create({...path, name: name}) 
+    return await this.pathRepository.save(newPath)
+  }
+
   async stepProgress(pathid: number)
   {
     let ownedPath: OwnedPath = await this.ownedPathRepository.findOne({where: {id: pathid}, relations:{user: true}})

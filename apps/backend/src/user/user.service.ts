@@ -18,6 +18,11 @@ export class UserService {
         private readonly achievementOwnedRepository: Repository<AchievementOwned>,
     ){}
 
+    public async save(user: User)
+    {
+        return await this.userRepository.save(user)
+    }
+
     public async create(user: CreateUserDto | VkUserDto)
     {
         const newUser = this.userRepository.create(user)

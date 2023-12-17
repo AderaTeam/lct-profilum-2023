@@ -2,13 +2,16 @@ import { Injectable, Logger } from '@nestjs/common';
 import { UserService } from '../user/user.service';
 import { SocialsService } from '../socials/socials.service';
 import axios from 'axios';
+import { VKResultDto } from '../achievement/dto/vkResultDto.dto';
+import { PathsService } from '../paths/paths.service';
 
 @Injectable()
 export class AnalyzeService {
 
     constructor(
         private userService: UserService,
-        private socialsService: SocialsService
+        private socialsService: SocialsService,
+        private pathService: PathsService   
     ){}
     public async analyzeUserById(userid: number)
     {
@@ -16,12 +19,13 @@ export class AnalyzeService {
 
         const userSocials = await this.socialsService.findLinksByUserId(userid)
 
+        Logger.log(userSocials)
+
         if(userSocials.filter((obj) => obj.social.name == 'VK'))
         {
             const userVKid = userSocials.filter((obj) => obj.social.name == 'VK')[0].originaluserid
 
-            Logger.log(userVKid)
-            var vkResultWorks = (await axios.get(`http://178.170.192.87:9000/vk/simple_analize_interests/?user_id=${userVKid}&n_of_works=4`)).data
+            var vkResultWorks: VKResultDto = (await axios.get(`http://178.170.192.87:9000/vk/simple_analize_interests/?user_id=${userVKid}&n_of_works=4`)).data
         }  
         if(userSocials.filter((obj) => obj.social.name == 'LeaderID'))
         {
@@ -31,7 +35,34 @@ export class AnalyzeService {
             var leaderResultWorks = (await axios.get(`http://178.170.192.87:9000/leaderid/get_works/?user_id=${leaderID}&n_of_works=4`)).data
         }
 
-        return {vkres: vkResultWorks, leaderes: leaderResultWorks}
+        user.isAnalyzed = true
+
+        let resultsVK = []
+
+        for (const work of vkResultWorks.names)
+        {
+            if(await this.pathService.findOneByName(work))
+            {
+                resultsVK.push(await this.pathService.findOneByName(work))
+            }
+            else
+            {
+                resultsVK.push(await this.pathService.createProfMock(work))
+            }
+        }
+
+        if(user.analysedPaths)
+        {
+            user.analysedPaths.push(...resultsVK)
+        }
+        else
+        {
+            user.analysedPaths = resultsVK
+        }
+
+        this.userService.save(user)
+
+        return {resultsVK}
 
     }
 }
