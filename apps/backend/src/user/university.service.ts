@@ -16,8 +16,6 @@ export class UniversityService {
 
     public async create(uni: CreateUniDto)
     {
-        Logger.log(uni.tags)
-        Logger.log(uni.tags[0])
         uni.tags = String(uni.tags)
         let tags:UniTag[] = []
         // for (const tag of uni.tags)
@@ -62,9 +60,7 @@ export class UniversityService {
             const tagToAdd = await this.uniTagRepository.save(newTag)
             tags.push(tagToAdd)
         }
-        Logger.log(tags)
         const newUni = this.uniRepository.create({...uni, tags: tags})
-        Logger.log(newUni.id)
         await this.uniRepository.save(newUni)
         newUni.image = `https://api.adera-team.ru/university/image/${newUni.id}`
         return await this.uniRepository.save(newUni)
@@ -82,10 +78,7 @@ export class UniversityService {
 
     public async getImage(id: number)
     {
-        Logger.log(JSON.stringify(await this.uniRepository.findOne({where: {id: id}})))
-        Logger.log((await this.uniRepository.findOne({where: {id: id}})).imageBuff)
-
-        return (await this.uniRepository.findOne({where: {id: id}})).imageBuff
+        return (await this.uniRepository.findOne({where: {id: id}, select: {imageBuff: true}})).imageBuff
     }
 
     public async dropall()
