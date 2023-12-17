@@ -24,7 +24,7 @@ export class SocialsController {
 
   @UseGuards(AccessTokenGuard)
   @Post('vk')
-  async attachVk(@Query('silent_token') silentToken: string, @Query('uuid') uuid: string,@Req () req: Record<string, any>)
+  async attachVk(@Query('silent_token') silentToken: string, @Query('uuid') uuid: string, @Req() req: Record<string, any>)
   {
     return await this.attachVk(silentToken, uuid, req.user.sub)
   }
