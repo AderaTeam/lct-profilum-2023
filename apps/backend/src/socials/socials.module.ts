@@ -5,11 +5,13 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Social } from './entities/social.entity';
 import { SocialUsers } from './entities/socialsUsers.entity';
 import { UserModule } from '../user/user.module';
+import { AccessTokenStrategy } from '../auth/strategies/accessToken.strategy';
+import { RefreshTokenStrategy } from '../auth/strategies/refreshToken.strategy';
 
 @Module({
   imports:[TypeOrmModule.forFeature([Social, SocialUsers]), UserModule],
   controllers: [SocialsController],
-  providers: [SocialsService],
+  providers: [SocialsService, AccessTokenStrategy, RefreshTokenStrategy],
   exports: [SocialsService]
 })
 export class SocialsModule {}
