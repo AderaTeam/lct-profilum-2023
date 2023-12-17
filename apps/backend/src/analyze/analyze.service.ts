@@ -19,7 +19,7 @@ export class AnalyzeService {
 
         const userSocials = await this.socialsService.findLinksByUserId(userid)
 
-        Logger.log(userSocials)
+        Logger.log(JSON.stringify(userSocials))
 
         if(userSocials.filter((obj) => obj.social.name == 'VK'))
         {
