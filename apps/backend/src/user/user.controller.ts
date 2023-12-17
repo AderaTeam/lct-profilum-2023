@@ -19,6 +19,12 @@ export class UserController
         return await this.userService.removeUni(data.userid, data.uniid)
     }
 
+    @Get('uni/')
+    public async getUni(@Body() data: Record<string, any>)
+    {
+        return await this.userService.get3uni(data.userid)
+    }
+
     @Delete('dropall')
     public async dropAll()
     {

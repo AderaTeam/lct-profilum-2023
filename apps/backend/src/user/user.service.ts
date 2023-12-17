@@ -77,6 +77,11 @@ export class UserService {
         return await this.userRepository.save(user)
     }
 
+    public async get3uni(userid: number)
+    {
+        return (await this.userRepository.findOne({where: {id: userid}, relations: {universities: true}, select: {universities: true}})).universities.slice(0, 3)
+    }
+
     public async getAll()
     {
         return await this.userRepository.find({relations: {socials: {social: true}}})
