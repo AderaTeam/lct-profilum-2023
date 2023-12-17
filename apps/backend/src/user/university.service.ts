@@ -64,13 +64,13 @@ export class UniversityService {
         }
         Logger.log(tags)
         const newUni = this.uniRepository.create({...uni, tags: tags})
-        await this.uniRepository.save(newUni)
-        return newUni
+        const uniReturn = await this.uniRepository.save(newUni)
+        return uniReturn
     }
 
     public async droptags()
     {
-       return await this.uniTagRepository.delete({})
+        return await this.uniTagRepository.delete({})
     }
 
     public async getAll()
@@ -80,7 +80,7 @@ export class UniversityService {
 
     public async getImage(id: number)
     {
-        return (await this.uniRepository.findOneBy({id: id})).imageBuff
+        return (await this.uniRepository.findOne({where: {id: id}, relations:{tags: true}})).imageBuff
     }
 
     public async dropall()
