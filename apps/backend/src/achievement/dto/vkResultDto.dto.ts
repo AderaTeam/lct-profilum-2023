@@ -1,6 +1,6 @@
-export class VKResultDto {
+export class ModelResultDto {
 
-    names: string[]
-    probs: number[]
+    name: string[]
+    value: number[]
 
 }

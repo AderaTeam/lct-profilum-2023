@@ -123,12 +123,12 @@ export class PathsService {
 
   async findOneByName(name: string)
   {
-    return await this.pathRepository.findOne({where: {name: name}})
+    return await this.pathRepository.findOne({where: {name: name}, relations:{pathSteps: {content: true, tags: true}}})
   }
 
   async createProfMock(name: string)
   {
-    let path = await this.pathRepository.findOneBy({name: "Профессия"})
+    let path = await this.pathRepository.findOne({where: {name: "Профессия"}, relations:{pathSteps: {content: true, tags: true}}})
     const newPath = this.pathRepository.create({...path, name: name}) 
     return await this.pathRepository.save(newPath)
   }
