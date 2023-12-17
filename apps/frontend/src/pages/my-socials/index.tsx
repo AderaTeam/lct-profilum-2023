@@ -13,7 +13,7 @@ const MySocialsPage = () => {
   const handleAnalysis = () => {
     setIsLoading(true);
     try {
-      $api.get('/paths/fakeanalyze').then((response) => {
+      $api.get('/analyze').then((response) => {
         setResult(response.data.result);
         UStore.setUser({ ...UStore.user, analysedPaths: response.data.result });
       });

@@ -4,9 +4,9 @@ interface Props {
   text?: string;
   children?: React.ReactNode;
   color?: string;
-  aciveId?: number;
+  aciveId?: number | string;
   activeIds?: number[];
-  id?: number;
+  id?: number | string;
   onClick?: () => void;
 }
 
