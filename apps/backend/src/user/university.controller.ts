@@ -16,6 +16,12 @@ export class UniversityController
         return await this.uniService.dropall()
     }
 
+    @Delete('droptags')
+    public async dropTags()
+    {
+        return await this.uniService.droptags()
+    }
+
     @Post()
     @UseInterceptors(FileInterceptor('file'))
     create(@Body() createUniDto: CreateUniDto, @UploadedFile() file: Express.Multer.File) {

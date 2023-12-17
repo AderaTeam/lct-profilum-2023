@@ -68,6 +68,11 @@ export class UniversityService {
         return newUni
     }
 
+    public async droptags()
+    {
+        this.uniTagRepository.delete({})
+    }
+
     public async getAll()
     {
         return await this.uniRepository.find()
