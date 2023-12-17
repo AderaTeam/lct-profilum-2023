@@ -102,6 +102,8 @@ export class SocialsService {
 
   async attachVk(silentToken: string, uuid: string, userid: number)
   {
+    Logger.log("VKATTACHING")
+
     const accessuri = `https://api.vk.com/method/auth.exchangeSilentAuthToken?v=5.131&access_token=${clientdata.service_token}&token=${silentToken}&uuid=${uuid}`
 
     const result = await axios.get(accessuri)

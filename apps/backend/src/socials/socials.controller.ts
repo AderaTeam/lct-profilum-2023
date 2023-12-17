@@ -10,6 +10,13 @@ import { AccessTokenGuard } from '../auth/accessToken.guard';
 export class SocialsController {
   constructor(private readonly socialsService: SocialsService) {}
 
+  @UseGuards(AccessTokenGuard)
+  @Post('vk')
+  async attachVk(@Query('silent_token') silentToken: string, @Query('uuid') uuid: string,@Req () req: Record<string, any>)
+  {
+    return await this.attachVk(silentToken, uuid, req.user.sub)
+  }
+
   @Post()
   @UseInterceptors(FileInterceptor('file'))
   create(@Body() createAchievementDto: CreateSocialDto, @UploadedFile() file: Express.Multer.File) {
@@ -32,12 +39,7 @@ export class SocialsController {
     return this.socialsService.findAll();
   }
 
-  @UseGuards(AccessTokenGuard)
-  @Post('vk')
-  async attachVk(@Query('silent_token') silentToken: string, @Query('uuid') uuid: string,@Req () req: Record<string, any>)
-  {
-    return await this.attachVk(silentToken, uuid, req.user.sub)
-  }
+
 
   @Delete('user/')
   removeUserSocial(@Body() dto: CreateUsersSocialDto) {
