@@ -32,7 +32,7 @@ export class CommunityService {
   }
 
   async findAllCardsByUser(id: number) {
-    return await this.cardRepository.find({where: {author: {id: id}}, order: {date: 'DESC'}});
+    return await this.cardRepository.find({where: {author: {id: id}},relations: {author: true, path: true}, order: {date: 'DESC'}});
   }
 
   async removeAll() {
