@@ -114,8 +114,8 @@ def root3(user_id: int, n_of_works: int=-1):
         texts += ioc.require('vkWallMainInfoTextExtractor')(i['main_description'][0])
     logging.warning("texts amount:" + str(len(texts)))
 
-    # print(texts)
-    # v = torch.zeros(1024)
+    print(texts)
+    # v = torch.zeros(1024).detach()
     v = vectorizer(texts, 100)
     logging.warning("vectorizer works")
 
