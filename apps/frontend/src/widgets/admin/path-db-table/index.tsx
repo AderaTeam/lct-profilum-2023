@@ -8,9 +8,13 @@ export const PathDbTable = () => {
     { id: number; name: string; pathSteps: IPathStep[] }[]
   >([]);
 
-  useEffect(() => {
+  const getPaths = () => {
     $api.get<IPath[]>('/paths').then((response) => setRowsData(response.data));
+  };
+
+  useEffect(() => {
+    getPaths();
   }, []);
 
-  return <Table rowsData={rowsData} type={'path'} />;
+  return <Table getPaths={getPaths} rowsData={rowsData} type={'path'} />;
 };

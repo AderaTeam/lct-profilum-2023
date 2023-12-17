@@ -1,35 +1,46 @@
 .textarea {
   textarea {
-    background: #25262B;
-    border-radius: 16px;
-    padding: 18px 24px;
-    color: #C1C2C5;
+    background: transparent;
+    border-radius: 8px;
+    padding: 12px 16px;
+    color: #212529;
     font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 24px;
-    height: 108px;
+    height: 43px;
+    font-weight: 400;
+    line-height: normal;
+    border: 1px solid #dee2e6;
+    height: 170px;
     &:focus-within {
-      border-color: #CC5DE8;
+      border-color: #fa1d80;
     }
     &::placeholder {
       font-size: 16px;
       font-style: normal;
       font-weight: 500;
-      line-height: 24px; 
-      color: #5C5F66;
+      line-height: 24px;
+      color: #adb5bd;
     }
     &:disabled {
-      background: #25262B;
+      background: #dee2e6;
+      &::placeholder {
+        color: white;
+      }
     }
   }
 
   label {
     margin-bottom: 8px;
+    color: #adb5bd;
     font-size: 16px;
     font-style: normal;
-    font-weight: 500;
-    line-height: 24px;
-    color: #5C5F66;
+    font-weight: 400;
+    line-height: normal;
+  }
+}
+
+.custom-textarea {
+  @extend .textarea;
+  textarea {
+    height: 100px;
   }
 }
