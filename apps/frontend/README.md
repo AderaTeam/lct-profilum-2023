@@ -1,5 +1,7 @@
 # Общая информация
-Frontend сервиса написан на React + Ts, под капотом использует: 
+
+Frontend сервиса написан на React + Ts, под капотом использует:
+
 <ul>
   <li>State-manager MobX;</li>
   <li>React-hook-form;</li>
