@@ -75,7 +75,7 @@ export class UserService {
         if(user.universities)
         {
             Logger.log(JSON.stringify(user.universities))
-            user.universities = user.universities.filter((obj) => {obj.id != uniid})
+            user.universities = user.universities.filter((obj) => {obj.id == uniid})
             Logger.log(JSON.stringify(user.universities))
         }
 
