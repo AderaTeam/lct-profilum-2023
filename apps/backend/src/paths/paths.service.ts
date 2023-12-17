@@ -170,17 +170,21 @@ export class PathsService {
   async remove(id: number) {
     let path = await this.pathRepository.findOneBy({id: id})
 
-    let users = await this.userService.getAll()
+    path.users = []
 
-    users = users.filter((user) => {return (user.paths.filter((userpath) => {return userpath.path.id == path.id}).length > 0)})
+    await this.pathRepository.save(path)
 
-    Logger.log(users)
+    // let users = await this.userService.getAll()
 
-    for(let user of users)
-    {
-      user.paths = user.paths.filter((userpath) => {return userpath.path == path})
-      await this.userService.save(user)
-    }
+    // users = users.filter((user) => {return (user.paths.filter((userpath) => {return userpath.path.id == path.id}).length > 0)})
+
+    // Logger.log(users)
+
+    // for(let user of users)
+    // {
+    //   user.paths = user.paths.filter((userpath) => {return userpath.path == path})
+    //   await this.userService.save(user)
+    // }
 
     return await this.pathRepository.delete({id: id});
   }
