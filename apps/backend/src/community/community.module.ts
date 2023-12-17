@@ -6,10 +6,11 @@ import { Card } from './entities/card.entity';
 import { UserService } from '../user/user.service';
 import { PathsModule } from '../paths/paths.module';
 import { UserModule } from '../user/user.module';
+import { Path } from '../database/entities-index';
 
 @Module({
   imports:[
-    TypeOrmModule.forFeature([Card]),
+    TypeOrmModule.forFeature([Card, Path]),
     UserModule,
   ],
   controllers: [CommunityController],
