@@ -3,7 +3,7 @@ import { User } from './entities/user.entity';
 import { Equal, EqualOperator, Repository } from 'typeorm';
 import { UserUpdateDto } from './dtos/userUpdate.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { AchievementOwned, Univercity } from '../database/entities-index';
+import { AchievementOwned } from '../database/entities-index';
 import { VkUserDto } from '../auth/dtos/vk.user.dto';
 import { CreateUserDto } from './dtos/createUser.dto';
 import { UniversityService } from './university.service';
@@ -72,23 +72,15 @@ export class UserService {
         let user = await this.userRepository.findOne({where: {id: userid}, relations: {universities: true}})
         Logger.log(user)
 
-        let newUnis: Univercity[] = []
         if(user.universities)
         {
-            for(const uni of user.universities)
-            {
-                if (uni.id != uniid)
-                {
-                    newUnis.push(await this.uniService.getOne(uni.id))
-                }
-            }
-            // Logger.log(JSON.stringify(user.universities))
-            // Logger.log(uniid)
-            // user.universities = user.universities.filter((obj) => {obj.id != uniid})
-            // Logger.log(JSON.stringify(user.universities))
+            Logger.log(JSON.stringify(user.universities))
+            Logger.log(uniid)
+            user.universities = user.universities.filter((obj) => {return obj.id !== uniid})
+            Logger.log(JSON.stringify(user.universities))
         }
 
-        return await this.userRepository.update(user.id, {universities: newUnis})
+        return await this.userRepository.save(user)
     }
 
     public async get3uni(userid: number)
