@@ -40,38 +40,48 @@ export const SocialCardForm = ({ name, getSocials }: SocialCardFormProps) => {
 
   return (
     <Stack gap={24}>
-      <Flex align={'center'} justify={'space-between'}>
-        <Controller
-          name={`originaluserid`}
-          defaultValue={''}
-          control={control}
-          disabled={watch(`url`)}
-          render={(field) => (
-            <Input
-              placeholder="53627832"
-              w={471.5}
-              {...field}
-              label="ID аккаунта"
+      {name === 'VK' ? (
+        <></>
+      ) : (
+        <>
+          <Flex align={'center'} justify={'space-between'}>
+            <Controller
+              name={`originaluserid`}
+              defaultValue={''}
+              control={control}
+              disabled={watch(`url`) || name === 'Steam'}
+              render={(field) => (
+                <Input
+                  placeholder="53627832"
+                  w={471.5}
+                  {...field}
+                  label="ID аккаунта"
+                />
+              )}
             />
-          )}
-        />
-        <Controller
-          name={`url`}
-          control={control}
-          defaultValue={''}
-          disabled={watch(`originaluserid`)}
-          render={(field) => (
-            <Input
-              placeholder="https://hailie.org"
-              w={471.5}
-              {...field}
-              label="Ссылка на страницу"
+            <Controller
+              name={`url`}
+              control={control}
+              defaultValue={''}
+              disabled={watch(`originaluserid`) || name === 'Steam'}
+              render={(field) => (
+                <Input
+                  placeholder="https://hailie.org"
+                  w={471.5}
+                  {...field}
+                  label="Ссылка на страницу"
+                />
+              )}
             />
-          )}
-        />
-      </Flex>
-      <p className="text gray">или войдите через свой аккаунт</p>
-      <Button onClick={() => handleConnect()} outline>
+          </Flex>
+          <p className="text gray">или войдите через свой аккаунт</p>
+        </>
+      )}
+      <Button
+        disabled={name === 'Steam'}
+        onClick={() => handleConnect()}
+        outline
+      >
         <Flex gap={8}>
           Подключить <IconArrowUpRight stroke={1.5} color="#ADB5BD" />
         </Flex>

@@ -1,5 +1,4 @@
 import {
-  ASSISTANT_ROUTE,
   COMMUNITY_ROUTE,
   CONNECT_NO_PAGE_ROUTE,
   EDUCATIONS_ROUTE,
@@ -21,7 +20,6 @@ import {
   IconChartHistogram,
   IconChessRook,
   IconFileDescription,
-  IconMessageChatbot,
   IconMessages,
   IconRoute,
   IconSchool,
@@ -32,7 +30,6 @@ const auth = lazy(() => import('pages/auth'));
 const myPath = lazy(() => import('pages/my-path'));
 const community = lazy(() => import('pages/community'));
 const educations = lazy(() => import('pages/educations'));
-const assistant = lazy(() => import('pages/assistant'));
 const training = lazy(() => import('pages/training'));
 const profile = lazy(() => import('pages/profile'));
 const mySocials = lazy(() => import('pages/my-socials'));
@@ -75,13 +72,6 @@ export const authRoutes = [
     title: 'Уч. заведения',
     isAdmin: false,
     icon: IconSchool,
-  },
-  {
-    path: ASSISTANT_ROUTE,
-    Component: assistant,
-    title: 'Ассистент',
-    isAdmin: false,
-    icon: IconMessageChatbot,
   },
   {
     path: PROFILE_ROUTE,

@@ -4,7 +4,6 @@ export const REGISTRATION_ROUTE = '/registration';
 export const MY_PATH_ROUTE = '/my_path';
 export const COMMUNITY_ROUTE = '/community';
 export const EDUCATIONS_ROUTE = '/educations';
-export const ASSISTANT_ROUTE = '/assistant';
 export const TRAINING_ROUTE = '/training';
 export const PROFILE_ROUTE = '/profile';
 export const MY_SOCIALS_ROUTE = '/my_socials';
