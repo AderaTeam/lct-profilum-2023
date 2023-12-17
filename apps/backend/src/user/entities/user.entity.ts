@@ -128,6 +128,7 @@ export class User {
     @BeforeUpdate()
     updateRank()
     {
+        const prev_rank = this.rank
         if(this.points > 400)
         {
             this.rank = "Оракул"
@@ -156,6 +157,14 @@ export class User {
                     }
                 }
             }
+        }
+        if(prev_rank != this.rank)
+        {
+            return true
+        }
+        else
+        {
+            return false
         }
     }
 }

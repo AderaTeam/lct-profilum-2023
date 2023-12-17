@@ -14,11 +14,14 @@ import { UserService } from '../user/user.service';
 import { CreateAnalyzedPathDto } from './dto/create-analyzed-path.dto';
 import { STATUS_CODES } from 'http';
 import { Speciality } from './entities/spaciality.entity';
-import { User } from '../database/entities-index';
+import { Card, User } from '../database/entities-index';
+import { CommunityService } from '../community/community.service';
+
 
 @Injectable()
 export class PathsService {
   constructor(
+    private communityService: CommunityService,
     private userService: UserService,
     @InjectRepository(Path)
     private pathRepository: Repository<Path>,
@@ -126,7 +129,12 @@ export class PathsService {
     Logger.log(ownedpathid)
     user.points += (await this.pathStepRepository.findOne({where: {path: Equal<number>(ownedpathid), step: ownedPath.currentStep}})).points
     ownedPath.currentStep = ownedPath.currentStep + 1;
+    await this.communityService.createCard({author_id: user.id, path_id: ownedpathid, status: "completed", title:`${user.username} прошел шаг!`})
     await this.userService.updateOne(ownedPath.user.id, user)
+    if(await user.updateRank())
+    {
+      await this.communityService.createCard({author_id: user.id, path_id: ownedpathid, status: "up", title:`${user.username} повысил уровень шаг!`})
+    }
     await this.ownedPathRepository.save(ownedPath)
     return this.userService.getOneById(ownedPath.user.id)
   }

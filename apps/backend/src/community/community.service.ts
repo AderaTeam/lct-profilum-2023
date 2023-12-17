@@ -18,15 +18,17 @@ export class CommunityService {
     private pathService: PathsService
   ){}
   async createCard(createCardDto: CreateCardDto) {
-    return await this.cardRepository.insert({
+    const card = this.cardRepository.create({
       ...createCardDto,
       author: await this.userService.getOneById(createCardDto.author_id),
       path: await this.pathService.findOne(createCardDto.path_id)
     })
+
+    return this.cardRepository.save(card)
   }
 
   async findAllCards() {
-    return await this.cardRepository.find({});
+    return await this.cardRepository.find({relations: {author: true, path: true}});
   }
 
   async findAllCardsByUser(id: number) {
