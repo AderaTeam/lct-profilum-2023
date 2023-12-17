@@ -3,6 +3,7 @@ import { Tag } from 'shared/components/Tag';
 
 import style from '../ProfileCard.module.scss';
 import { IUser } from 'shared/models/IUser';
+import { ProfileRating } from './ProfileRating';
 
 interface ProfileInfoProps {
   user: IUser;
@@ -15,11 +16,7 @@ export const ProfileInfo = ({ user, rankImage }: ProfileInfoProps) => {
       <Stack gap={6}>
         <Flex align={'center'} gap={12}>
           <Text className={style.name}>{user.username}</Text>
-          {user.ratingPlacement ? (
-            <Tag variant="light">Топ {user.ratingPlacement}</Tag>
-          ) : (
-            <></>
-          )}
+          <ProfileRating id={user?.id} />
         </Flex>
         <Flex align={'center'} gap={16}>
           <p className="text">{user.nickname}</p>
