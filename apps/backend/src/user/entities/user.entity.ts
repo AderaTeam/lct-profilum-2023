@@ -4,6 +4,7 @@ import { OwnedPath } from "../../paths/entities/ownedPath.entity"
 import { SocialUsers } from "../../socials/entities/socialsUsers.entity"
 import { Path } from "../../paths/entities/path.entity"
 import { Card } from "../../community/entities/card.entity"
+import { Univercity as University } from "./university.entity"
 
 @Entity()
 export class User {
@@ -112,6 +113,10 @@ export class User {
     @ManyToMany(() => Card, (card) => card.author, {onDelete: 'CASCADE'})
     @JoinTable()
     cards?: Card[]
+
+    @ManyToMany(() => University, (uni) => uni.users, {onDelete: 'SET NULL'})
+    @JoinTable()
+    universities: University[]
 
     @OneToMany(() => AchievementOwned, (achievement) => achievement.user)
     @JoinColumn()
