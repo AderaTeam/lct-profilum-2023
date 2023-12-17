@@ -11,7 +11,6 @@ import { UserModule } from '../user/user.module';
   imports:[
     TypeOrmModule.forFeature([Card]),
     UserModule,
-    PathsModule
   ],
   controllers: [CommunityController],
   providers: [CommunityService],
