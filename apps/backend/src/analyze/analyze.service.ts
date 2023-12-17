@@ -65,16 +65,17 @@ export class AnalyzeService {
                 var worksname: string[] = []
             }
         }
-       
 
         for (const work of worksname)
         {
             if(await this.pathService.findOneByName(work))
             {
+                Logger.log('EXISTS')
                 results.push(await this.pathService.findOneByName(work))
             }
             else
             {
+                Logger.log('NEW')
                 results.push(await this.pathService.createProfMock(work))
             }
         }
@@ -91,6 +92,5 @@ export class AnalyzeService {
         this.userService.save(user)
 
         return {result: results}
-
     }
 }
