@@ -10,8 +10,8 @@ def simpleDistAnalizer(text_for_compare_vectorized: torch.tensor, vectors_databa
             # print(r1.shape, r2.shape)
             r1 = (i.sum(dim=0)/i.shape[0]).unsqueeze(0)
             r2 = (text_for_compare_vectorized.sum(dim=0)/i.shape[0]).unsqueeze(0)
-            print(r1.shape, r2.shape)
-            print(r1.shape, r2.shape, i.shape)
+            # print(r1.shape, r2.shape)
+            # print(r1.shape, r2.shape, i.shape)
             d[t] = torch.nn.CosineSimilarity(dim=1)(r1, r2).item()
             t+=1
     return pd.Series(d)

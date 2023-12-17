@@ -21,8 +21,8 @@ def valuesInitiator():
     with open('./DATA/secrets.json', 'r') as f:
         secrets = json.load(f)
 
-    # with open('./DATA/large_spec_desc_processed.json', 'r') as f:
-    #     large_spec_desc_processed = json.load(f)
+    with open('./DATA/large_spec_desc_processed.json', 'r') as f:
+        large_spec_desc_processed = json.load(f)
 
     with open('./DATA/work_spec_desc.json', 'r') as f:
         work_spec_desc = json.load(f)
@@ -61,6 +61,6 @@ def valuesInitiator():
     ioc.provide('maxPostHistLength', 10)
     ioc.provide('smallDescriptionVectors', small_description_vectors)
     ioc.provide('profWaysData', prof_ways_data)
-    # ioc.provide('largeSpecDescProcessed', large_spec_desc_processed)
+    ioc.provide('largeSpecDescProcessed', large_spec_desc_processed)
     ioc.provide('smallSpecDesc', small_spec_desc)
     ioc.provide('workSpecDesc', work_spec_desc)
