@@ -50,7 +50,14 @@ export class UserService {
         let user = await this.userRepository.findOneBy({id: userid})
         const uni = await this.uniService.getOne(uniid)
 
-        user.universities.push(uni)
+        if(user.universities)
+        {
+            user.universities.push(uni)
+        }
+        else
+        {
+            user.universities = [uni]
+        }
 
         return await this.userRepository.save(user)
     }
