@@ -70,7 +70,7 @@ export class UniversityService {
 
     public async droptags()
     {
-        this.uniTagRepository.delete({})
+       return await this.uniTagRepository.delete({})
     }
 
     public async getAll()
