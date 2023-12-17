@@ -55,10 +55,10 @@ export class PathsController {
     return this.pathsService.dropOwnageForUser(+id);
   }
 
-  // @Delete(':id')
-  // remove(@Param('id') id: string) {
-  //   return this.pathsService.remove(+id);
-  // }
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.pathsService.remove(+id);
+  }
 
   @Delete('')
   removeAll(@Param('id') id: string) {
