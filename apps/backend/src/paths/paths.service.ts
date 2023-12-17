@@ -16,6 +16,8 @@ import { STATUS_CODES } from 'http';
 import { Speciality } from './entities/spaciality.entity';
 import { Card, User } from '../database/entities-index';
 import { CommunityService } from '../community/community.service';
+import { CreatePathStepDto } from './dto/create-pathstep.dto';
+import { CreateStepContentDto } from './dto/create-step-content.dto';
 
 
 @Injectable()
@@ -129,8 +131,35 @@ export class PathsService {
   async createProfMock(name: string)
   {
     let path = await this.pathRepository.findOne({where: {name: "Профессия"}, relations:{pathSteps: {content: true, tags: true}}})
-    const newPath = this.pathRepository.create({...path, name: name, id: null}) 
-    return await this.pathRepository.save(newPath)
+
+    let steps: CreatePathStepDto[] = []
+    for(const step of path.pathSteps)
+    {
+      let tags: string[] = []
+      for (const tag of step.tags)
+      {
+        tags.push(tag.name)
+      }
+
+      let contentDto: CreateStepContentDto = {
+        link: step.content.link,
+        questionsCount: step.content.questionsCount,
+        text: step.content.text
+      }
+
+      let stepDto: CreatePathStepDto = {
+        points: step.points,
+        step: step.step,
+        title: step.title,
+        tags: tags,
+        content: contentDto
+        
+      }
+
+      steps.push({...step, tags: tags})
+    }
+
+    return this.create({...path, steps: steps})
   }
 
   async stepProgress(pathid: number)
