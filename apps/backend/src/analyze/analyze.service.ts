@@ -90,7 +90,7 @@ export class AnalyzeService {
 
         this.userService.save(user)
 
-        return results
+        return {result: results}
 
     }
 }
