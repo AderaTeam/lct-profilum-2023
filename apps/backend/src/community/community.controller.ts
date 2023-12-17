@@ -19,7 +19,7 @@ export class CommunityController {
 
   @Get('card/:id')
   findOne(@Param('id') id: string) {
-    return this.communityService.findOneCard(+id);
+    return this.communityService.findAllCardsByUser(+id);
   }
 
   @Patch('card/:id')

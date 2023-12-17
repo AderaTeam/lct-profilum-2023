@@ -19,15 +19,11 @@ export class CommunityService {
     private userService: UserService,
   ){}
   async createCard(createCardDto: CreateCardDto) {
-    Logger.log(JSON.stringify(createCardDto.author_id))
-    Logger.log(JSON.stringify(createCardDto.path_id))
-
     const card = this.cardRepository.create({
       ...createCardDto,
       author: (await this.userService.getOneById(createCardDto.author_id)),
       path: (await this.pathRepository.findOne({where:{id: createCardDto.path_id}}))
     })
-    Logger.log(JSON.stringify(card))
     return this.cardRepository.save(card)
   }
 
@@ -36,7 +32,11 @@ export class CommunityService {
   }
 
   async findAllCardsByUser(id: number) {
-    return await this.cardRepository.find({where: {author: Equal<User>(await this.userService.getOneById(id))}});
+    return await this.cardRepository.find({where: {author: {id: id}}});
+  }
+
+  async removeAll(id: number) {
+    return await this.cardRepository.delete({})
   }
 
   findOneCard(id: number) {
