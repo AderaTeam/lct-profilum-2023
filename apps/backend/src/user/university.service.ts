@@ -80,7 +80,7 @@ export class UniversityService {
 
     public async getImage(id: number)
     {
-        Logger.log(await this.uniRepository.findOne({where: {id: id}}))
+        Logger.log(JSON.stringify(await this.uniRepository.findOne({where: {id: id}})))
         Logger.log((await this.uniRepository.findOne({where: {id: id}})).imageBuff)
 
         return (await this.uniRepository.findOne({where: {id: id}})).imageBuff
