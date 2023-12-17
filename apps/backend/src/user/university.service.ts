@@ -80,7 +80,10 @@ export class UniversityService {
 
     public async getImage(id: number)
     {
-        return (await this.uniRepository.findOne({where: {id: id}, relations:{tags: true}})).imageBuff
+        Logger.log(await this.uniRepository.findOne({where: {id: id}}))
+        Logger.log((await this.uniRepository.findOne({where: {id: id}})).imageBuff)
+
+        return (await this.uniRepository.findOne({where: {id: id}})).imageBuff
     }
 
     public async dropall()

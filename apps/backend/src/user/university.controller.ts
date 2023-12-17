@@ -26,7 +26,7 @@ export class UniversityController
     @UseInterceptors(FileInterceptor('file'))
     create(@Body() createUniDto: CreateUniDto, @UploadedFile() file: Express.Multer.File) {
         return this.uniService.create({...createUniDto, imageBuff: file.buffer});
-  }
+    }
 
     @Get()
     public async getAll()
