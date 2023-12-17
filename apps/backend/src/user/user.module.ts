@@ -12,7 +12,7 @@ import { UniTag } from './entities/uniTag.entity';
 @Module({
         imports:[TypeOrmModule.forFeature([User, AchievementOwned, Univercity, UniTag])],
         controllers: [UserController, UniversityController],
-        providers: [UserService, databaseProvider],
-        exports: [UserService, UniversityService]
+        providers: [UserService, databaseProvider, UniversityService],
+        exports: [UserService]
     })
 export class UserModule {}
