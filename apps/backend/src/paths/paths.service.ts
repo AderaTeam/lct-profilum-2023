@@ -123,7 +123,7 @@ export class PathsService {
 
   async findOneByName(name: string)
   {
-    return await this.pathRepository.findOne({where: {name: name}, relations:{pathSteps: {content: true, tags: true}}})
+    return await this.pathRepository.findOne({where: {name: name}, relations:{pathSteps: {content: true, tags: true}, specialities: true}})
   }
 
   async createProfMock(name: string)
@@ -167,32 +167,32 @@ export class PathsService {
   //   return await this.pathRepository.update(id, updatePathDto);
   // }
 
-  async remove(id: number) {
-    let path = await this.pathRepository.findOneBy({id: id})
+  // async remove(id: number) {
+  //   let path = await this.pathRepository.findOneBy({id: id})
 
-    path.users = []
+  //   path.users = []
 
-    await this.pathRepository.save(path)
+  //   await this.pathRepository.save(path)
 
-    let users = await this.userService.getAll()
+  //   let users = await this.userService.getAll()
 
-    for (const us of users)
-    {
-      Logger.log(us.paths.filter((pathOwned) => {pathOwned.path == path}))
-    }
+  //   for (const us of users)
+  //   {
+  //     Logger.log(us.paths.filter((pathOwned) => {pathOwned.path == path}))
+  //   }
 
-    users = users.filter((user) => {user.paths.filter((pathOwned) => {pathOwned.path == path}).length > 0})
+  //   users = users.filter((user) => {user.paths.filter((pathOwned) => {pathOwned.path == path}).length > 0})
 
-    Logger.log(users)
+  //   Logger.log(users)
 
-    for(let user of users)
-    {
-      user.paths = user.paths.filter((userpath) => {return userpath.path == path})
-      await this.userService.save(user)
-    }
+  //   for(let user of users)
+  //   {
+  //     user.paths = user.paths.filter((userpath) => {return userpath.path == path})
+  //     await this.userService.save(user)
+  //   }
 
-    return await this.pathRepository.delete({id: id});
-  }
+  //   return await this.pathRepository.delete({id: id});
+  // }
 
 //removeSome
   // async removeAll() {
