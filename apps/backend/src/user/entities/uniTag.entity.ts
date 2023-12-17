@@ -21,5 +21,5 @@ export class UniTag {
 
     @ManyToMany(() => Univercity, (uni) => uni.tags)
     @JoinTable()
-    universities: Univercity
+    universities: Univercity[]
 }
