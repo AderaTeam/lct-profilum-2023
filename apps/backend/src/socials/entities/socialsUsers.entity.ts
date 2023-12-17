@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, JoinTable, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { User } from "../../database/entities-index";
 import { Social } from "./social.entity";
 
@@ -25,10 +25,10 @@ export class SocialUsers {
     url: string
 
     @ManyToOne(() => User, {onDelete: 'CASCADE'})
-    @JoinColumn()
+    @JoinTable()
     user: User
 
     @ManyToOne(() => Social, {onDelete: 'CASCADE'})
-    @JoinColumn()
+    @JoinTable()
     social: Social
 }

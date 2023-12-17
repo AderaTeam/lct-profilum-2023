@@ -39,8 +39,6 @@ export class SocialsController {
     return this.socialsService.findAll();
   }
 
-
-
   @Delete('user/')
   removeUserSocial(@Body() dto: CreateUsersSocialDto) {
     return this.socialsService.removeUsersSocials(dto.userid, dto.socialname);
