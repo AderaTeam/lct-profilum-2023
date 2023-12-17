@@ -5,12 +5,21 @@ import dayjs from 'dayjs';
 
 import user from 'shared/assets/user.svg';
 import { IEvents } from 'shared/models/IEvents';
+import { eventsTitleFormater } from 'shared/helpers/eventsTitleFormater';
 
 interface CommunityEventsListProps {
   events: IEvents[];
 }
 
 export const CommunityEventsList = ({ events }: CommunityEventsListProps) => {
+  console.log(
+    eventsTitleFormater(
+      'Исаченко Ваня повысил уровень до Первый шар!',
+      'up',
+      ''
+    )
+  );
+
   return (
     <Stack gap={12}>
       {events.map((item) => (
