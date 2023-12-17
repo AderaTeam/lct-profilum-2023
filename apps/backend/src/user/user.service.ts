@@ -33,6 +33,7 @@ export class UserService {
     public async getOneById(id: number)
     {
         const user = await this.userRepository.findOne({where:{id: id}, order: {paths: {path: {pathSteps: {step: 'ASC'}}}}})
+
         Logger.log(JSON.stringify(await this.getOneByNicknameWithPass(user.nickname)))
         return await this.userRepository.findOne({where:{id: id}, order: {paths: {path: {pathSteps: {step: 'ASC'}}}}})
     }
@@ -54,7 +55,7 @@ export class UserService {
 
     public async getOneByNicknameWithPass(nickname: string)
     {
-        return await this.userRepository.findOne({where:{nickname: nickname}, select: {password: true}})
+        return await this.userRepository.findOne({where:{nickname: nickname}})
     }
 
     public async addUni(userid: number, uniid: number)
