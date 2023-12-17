@@ -2,7 +2,13 @@ import { Flex, Stack } from '@mantine/core';
 import { Context } from 'main';
 import { observer } from 'mobx-react-lite';
 import { useContext } from 'react';
-import { Route, Routes, useLocation, Navigate } from 'react-router-dom';
+import {
+  Route,
+  Routes,
+  useLocation,
+  Navigate,
+  useNavigate,
+} from 'react-router-dom';
 import {
   HOME_ROUTE,
   LOGIN_ROUTE,
@@ -10,24 +16,39 @@ import {
   MY_PATH_ROUTE,
   NO_PAGE_ROUTE,
   ONBOARDING_ROUTE,
+  STAT_ROUTE,
 } from 'shared/constants/const';
 import { authRoutes, publicRoutes } from 'shared/constants/routes';
 import Navbar from 'widgets/navbar';
 
 export const Routing = observer(() => {
   const location = useLocation();
+  const navigate = useNavigate();
   const { UStore } = useContext(Context);
 
   if (
     UStore.isAuth &&
     !authRoutes.find((item) => item.path.includes(location.pathname))
   ) {
-    return <Navigate to={MY_PATH_ROUTE} />;
+    if (UStore.user.role === 'admin') {
+      return <Navigate to={STAT_ROUTE} />;
+    } else {
+      return <Navigate to={MY_PATH_ROUTE} />;
+    }
   } else if (
     location.pathname === HOME_ROUTE &&
     localStorage.getItem('token')
   ) {
-    return <Navigate to={MY_PATH_ROUTE} />;
+    if (UStore.user.role === 'admin') {
+      return <Navigate to={STAT_ROUTE} />;
+    } else {
+      return <Navigate to={MY_PATH_ROUTE} />;
+    }
+  } else if (
+    location.pathname === HOME_ROUTE &&
+    !localStorage.getItem('token')
+  ) {
+    return <Navigate to={LOGIN_ROUTE} />;
   } else if (
     !localStorage.getItem('token') &&
     !publicRoutes.find((item) => item.path.includes(location.pathname))

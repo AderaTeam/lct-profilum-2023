@@ -96,7 +96,14 @@ export default class UserStore {
       this.setAuth(true);
       this.setUser(response.data.user);
     } catch (e: any) {
-      console.log(e.response?.data?.message);
+      console.log(e);
+      if (e.name === 403) {
+      } else {
+        localStorage.removeItem('token');
+        localStorage.removeItem('rtoken');
+        this.setAuth(false);
+        this.setUser({} as IUser);
+      }
     } finally {
       this.setLoading(false);
     }
