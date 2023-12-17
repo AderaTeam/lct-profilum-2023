@@ -174,7 +174,7 @@ export class PathsService {
 
     users = users.filter((user) => {return user.paths.filter((userpath) => {return userpath.path == path})})
 
-    Logger.log(JSON.stringify(users))
+    Logger.log(users)
 
     for(let user of users)
     {
