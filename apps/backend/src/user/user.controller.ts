@@ -13,6 +13,12 @@ export class UserController
         private readonly userService: UserService
     ){}
     
+    @Delete('uni/')
+    public async removeUni(@Body() data: Record<string, any>)
+    {
+        return await this.userService.removeUni(data.userid, data.uniid)
+    }
+
     @Delete('dropall')
     public async dropAll()
     {
@@ -37,11 +43,7 @@ export class UserController
         return await this.userService.addUni(data.userid, data.uniid)
     }
 
-    @Delete('uni/')
-    public async removeUni(@Body() data: Record<string, any>)
-    {
-        return await this.userService.removeUni(data.userid, data.uniid)
-    }
+    
 
     @Get()
     public async getAll()
