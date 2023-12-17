@@ -47,22 +47,22 @@ export class AnalyzeService {
         {
             if(leaderResultWorks)
             {
-                const worksname: string[] = [...new Set(vkResultWorks.name.concat(leaderResultWorks.name))]
+                var worksname: string[] = [...new Set(vkResultWorks.name.concat(leaderResultWorks.name))]
             }
             else
             {
-                const worksname: string[] = vkResultWorks.name
+                var worksname: string[] = vkResultWorks.name
             }
         }
         else
         {
             if(leaderResultWorks)
             {
-                const worksname: string[] = leaderResultWorks.name
+                var worksname: string[] = leaderResultWorks.name
             }
             else
             {
-                const worksname: string[] = []
+                var worksname: string[] = []
             }
         }
        
