@@ -12,14 +12,6 @@ interface CommunityEventsListProps {
 }
 
 export const CommunityEventsList = ({ events }: CommunityEventsListProps) => {
-  console.log(
-    eventsTitleFormater(
-      'Исаченко Ваня повысил уровень до Первый шар!',
-      'up',
-      ''
-    )
-  );
-
   return (
     <Stack gap={12}>
       {events.map((item) => (
@@ -39,7 +31,22 @@ export const CommunityEventsList = ({ events }: CommunityEventsListProps) => {
                   <IconCircleCheck stroke={1.5} color="#FA1D80" />
                 )}
               </Flex>
-              <h2 className="h2">{item.title}</h2>
+              <h2 className="h2">
+                {item.status === 'up' ? (
+                  <>
+                    {item.title.split('до')[0]} до
+                    <span className="h2 text pink">
+                      {eventsTitleFormater(item.title, item.status)}
+                    </span>
+                  </>
+                ) : (
+                  `${eventsTitleFormater(
+                    item.title.replace('№', ''),
+                    item.status,
+                    item.path.pathSteps
+                  )}`
+                )}
+              </h2>
               <p style={{ marginLeft: 'auto' }} className="text gray">
                 {dayjs(item.date).format('D MMMM')}
               </p>

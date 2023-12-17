@@ -8,7 +8,6 @@ import { MY_SOCIALS_ROUTE } from 'shared/constants/const';
 const ConnectNoPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { UStore } = useContext(Context);
 
   useEffect(() => {
     const indexToken = location.search.split('%22').indexOf('token') + 2;
@@ -19,13 +18,7 @@ const ConnectNoPage = () => {
           location.search.split('%22')[indexToken]
         }&uuid=${location.search.split('%22')[indexUuid]}`
       )
-      .then(
-        (response) => console.log(response.data)
-        // localStorage.setItem('token', response.data.accessToken);
-        // localStorage.setItem('rtoken', response.data.refreshToken);
-        // UStore.setAuth(true);
-        // UStore.setUser(response.data.user);
-      );
+      .then(() => navigate(MY_SOCIALS_ROUTE));
   }, []);
 
   return (
