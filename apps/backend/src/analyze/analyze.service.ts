@@ -21,9 +21,11 @@ export class AnalyzeService {
 
         Logger.log(JSON.stringify(userSocials))
 
-        if(userSocials.filter((obj) => obj.social.name == 'VK'))
+        if(userSocials.filter((obj) => {return obj.social.name == 'VK'}))
         {
-            const userVKid = userSocials.filter((obj) => obj.social.name == 'VK')[0].originaluserid
+            Logger.log(userSocials.filter((obj) => {return obj.social.name == 'VK'}))
+
+            const userVKid = userSocials.filter((obj) => {return obj.social.name == 'VK'})[0].originaluserid
 
             var vkResultWorks: VKResultDto = (await axios.get(`http://178.170.192.87:9000/vk/simple_analize_interests/?user_id=${userVKid}&n_of_works=4`)).data
         }  
