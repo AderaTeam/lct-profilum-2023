@@ -1,6 +1,7 @@
-import { Body, Controller, Delete, Get, Param, Post } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Post, StreamableFile, UploadedFile, UseInterceptors } from "@nestjs/common";
 import { UniversityService } from "./university.service";
 import { CreateUniDto } from "./dtos/createUni.dto";
+import { FileInterceptor } from "@nestjs/platform-express";
 
 @Controller('university')
 export class UniversityController
@@ -16,15 +17,21 @@ export class UniversityController
     }
 
     @Post()
-    public async createOne(@Body() uniDto: CreateUniDto)
-    {
-        return await this.uniService.create(uniDto)
-    }
+    @UseInterceptors(FileInterceptor('file'))
+    create(@Body() createUniDto: CreateUniDto, @UploadedFile() file: Express.Multer.File) {
+        return this.uniService.create({...createUniDto, imageBuff: file.buffer});
+  }
 
     @Get()
     public async getAll()
     {
         return await this.uniService.getAll()
+    }
+
+    @Get('image/:id')
+    public async getOneImage(@Param('id') id: number)
+    {
+        return new StreamableFile(await this.uniService.getImage(id))
     }
 
     @Delete(':id')

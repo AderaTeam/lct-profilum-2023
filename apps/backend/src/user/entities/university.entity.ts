@@ -64,5 +64,12 @@ export class Univercity {
             select: false
         }
     )
-    imageBuff: string
+    imageBuff: Buffer
+
+    @BeforeInsert()
+    @BeforeUpdate()
+    updateImage()
+    {
+        this.image = ''
+    }
 }

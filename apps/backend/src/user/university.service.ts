@@ -40,6 +40,11 @@ export class UniversityService {
         return await this.uniRepository.find()
     }
 
+    public async getImage(id: number)
+    {
+        return (await this.uniRepository.findOneBy({id: id})).imageBuff
+    }
+
     public async dropall()
     {
         return await this.uniRepository.delete({})

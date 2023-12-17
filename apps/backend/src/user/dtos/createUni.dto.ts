@@ -7,4 +7,5 @@ export class CreateUniDto
     budgetPlaces: boolean
     tags: string[]
     image?: string
+    imageBuff?: Buffer
 }
