@@ -56,7 +56,7 @@ class WorkRes(BaseModel):
 
 @app.get("/hi")
 def hello():
-    logger.log('Test')
+    logging.debug('Test')
     return {"message": "hi"}
 
 
