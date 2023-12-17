@@ -31,22 +31,31 @@ export const CommunityEventsList = ({ events }: CommunityEventsListProps) => {
                   <IconCircleCheck stroke={1.5} color="#FA1D80" />
                 )}
               </Flex>
-              <h2 className="h2">
-                {item.status === 'up' ? (
-                  <>
-                    {item.title.split('до')[0]} до
-                    <span className="h2 text pink">
-                      {eventsTitleFormater(item.title, item.status)}
-                    </span>
-                  </>
-                ) : (
-                  `${eventsTitleFormater(
-                    item.title.replace('№', ''),
-                    item.status,
-                    item.path.pathSteps
-                  )}`
-                )}
-              </h2>
+              <Flex w={757} style={{}}>
+                <h2
+                  style={{
+                    whiteSpace: 'nowrap',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                  }}
+                  className="h2"
+                >
+                  {item.status === 'up' ? (
+                    <>
+                      {item.title.split('до')[0]} до
+                      <span className="h2 text pink">
+                        {eventsTitleFormater(item.title, item.status)}
+                      </span>
+                    </>
+                  ) : (
+                    `${eventsTitleFormater(
+                      item.title.replace('№', ''),
+                      item.status,
+                      item.path.pathSteps
+                    )}`
+                  )}
+                </h2>
+              </Flex>
               <p style={{ marginLeft: 'auto' }} className="text gray">
                 {dayjs(item.date).format('D MMMM')}
               </p>
