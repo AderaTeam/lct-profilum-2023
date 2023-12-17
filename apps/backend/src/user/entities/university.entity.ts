@@ -53,7 +53,7 @@ export class Univercity {
 
     @Column(
         {
-            nullable: false,
+            nullable: true,
         }
     )
     image: string
