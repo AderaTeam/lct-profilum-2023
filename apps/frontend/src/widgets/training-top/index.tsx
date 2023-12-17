@@ -44,6 +44,7 @@ export const TrainingTop = () => {
             <Flex gap={8} wrap={'nowrap'} className={style.scroll}>
               {users
                 .sort((a, b) => b.points - a.points)
+                .filter((item) => item.role !== 'admin')
                 .map((item, index: number) => {
                   if (index < 4) {
                     return (

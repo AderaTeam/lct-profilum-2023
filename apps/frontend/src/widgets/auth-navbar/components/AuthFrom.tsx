@@ -7,6 +7,7 @@ import { Controller, useFormContext } from 'react-hook-form';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { Button } from 'shared/components/Button';
 import { Input } from 'shared/components/Input';
+import FileDownload from 'js-file-download';
 import { Select } from 'shared/components/Select';
 import {
   LOGIN_ROUTE,
@@ -18,6 +19,7 @@ import {
 import vk from 'shared/assets/vk.svg';
 import { observer } from 'mobx-react-lite';
 import { Checkbox } from 'shared/components/Checkbox';
+import $api from 'shared/api';
 
 interface AuthFormProps {
   activeRole: number;
@@ -63,6 +65,23 @@ export const AuthForm = observer(({ activeRole }: AuthFormProps) => {
   useEffect(() => {
     UStore.setError('');
   }, []);
+
+  const handleSavePolicy = async () => {
+    const response = await $api.get('/confidentiality', {
+      responseType: 'blob',
+    });
+    FileDownload(
+      response.data,
+      'Политика_конфиденциальности_персональных_данных.pdf'
+    );
+  };
+
+  const handleSaveConditions = async () => {
+    const response = await $api.get('/agreement', {
+      responseType: 'blob',
+    });
+    FileDownload(response.data, 'Пользовательское Соглашение.pdf');
+  };
 
   return (
     <Stack align="center" gap={24}>
@@ -208,11 +227,13 @@ export const AuthForm = observer(({ activeRole }: AuthFormProps) => {
             <span
               style={{ textDecorationLine: 'underline', cursor: 'pointer' }}
               className="text pink"
+              onClick={() => handleSaveConditions()}
             >
               с условиями пользовательского соглашения
             </span>{' '}
             и{' '}
             <span
+              onClick={() => handleSavePolicy()}
               style={{ textDecorationLine: 'underline', cursor: 'pointer' }}
               className="text pink"
             >

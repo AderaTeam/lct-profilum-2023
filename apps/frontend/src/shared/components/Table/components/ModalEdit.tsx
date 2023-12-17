@@ -111,7 +111,7 @@ export const ModalEdit = ({
       </Stack>
       <Flex w={'100%'} align={'center'} justify={'space-between'}>
         <Button onClick={() => close()} title="Отменить" outline />
-        <Button onClick={onSubmit} title="Сохранить изменения" />
+        <Button disabled onClick={onSubmit} title="Сохранить изменения" />
       </Flex>
     </Stack>
   );

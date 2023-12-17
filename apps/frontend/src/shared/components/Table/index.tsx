@@ -30,12 +30,12 @@ export const Table = ({ rowsData, type, getPaths }: TableProps) => {
 
   const handleExport = async () => {
     console.log(activeIds);
-    const response = await $api.post(
-      '/process/export',
-      { ids: activeIds },
-      { responseType: 'blob' }
-    );
-    FileDownload(response.data, 'document.xlsx');
+    // const response = await $api.post(
+    //   '/process/export',
+    //   { ids: activeIds },
+    //   { responseType: 'blob' }
+    // );
+    // FileDownload(response.data, 'document.xlsx');
   };
 
   const handleRowDelete = (id: number) => {
