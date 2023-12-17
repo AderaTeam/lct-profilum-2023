@@ -100,7 +100,7 @@ def root2(user_id: int, n_of_works: int=-1):
 # 393854543
 @app.get("/vk/simple_analize_interests")
 def root3(user_id: int, n_of_works: int=-1):
-    logger.log('start vkanalyze')
+    logging.debug('start vkanalyze')
     print('start vkanalyze')
     prof_ways_data = ioc.require('profWaysData').reset_index()
     text_samples_vectors = ioc.require('smallDescriptionVectors')
@@ -109,7 +109,7 @@ def root3(user_id: int, n_of_works: int=-1):
     subscribes = ioc.require('getVkUserSubscribes')(vk_session=vk_session, user_id=user_id)
     subscribes_processed = ioc.require('vkSubscribesProcessor')(subscribes)
     print('fetch vk done')
-    logger.log('fetch vk done')
+    logging.debug('fetch vk done')
     texts = []
     for i in subscribes_processed:
         texts += ioc.require('vkWallMainInfoTextExtractor')(i['main_description'][0])
