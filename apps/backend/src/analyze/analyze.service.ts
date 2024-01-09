@@ -93,4 +93,45 @@ export class AnalyzeService {
 
         return {result: results}
     }
+
+    public async mockAnalyze(userid: number)
+    {
+        const user = await this.userService.getOneById(userid)
+
+        const worksname = ["Специалист по машинному обучению", "Учитель", "Системный аналитик"]
+
+        const leaderResultWorks = []
+
+        user.isAnalyzed = true
+
+        let results = []
+
+        for (const work of worksname)
+        {
+            if(await this.pathService.findOneByName(work))
+            {
+                Logger.log('EXISTS')
+                results.push(await this.pathService.findOneByName(work))
+            }
+            else
+            {
+                Logger.log('NEW')
+                results.push(await this.pathService.createProfMock(work))
+            }
+        }
+
+        if(user.analysedPaths)
+        {
+            user.analysedPaths.push(...results)
+        }
+        else
+        {
+            user.analysedPaths = results
+        }
+
+        this.userService.save(user)
+
+        return {result: results}
+
+    }
 }

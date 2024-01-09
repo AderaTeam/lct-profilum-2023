@@ -19,4 +19,14 @@ export class AnalyzeController {
 
     
   }
+
+  @UseGuards(AccessTokenGuard)
+  @Get('mock')
+  public async analyzeMock(@Req() req: Record<string, any>)
+  {
+
+    return this.analyzeService.mockAnalyze(req.user.sub)
+
+    
+  }
 }
