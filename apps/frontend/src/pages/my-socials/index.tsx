@@ -12,7 +12,7 @@ const MySocialsPage = () => {
 
   const handleAnalysis = () => {
     setIsLoading(true);
-    $api.get('/analyze').then((response) => {
+    $api.get('/analyze/mock').then((response) => {
       if (response) {
         setIsLoading(false);
         setResult(response.data.result);
