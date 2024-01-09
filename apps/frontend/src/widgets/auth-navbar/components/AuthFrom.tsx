@@ -259,7 +259,7 @@ export const AuthForm = observer(({ activeRole }: AuthFormProps) => {
           fullWidth
         >
           <Flex align={'center'} gap={8}>
-            {location.pathname === LOGIN_ROUTE ? 'Войти' : 'Зарегестрироваться'}
+            {location.pathname === LOGIN_ROUTE ? 'Войти' : 'Зарегистрироваться'}
             <IconChevronRight stroke={1.5} color="#FFFF" />
           </Flex>
         </Button>
