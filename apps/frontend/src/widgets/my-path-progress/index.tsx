@@ -33,19 +33,16 @@ export const MyPathProgress = observer(() => {
 
   const handleStepComplete = (id: number) => {
     setIsLoading(true);
-    try {
-      $api.post<IUser>(`/paths/progress/${id}`).then((response) => {
+    $api
+      .post<IUser>(`/paths/progress/${id}`)
+      .then((response) => {
         UStore.setUser(response.data);
         setCurrentStep(
           response.data.paths.find((item) => item.id === activePathId)
             ?.currentStep!
         );
-      });
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsLoading(false);
-    }
+      })
+      .finally(() => setIsLoading(false));
   };
 
   return (
